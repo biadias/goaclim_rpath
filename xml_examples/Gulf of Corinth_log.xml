@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <Platform>Microsoft Windows NT 10.0.26100.0</Platform>
+  <Is64BitOS>True</Is64BitOS>
+  <ModelName>Gulf of Corinth</ModelName>
+  <Created>2:36:03 PM Wednesday, August 13, 2025</Created>
+<Session_Started
+  Date="2:36:03 PM Wednesday, August 13, 2025">
+  <Model>Gulf of Corinth</Model>
+  <LogFile>C:\Users\andrew.beet\Documents\myWork\demo_repos\Rpath_fitting\xml_examples\Gulf of Corinth_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="2:36:03 PM Wednesday, August 13, 2025">
+  <Message>Ecopath model 'C:\Users\andrew.beet\Documents\myWork\demo_repos\Rpath_fitting\xml_examples\Gulf of Corinth.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="2:36:11 PM Wednesday, August 13, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="2:36:15 PM Wednesday, August 13, 2025">
+  <Message>Basic estimates saved to 'C:\Users\andrew.beet\Documents\myWork\demo_repos\Rpath_fitting\xml_examples\Gulf of Corinth-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="2:36:21 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:36:21 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:36:21 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:36:21 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:36:21 PM Wednesday, August 13, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:36:21 PM Wednesday, August 13, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+</doc>

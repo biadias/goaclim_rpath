@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <Platform>Microsoft Windows NT 10.0.22631.0</Platform>
+  <Is64BitOS>True</Is64BitOS>
+  <ModelName>WGOA_9May2025</ModelName>
+  <Created>11:29:18 AM Monday, August 18, 2025</Created>
+<Session_Started
+  Date="11:29:18 AM Monday, August 18, 2025">
+  <Model>WGOA_9May2025</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="11:29:18 AM Monday, August 18, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="11:29:39 AM Monday, August 18, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="11:30:11 AM Monday, August 18, 2025">
+  <Message>Basic estimates saved to 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Western GOA model-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Warning_Message
+  Date="11:33:08 AM Monday, August 18, 2025">
+  <Message>Detritus fate cannot be 2. Value is out of range</Message>
+  <Message_Type>DataValidation</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupInput</Message_DataType>
+</Warning_Message>
+<Critical_Message
+  Date="11:33:40 AM Monday, August 18, 2025">
+  <Message>Your model has 1 group(s) for which the Detritus fate (DF) sum to more than 1.You should go back to your input data, and make sure the DF's sum to max 1 only.</Message>
+  <Message_Type>ErrorEncountered</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Critical_Message>
+<Critical_Message
+  Date="11:33:40 AM Monday, August 18, 2025">
+  <Message>Your model has 1 group(s) for which the Detritus fate (DF) sum to more than 1.You should go back to your input data, and make sure the DF's sum to max 1 only.</Message>
+  <Message_Type>ErrorEncountered</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Critical_Message>
+<Information_Message
+  Date="11:33:44 AM Monday, August 18, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="11:34:02 AM Monday, August 18, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="3:35:47 PM Monday, August 18, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:35:47 PM Monday, August 18, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:35:47 PM Monday, August 18, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:35:47 PM Monday, August 18, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:35:47 PM Monday, August 18, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:35:47 PM Monday, August 18, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="4:17:40 PM Tuesday, August 19, 2025">
+  <Model>WGOA_9May2025</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="4:17:40 PM Tuesday, August 19, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="4:17:49 PM Tuesday, August 19, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Session_Started
+  Date="2:44:55 PM Wednesday, September 10, 2025">
+  <Model>WGOA_9May2025</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="2:44:55 PM Wednesday, September 10, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="2:45:22 PM Wednesday, September 10, 2025">
+  <Message>Unable to obtain server time</Message>
+</Log_Message>
+<Log_Message
+  Date="3:18:20 PM Wednesday, September 10, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:18:20 PM Wednesday, September 10, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:18:20 PM Wednesday, September 10, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:18:20 PM Wednesday, September 10, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:18:20 PM Wednesday, September 10, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:18:20 PM Wednesday, September 10, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="10:16:33 AM Wednesday, September 24, 2025">
+  <Model>WGOA_9May2025</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="10:16:33 AM Wednesday, September 24, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="10:16:37 AM Wednesday, September 24, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Session_Started
+  Date="11:46:46 AM Wednesday, September 24, 2025">
+  <Model>WGOA_9May2025</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="11:46:46 AM Wednesday, September 24, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="11:46:54 AM Wednesday, September 24, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="11:47:06 AM Wednesday, September 24, 2025">
+  <Message>Options applied successfully.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="11:47:07 AM Wednesday, September 24, 2025">
+  <Message>Options applied successfully.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="2:20:27 PM Wednesday, September 24, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:20:27 PM Wednesday, September 24, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:20:27 PM Wednesday, September 24, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:20:27 PM Wednesday, September 24, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:20:27 PM Wednesday, September 24, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:20:27 PM Wednesday, September 24, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="11:27:19 AM Sunday, September 28, 2025">
+  <Model>WGOA_9May2025</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="11:27:19 AM Sunday, September 28, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="11:27:23 AM Sunday, September 28, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="11:27:32 AM Sunday, September 28, 2025">
+  <Message>Options applied successfully.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Log_Message
+  Date="11:32:09 AM Sunday, September 28, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="11:32:09 AM Sunday, September 28, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="11:32:09 AM Sunday, September 28, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="11:32:09 AM Sunday, September 28, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="11:32:09 AM Sunday, September 28, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="11:32:09 AM Sunday, September 28, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="11:32:42 AM Sunday, September 28, 2025">
+  <Model>WGOA_9May2025</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="11:32:42 AM Sunday, September 28, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\WGOA_9May2025.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="11:32:54 AM Sunday, September 28, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="11:32:58 AM Sunday, September 28, 2025">
+  <Message>Options applied successfully.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="1:57:14 PM Monday, September 29, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="1:57:14 PM Monday, September 29, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="1:57:14 PM Monday, September 29, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="1:57:14 PM Monday, September 29, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="1:57:14 PM Monday, September 29, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="1:57:14 PM Monday, September 29, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+</doc>

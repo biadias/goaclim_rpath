@@ -1,0 +1,781 @@
+<?xml version="1.0"?>
+<EwEModel Name="North Aegean" DBVersion="6.700014" EwEVersion="6.7.0.18858">
+  <Table Name="Auxillary" Columns="DBID:System.Int64,Remark:System.String,Settings:System.String,ValueID:System.String,VisualStyle:System.String" Num="0" />
+  <Table Name="EcopathCatch" Columns="DiscardMortality:System.Single,Discards:System.Single,FleetID:System.Int64,GroupID:System.Int64,Landing:System.Single,Price:System.Single" Num="1200">
+    <Row>1,0,1,1,0,1</Row>
+    <Row>1,0,1,2,0,1</Row>
+    <Row>1,0,1,3,0,1</Row>
+    <Row>1,0,1,4,0,1</Row>
+    <Row>1,0,1,5,0,1</Row>
+    <Row>1,0,1,6,0,1</Row>
+    <Row>1,0,1,7,0,1</Row>
+    <Row>1,0.00527,1,8,0.093854,1</Row>
+    <Row>1,0.0194,1,9,0.003762888,1</Row>
+    <Row>1,0.000107,1,10,0.01,1</Row>
+    <Row>1,0.034,1,11,0.007678997,1</Row>
+    <Row>1,0.00441,1,12,0.03893558,1</Row>
+    <Row>1,0.00537,1,13,0.0210904,1</Row>
+    <Row>1,0.000374,1,14,0.03317613,1</Row>
+    <Row>1,0.00255,1,15,0.0231839,1</Row>
+    <Row>1,0.00768,1,16,0.005511694,1</Row>
+    <Row>1,0.00378,1,17,0.01219438,1</Row>
+    <Row>1,0.0035,1,18,0.0546176,1</Row>
+    <Row>1,0.0121,1,19,0.002172416,1</Row>
+    <Row>1,0.006102,1,20,0.009113344,1</Row>
+    <Row>1,0.01631,1,21,0.009433345,1</Row>
+    <Row>1,0.00945,1,22,0.004884762,1</Row>
+    <Row>1,0.00383,1,23,0.000563244,1</Row>
+    <Row>1,0.00632,1,24,0.009511966,1</Row>
+    <Row>1,0.0103,1,25,0.005016972,1</Row>
+    <Row>1,0.00215,1,26,0.01070378,1</Row>
+    <Row>1,2.5E-06,1,27,9.05835E-07,1</Row>
+    <Row>1,0.000873,1,28,0.000316094,1</Row>
+    <Row>1,3.37E-06,1,29,2.6179E-07,1</Row>
+    <Row>1,0.00722,1,30,0.000560738,1</Row>
+    <Row>1,0.0139,1,31,0.01215569,1</Row>
+    <Row>1,0.000481,1,32,0.007790009,1</Row>
+    <Row>1,0.00127,1,33,0.00319033,1</Row>
+    <Row>1,4.34E-05,1,34,0.001082069,1</Row>
+    <Row>1,0,1,35,3.99202E-06,1</Row>
+    <Row>1,0.000142,1,36,0,1</Row>
+    <Row>1,0,1,37,0,1</Row>
+    <Row>1,0,1,38,0,1</Row>
+    <Row>1,0,1,39,0,0</Row>
+    <Row>1,0,1,40,0,1</Row>
+    <Row>1,0,2,1,0,1</Row>
+    <Row>1,0,2,2,0,1</Row>
+    <Row>1,0,2,3,0,1</Row>
+    <Row>1,0,2,4,0,1</Row>
+    <Row>1,0,2,5,0,1</Row>
+    <Row>1,0,2,6,0,1</Row>
+    <Row>1,0,2,7,0,1</Row>
+    <Row>1,5.31E-09,2,8,0,1</Row>
+    <Row>1,6.87E-06,2,9,0,1</Row>
+    <Row>1,0,2,10,1.68532E-05,1</Row>
+    <Row>1,0,2,11,6.40476E-05,1</Row>
+    <Row>1,0.000361,2,12,7.29412E-05,1</Row>
+    <Row>1,0.000213,2,13,0.000884459,1</Row>
+    <Row>1,1.65E-05,2,14,8.19126E-06,1</Row>
+    <Row>1,2.02E-05,2,15,7.49771E-06,1</Row>
+    <Row>1,2.85E-05,2,16,2.5622E-05,1</Row>
+    <Row>1,9.77E-06,2,17,0.000666045,1</Row>
+    <Row>1,2.86E-05,2,18,1.87258E-05,1</Row>
+    <Row>1,4.33E-05,2,19,3.53274E-05,1</Row>
+    <Row>1,0.000398,2,20,0.000429381,1</Row>
+    <Row>1,0.0021,2,21,7.5697E-05,1</Row>
+    <Row>1,0.00314,2,22,0.001812732,1</Row>
+    <Row>1,5.71E-06,2,23,0,1</Row>
+    <Row>1,0.0101,2,24,0.01986806,1</Row>
+    <Row>1,2.66E-07,2,25,5.61773E-06,1</Row>
+    <Row>1,3.05E-05,2,26,7.67045E-06,1</Row>
+    <Row>1,1.67E-08,2,27,0.001217305,1</Row>
+    <Row>1,5.82E-06,2,28,0.4247827,1</Row>
+    <Row>1,3.96E-07,2,29,0.000119929,1</Row>
+    <Row>1,0.000849,2,30,0.2568801,1</Row>
+    <Row>1,0.00351,2,31,0.01832357,1</Row>
+    <Row>1,0.000131,2,32,0.05028868,1</Row>
+    <Row>1,0.00249,2,33,0.02303073,1</Row>
+    <Row>1,3.31E-05,2,34,0.02671665,1</Row>
+    <Row>1,0,2,35,0,1</Row>
+    <Row>1,0,2,36,0,1</Row>
+    <Row>1,0,2,37,0,1</Row>
+    <Row>1,0,2,38,0,1</Row>
+    <Row>1,0,2,39,0,0</Row>
+    <Row>1,0,2,40,0,1</Row>
+    <Row>1,0,3,1,0,1</Row>
+    <Row>1,0,3,2,0,1</Row>
+    <Row>1,0,3,3,0,1</Row>
+    <Row>1,0,3,4,0,1</Row>
+    <Row>1,0,3,5,0,1</Row>
+    <Row>1,0,3,6,0,1</Row>
+    <Row>1,0,3,7,0,1</Row>
+    <Row>1,0,3,8,0,1</Row>
+    <Row>1,0,3,9,3.68667E-06,1</Row>
+    <Row>1,0,3,10,0,1</Row>
+    <Row>1,0,3,11,0,1</Row>
+    <Row>1,0,3,12,0.000346581,1</Row>
+    <Row>1,0,3,13,0.000181967,1</Row>
+    <Row>1,0,3,14,9.56952E-06,1</Row>
+    <Row>1,0,3,15,2.86607E-05,1</Row>
+    <Row>1,0,3,16,0.000128165,1</Row>
+    <Row>1,0,3,17,0.000466147,1</Row>
+    <Row>1,0.00128,3,18,0.01150357,1</Row>
+    <Row>1,0,3,19,9.46271E-05,1</Row>
+    <Row>1,0.00304,3,20,0.000601655,1</Row>
+    <Row>1,4.64E-05,3,21,0.005913325,1</Row>
+    <Row>1,0,3,22,0.00200952,1</Row>
+    <Row>1,0,3,23,7.80123E-06,1</Row>
+    <Row>1,0,3,24,7.30128E-05,1</Row>
+    <Row>1,0,3,25,0.001113436,1</Row>
+    <Row>1,0.000908,3,26,0.002119816,1</Row>
+    <Row>1,0,3,27,0,1</Row>
+    <Row>1,0,3,28,0,1</Row>
+    <Row>1,0,3,29,0,1</Row>
+    <Row>1,0,3,30,0,1</Row>
+    <Row>1,0,3,31,0.000111868,1</Row>
+    <Row>1,0,3,32,0.0006593,1</Row>
+    <Row>1,0,3,33,9.47356E-05,1</Row>
+    <Row>1,0,3,34,0.03139939,1</Row>
+    <Row>1,0.000276,3,35,0.00689388,1</Row>
+    <Row>1,7.11E-05,3,36,0,1</Row>
+    <Row>1,0,3,37,0,1</Row>
+    <Row>1,0,3,38,0,1</Row>
+    <Row>1,0,3,39,0,0</Row>
+    <Row>1,0,3,40,0,1</Row>
+    <Row>1,0,4,1,0,1</Row>
+    <Row>1,0,4,2,0,1</Row>
+    <Row>1,0,4,3,0,1</Row>
+    <Row>1,0,4,4,0,1</Row>
+    <Row>1,0,4,5,0,1</Row>
+    <Row>1,0,4,6,0,1</Row>
+    <Row>1,0,4,7,0,1</Row>
+    <Row>1,0,4,8,0.009918104,1</Row>
+    <Row>1,0.003737656,4,9,0.005960046,1</Row>
+    <Row>1,0,4,10,0.001653017,1</Row>
+    <Row>1,0.02497893,4,11,0.000780592,1</Row>
+    <Row>1,0.001405065,4,12,0.1028544,1</Row>
+    <Row>1,3.67337E-05,4,13,0.005197821,1</Row>
+    <Row>1,0.000347134,4,14,0.04600898,1</Row>
+    <Row>1,0.000386622,4,15,0.02176473,1</Row>
+    <Row>1,0.002295857,4,16,0.01946887,1</Row>
+    <Row>1,0.000179077,4,17,0.005684543,1</Row>
+    <Row>1,0.001212213,4,18,0.03498887,1</Row>
+    <Row>1,0.004839668,4,19,0.003976425,1</Row>
+    <Row>1,0.003847857,4,20,0.02773396,1</Row>
+    <Row>1,0.03232567,4,21,0.031591,1</Row>
+    <Row>1,0.03324402,4,22,0.02360141,1</Row>
+    <Row>1,3.51725E-05,4,23,0.00064284,1</Row>
+    <Row>1,0.05142721,4,24,0.07594696,1</Row>
+    <Row>1,0,4,25,0.002901964,1</Row>
+    <Row>1,0.02672378,4,26,0.007842649,1</Row>
+    <Row>1,3.82949E-05,4,27,1.2765E-05,1</Row>
+    <Row>1,0.01340781,4,28,0.004453963,1</Row>
+    <Row>1,2.36932E-05,4,29,1.2214E-05,1</Row>
+    <Row>1,0.05069253,4,30,0.02626461,1</Row>
+    <Row>1,0.003884591,4,31,0.01028544,1</Row>
+    <Row>1,0.004398863,4,32,0.02488709,1</Row>
+    <Row>1,0.02424425,4,33,0.01010177,1</Row>
+    <Row>1,0,4,34,0.04839668,1</Row>
+    <Row>1,0,4,35,0.000539067,1</Row>
+    <Row>1,0,4,36,0,1</Row>
+    <Row>1,0,4,37,0,1</Row>
+    <Row>1,0.000213056,4,38,0,1</Row>
+    <Row>1,0,4,39,0,0</Row>
+    <Row>1,0,4,40,0,1</Row>
+    <Row>1,0,5,1,0,1</Row>
+    <Row>1,0,5,2,0,1</Row>
+    <Row>1,0,5,3,0,1</Row>
+    <Row>1,0,5,4,0,1</Row>
+    <Row>1,0,5,5,0,1</Row>
+    <Row>1,0,5,6,0,1</Row>
+    <Row>1,0,5,7,0,1</Row>
+    <Row>1,0,5,8,0.000175854,1</Row>
+    <Row>1,0,5,9,0.00063881,1</Row>
+    <Row>1,0,5,10,0,1</Row>
+    <Row>1,0,5,11,0,1</Row>
+    <Row>1,0,5,12,0.03136913,1</Row>
+    <Row>1,0,5,13,0,1</Row>
+    <Row>1,0,5,14,0,1</Row>
+    <Row>1,0,5,15,0,1</Row>
+    <Row>1,0,5,16,0,1</Row>
+    <Row>1,0,5,17,0,1</Row>
+    <Row>1,0,5,18,0,1</Row>
+    <Row>1,0,5,19,0,1</Row>
+    <Row>1,0,5,20,0,1</Row>
+    <Row>1,0,5,21,0,1</Row>
+    <Row>1,0,5,22,0,1</Row>
+    <Row>1,0,5,23,0,1</Row>
+    <Row>1,0,5,24,0,1</Row>
+    <Row>1,0,5,25,0,1</Row>
+    <Row>1,0,5,26,0,1</Row>
+    <Row>1,0,5,27,0,1</Row>
+    <Row>1,0,5,28,0,1</Row>
+    <Row>1,0,5,29,0,1</Row>
+    <Row>1,0,5,30,0,1</Row>
+    <Row>1,0,5,31,0,1</Row>
+    <Row>1,0,5,32,0,1</Row>
+    <Row>1,0,5,33,0,1</Row>
+    <Row>1,0,5,34,0,1</Row>
+    <Row>1,0,5,35,0,1</Row>
+    <Row>1,0,5,36,0,1</Row>
+    <Row>1,0,5,37,0,1</Row>
+    <Row>1,0,5,38,0,1</Row>
+    <Row>1,0,5,39,0,0</Row>
+    <Row>1,0,5,40,0,1</Row>
+  </Table>
+  <Table Name="EcopathCatchCode" Columns="Code:System.Int64,GroupID:System.Int64,Proportion:System.Single" Num="0" />
+  <Table Name="EcopathDietComp" Columns="DetritusFate:System.Single,Diet:System.Single,Electivity:System.Single,MTI:System.Single,PredID:System.Int64,PreyID:System.Int64" Num="2646">
+    <Row>1,0,0,0,28,39</Row>
+    <Row>0,1,0,0,28,3</Row>
+    <Row>1,0,0,0,30,39</Row>
+    <Row>0,0.005,0,0,30,4</Row>
+    <Row>0,0.973,0,0,30,3</Row>
+    <Row>0,0.022,0,0,30,6</Row>
+    <Row>0,0.026,0,0,15,28</Row>
+    <Row>0,0.007999999,0,0,15,30</Row>
+    <Row>0,0.013,0,0,15,15</Row>
+    <Row>0,0.108,0,0,15,12</Row>
+    <Row>0,0.104,0,0,15,11</Row>
+    <Row>0,0.102,0,0,15,23</Row>
+    <Row>0,0.008999999,0,0,15,9</Row>
+    <Row>0,0.05599999,0,0,15,20</Row>
+    <Row>0,0.09599999,0,0,15,21</Row>
+    <Row>0,0.005999999,0,0,15,22</Row>
+    <Row>1,0,0,0,15,39</Row>
+    <Row>0,0.028,0,0,15,16</Row>
+    <Row>0,0.08699999,0,0,15,18</Row>
+    <Row>0,0.05299999,0,0,15,31</Row>
+    <Row>0,0.009999999,0,0,15,27</Row>
+    <Row>0,0.003,0,0,15,29</Row>
+    <Row>0,0.024,0,0,15,32</Row>
+    <Row>0,0.018,0,0,15,14</Row>
+    <Row>0,0.008999999,0,0,15,10</Row>
+    <Row>0,0.114,0,0,15,17</Row>
+    <Row>0,0.018,0,0,15,24</Row>
+    <Row>0,0.039,0,0,15,7</Row>
+    <Row>0,0.004,0,0,15,26</Row>
+    <Row>0,0.004,0,0,15,25</Row>
+    <Row>0,0.019,0,0,15,8</Row>
+    <Row>0,0.042,0,0,15,6</Row>
+    <Row>0,0.048,0,0,12,12</Row>
+    <Row>0,0.528,0,0,12,11</Row>
+    <Row>0,0.156,0,0,12,9</Row>
+    <Row>0,0.007,0,0,12,19</Row>
+    <Row>0,0.035,0,0,12,21</Row>
+    <Row>0,0.023,0,0,12,22</Row>
+    <Row>1,0,0,0,12,39</Row>
+    <Row>0,0.036,0,0,12,4</Row>
+    <Row>0,0.004,0,0,12,10</Row>
+    <Row>0,0.008,0,0,12,17</Row>
+    <Row>0,0.013,0,0,12,24</Row>
+    <Row>0,0.059,0,0,12,7</Row>
+    <Row>0,0.057,0,0,12,8</Row>
+    <Row>0,0.026,0,0,12,6</Row>
+    <Row>0,0.03,0,0,11,11</Row>
+    <Row>1,0.9,0,0,11,39</Row>
+    <Row>0,0.02,0,0,11,7</Row>
+    <Row>0,0.264,0,0,13,28</Row>
+    <Row>0,0.105,0,0,13,30</Row>
+    <Row>0,0.052,0,0,13,12</Row>
+    <Row>0,0.022,0,0,13,11</Row>
+    <Row>0,0.03,0,0,13,13</Row>
+    <Row>0,0.015,0,0,13,23</Row>
+    <Row>0,0.003,0,0,13,9</Row>
+    <Row>1,0,0,0,13,39</Row>
+    <Row>0,0.003,0,0,13,18</Row>
+    <Row>0,0.02,0,0,13,31</Row>
+    <Row>0,0.098,0,0,13,27</Row>
+    <Row>0,0.044,0,0,13,29</Row>
+    <Row>0,0.03400001,0,0,13,32</Row>
+    <Row>0,0.08600001,0,0,13,4</Row>
+    <Row>0,0.055,0,0,13,3</Row>
+    <Row>0,0.005,0,0,13,14</Row>
+    <Row>0,0.011,0,0,13,17</Row>
+    <Row>0,0.05400001,0,0,13,33</Row>
+    <Row>0,0.004000001,0,0,13,24</Row>
+    <Row>0,0.06,0,0,13,7</Row>
+    <Row>0,0.002,0,0,13,25</Row>
+    <Row>0,0.017,0,0,13,8</Row>
+    <Row>0,0.016,0,0,13,6</Row>
+    <Row>0,0.002,0,0,23,12</Row>
+    <Row>0,0.012,0,0,23,11</Row>
+    <Row>0,0.014,0,0,23,9</Row>
+    <Row>1,0,0,0,23,39</Row>
+    <Row>0,0.458,0,0,23,4</Row>
+    <Row>0,0.458,0,0,23,3</Row>
+    <Row>0,0.001,0,0,23,7</Row>
+    <Row>0,0.017,0,0,23,8</Row>
+    <Row>0,0.038,0,0,23,6</Row>
+    <Row>0,0.314,0,0,9,11</Row>
+    <Row>0,0.02,0,0,9,9</Row>
+    <Row>0,0.003,0,0,9,19</Row>
+    <Row>0,0.003,0,0,9,21</Row>
+    <Row>0,0.003,0,0,9,22</Row>
+    <Row>1,0.147,0,0,9,39</Row>
+    <Row>0,0.009999999,0,0,9,40</Row>
+    <Row>0,0.004999999,0,0,9,4</Row>
+    <Row>0,0.005999999,0,0,9,10</Row>
+    <Row>0,0.4139999,0,0,9,7</Row>
+    <Row>0,0.016,0,0,9,8</Row>
+    <Row>0,0.05699999,0,0,9,6</Row>
+    <Row>0,0.003,0,0,19,12</Row>
+    <Row>0,0.018,0,0,19,11</Row>
+    <Row>0,0.047,0,0,19,9</Row>
+    <Row>0,0.012,0,0,19,19</Row>
+    <Row>0,0.02,0,0,19,21</Row>
+    <Row>0,0.018,0,0,19,22</Row>
+    <Row>1,0,0,0,19,39</Row>
+    <Row>0,0.007,0,0,19,16</Row>
+    <Row>0,0.056,0,0,19,4</Row>
+    <Row>0,0.095,0,0,19,3</Row>
+    <Row>0,0.078,0,0,19,7</Row>
+    <Row>0,0.089,0,0,19,8</Row>
+    <Row>0,0.537,0,0,19,6</Row>
+    <Row>0,0.1691692,0,0,20,28</Row>
+    <Row>0,0.07407408,0,0,20,30</Row>
+    <Row>0,0.1221221,0,0,20,12</Row>
+    <Row>0,0.01001001,0,0,20,11</Row>
+    <Row>0,0.01401401,0,0,20,13</Row>
+    <Row>0,0.1081081,0,0,20,23</Row>
+    <Row>0,0.05805806,0,0,20,9</Row>
+    <Row>0,0.007007007,0,0,20,19</Row>
+    <Row>0,0.02402402,0,0,20,20</Row>
+    <Row>0,0.06806807,0,0,20,21</Row>
+    <Row>0,0.04704705,0,0,20,22</Row>
+    <Row>1,0,0,0,20,39</Row>
+    <Row>0,0.01501502,0,0,20,16</Row>
+    <Row>0,0.004004004,0,0,20,18</Row>
+    <Row>0,0.02102102,0,0,20,31</Row>
+    <Row>0,0.03503504,0,0,20,27</Row>
+    <Row>0,0.03003003,0,0,20,29</Row>
+    <Row>0,0.02402402,0,0,20,4</Row>
+    <Row>0,0.006006006,0,0,20,3</Row>
+    <Row>0,0.01301301,0,0,20,14</Row>
+    <Row>0,0.04204204,0,0,20,17</Row>
+    <Row>0,0.03903904,0,0,20,24</Row>
+    <Row>0,0.01301301,0,0,20,7</Row>
+    <Row>0,0.04604605,0,0,20,8</Row>
+    <Row>0,0.01001001,0,0,20,6</Row>
+    <Row>0,0.01201201,0,0,21,12</Row>
+    <Row>0,0.2052052,0,0,21,11</Row>
+    <Row>0,0.008008009,0,0,21,23</Row>
+    <Row>0,0.02402402,0,0,21,9</Row>
+    <Row>0,0.006006006,0,0,21,19</Row>
+    <Row>0,0.001001001,0,0,21,20</Row>
+    <Row>0,0.01601602,0,0,21,21</Row>
+    <Row>0,0.008008009,0,0,21,22</Row>
+    <Row>1,0,0,0,21,39</Row>
+    <Row>0,0.001001001,0,0,21,16</Row>
+    <Row>0,0.007007007,0,0,21,27</Row>
+    <Row>0,0.009009009,0,0,21,29</Row>
+    <Row>0,0.009009009,0,0,21,4</Row>
+    <Row>0,0.01101101,0,0,21,24</Row>
+    <Row>0,0.3993994,0,0,21,7</Row>
+    <Row>0,0.1061061,0,0,21,8</Row>
+    <Row>0,0.1771772,0,0,21,6</Row>
+    <Row>0,0.475,0,0,22,11</Row>
+    <Row>0,0.042,0,0,22,9</Row>
+    <Row>1,0,0,0,22,39</Row>
+    <Row>0,0.005,0,0,22,4</Row>
+    <Row>0,0.015,0,0,22,3</Row>
+    <Row>0,0.396,0,0,22,7</Row>
+    <Row>0,0.016,0,0,22,8</Row>
+    <Row>0,0.049,0,0,22,6</Row>
+    <Row>1,0,0,0,40,39</Row>
+    <Row>0,0.22,0,0,38,28</Row>
+    <Row>0,0.131,0,0,38,30</Row>
+    <Row>0,0.101,0,0,38,12</Row>
+    <Row>0,0.102,0,0,38,13</Row>
+    <Row>0,0.041,0,0,38,23</Row>
+    <Row>0,0.033,0,0,38,20</Row>
+    <Row>0,0.011,0,0,38,21</Row>
+    <Row>0,0.002,0,0,38,22</Row>
+    <Row>1,0,0,0,38,39</Row>
+    <Row>0,0.002,0,0,38,16</Row>
+    <Row>0,0.062,0,0,38,18</Row>
+    <Row>0,0.026,0,0,38,31</Row>
+    <Row>0,0.096,0,0,38,27</Row>
+    <Row>0,0.031,0,0,38,29</Row>
+    <Row>0,0.032,0,0,38,32</Row>
+    <Row>0,0.048,0,0,38,17</Row>
+    <Row>0,0.053,0,0,38,33</Row>
+    <Row>0,0.008,0,0,38,24</Row>
+    <Row>0,0.001,0,0,38,8</Row>
+    <Row>0,0.03493014,0,0,16,28</Row>
+    <Row>0,0.03193613,0,0,16,30</Row>
+    <Row>0,0.00499002,0,0,16,12</Row>
+    <Row>0,0.1417166,0,0,16,11</Row>
+    <Row>0,0.06187625,0,0,16,9</Row>
+    <Row>0,0.02295409,0,0,16,19</Row>
+    <Row>0,0.003992016,0,0,16,20</Row>
+    <Row>0,0.04091817,0,0,16,21</Row>
+    <Row>0,0.02295409,0,0,16,22</Row>
+    <Row>1,0,0,0,16,39</Row>
+    <Row>0,0.01197605,0,0,16,16</Row>
+    <Row>0,0.00998004,0,0,16,27</Row>
+    <Row>0,0.00998004,0,0,16,29</Row>
+    <Row>0,0.1047904,0,0,16,4</Row>
+    <Row>0,0.01197605,0,0,16,3</Row>
+    <Row>0,0.01397206,0,0,16,17</Row>
+    <Row>0,0.1516966,0,0,16,7</Row>
+    <Row>0,0.09780439,0,0,16,8</Row>
+    <Row>0,0.2215569,0,0,16,6</Row>
+    <Row>0,0.1884347,0,0,18,28</Row>
+    <Row>0,0.07477568,0,0,18,30</Row>
+    <Row>0,0.07477568,0,0,18,12</Row>
+    <Row>0,0.02392822,0,0,18,11</Row>
+    <Row>0,0.04586242,0,0,18,13</Row>
+    <Row>0,0.02791625,0,0,18,23</Row>
+    <Row>0,0.006979064,0,0,18,19</Row>
+    <Row>0,0.0109671,0,0,18,20</Row>
+    <Row>0,0.0219342,0,0,18,21</Row>
+    <Row>0,0.008973082,0,0,18,22</Row>
+    <Row>1,0,0,0,18,39</Row>
+    <Row>0,0.01196411,0,0,18,16</Row>
+    <Row>0,0.03788634,0,0,18,18</Row>
+    <Row>0,0.01694915,0,0,18,31</Row>
+    <Row>0,0.07477568,0,0,18,27</Row>
+    <Row>0,0.01994018,0,0,18,29</Row>
+    <Row>0,0.02592224,0,0,18,32</Row>
+    <Row>0,0.09371885,0,0,18,4</Row>
+    <Row>0,0.002991027,0,0,18,14</Row>
+    <Row>0,0.0009970091,0,0,18,10</Row>
+    <Row>0,0.007976073,0,0,18,17</Row>
+    <Row>0,0.04586242,0,0,18,33</Row>
+    <Row>0,0.02891326,0,0,18,24</Row>
+    <Row>0,0.02392822,0,0,18,7</Row>
+    <Row>0,0.06480559,0,0,18,8</Row>
+    <Row>0,0.05882354,0,0,18,6</Row>
+    <Row>0,0.0009990011,0,0,31,12</Row>
+    <Row>0,0.0009990011,0,0,31,13</Row>
+    <Row>0,0.01098901,0,0,31,23</Row>
+    <Row>0,0.0009990011,0,0,31,9</Row>
+    <Row>0,0.0009990011,0,0,31,21</Row>
+    <Row>1,0,0,0,31,39</Row>
+    <Row>0,0.0009990011,0,0,31,16</Row>
+    <Row>0,0.02497503,0,0,31,5</Row>
+    <Row>0,0.006993008,0,0,31,27</Row>
+    <Row>0,0.003996004,0,0,31,29</Row>
+    <Row>0,0.2057942,0,0,31,4</Row>
+    <Row>0,0.6633367,0,0,31,3</Row>
+    <Row>0,0.001998002,0,0,31,17</Row>
+    <Row>0,0.001998002,0,0,31,33</Row>
+    <Row>0,0.002997003,0,0,31,8</Row>
+    <Row>0,0.07192808,0,0,31,6</Row>
+    <Row>1,0,0,0,5,39</Row>
+    <Row>0,0.03,0,0,5,5</Row>
+    <Row>0,0.04,0,0,5,4</Row>
+    <Row>0,0.75,0,0,5,3</Row>
+    <Row>0,0.1,0,0,5,2</Row>
+    <Row>0,0.08,0,0,5,1</Row>
+    <Row>1,0,0,0,27,39</Row>
+    <Row>0,1,0,0,27,3</Row>
+    <Row>1,0,0,0,29,39</Row>
+    <Row>0,1,0,0,29,3</Row>
+    <Row>0,0.41,0,0,35,28</Row>
+    <Row>0,0.067,0,0,35,30</Row>
+    <Row>0,0.184,0,0,35,13</Row>
+    <Row>0,0.004,0,0,35,23</Row>
+    <Row>0,0.023,0,0,35,20</Row>
+    <Row>1,0,0,0,35,39</Row>
+    <Row>0,0.004,0,0,35,18</Row>
+    <Row>0,0.04,0,0,35,31</Row>
+    <Row>0,0.109,0,0,35,27</Row>
+    <Row>0,0.011,0,0,35,29</Row>
+    <Row>0,0.036,0,0,35,32</Row>
+    <Row>0,0.002,0,0,35,4</Row>
+    <Row>0,0.081,0,0,35,33</Row>
+    <Row>0,0.029,0,0,35,8</Row>
+    <Row>0,0.505,0,0,36,11</Row>
+    <Row>0,0.168,0,0,36,9</Row>
+    <Row>1,0,0,0,36,39</Row>
+    <Row>0,0.282,0,0,36,40</Row>
+    <Row>0,0.045,0,0,36,5</Row>
+    <Row>0,0.006006005,0,0,32,11</Row>
+    <Row>0,0.008008007,0,0,32,13</Row>
+    <Row>0,0.007007006,0,0,32,23</Row>
+    <Row>0,0.001001001,0,0,32,22</Row>
+    <Row>1,0,0,0,32,39</Row>
+    <Row>0,0.003003003,0,0,32,31</Row>
+    <Row>0,0.09009008,0,0,32,5</Row>
+    <Row>0,0.06506506,0,0,32,27</Row>
+    <Row>0,0.02602602,0,0,32,29</Row>
+    <Row>0,0.2532532,0,0,32,4</Row>
+    <Row>0,0.4674674,0,0,32,3</Row>
+    <Row>0,0.001001001,0,0,32,17</Row>
+    <Row>0,0.01701702,0,0,32,33</Row>
+    <Row>0,0.01201201,0,0,32,8</Row>
+    <Row>0,0.04304304,0,0,32,6</Row>
+    <Row>1,0.15,0,0,4,39</Row>
+    <Row>0,0.05,0,0,4,4</Row>
+    <Row>0,0.5,0,0,4,3</Row>
+    <Row>0,0.15,0,0,4,2</Row>
+    <Row>0,0.15,0,0,4,1</Row>
+    <Row>0,0.5554445,0,0,34,28</Row>
+    <Row>0,0.1278721,0,0,34,30</Row>
+    <Row>0,0.002997003,0,0,34,12</Row>
+    <Row>0,0.04895104,0,0,34,13</Row>
+    <Row>1,0,0,0,34,39</Row>
+    <Row>0,0.000999001,0,0,34,31</Row>
+    <Row>0,0.01098901,0,0,34,5</Row>
+    <Row>0,0.09390609,0,0,34,27</Row>
+    <Row>0,0.01298701,0,0,34,29</Row>
+    <Row>0,0.02297702,0,0,34,32</Row>
+    <Row>0,0.002997003,0,0,34,4</Row>
+    <Row>0,0.004995005,0,0,34,14</Row>
+    <Row>0,0.000999001,0,0,34,17</Row>
+    <Row>0,0.08591408,0,0,34,33</Row>
+    <Row>0,0.006993007,0,0,34,24</Row>
+    <Row>0,0.003996004,0,0,34,8</Row>
+    <Row>0,0.01698302,0,0,34,6</Row>
+    <Row>1,0.2,0,0,3,39</Row>
+    <Row>0,0.05,0,0,3,3</Row>
+    <Row>0,0.25,0,0,3,2</Row>
+    <Row>0,0.5,0,0,3,1</Row>
+    <Row>1,0.3,0,0,2,39</Row>
+    <Row>0,0.05,0,0,2,2</Row>
+    <Row>0,0.65,0,0,2,1</Row>
+    <Row>0,0.05794206,0,0,14,11</Row>
+    <Row>0,0.02697303,0,0,14,9</Row>
+    <Row>1,0.3976024,0,0,14,39</Row>
+    <Row>0,0.1108891,0,0,14,4</Row>
+    <Row>0,0.01498501,0,0,14,3</Row>
+    <Row>0,0.1898102,0,0,14,7</Row>
+    <Row>0,0.07192807,0,0,14,8</Row>
+    <Row>0,0.1298701,0,0,14,6</Row>
+    <Row>0,0.006,0,0,10,12</Row>
+    <Row>0,0.135,0,0,10,11</Row>
+    <Row>0,0.073,0,0,10,9</Row>
+    <Row>1,0.384,0,0,10,39</Row>
+    <Row>0,0.241,0,0,10,4</Row>
+    <Row>0,0.022,0,0,10,7</Row>
+    <Row>0,0.111,0,0,10,8</Row>
+    <Row>0,0.028,0,0,10,6</Row>
+    <Row>0,0.047,0,0,17,28</Row>
+    <Row>0,0.001,0,0,17,30</Row>
+    <Row>0,0.017,0,0,17,12</Row>
+    <Row>0,0.007,0,0,17,11</Row>
+    <Row>0,0.066,0,0,17,23</Row>
+    <Row>0,0.028,0,0,17,9</Row>
+    <Row>0,0.007,0,0,17,19</Row>
+    <Row>0,0.007,0,0,17,21</Row>
+    <Row>0,0.01,0,0,17,22</Row>
+    <Row>1,0.001,0,0,17,39</Row>
+    <Row>0,0.012,0,0,17,40</Row>
+    <Row>0,0.006,0,0,17,5</Row>
+    <Row>0,0.042,0,0,17,27</Row>
+    <Row>0,0.008,0,0,17,29</Row>
+    <Row>0,0.299,0,0,17,4</Row>
+    <Row>0,0.077,0,0,17,3</Row>
+    <Row>0,0.001,0,0,17,14</Row>
+    <Row>0,0.002,0,0,17,17</Row>
+    <Row>0,0.001,0,0,17,24</Row>
+    <Row>0,0.035,0,0,17,7</Row>
+    <Row>0,0.174,0,0,17,8</Row>
+    <Row>0,0.152,0,0,17,6</Row>
+    <Row>0,0.006,0,0,33,11</Row>
+    <Row>1,0.003,0,0,33,39</Row>
+    <Row>0,0.086,0,0,33,4</Row>
+    <Row>0,0.686,0,0,33,3</Row>
+    <Row>0,0.014,0,0,33,1</Row>
+    <Row>0,0.203,0,0,33,6</Row>
+    <Row>1,0,0,0,1,39</Row>
+    <Row>1,0,0,0,24,39</Row>
+    <Row>0,0.102,0,0,24,4</Row>
+    <Row>0,0.865,0,0,24,3</Row>
+    <Row>0,0.012,0,0,24,7</Row>
+    <Row>0,0.004,0,0,24,8</Row>
+    <Row>0,0.017,0,0,24,6</Row>
+    <Row>0,0.05,0,0,7,11</Row>
+    <Row>1,0.8,0,0,7,39</Row>
+    <Row>0,0.05,0,0,7,7</Row>
+    <Row>0,0.2692693,0,0,26,28</Row>
+    <Row>0,0.01101101,0,0,26,30</Row>
+    <Row>0,0.003003003,0,0,26,12</Row>
+    <Row>0,0.05105105,0,0,26,11</Row>
+    <Row>0,0.003003003,0,0,26,13</Row>
+    <Row>0,0.007007007,0,0,26,23</Row>
+    <Row>0,0.08108108,0,0,26,9</Row>
+    <Row>0,0.02002002,0,0,26,19</Row>
+    <Row>0,0.008008009,0,0,26,20</Row>
+    <Row>0,0.03103103,0,0,26,21</Row>
+    <Row>0,0.02702703,0,0,26,22</Row>
+    <Row>1,0,0,0,26,39</Row>
+    <Row>0,0.008008009,0,0,26,40</Row>
+    <Row>0,0.008008009,0,0,26,16</Row>
+    <Row>0,0.004004004,0,0,26,18</Row>
+    <Row>0,0.01001001,0,0,26,31</Row>
+    <Row>0,0.08408409,0,0,26,27</Row>
+    <Row>0,0.007007007,0,0,26,29</Row>
+    <Row>0,0.01601602,0,0,26,32</Row>
+    <Row>0,0.04804805,0,0,26,4</Row>
+    <Row>0,0.02802803,0,0,26,14</Row>
+    <Row>0,0.06506506,0,0,26,17</Row>
+    <Row>0,0.03003003,0,0,26,33</Row>
+    <Row>0,0.02102102,0,0,26,24</Row>
+    <Row>0,0.07607608,0,0,26,7</Row>
+    <Row>0,0.07707708,0,0,26,8</Row>
+    <Row>0,0.006006006,0,0,26,6</Row>
+    <Row>0,0.09206075,0,0,37,28</Row>
+    <Row>0,0.0430284,0,0,37,30</Row>
+    <Row>0,0.003001981,0,0,37,13</Row>
+    <Row>1,0,0,0,37,39</Row>
+    <Row>0,0.2051354,0,0,37,40</Row>
+    <Row>0,0.00100066,0,0,37,31</Row>
+    <Row>0,0.008005284,0,0,37,29</Row>
+    <Row>0,0.03302179,0,0,37,33</Row>
+    <Row>0,0.0003402245,0,0,37,37</Row>
+    <Row>0,0.02306921,0,0,25,28</Row>
+    <Row>0,0.01604815,0,0,25,30</Row>
+    <Row>0,0.001003009,0,0,25,15</Row>
+    <Row>0,0.05416249,0,0,25,12</Row>
+    <Row>0,0.2968907,0,0,25,11</Row>
+    <Row>0,0.01805416,0,0,25,13</Row>
+    <Row>0,0.002006018,0,0,25,23</Row>
+    <Row>0,0.004012037,0,0,25,9</Row>
+    <Row>1,0,0,0,25,39</Row>
+    <Row>0,0.008024073,0,0,25,40</Row>
+    <Row>0,0.0110331,0,0,25,16</Row>
+    <Row>0,0.01203611,0,0,25,5</Row>
+    <Row>0,0.05917753,0,0,25,27</Row>
+    <Row>0,0.005015045,0,0,25,29</Row>
+    <Row>0,0.115346,0,0,25,4</Row>
+    <Row>0,0.005015045,0,0,25,14</Row>
+    <Row>0,0.02908726,0,0,25,17</Row>
+    <Row>0,0.1735206,0,0,25,7</Row>
+    <Row>0,0.003009027,0,0,25,26</Row>
+    <Row>0,0.003009027,0,0,25,25</Row>
+    <Row>0,0.1604814,0,0,25,8</Row>
+    <Row>0,0.01598402,0,0,8,12</Row>
+    <Row>0,0.2767233,0,0,8,11</Row>
+    <Row>0,0.002997003,0,0,8,23</Row>
+    <Row>0,0.002997003,0,0,8,9</Row>
+    <Row>0,0.001998002,0,0,8,19</Row>
+    <Row>1,0.08191809,0,0,8,39</Row>
+    <Row>0,0.004995005,0,0,8,40</Row>
+    <Row>0,0.001998002,0,0,8,16</Row>
+    <Row>0,0.06193807,0,0,8,4</Row>
+    <Row>0,0.04095905,0,0,8,3</Row>
+    <Row>0,0.1948052,0,0,8,7</Row>
+    <Row>0,0.02697303,0,0,8,8</Row>
+    <Row>0,0.2307692,0,0,8,6</Row>
+    <Row>0,0.03,0,0,6,11</Row>
+    <Row>1,0.8,0,0,6,39</Row>
+    <Row>0,0.005,0,0,6,40</Row>
+    <Row>0,0.1,0,0,6,3</Row>
+    <Row>0,0.02,0,0,6,1</Row>
+    <Row>0,0.02,0,0,6,7</Row>
+    <Row>0,0.025,0,0,6,6</Row>
+  </Table>
+  <Table Name="EcopathDietCompSample" Columns="Diet:System.Single,PredID:System.Int64,PreyID:System.Int64,SampleID:System.Int64" Num="0" />
+  <Table Name="EcopathDiscardFate" Columns="DiscardFate:System.Single,FleetID:System.Int64,GroupID:System.Int64" Num="15">
+    <Row>1,1,40</Row>
+    <Row>1,2,40</Row>
+    <Row>1,3,40</Row>
+    <Row>1,4,40</Row>
+    <Row>1,5,40</Row>
+  </Table>
+  <Table Name="EcopathFleet" Columns="FixedCost:System.Single,FleetID:System.Int64,FleetName:System.String,NominalEffort:System.Single,PoolColor:System.String,SailingCost:System.Single,Sequence:System.Int64,VariableCost:System.Single" Num="40">
+    <Row>0,1,Trawls,,0,40,1,40</Row>
+    <Row>0,2,Purse seines,,0,40,2,40</Row>
+    <Row>0,3,Longlines + Troll baits,,0,40,3,40</Row>
+    <Row>0,4,Nets,,0,40,4,40</Row>
+    <Row>0,5,Traps,,0,40,5,40</Row>
+  </Table>
+  <Table Name="EcopathGroup" Columns="AinLW:System.Single,Area:System.Single,BinLW:System.Single,BiomAcc:System.Single,BiomAccRate:System.Single,Biomass:System.Single,Catch:System.Single,CmCo:System.Single,ConsBiom:System.Single,Consumption:System.Single,DtImports:System.Single,EcoEfficiency:System.Single,EmigRate:System.Single,Emigration:System.Single,Export:System.Single,GroupID:System.Int64,GroupIsFish:System.Boolean,GroupIsInvert:System.Boolean,GroupName:System.String,Immigration:System.Single,ImpVar:System.Single,Loo:System.Single,NonMarketValue:System.Single,OtherMort:System.Single,PoolColor:System.String,ProdBiom:System.Single,ProdCons:System.Single,ProdResp:System.Single,Production:System.Single,PSDInclude:System.Int64,QmQo:System.Single,RespBiom:System.Single,RespCons:System.Single,Respiration:System.Single,Sequence:System.Int64,t0:System.Single,Tcatch:System.Single,Tmax:System.Single,Type:System.Single,Unassim:System.Single,Unassimilated:System.Single,vbK:System.Single,Winf:System.Single" Num="1720">
+    <Row>-1,1,-1,0,0,1.79,0,,5.20125,0,0,-9999,0,0,0.4438394,28,True,True,Adult anchovy,0,0,-1,0,-9999,0,1.373364,-9999,0,0,,,0,0,4.058844,28,-9999,-1,-1,0,0.3,0,0.509,-1</Row>
+    <Row>-1,1,-1,0,0,0.8100001,0,,9.49176,0,0,-9999,0,0,0.342467,30,True,True,Adult sardine,0,0,-1,0,-9999,0,1.20233,-9999,0,0,,,0,0,4.407942,30,-9999,-1,-1,0,0.3,0,0.86,-1</Row>
+    <Row>-1,1,-1,0,0,0.081,0,,4.345017,0,0,-9999,0,0,0.04794161,15,True,True,Anglerfish,0,0,-1,0,-9999,0,0.904,-9999,0,0,,,0,0,0.2083331,15,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.292,0,,5.5,0,0,-9999,0,0,0.1797547,12,True,True,Benthic cephalopods,0,0,-1,0,-9999,0,2.683,-9999,0,0,,,0,0,0.613784,12,-9999,-1,-1,0,0.13,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,8.712,0,,3.267018,0,0,-9999,0,0,0.06750257,11,True,True,Benthic invert. (no crustacea),0,0.05,-1,0,-9999,0,1.148,-9999,0,0,,,0,0,6.222112,11,-9999,-1,-1,0,0.43,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.114,0,,26.47,0,0,-9999,0,0,0.03297438,13,True,True,Benthopelagic cephalopods,0,0,-1,0,-9999,0,2.596,-9999,0,0,,,0,0,1.514604,13,-9999,-1,-1,0,0.4,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.268,0,,9.274848,0,0,-9999,0,0,0.005084768,23,True,True,BepeFish,0,0,-1,0,-9999,0,1.25,-9999,0,0,,,0,0,1.404961,23,-9999,-1,-1,0,0.3,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.27,0,,4.937059,0,0,-9999,0,0,0.03350995,9,True,True,Crabs,0,0.002,-1,0,-9999,0,2.423,-9999,0,0,,,0,0,0.4121947,9,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.068,0,,7.479407,0,0,-9999,0,0,0.02326176,19,True,True,DemeFish1,0,0.02,-1,0,-9999,0,1.551,-9999,0,0,,,0,0,0.3014117,19,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.076,0,,5.15135,0,0,-9999,0,0,0.0512662,20,True,True,DemeFish2,0,0,-1,0,-9999,0,1.494,-9999,0,0,,,0,0,0.1996581,20,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.201,0,,8.448091,0,0,-9999,0,0,0.09779543,21,True,True,DemeFish3,0,0,-1,0,-9999,0,1.713,-9999,0,0,,,0,0,1.01414,21,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.099,0,,9.002935,0,0,-9999,0,0,0.07814245,22,True,True,DemeFish4,0,0.002,-1,0,-9999,0,2.223,-9999,0,0,,,0,0,0.4929555,22,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,31.44,0,,-9999,0,0,-9999,0,0,272.4631,39,True,True,Detritus,0,0,-1,0,-9999,0,-9999,-9999,0,0,,,0,0,0,39,-9999,-1,-1,2,0,0,-1,-1</Row>
+    <Row>-1,1,-1,0,0,0.584,0,,-9999,0,0,-9999,0,0,0,40,True,True,Discards,0,0,-1,0,-9999,0,-9999,-9999,0,0,,,0,0,0,40,-9999,-1,-1,2,0,0,-1,-1</Row>
+    <Row>-1,1,-1,0,0,0.01,0,,13.80789,0,0,-9999,0,0,0.000213056,38,True,True,dolphins,0,0,-1,0,-9999,0,0.083,-9999,0,0,,,0,0,0.1096331,38,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.061,0,,9.091728,0,0,-9999,0,0,0.03513871,16,True,True,Flatfishes,0,0,-1,0,-9999,0,1.598,-9999,0,0,,,0,0,0.3461983,16,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.306,0,,5.261104,0,0,-9999,0,0,0.1071496,18,True,True,Hake,0,0,-1,0,-9999,0,0.745,-9999,0,0,,,0,0,1.059948,18,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.182,0,,7.788942,0,0,-9999,0,0,0.06217116,31,True,True,Horse mackerel,0,0,-1,0,-9999,0,1.078,-9999,0,0,,,0,0,0.937874,31,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,2.476,0,,12.09026,0,0,-9999,0,0,0,5,True,True,Jellyfish+ mnemiopsis,0,0,-1,0,-9999,0,4.836,-9999,0,0,,,0,0,11.97445,5,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.3583411,0,,12.20899,0,0,-9999,0,0,0.001271787,27,True,True,Juv anchovy,0,0,-1,0,-9999,0,2.245464,-9999,0,0,,,0,0,2.257847,27,-9999,-1,-1,0,0.3,0,0.509,-1</Row>
+    <Row>-1,1,-1,0,0,0.1793895,0,,18.41142,0,0,-9999,0,0,0.000159864,29,True,True,Juv sardine,0,0,-1,0,-9999,0,1.616037,-9999,0,0,,,0,0,2.022071,29,-9999,-1,-1,0,0.3,0,0.86,-1</Row>
+    <Row>-1,1,-1,0,0,0.035,0,,2.389032,0,0,-9999,0,0,0.007712939,35,True,True,Large pelagic fishes,0,0,-1,0,-9999,0,0.335,-9999,0,0,,,0,0,0.05516789,35,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.02,0,,2.684032,0,0,-9999,0,0,0.0002131,36,True,True,Loggerhead turtle,0,0,-1,0,-9999,0,0.164,-9999,0,0,,,0,0,0.03966451,36,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.284,0,,5.878972,0,0,-9999,0,0,0.08863594,32,True,True,Mackerel,0,0,-1,0,-9999,0,0.971,-9999,0,0,,,0,0,1.059938,32,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,-9999,0,,53.16993,0,0,0.95,0,0,0,4,True,True,Macrozooplankton,0,0,-1,0,-9999,0,21.073,-9999,0,0,,,0,0,6.169061,4,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.2,0,,3.239254,0,0,-9999,0,0,0.1076713,34,True,True,Medium pelagic fish,0,0,-1,0,-9999,0,0.61,-9999,0,0,,,0,0,0.3962807,34,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,2.79,0,,87.55471,0,0,-9999,0,0,0,3,True,True,mesozooplankton,0,0,-1,0,-9999,0,29.185,-9999,0,0,,,0,0,65.14043,3,-9999,-1,-1,0,0.4,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.475,0,,776.5408,0,0,-9999,0,0,0,2,True,True,micro-,0,0,-1,0,-9999,0,258.847,-9999,0,0,,,0,0,98.3618,2,-9999,-1,-1,0,0.4,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.072,0,,7.6714,0,0,-9999,0,0,0.07994051,14,True,True,Mullets,0,0,-1,0,-9999,0,1.799,-9999,0,0,,,0,0,0.3123446,14,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.024,0,,4.759617,0,0,-9999,0,0,0.01177687,10,True,True,Norway lobster,0,0,-1,0,-9999,0,1.318,-9999,0,0,,,0,0,0.05975264,10,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.182,0,,7.636629,0,0,-9999,0,0,0.02297996,17,True,True,Other gadiforms,0,0,-1,0,-9999,0,1.1,-9999,0,0,,,0,0,0.9116932,17,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.563,0,,8.405187,0,0,-9999,0,0,0.06442183,33,True,True,Other Small pelagic fishes,0,0.002,-1,0,-9999,0,0.753,-9999,0,0,,,0,0,2.888545,33,-9999,-1,-1,0,0.3,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,4.565,0,,-9999,0,0,-9999,0,0,0,1,True,True,phyto,0,0,-1,0,-9999,0,117.3,-9999,0,0,,,0,0,0,1,-9999,-1,-1,1,0,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.187,0,,7.682348,0,0,-9999,0,0,0.1732472,24,True,True,picarels and bogue,0,0,-1,0,-9999,0,1.69,-9999,0,0,,,0,0,0.8332493,24,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,5.333,0,,12.46214,0,0,-9999,0,0,0,7,True,True,Polychaetes,0,0.1,-1,0,-9999,0,1.633,-9999,0,0,,,0,0,17.87544,7,-9999,-1,-1,0,0.6,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.082,0,,4.072094,0,0,-9999,0,0,0.0504862,26,True,True,rays &amp; skates,0,0,-1,0,-9999,0,0.875,-9999,0,0,,,0,0,0.1953794,26,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.001,0,,111.6136,0,0,-9999,0,0,0,37,True,True,Sea birds,0,0.6144055,-1,0,-9999,0,4.782,-9999,0,0,,,0,0,0.08450888,37,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.082,0,,5.158342,0,0,-9999,0,0,0.01933826,25,True,True,sharks,0,0,-1,0,-9999,0,0.578,-9999,0,0,,,0,0,0.2909913,25,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,0.399,0,,7.515185,0,0,-9999,0,0,0.109218,8,True,True,Shrimps,0,0.05494506,-1,0,-9999,0,3.18,-9999,0,0,,,0,0,1.130027,8,-9999,-1,-1,0,0.2,0,0,-1</Row>
+    <Row>-1,1,-1,0,0,1.109,0,,54.40159,0,0,-9999,0,0,0,6,True,True,Suprabenthos,0,0,-1,0,-9999,0,7.315,-9999,0,0,,,0,0,34.11961,6,-9999,-1,-1,0,0.3,0,0,-1</Row>
+  </Table>
+  <Table Name="EcopathGroupCatchSample" Columns="Discards:System.Single,FleetID:System.Int64,GroupID:System.Int64,Landing:System.Single,SampleID:System.Int64" Num="0" />
+  <Table Name="EcopathGroupPedigree" Columns="Confidence:System.Int64,GroupID:System.Int64,LevelID:System.Int64,VarName:System.String" Num="0" />
+  <Table Name="EcopathGroupSample" Columns="BiomAcc:System.Single,BiomAccRate:System.Single,Biomass:System.Single,ConsBiom:System.Single,EcoEfficiency:System.Single,GroupID:System.Int64,ImpVar:System.Single,ProdBiom:System.Single,SampleID:System.Int64" Num="0" />
+  <Table Name="EcopathGroupTaxon" Columns="EcopathGroupID:System.Int64,PropCatch:System.Single,Proportion:System.Single,TaxonID:System.Int64" Num="0" />
+  <Table Name="EcopathModel" Columns="Area:System.Single,Author:System.String,CodeEcobase:System.String,Contact:System.String,Country:System.String,Description:System.String,EcosystemType:System.String,FirstYear:System.Int64,GroupDigits:System.Byte,LastSaved:System.Single,LastSavedVersion:System.String,MaxLat:System.Single,MaxLon:System.Single,MinLat:System.Single,MinLon:System.Single,ModelID:System.Int64,MonetaryUnit:System.String,Name:System.String,NumDigits:System.Int32,NumYears:System.Single,PublicationDOI:System.String,PublicationRef:System.String,PublicationURI:System.String,UnitCurrency:System.Int64,UnitCurrencyCustom:System.String,UnitMonetary:System.String,UnitTime:System.Int64,UnitTimeCustom:System.String" Num="28">
+    <Row>8374,Tsagarakis K.,495,kontsag@hcmr.gr,"Greece,Turkey",No description,continental shelf,2003,0,45880.41,,40.14805,26.00112,40.90654,23.77503,1,,North Aegean,3,3,,"Tsagarakis K.,Coll M.,Giannoulaki M.,Somarakis S.,Papaconstantinou C.,Machias A.(2010). Food-web traits of the North Aegean Sea ecosystem (Eastern Mediterranean) and comparison with other Mediterranean ecosystems Estuarine, Coastal and Shelf Science. pp 233-248",http://www.sciencedirect.com/science/article/pii/S027277141000140X,5,,,1,</Row>
+  </Table>
+  <Table Name="EcopathPSD" Columns="ClimateType:System.Int32,FirstWeightClass:System.Single,ModelID:System.Int64,MortalityType:System.Int64,NumAgeSteps:System.Int64,NumWeightClasses:System.Int64" Num="0" />
+  <Table Name="EcopathSample" Columns="Generated:System.Single,Hash:System.String,Rating:System.Single,SampleID:System.Int64,Source:System.String,SS:System.Single" Num="0" />
+  <Table Name="EcopathStanzaTaxon" Columns="PropCatch:System.Single,Proportion:System.Single,StanzaID:System.Int64,TaxonID:System.Int64" Num="0" />
+  <Table Name="EcopathTaxon" Columns="ClassName:System.String,CodeAphia:System.String,CodeAquaMaps:System.String,CodeFAO:System.String,CodeFB:System.Int64,CodeLCID:System.String,CodeOBIS:System.Int64,CodeSAUP:System.Int64,CodeSLB:System.Int64,CommonName:System.String,ConservationStatus:System.Int64,EcologyType:System.Int64,ExploitationStatus:System.Int64,Exploited:System.Byte,FamilyName:System.String,GenusName:System.String,LastUpdated:System.Single,MaxLength:System.Single,MeanLength:System.Single,MeanLifeSpan:System.Single,MeanWeight:System.Single,OccurrenceStatus:System.Int64,OrderName:System.String,OrganismType:System.Int64,SourceKey:System.String,SourceName:System.String,SpeciesName:System.String,TaxonID:System.Int64,vbgfK:System.Int64,VulnerabiltyIndex:System.Int32,Winf:System.Single" Num="0" />
+  <Table Name="EcosimModel" Columns="ForcePoints:System.Int64,ModelID:System.Int64" Num="2">
+    <Row>1200,1</Row>
+  </Table>
+  <Table Name="EcosimScenario" Columns="Author:System.String,Contact:System.String,Description:System.String,Discount:System.Single,DoInteg:System.Boolean,EquilibriumStepSize:System.Single,EquilScaleMax:System.Single,ForagingTimeLowerLimit:System.Single,LastSaved:System.Single,LastSavedVersion:System.String,NudgeEnd:System.Single,NudgeFactor:System.Single,NudgeStart:System.Single,NutBaseFreeProp:System.Single,NutForcingShapeID:System.Int64,NutPBmax:System.Single,ScenarioID:System.Int64,ScenarioName:System.String,sorwt:System.Single,StepSize:System.Single,SystemRecovery:System.Single,TotalTime:System.Int64,UseNudge:System.Boolean,UseVarPQ:System.Boolean" Num="0" />
+  <Table Name="EcosimScenarioArena" Columns="PeatArena:System.Single,PredID:System.Int64,PredSharedID:System.Int32,PreyID:System.Int64,ScenarioID:System.Int64,Sequence:System.Int64" Num="0" />
+  <Table Name="EcosimScenarioCapacityDrivers" Columns="DriverID:System.Int64,GroupID:System.Int64,ResponseID:System.Int64,ScenarioID:System.Int64,Target:System.Int32" Num="0" />
+  <Table Name="EcosimScenarioFleet" Columns="CapBaseGrowth:System.Single,CapDepreciate:System.Single,CatchRefLower:System.Single,CatchRefUpper:System.Single,CV:System.Single,EcopathFleetID:System.Int64,EffortConversionFactor:System.Int64,EffortRefLower:System.Single,EffortRefUpper:System.Single,Epower:System.Single,FishRateShapeID:System.Int64,FleetID:System.Int64,MaxEffort:System.Single,MSYEvaluateFleet:System.Boolean,PCapBase:System.Single,QIncrease:System.Single,QuotaType:System.Int32,ScenarioID:System.Int64" Num="0" />
+  <Table Name="EcosimScenarioFleetGroupCatchability" Columns="FleetID:System.Int64,GroupID:System.Int64,ScenarioID:System.Int64,zScale:System.String" Num="0" />
+  <Table Name="EcosimScenarioFleetYear" Columns="CV:System.Single,FleetID:System.Int64,ScenarioID:System.Int64,TimeYear:System.Int64" Num="0" />
+  <Table Name="EcosimScenarioForcingMatrix" Columns="PredID:System.Int64,PreyID:System.Int64,ScenarioID:System.Int64,vulnerability:System.Single" Num="0" />
+  <Table Name="EcosimScenarioGroup" Columns="AdditivePredMort:System.Single,Bbase:System.Single,BiomassCV:System.Single,BiomassRefLower:System.Single,BiomassRefUpper:System.Single,Blim:System.Single,CatchRefLower:System.Single,CatchRefUpper:System.Single,CmCo:System.Single,EcopathGroupID:System.Int64,FishMortMax:System.Single,FishMortShapeID:System.Int64,FishRateMax:System.Single,FixedEscapement:System.Single,FixedF:System.Single,Fopt:System.Single,FtimeAdjust:System.Single,FtimeMax:System.Single,GroupID:System.Int64,Kalwt:System.Single,LowerRisk:System.Single,MoPred:System.Single,Pbmaxs:System.Single,QmQo:System.Single,RecruitmentCV:System.Single,RHalfB0Ratio:System.Single,RiskTime:System.Single,RStockRatio:System.Single,ScenarioID:System.Int64,Show:System.Boolean,SwitchPower:System.Single,UpperRisk:System.Single" Num="0" />
+  <Table Name="EcosimScenarioGroupYear" Columns="CVBiom:System.Single,GroupID:System.Int64,ScenarioID:System.Int64,TimeYear:System.Int64" Num="0" />
+  <Table Name="EcosimScenarioLandingsShape" Columns="FleetID:System.Int64,FunctionType:System.Int32,GroupID:System.Int64,ScenarioID:System.Int64,ShapeID:System.Int64" Num="0" />
+  <Table Name="EcosimScenarioMSE" Columns="AssessMethod:System.Int64,AssessPower:System.Single,MaxEffort:System.Single,NTrials:System.Int32,ScenarioID:System.Int64,StartIndex:System.Int32" Num="0" />
+  <Table Name="EcosimScenarioPredPreyShape" Columns="FunctionType:System.Int32,PredID:System.Int64,PreyID:System.Int64,ScenarioID:System.Int64,ShapeID:System.Int64" Num="0" />
+  <Table Name="EcosimScenarioQuota" Columns="EcosimGroupID:System.Int64,FleetID:System.Int64,Fweight:System.Single,Quota:System.Single,QuotaShare:System.Single,ScenarioID:System.Int64" Num="0" />
+  <Table Name="EcosimScenarioShapeMedWeightsFleet" Columns="FleetID:System.Int64,MedWeights:System.Single,ScenarioID:System.Int64,ShapeID:System.Int64" Num="0" />
+  <Table Name="EcosimScenarioshapeMedWeightsGroup" Columns="GroupID:System.Int64,MedWeights:System.Single,ScenarioID:System.Int64,ShapeID:System.Int64" Num="0" />
+  <Table Name="EcosimScenarioshapeMedWeightsLandings" Columns="FleetID:System.Int64,GroupID:System.Int64,MedWeights:System.Single,ScenarioID:System.Int64,ShapeID:System.Int64" Num="0" />
+  <Table Name="EcosimShape" Columns="IsSeasonal:System.Boolean,ShapeID:System.Int64,ShapeType:System.Int64" Num="0" />
+  <Table Name="EcosimShapeEggProd" Columns="FunctionParams:System.String,FunctionType:System.Int32,ShapeID:System.Int64,Title:System.String,zMaxScale:System.Single,zScale:System.String" Num="0" />
+  <Table Name="EcosimShapeFishMort" Columns="ShapeID:System.Int64,Title:System.String,zScale:System.String" Num="0" />
+  <Table Name="EcosimShapeFishRate" Columns="ShapeID:System.Int64,Title:System.String,zScale:System.String" Num="0" />
+  <Table Name="EcosimShapeMediation" Columns="FunctionParams:System.String,FunctionType:System.Int32,IMedBase:System.Int32,ShapeID:System.Int64,Title:System.String,XAxisMax:System.Single,XAxisMin:System.Single,zScale:System.String" Num="0" />
+  <Table Name="EcosimShapeTime" Columns="ApplicationType:System.Int64,FunctionParams:System.String,FunctionType:System.Int64,ShapeID:System.Int64,Title:System.String,zMaxScale:System.Single,zScale:System.String" Num="0" />
+  <Table Name="EcosimStanzaShape" Columns="EggprodShapeID:System.Int64,HatchCodeShapeID:System.Int64,StanzaID:System.Int64" Num="0" />
+  <Table Name="EcosimTimeSeries" Columns="CV:System.Single,DatasetID:System.Int64,DatName:System.String,DatType:System.Int32,Sequence:System.Int64,TimeSeriesID:System.Int64,TimeValues:System.String,WtType:System.Single" Num="0" />
+  <Table Name="EcosimTimeSeriesDataset" Columns="Author:System.String,Contact:System.String,DataInterval:System.Int64,DatasetID:System.Int64,DatasetName:System.String,Description:System.String,FirstYear:System.Int64,NumPoints:System.Int64" Num="0" />
+  <Table Name="EcosimTimeSeriesFleet" Columns="FleetID:System.Int64,GroupID:System.Int64,TimeSeriesID:System.Int64" Num="0" />
+  <Table Name="EcosimTimeSeriesGroup" Columns="GroupID:System.Int64,TimeSeriesID:System.Int64,VariableName:System.String" Num="0" />
+  <Table Name="EcospaceScenario" Columns="AdjustSpace:System.Boolean,AssumeSquareCells:System.Boolean,Author:System.String,CellAreaMap:System.String,CellLength:System.Single,CellSize:System.Single,Contact:System.String,CoordinateSystemWKT:System.String,DepthAMap:System.String,DepthMap:System.String,Description:System.String,EcosimScenarioID:System.Int64,EffortDistrThreshold:System.Single,EffortZoneMap:System.String,ExclusionMap:System.String,FirstPenaltyMonth:System.Single,FitResponseType:System.Byte,FlowMap:System.String,IFDPower:System.Single,Incol:System.Int64,Inrow:System.Int64,LastSaved:System.Single,LastSavedVersion:System.String,MinLat:System.Single,MinLon:System.Single,ModelType:System.Int32,NoFishWeight:System.Single,NumEffortZones:System.Int64,NumPacketsMultiplier:System.Single,NumRegions:System.Int64,NumThreads:System.Int32,PenaltyPower:System.Single,PredictEffort:System.Boolean,Q10DriverMap:System.String,RegionMap:System.String,RelCinMap:System.String,RelPPMap:System.String,ScenarioID:System.Int64,ScenarioName:System.String,SpinupYears:System.Int32,TimeStep:System.Single,Tolerance:System.Single,TotalTime:System.Single,UseEffortDistrThreshold:System.Int32,UseExact:System.Boolean,UsePenaltySearch:System.Byte,UseSpinup:System.Byte" Num="0" />
+  <Table Name="EcospaceScenarioCapacityDrivers" Columns="GroupID:System.Int64,ScenarioID:System.Int64,ShapeID:System.Int64,Target:System.Int32,VarDBID:System.Int64" Num="0" />
+  <Table Name="EcospaceScenarioDataConnection" Columns="ConverterCfg:System.String,ConverterTypeName:System.String,CustomDateEnd:System.String,CustomDateStart:System.String,DatasetCfg:System.String,DatasetGUID:System.String,DatasetTypeName:System.String,LayerID:System.Int64,Scale:System.Single,ScaleType:System.Byte,ScenarioID:System.Int64,Sequence:System.Int64,VarName:System.String" Num="0" />
+  <Table Name="EcospaceScenarioDataConnectionDisabled" Columns="LayerID:System.Int64,ScenarioID:System.Int64,VarName:System.String" Num="0" />
+  <Table Name="EcospaceScenarioDriverDisabled" Columns="LayerID:System.Int64,ScenarioID:System.Int64,Target:System.Int32" Num="0" />
+  <Table Name="EcospaceScenarioDriverLayer" Columns="LayerDescription:System.String,LayerID:System.Int64,LayerMap:System.String,LayerName:System.String,LayerUnits:System.String,ScenarioID:System.Int64,Sequence:System.Int64" Num="0" />
+  <Table Name="EcospaceScenarioFleet" Columns="EcopathFleetID:System.Int64,EffPower:System.Single,FleetID:System.Int64,PortMap:System.String,SailCostMap:System.String,ScenarioID:System.Int64,SEMult:System.Single" Num="0" />
+  <Table Name="EcospaceScenarioGroup" Columns="BarrierAvoidanceWeight:System.Single,CapacityCalType:System.Int32,CapacityMap:System.String,EcopathGroupID:System.Int64,FTarget:System.Single,GroupID:System.Int64,InMigAreaMovement:System.Single,IsAdvected:System.Boolean,IsMigratory:System.Boolean,KMoveFit:System.Single,Mvel:System.Single,OtherMortMap:System.String,RelMoveBad:System.Single,RelVulBad:System.Single,ScenarioID:System.Int64" Num="0" />
+  <Table Name="EcospaceScenarioGroupHabitat" Columns="GroupID:System.Int64,HabitatID:System.Int64,Preference:System.Single,ScenarioID:System.Int64" Num="0" />
+  <Table Name="EcospaceScenarioGroupMigration" Columns="Concentration:System.Single,GroupID:System.Int64,Map:System.String,MonthID:System.Byte,ScenarioID:System.Int64" Num="0" />
+  <Table Name="EcospaceScenarioHabitat" Columns="HabitatID:System.Int64,HabitatMap:System.String,HabitatName:System.String,ScenarioID:System.Int64,Sequence:System.Int64" Num="0" />
+  <Table Name="EcospaceScenarioHabitatFishery" Columns="FleetID:System.Int64,HabitatID:System.Int64,ScenarioID:System.Int64" Num="0" />
+  <Table Name="EcospaceScenarioMonth" Columns="AdvectionXVelMap:System.String,AdvectionYVelMap:System.String,MonthID:System.Byte,ScenarioID:System.Int64,UpwellingMap:System.String,WindXVelMap:System.String,WindYVelMap:System.String" Num="0" />
+  <Table Name="EcospaceScenarioMPA" Columns="MPAID:System.Int64,MPAMap:System.String,MPAmonth:System.String,MPAname:System.String,ScenarioID:System.Int64,Sequence:System.Int64" Num="0" />
+  <Table Name="EcospaceScenarioMPAFishery" Columns="FleetID:System.Int64,MPAID:System.Int64,ScenarioID:System.Int64" Num="0" />
+  <Table Name="EcospaceScenarioWeightLayer" Columns="Description:System.String,LayerID:System.Int64,LayerMap:System.String,Name:System.String,ScenarioID:System.Int64,Sequence:System.Int64,Weight:System.Single" Num="0" />
+  <Table Name="EcotracerScenario" Columns="Author:System.String,Cdecay:System.Single,Cinflow:System.Single,ConForcingShapeID:System.Int64,Contact:System.String,Coutflow:System.Single,Czero:System.Single,Description:System.String,LastSaved:System.Single,LastSavedVersion:System.String,ScenarioID:System.Int64,ScenarioName:System.String" Num="0" />
+  <Table Name="EcotracerScenarioGroup" Columns="CassimProp:System.Single,Cdecay:System.Single,Cenv:System.Single,Cimmig:System.Single,CmetabolismRate:System.Single,Czero:System.Single,EcopathGroupID:System.Int64,ScenarioID:System.Int64" Num="0" />
+  <Table Name="Pedigree" Columns="Confidence:System.Single,Description:System.String,IndexValue:System.Single,LevelColor:System.Int64,LevelID:System.Int64,LevelName:System.String,Sequence:System.Int64,VarName:System.String" Num="0" />
+  <Table Name="Quote" Columns="ID:System.Int64,Quote:System.String,Source:System.String" Num="0" />
+  <Table Name="Stanza" Columns="BABsplit:System.Single,EggAtSpawn:System.Byte,FixedFecundity:System.Boolean,HatchCode:System.Int64,LeadingCB:System.Int32,LeadingLifeStage:System.Int64,RecPower:System.Single,RecStanza:System.Int64,StanzaID:System.Int64,StanzaName:System.String,WmatWinf:System.Single" Num="22">
+    <Row>0,1,False,0,1,1,1,,1,anchovy,0.174803</Row>
+    <Row>0,1,False,0,1,1,1,,2,sardine,0.1648901</Row>
+  </Table>
+  <Table Name="StanzaLifeStage" Columns="AgeStart:System.Int32,Feeding:System.Boolean,GroupID:System.Int64,Mortality:System.Single,Sequence:System.Int64,Spawning:System.Boolean,SpawnProp:System.Single,StanzaID:System.Int64,vbK:System.Single" Num="36">
+    <Row>0,False,27,2.245464,1,False,,1,0.3</Row>
+    <Row>12,False,28,1.373364,2,False,,1,0.3</Row>
+    <Row>0,False,29,1.616037,1,False,,2,0.3</Row>
+    <Row>12,False,30,1.20233,2,False,,2,0.3</Row>
+  </Table>
+  <Table Name="UpdateLog" Columns="Date:System.String,EwEVersion:System.String,Remark:System.String,Version:System.Single" Num="4">
+    <Row>4/5/2023,,Release,6.700014</Row>
+  </Table>
+</EwEModel>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <Platform>Microsoft Windows NT 10.0.26100.0</Platform>
+  <Is64BitOS>True</Is64BitOS>
+  <ModelName>Mid-Atlantic Bight</ModelName>
+  <Created>2:56:26 PM Wednesday, August 13, 2025</Created>
+<Session_Started
+  Date="2:56:26 PM Wednesday, August 13, 2025">
+  <Model>Mid-Atlantic Bight</Model>
+  <LogFile>C:\Users\andrew.beet\Documents\myWork\demo_repos\Rpath_fitting\xml_examples\Mid-Atlantic Bight_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="2:56:26 PM Wednesday, August 13, 2025">
+  <Message>Ecopath model 'C:\Users\andrew.beet\Documents\myWork\demo_repos\Rpath_fitting\xml_examples\Mid-Atlantic Bight.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Warning_Message
+  Date="2:56:35 PM Wednesday, August 13, 2025">
+  <Message>Your model has 1 gear(s) for which the Discard fate is not specified. You should go back to your input data and make sure to specify what happens to the discards. Discards must be directed to a detritus group, if this  is not the case in your case, you should perhaps treat  the discards from the given fleet as landings with zero value.</Message>
+  <Message_Type>ErrorEncountered</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Warning_Message
+  Date="2:56:35 PM Wednesday, August 13, 2025">
+  <Message>Your model has 1 gear(s) for which the Discard fate is not specified. You should go back to your input data and make sure to specify what happens to the discards. Discards must be directed to a detritus group, if this  is not the case in your case, you should perhaps treat  the discards from the given fleet as landings with zero value.</Message>
+  <Message_Type>ErrorEncountered</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Information_Message
+  Date="2:57:01 PM Wednesday, August 13, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="2:57:04 PM Wednesday, August 13, 2025">
+  <Message>Basic estimates saved to 'C:\Users\andrew.beet\Documents\myWork\demo_repos\Rpath_fitting\xml_examples\Mid-Atlantic Bight-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="2:57:10 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:57:10 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:57:10 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:57:10 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:57:10 PM Wednesday, August 13, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:57:11 PM Wednesday, August 13, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+</doc>

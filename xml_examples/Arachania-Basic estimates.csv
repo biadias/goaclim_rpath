@@ -1,0 +1,10 @@
+,"Group name","Trophic level","Hab area (proportion)","Biomass in habitat area (t/km^2)","Biomass (t/km^2)","Production / biomass (/year)","Consumption / biomass (/year)","Ecotrophic Efficiency","Production / consumption (/year)","Biomass accumulation (t/km^2)","BA rate (/year)"
+1,Fishes,0.00000000,0.50000000,2.31585598,1.15792799,1.15638804,4.62766886,,,,
+2,"Atlantorchestoidea brasiliensis",0.00000000,0.50000000,0.93019217,0.46509609,2.32620406,212.269302,,,,
+3,"Hemipodus olivieri",0.00000000,0.17000000,4.17339802,0.70947772,3.56784606,19.3254299,,,,
+4,"Excirolana braziliensis",0.00000000,0.17000000,0.99671060,0.16944081,3.77890706,82.6209488,,,,
+5,"Emerita brasiliensis",0.00000000,0.20999999,21.3482208,4.48312712,3.61498189,6.53510618,,,,
+6,"Donax hanleyanus",0.00000000,0.20999999,95.8688965,20.1324692,1.39627397,6.90059614,,,,
+7,Zooplankton,0.00000000,0.50000000,5.16183615,2.58091807,114.662201,313.216888,,,,
+8,Phytoplankton,0.00000000,0.50000000,33.6753197,16.8376598,509.548492,,,,,
+9,Detritus,0.00000000,1.00000000,141.475006,141.475006,,,0.068444774,,,

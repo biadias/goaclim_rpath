@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <Platform>Microsoft Windows NT 10.0.22631.0</Platform>
+  <Is64BitOS>True</Is64BitOS>
+  <ModelName>Arachania</ModelName>
+  <Created>9:44:25 AM Monday, August 11, 2025</Created>
+<Session_Started
+  Date="9:44:25 AM Monday, August 11, 2025">
+  <Model>Arachania</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Arachania_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="9:44:25 AM Monday, August 11, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Arachania.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Warning_Message
+  Date="9:44:27 AM Monday, August 11, 2025">
+  <Message>Diet for one or more groups does not sum to 1. Do you want to normalize diets to 1 for ALL predator groups?</Message>
+  <Message_Type>DietComp</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+  <Message_Reply>CANCEL</Message_Reply>
+  <Message_Suppressable>False</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Warning_Message>
+<Warning_Message
+  Date="9:44:27 AM Monday, August 11, 2025">
+  <Message>Diet for one or more groups does not sum to 1. Do you want to normalize diets to 1 for ALL predator groups?</Message>
+  <Message_Type>DietComp</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+  <Message_Reply>CANCEL</Message_Reply>
+  <Message_Suppressable>False</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Warning_Message>
+<Warning_Message
+  Date="9:44:29 AM Monday, August 11, 2025">
+  <Message>Ecopath diets have changed</Message>
+  <Message_Type>DataModified</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Warning_Message
+  Date="9:44:29 AM Monday, August 11, 2025">
+  <Message>Your model is NOT mass-balanced!
+Computed Ecotrophic Efficiencies (EE) invalid for one or more group(s).</Message>
+  <Message_Type>EE</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupOutput</Message_DataType>
+</Warning_Message>
+<Warning_Message
+  Date="9:44:29 AM Monday, August 11, 2025">
+  <Message>Ecopath diets have changed</Message>
+  <Message_Type>DataModified</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Warning_Message
+  Date="9:44:31 AM Monday, August 11, 2025">
+  <Message>Your model is NOT mass-balanced!
+Computed Ecotrophic Efficiencies (EE) invalid for one or more group(s).</Message>
+  <Message_Type>EE</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupOutput</Message_DataType>
+</Warning_Message>
+<Information_Message
+  Date="9:44:33 AM Monday, August 11, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="9:44:39 AM Monday, August 11, 2025">
+  <Message>Basic estimates saved to 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Arachania-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="9:44:46 AM Monday, August 11, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:44:46 AM Monday, August 11, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:44:46 AM Monday, August 11, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:44:46 AM Monday, August 11, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:44:46 AM Monday, August 11, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:44:46 AM Monday, August 11, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="4:56:26 PM Monday, August 11, 2025">
+  <Model>Arachania</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Arachania_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="4:56:26 PM Monday, August 11, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Arachania.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Question_Message
+  Date="4:56:56 PM Monday, August 11, 2025">
+  <Message>Pedigree levels are not defined for one or more value types. Do you want to define these now?</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+  <Message_Reply>YES</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Log_Message
+  Date="4:58:38 PM Monday, August 11, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:58:38 PM Monday, August 11, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:58:38 PM Monday, August 11, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:58:38 PM Monday, August 11, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:58:38 PM Monday, August 11, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:58:38 PM Monday, August 11, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="5:24:54 PM Tuesday, August 12, 2025">
+  <Model>Arachania</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Arachania_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="5:24:54 PM Tuesday, August 12, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Arachania.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Warning_Message
+  Date="5:25:01 PM Tuesday, August 12, 2025">
+  <Message>Diet for one or more groups does not sum to 1. Do you want to normalize diets to 1 for ALL predator groups?</Message>
+  <Message_Type>DietComp</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+  <Message_Reply>CANCEL</Message_Reply>
+  <Message_Suppressable>False</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Warning_Message>
+<Warning_Message
+  Date="5:25:01 PM Tuesday, August 12, 2025">
+  <Message>Diet for one or more groups does not sum to 1. Do you want to normalize diets to 1 for ALL predator groups?</Message>
+  <Message_Type>DietComp</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+  <Message_Reply>CANCEL</Message_Reply>
+  <Message_Suppressable>False</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Warning_Message>
+<Log_Message
+  Date="5:25:07 PM Tuesday, August 12, 2025">
+  <Message>EwECore.cCore.RunEcoPath() Failed to Estimate Parameters.</Message>
+</Log_Message>
+<Information_Message
+  Date="5:25:07 PM Tuesday, August 12, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="5:25:13 PM Tuesday, August 12, 2025">
+  <Message>Basic estimates saved to 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Arachania-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="5:25:21 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:25:21 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:25:21 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:25:21 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:25:21 PM Tuesday, August 12, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:25:21 PM Tuesday, August 12, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+</doc>
