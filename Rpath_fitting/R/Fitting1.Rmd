@@ -1,0 +1,77 @@
+---
+title: "Fitting"
+author: "Kerim Aydin"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Setup
+
+```{r Ecopath}
+
+library(Rpath)
+source("tmp_ecofitting.R")
+# Setup Base Ecopath 
+  Ebase <- "models/ebs_aclim2_72bio_base.csv"  # Base biomass, production, fishing, etc.
+  Ediet <- "models/ebs_aclim2_72bio_diet_cod-bairdi_update.csv"  # Diet matrix
+  Eped  <- "models/ebs_aclim2_72bio_ped_temp.csv"   # Data pedigree = quality of input data
+  Estz  <- "models/ebs_aclim2_72bio_stanzas.csv"   # Stanzas
+  Estg  <- "models/ebs_aclim2_72bio_stanza_groups.csv" # Stanza groups
+  unbal <- rpath.stanzas(read.rpath.params(Ebase, Ediet, Eped, Estg, Estz)) # unbalanced
+  bal   <- rpath(unbal) # balanced
+
+# Setup years and base ecosim scenario
+  hind_years <- 1991:2021
+  scene0 <- rsim.scenario(bal, unbal, years = hind_years)
+  # check if in equilibrium
+  # run.hind <- rsim.run(scene0, method='AB', years=hind_years)
+  # rsim.plot(run.hind)
+
+# Read in biomass to fit 
+  scene1 <- read.fitting.biomass(scene0, "fits/EBS_2023_fitting_survey_index_2_Q1.csv")
+  #scene1 <- read.fitting.biomass(scene0, "fits/EBS_2023_fitting_survey_index_2_fullQ.csv")
+  scene1$fitting$Biomass$Type[]<-"index"
+# Read in catch to fit.  This does not on its own apply read-in catch to catch forcing.  
+  scene2 <- read.fitting.catch(scene1, "fits/EBS_ACLIM_72_BIO_catch_2021_long.csv")
+
+# This function copies the fitting catch table into the forced_catch matrix 
+# This does not zero out previous Effort-applied (equilibrium) catch
+  scene3 <- fitcatch.to.forcecatch(scene2)
+
+# Zeroing out effort matrix manually (this will turn off detritus flows that are by gear)
+  scene3$fishing$ForcedEffort[] <- 0  
+  result <- NULL
+  result$par <- c(arrowtooth_adu = 0.0231729959662409, shallow_demersals = -0.0382461261430272)  
+  scene3 <- adjust.scenario(scene3,"MzeroMort",group=names(result$par),value=result$par)
+  
+# scene_fit is the final scene to use for fitting    
+  scene_fit <- scene3
+
+```
+
+## Table of negative-log likelihoods
+```{r fittable}
+run1 <- rsim.run(scene_fit, method='AB', years=hind_years)
+rsim.fit.table(scene_fit,run1)
+
+```
+
+## Results
+```{r fitplots, fig.height=1.8}
+#for(sp in rpath.living(bal)){
+s_list <- c(rpath.living(bal),rpath.detrital(bal))
+#s_list <-c("pollock_adu","pcod_adu","arrowtooth_adu") 
+for(sp in s_list){
+  #par(mfrow=c(1,2))
+  #par(mar=c(5,4,4,2))
+  #par(oma=c(0,0,0,0))
+  TMP.rsim.plot.full(scene_fit, run1, sp)
+  #TMP.rsim.plot.biomass(scene_fit, run1, sp)
+  #TMP.rsim.plot.catch(scene_fit, run1, sp)
+}
+
+```

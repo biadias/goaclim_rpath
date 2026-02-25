@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <Platform>Microsoft Windows NT 10.0.22631.0</Platform>
+  <Is64BitOS>True</Is64BitOS>
+  <ModelName>Antarctic</ModelName>
+  <Created>9:43:57 AM Monday, August 11, 2025</Created>
+<Session_Started
+  Date="9:43:57 AM Monday, August 11, 2025">
+  <Model>Antarctic</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Antarctic_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="9:43:57 AM Monday, August 11, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Antarctic.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="9:43:58 AM Monday, August 11, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="9:44:02 AM Monday, August 11, 2025">
+  <Message>Basic estimates saved to 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Antarctic-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="9:44:10 AM Monday, August 11, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:44:10 AM Monday, August 11, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:44:10 AM Monday, August 11, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:44:10 AM Monday, August 11, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:44:10 AM Monday, August 11, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:44:11 AM Monday, August 11, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="5:07:05 PM Tuesday, August 12, 2025">
+  <Model>Antarctic</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Antarctic_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="5:07:05 PM Tuesday, August 12, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Antarctic.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="5:07:10 PM Tuesday, August 12, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Log_Message
+  Date="5:21:44 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:21:44 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:21:44 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:21:44 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:21:44 PM Tuesday, August 12, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:21:44 PM Tuesday, August 12, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="5:24:04 PM Tuesday, August 12, 2025">
+  <Model>Antarctic</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Antarctic_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="5:24:04 PM Tuesday, August 12, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Antarctic.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="5:24:09 PM Tuesday, August 12, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="5:24:15 PM Tuesday, August 12, 2025">
+  <Message>Basic estimates saved to 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Antarctic-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="5:24:30 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:24:30 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:24:30 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:24:30 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:24:30 PM Tuesday, August 12, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:24:30 PM Tuesday, August 12, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="10:18:33 AM Wednesday, August 13, 2025">
+  <Model>Antarctic</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Antarctic_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="10:18:33 AM Wednesday, August 13, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Antarctic.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="10:21:19 AM Wednesday, August 13, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Log_Message
+  Date="10:45:00 AM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:45:00 AM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:45:01 AM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:45:01 AM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:45:01 AM Wednesday, August 13, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:45:01 AM Wednesday, August 13, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+</doc>

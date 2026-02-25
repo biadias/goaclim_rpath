@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <Platform>Microsoft Windows NT 10.0.26100.0</Platform>
+  <Is64BitOS>True</Is64BitOS>
+  <ModelName>Paraná River Floodplain</ModelName>
+  <Created>3:53:37 PM Wednesday, August 13, 2025</Created>
+<Session_Started
+  Date="3:53:37 PM Wednesday, August 13, 2025">
+  <Model>Paraná River Floodplain</Model>
+  <LogFile>C:\NOAA\Rpath_fitting\xml_examples\Paraná River Floodplain_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="3:53:37 PM Wednesday, August 13, 2025">
+  <Message>Ecopath model 'C:\NOAA\Rpath_fitting\xml_examples\Paraná River Floodplain.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Question_Message
+  Date="3:53:44 PM Wednesday, August 13, 2025">
+  <Message>Biomass, PB, QB and EE for 'Plagioscion squamisissimus' are entered. Do you want to estimate biomass accumulation?</Message>
+  <Message_Type>Estimate_BA</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupInput</Message_DataType>
+  <Message_Reply>CANCEL</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Question_Message
+  Date="3:53:44 PM Wednesday, August 13, 2025">
+  <Message>Biomass, PB, QB and EE for 'Plagioscion squamisissimus' are entered. Do you want to estimate biomass accumulation?</Message>
+  <Message_Type>Estimate_BA</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupInput</Message_DataType>
+  <Message_Reply>CANCEL</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Warning_Message
+  Date="4:47:55 PM Wednesday, August 13, 2025">
+  <Message>Enter Biomass for all detritus groups before proceeding to Ecosim.</Message>
+  <Message_Type>InvalidModel_B_Detritus</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Information_Message
+  Date="4:47:55 PM Wednesday, August 13, 2025">
+  <Message>The following variables were estimated:</Message>
+  <Message_Type>DataModified</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Warning_Message
+  Date="4:47:55 PM Wednesday, August 13, 2025">
+  <Message>Enter Biomass for all detritus groups before proceeding to Ecosim.</Message>
+  <Message_Type>InvalidModel_B_Detritus</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Information_Message
+  Date="4:48:51 PM Wednesday, August 13, 2025">
+  <Message>The following variables were estimated:</Message>
+  <Message_Type>DataModified</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="4:48:51 PM Wednesday, August 13, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="4:49:02 PM Wednesday, August 13, 2025">
+  <Message>Basic estimates saved to 'C:\NOAA\Rpath_fitting\xml_examples\Paraná River Floodplain-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="4:49:17 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:49:17 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:49:17 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:49:17 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:49:17 PM Wednesday, August 13, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:49:17 PM Wednesday, August 13, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+</doc>

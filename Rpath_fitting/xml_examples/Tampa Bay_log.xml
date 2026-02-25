@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <Platform>Microsoft Windows NT 10.0.22631.0</Platform>
+  <Is64BitOS>True</Is64BitOS>
+  <ModelName>Tampa Bay</ModelName>
+  <Created>1:43:46 PM Tuesday, August 12, 2025</Created>
+<Session_Started
+  Date="1:43:46 PM Tuesday, August 12, 2025">
+  <Model>Tampa Bay</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Tampa Bay_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="1:43:46 PM Tuesday, August 12, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Tampa Bay.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="1:44:00 PM Tuesday, August 12, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="1:44:13 PM Tuesday, August 12, 2025">
+  <Message>Basic estimates saved to 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Tampa Bay-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="1:47:25 PM Tuesday, August 12, 2025">
+  <Message>Basic estimates saved to 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Tampa Bay-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Log_Message
+  Date="2:57:22 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:57:22 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:57:22 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:57:22 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:57:22 PM Tuesday, August 12, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:57:22 PM Tuesday, August 12, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="3:31:36 PM Tuesday, August 12, 2025">
+  <Model>Tampa Bay</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Tampa Bay_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="3:31:36 PM Tuesday, August 12, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Tampa Bay.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="3:36:44 PM Tuesday, August 12, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Question_Message
+  Date="3:36:57 PM Tuesday, August 12, 2025">
+  <Message>Pedigree levels are not defined for one or more value types. Do you want to define these now?</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+  <Message_Reply>YES</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Log_Message
+  Date="5:07:05 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:07:05 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:07:05 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:07:05 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:07:05 PM Tuesday, August 12, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:07:05 PM Tuesday, August 12, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="4:09:28 PM Thursday, August 14, 2025">
+  <Model>Tampa Bay</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Tampa Bay_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="4:09:28 PM Thursday, August 14, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Tampa Bay.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="4:09:48 PM Thursday, August 14, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:09:48 PM Thursday, August 14, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:09:48 PM Thursday, August 14, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:09:48 PM Thursday, August 14, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:09:48 PM Thursday, August 14, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:09:48 PM Thursday, August 14, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+</doc>

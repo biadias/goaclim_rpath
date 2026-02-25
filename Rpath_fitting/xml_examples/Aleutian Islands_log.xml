@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <Platform>Microsoft Windows NT 10.0.22631.0</Platform>
+  <Is64BitOS>True</Is64BitOS>
+  <ModelName>Aleutian Islands</ModelName>
+  <Created>9:43:08 AM Monday, August 11, 2025</Created>
+<Session_Started
+  Date="9:43:08 AM Monday, August 11, 2025">
+  <Model>Aleutian Islands</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="9:43:08 AM Monday, August 11, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Warning_Message
+  Date="9:43:16 AM Monday, August 11, 2025">
+  <Message>Your model has 2 group(s) that have a diet with imports only. Such groups are not well defined, will have trophic levels of 1, and will not show any flow on trophic level decomposition interfaces.</Message>
+  <Message_Type>ErrorEncountered</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Warning_Message
+  Date="9:43:16 AM Monday, August 11, 2025">
+  <Message>Your model has 2 group(s) that have a diet with imports only. Such groups are not well defined, will have trophic levels of 1, and will not show any flow on trophic level decomposition interfaces.</Message>
+  <Message_Type>ErrorEncountered</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Information_Message
+  Date="9:43:25 AM Monday, August 11, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="9:43:30 AM Monday, August 11, 2025">
+  <Message>Basic estimates saved to 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="9:43:38 AM Monday, August 11, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:43:38 AM Monday, August 11, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:43:38 AM Monday, August 11, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:43:38 AM Monday, August 11, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:43:38 AM Monday, August 11, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:43:38 AM Monday, August 11, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="10:30:26 AM Tuesday, August 12, 2025">
+  <Model>Aleutian Islands</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="10:30:26 AM Tuesday, August 12, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="10:30:43 AM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:30:43 AM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:30:43 AM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:30:43 AM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:30:43 AM Tuesday, August 12, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:30:43 AM Tuesday, August 12, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="5:22:57 PM Tuesday, August 12, 2025">
+  <Model>Aleutian Islands</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="5:22:57 PM Tuesday, August 12, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Warning_Message
+  Date="5:23:06 PM Tuesday, August 12, 2025">
+  <Message>Your model has 2 group(s) that have a diet with imports only. Such groups are not well defined, will have trophic levels of 1, and will not show any flow on trophic level decomposition interfaces.</Message>
+  <Message_Type>ErrorEncountered</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Warning_Message
+  Date="5:23:06 PM Tuesday, August 12, 2025">
+  <Message>Your model has 2 group(s) that have a diet with imports only. Such groups are not well defined, will have trophic levels of 1, and will not show any flow on trophic level decomposition interfaces.</Message>
+  <Message_Type>ErrorEncountered</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Information_Message
+  Date="5:23:08 PM Tuesday, August 12, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="5:23:34 PM Tuesday, August 12, 2025">
+  <Message>Basic estimates saved to 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="5:23:40 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:23:40 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:23:40 PM Tuesday, August 12, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:23:40 PM Tuesday, August 12, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:23:40 PM Tuesday, August 12, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:23:40 PM Tuesday, August 12, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="10:15:51 AM Wednesday, August 13, 2025">
+  <Model>Aleutian Islands</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="10:15:51 AM Wednesday, August 13, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="10:18:32 AM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:18:32 AM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:18:32 AM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:18:32 AM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:18:32 AM Wednesday, August 13, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="10:18:33 AM Wednesday, August 13, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="4:24:22 PM Wednesday, August 13, 2025">
+  <Model>Aleutian Islands</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="4:24:22 PM Wednesday, August 13, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Question_Message
+  Date="4:24:27 PM Wednesday, August 13, 2025">
+  <Message>Pedigree levels are not defined for one or more value types. Do you want to define these now?</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+  <Message_Reply>YES</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Log_Message
+  Date="5:21:49 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:21:49 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:21:49 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:21:49 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:21:49 PM Wednesday, August 13, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="5:21:49 PM Wednesday, August 13, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="4:26:08 PM Saturday, September 27, 2025">
+  <Model>Aleutian Islands</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="4:26:08 PM Saturday, September 27, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\Aleutian Islands.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Warning_Message
+  Date="4:26:17 PM Saturday, September 27, 2025">
+  <Message>Your model has 2 group(s) that have a diet with imports only. Such groups are not well defined, will have trophic levels of 1, and will not show any flow on trophic level decomposition interfaces.</Message>
+  <Message_Type>ErrorEncountered</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Warning_Message
+  Date="4:26:17 PM Saturday, September 27, 2025">
+  <Message>Your model has 2 group(s) that have a diet with imports only. Such groups are not well defined, will have trophic levels of 1, and will not show any flow on trophic level decomposition interfaces.</Message>
+  <Message_Type>ErrorEncountered</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Information_Message
+  Date="4:26:24 PM Saturday, September 27, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Information_Message
+  Date="4:26:29 PM Saturday, September 27, 2025">
+  <Message>Options applied successfully.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="4:27:04 PM Saturday, September 27, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:27:04 PM Saturday, September 27, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:27:04 PM Saturday, September 27, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:27:04 PM Saturday, September 27, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:27:04 PM Saturday, September 27, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="4:27:04 PM Saturday, September 27, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+</doc>
