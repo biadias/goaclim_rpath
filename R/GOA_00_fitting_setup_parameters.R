@@ -61,7 +61,7 @@ par63_species <- c(sv_groups_63par,
 par63_start   <- rep(0,length(par63_species))
 
 # ---------------------------------------------------------------------------- #
-# 59 Parameters + 2 M0 Setup (Pollock and Cod) ####
+# 61 Parameters + 2 M0 Setup (Pollock and Cod) ####
 # ---------------------------------------------------------------------------- #
 
 mzero_groups_2     <- c("walleye_pollock_adult", "pacific_cod_adult" )
@@ -159,3 +159,108 @@ par59M03_species <- c(mzero_groups_3,
 par59M03_start   <- c(scene_base$params$MzeroMort[mzero_groups_3],
                       rep(0,(length(par59M03_species)-length(mzero_groups_3))))
 
+
+# ---------------------------------------------------------------------------- #
+# 59 Parameters + 4 M0 Setup (Pollock, Cod, Arrowtooth, DWflatfish ) ####
+# ---------------------------------------------------------------------------- #
+mzero_groups_4     <- c("walleye_pollock_adult", "pacific_cod_adult",
+                        "arrowtooth_flounder_adult", "deep_water_flatfish" )
+par59M04_groups        <- c(
+  "other_skates",
+  "walleye_pollock_adult",
+  "pandalid_shrimp",
+  "pacific_sandlance",
+  "tanner_crab" ,
+  "benthic_zooplankton",
+  "pacific_halibut_adult",
+  "pacific_cod_adult",
+  "arrowtooth_flounder_adult" ,
+  "salmon_returning",
+  "shelf_demersal_fish",
+  "shelf_forage_fish",
+  "offal",#only preyvul for this group
+  "infauna",
+  "pacific_herring_juvenile",
+  "sablefish_adult",
+  "pacific_herring_adult",
+  "arrowtooth_flounder_juvenile",
+  "mysids",
+  "deep_water_flatfish",
+  "pacific_capelin",
+  "large_microzooplankton" ,
+  "pacific_ocean_perch_adult",
+  "squid", 
+  "shallow_water_flatfish",
+  "motile_epifauna",
+  "octopus",
+  "nonpandalid_shrimp",
+  "walleye_pollock_juvenile",
+  "euphausiids"
+  #"rex_sole_adult",
+  #"pacific_cod_juvenile"
+)
+
+par59M04_vartype <- c(rep("mzero", length(mzero_groups_4)),
+                      rep("preyvul", length(par59M04_groups)),
+                      rep("predvul",(length(par59M04_groups)-1))) 
+par59M04_species <- c(mzero_groups_4,
+                      par59M04_groups, 
+                      par59M04_groups[1:(length(par59M04_groups)-1)])
+
+par59M04_start   <- c(scene_base$params$MzeroMort[mzero_groups_4],
+                      rep(0,(length(par59M04_species)-length(mzero_groups_4))))
+
+
+
+
+
+
+# ---------------------------------------------------------------------------- #
+# 57 Parameters + 5 M0 Setup (Pollock, Cod, Arrowtooth, POP, DWFlat ) ####
+# ---------------------------------------------------------------------------- #
+mzero_groups_5     <- c("walleye_pollock_adult", "pacific_cod_adult","arrowtooth_flounder_adult", 
+                        "pacific_ocean_perch_adult", "deep_water_flatfish" )
+par57M05_groups        <- c(
+  "other_skates",
+  "walleye_pollock_adult",
+  "pandalid_shrimp",
+  "pacific_sandlance",
+  "tanner_crab" ,
+  "benthic_zooplankton",
+  "pacific_halibut_adult",
+  "pacific_cod_adult",
+  "arrowtooth_flounder_adult" ,
+  "salmon_returning",
+  "shelf_demersal_fish",
+  "shelf_forage_fish",
+  "offal",#only preyvul for this group
+  "infauna",
+  "pacific_herring_juvenile",
+  "sablefish_adult",
+  "pacific_herring_adult",
+  "arrowtooth_flounder_juvenile",
+  "mysids",
+  "deep_water_flatfish",
+  "pacific_capelin",
+  "large_microzooplankton" ,
+  "pacific_ocean_perch_adult",
+  "squid", 
+  "shallow_water_flatfish",
+  "motile_epifauna",
+  "octopus",
+  "nonpandalid_shrimp",
+  "walleye_pollock_juvenile"
+  #"euphausiids"
+  #"rex_sole_adult",
+  #"pacific_cod_juvenile"
+)
+
+par57M05_vartype <- c(rep("mzero", length(mzero_groups_5)),
+                      rep("preyvul", length(par57M05_groups)),
+                      rep("predvul",(length(par57M05_groups)-1))) 
+par57M05_species <- c(mzero_groups_5,
+                      par57M05_groups, 
+                      par57M05_groups[1:(length(par57M05_groups)-1)])
+
+par57M05_start   <- c(scene_base$params$MzeroMort[mzero_groups_5],
+                      rep(0,(length(par57M05_species)-length(mzero_groups_5))))

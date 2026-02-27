@@ -107,7 +107,7 @@ rsim.plot.fitbio.small.bd <- function(scene, run_list, species, datasource, cols
 
 ################################################################################
 ##### modified by BD 1/6/2026 ####
-rsim.runplot.multi <- function(scene, run_list, species, cols = NULL, run_names=NULL) {
+rsim.runplot.multi <- function(scene, run_list, species, cols = NULL, run_names=NULL, inset=c(-0.3,0)) {
   
   if (is.null(cols)) {
     cols <- c("#000000", "#e69f00", "#56b4e9", "#009e73", "#0072b2", "#d55e00","#cc79a7", "#f0e442")
@@ -118,14 +118,13 @@ rsim.runplot.multi <- function(scene, run_list, species, cols = NULL, run_names=
   if (is.null(run_names)) {
     run_names <- paste("Run", 1:length(run_list))
   }
+  
   legend_labels <- sapply(1:length(run_list), function(i){
     total_nll <- round(rsim.fit.obj(scene, run_list[[i]], FALSE),2)
   paste0(run_names[i], " (nll: ", total_nll, ")")
   })
   #run.out   <- rsim.run(scene, method='AB', years=years)
-  
   #run.out <- run #rsim.fit.run(values,groups,vartypes,scene,"AB",years,T)
-
   
   #all_sources <- rsim.fit.list.bio.series(scene_fit)$sources
   all_series <- strsplit(rsim.fit.list.bio.series(scene)$all, ":")
@@ -173,8 +172,9 @@ rsim.runplot.multi <- function(scene, run_list, species, cols = NULL, run_names=
          col = cols[1:length(run_list)], 
          lty = 1, 
          lwd = 4, 
-         inset=c(-0.2,0),
+         inset=inset,
+         xpd = TRUE,
          #horiz = TRUE, 
-         cex = 1.2, #1.2
+         cex = 1.2,
          bty = "n")
 }
