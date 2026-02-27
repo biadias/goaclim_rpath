@@ -55,11 +55,8 @@ datfiles <- list(
   surveyfile_nonrace    = "GOA/wgoa_data_rpath_fitting/wgoa_nonrace_biomass_ts_fitting_index.csv",
   surveyfile_gak        = "GOA/wgoa_data_rpath_fitting/gak_zooplankton_b_ts_v2.csv",
   surveyfile_ecofoci    = "GOA/wgoa_data_rpath_fitting/goaecofoci_zooplankton_b_ts_v2.csv",
-  surveyfile_wintshelik = "GOA/wgoa_data_rpath_fitting/wgoa_pollock_shelikof_v2_biomass_ts_fitting_index_v2_tons_ka.csv"
-  #surveyfile_slope    = "data/ebs_slope_fitting_index_aclim3_Q1.csv",
-  #surveyfile_mammals  = "data/ebs_aclim3_mammal_index.csv",
-  #surveyfile_birds    = "data/seabird_colony_data.csv",
-  #hindcast_ocean      = "climate/a2_hind.csv"
+  surveyfile_wintshelik = "GOA/wgoa_data_rpath_fitting/wgoa_pollock_shelikof_v2_biomass_ts_fitting_index_v2_tons_ka.csv",
+  surveyfile_sable_ll   = "GOA/wgoa_data_rpath_fitting/wgoa_sablefish_ll_v2_biomass_ts_fitting_index_v3.csv"
 )
 
 ecofoci <- read.csv(datfiles$surveyfile_ecofoci) %>%
@@ -74,6 +71,9 @@ ecofoci <- read.csv(datfiles$surveyfile_ecofoci) %>%
 wintshelik <- read.csv(datfiles$surveyfile_wintshelik) %>%
   mutate(Value = as.numeric(Value))
 
+sable_ll <- read.csv(datfiles$surveyfile_sable_ll) %>%
+  mutate(Value = as.numeric(Value))
+
 
 ##### 1.Read biomass and catch timeseries into data frames ####
 #do any needed data cleanup  #
@@ -81,6 +81,7 @@ bio_dat <- rbind(
   read.csv(datfiles$surveyfile_shelf),
   read.csv(datfiles$surveyfile_gak),
   wintshelik,
+  sable_ll,
   ecofoci
 )
 bio_dat$Group <- make_clean_names(bio_dat$Group, allow_dupes = TRUE)
@@ -99,7 +100,7 @@ unbal <- w.unbal
 bal   <- rpath(unbal)
 
 # Setup base scenario
-hind_years <- 1990:2020
+hind_years <- 1991:2020 #BIA ATTENTION HERE#### changing to 1991-2020 will cause the nll to drop 1000pts
 scene0 <- rsim.scenario(bal, unbal, years = hind_years)
 # Read in biomass to fit from data frame
 scene1 <- read.fitting.biomass.cv(scene0, bio_dat)
@@ -146,8 +147,9 @@ removed_series <- c(
   "pacific_hake:race_wgoa",
   "pacific_herring_adult:craig_index",
   "salmon_shark:race_wgoa",
-  "walleye_pollock_adult:race_wgoa",
-  "miscellaneous_deep_sea_fish:race_wgoa", #removing this time series_replacing by shelikoff index
+  "walleye_pollock_adult:race_wgoa",#removing this time series_replacing by shelikoff index
+  "sablefish_adult:race_wgoa",
+  "miscellaneous_deep_sea_fish:race_wgoa", 
   "squid:race_wgoa",
   "nonpandalid_shrimp:race_wgoa",
   "other_gelatinous_zooplankton:race_wgoa",
