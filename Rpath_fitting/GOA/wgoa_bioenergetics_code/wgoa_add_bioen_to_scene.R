@@ -1,4 +1,4 @@
-source("GOA/wgoa_bioenergetics_code/bioenergetic_projections.r")
+source("Rpath_fitting/GOA/wgoa_bioenergetics_code/bioenergetic_projections.r")
 
 wgoa_add_bioenergetics <- function(ssp){
 #hind_years <- 1991:2020 # just for knowledge, it won't be used. 
@@ -6,7 +6,7 @@ prefix <- "tdc"
 cons <- TRUE
 resp <- TRUE
 #ssp <- "ssp126" # or ssp245, ssp585, etc.
-scene_bd <- rsim.scenario(bal, unbal, years=1991:2089)
+scene_bd <- rsim.scenario(bal, unbal, years=1991:2099)
 #run_bd  <- rsim.run(scene_bd, method="AB", years = 1990:2089)
 
 #–– Bioenergetics fitting ––#

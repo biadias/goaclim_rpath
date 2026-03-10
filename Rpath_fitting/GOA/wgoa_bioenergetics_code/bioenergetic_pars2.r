@@ -15,7 +15,7 @@ library(viridisLite)
 
 
 
-bioen_pars <- read.csv("GOA/wgoa_bioenergetics_code/WGOA_bioen.csv", header=TRUE, sep=',', 
+bioen_pars <- read.csv("Rpath_fitting/GOA/wgoa_bioenergetics_code/WGOA_bioen.csv", header=TRUE, sep=',', 
                        dec='.', row.names=1) #this file is valid for both EGOA and WGOA
 # X parameter in Kitchell equation
 bioen_sp <- row.names(bioen_pars)
@@ -25,7 +25,7 @@ bioen_sp <- row.names(bioen_pars)
 #bioen_pars["shortraker_rock",4:5] <- bioen_pars["rougheye_rock",4:5]
 # species-specific temp time series from BT survey
 hind_bt <- read.csv(
-  "GOA/wgoa_bioenergetics_code/species_weighted_temp_WGOA.csv",
+  "Rpath_fitting/GOA/wgoa_bioenergetics_code/species_weighted_temp_WGOA.csv",
   header = TRUE,
   sep = ',',
   dec = '.',
@@ -222,7 +222,7 @@ rc_scaled_b[is.nan(rc_scaled_b)] <- 1e-08
 #**historical**: representing model spinup (1980 to 2014).
 
  
-roms_hind_temp <- read.csv("GOA/wgoa_data_rpath_fitting/Long_WGOA_temp_monthly_1000.csv", 
+roms_hind_temp <- read.csv("Rpath_fitting/GOA/wgoa_data_rpath_fitting/Long_WGOA_temp_monthly_1000.csv", 
                            header=TRUE, sep=',', dec='.') %>% 
   filter(simulation=="ssp126", year>1990 & year<2021) %>% 
   select(c( year, month, depthclass,area_weighted_temp)) %>% 
@@ -230,7 +230,7 @@ roms_hind_temp <- read.csv("GOA/wgoa_data_rpath_fitting/Long_WGOA_temp_monthly_1
   rename(temp_b5=Bottom,  temp_s5=Surface)
 roms_hind_temp$tstep <- 1:360
 
-roms_hind_npz <- read.csv("GOA/wgoa_bioenergetics_code/Long_WGOA_B_summary_month1000_v2_corrected.csv", 
+roms_hind_npz <- read.csv("Rpath_fitting/GOA/wgoa_bioenergetics_code/Long_WGOA_B_summary_month1000_v2_corrected.csv", 
                            header=TRUE, sep=',', dec='.') %>% 
   filter(simulation=="ssp126", year>1990 & year<2021) %>% 
   select(c( year, month, varname,biomass_tonnes_km2)) %>% 
