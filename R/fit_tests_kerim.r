@@ -1,6 +1,9 @@
 # These tests assume you have run a fitting setup script (EBS, GOA or other), 
 # and that you have unbal, bal, and scene_fit loaded.
 
+
+
+
 library(foreach)
 library(doParallel)
 
@@ -18,6 +21,10 @@ testfun <- function(vul_level, scene, years){
   }
   return(result)
 }
+
+# define scene_fit, hind_years etc
+
+  source("R/EBS_fitting_setup.r")
 
 
 # How many cores does your CPU have
