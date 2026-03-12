@@ -2,10 +2,19 @@
 # The inputs needed for the following script are:
 #   scene - an rsim scenario 
 #   years - the years used to set up the scene
-  source("Rpath_fitting/R/EBS_fitting_setup.r")
+  #source("Rpath_fitting/R/EBS_fitting_setup.r")
   source("code/00_setup_forecast.R")
-  scene <- scene_bioen
-  years <- hind_years
+  best_model <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M04par.rds") # Loads the best model scenario and sets up scene_bioen
+  
+  best_model <- scene_gfdl_persist
+  
+  #scene <- scene_bioen
+  scene <- scene_gfdl_persist
+  scene <- scene_gfdl_126
+  scene <- scene_gfdl_245
+  scene <- scene_gfdl_585
+  #years <- hind_years
+  years <- all_years
 
 # If fitting vectors need to be applied, can add that here
 #  scene$params <- rsim.fit.apply(values, species, vartype, scene)
@@ -67,9 +76,62 @@
   output[,2:13] <- output[,2:13]/output$Biomass
   
 # Some Plots
-  plot(rownames(output),log(output$Biomass),xlab="year", ylab="log Biomass")
-  plot(rownames(output), output$FishingLoss, xlab="year", ylab="F rate")
-  plot(rownames(output), output$FoodGain - output$UnAssimLoss - output$ActiveRespLoss, xlab="year", ylab="Net feeding rate")
+  plot(rownames(output),log(output$Biomass),xlab="year", ylab="log Biomass", main=this.species)
+  plot(rownames(output), output$FishingLoss, xlab="year", ylab="F rate", main=this.species)
+  plot(rownames(output), output$FoodGain - output$UnAssimLoss - output$ActiveRespLoss, xlab="year", ylab="Net feeding rate", main=this.species )
   
+# ---------------------------------------------------------------------------- #
+# several species
+# ---------------------------------------------------------------------------- #
+  
+  
+  target_species <- c("walleye_pollock_adult", "pacific_cod_adult", "arrowtooth_flounder_adult")
+  
+  output_list <- list()
+  for(sp in target_species){
+    output_list[[sp]] <- data.frame(matrix(NA, length(years), 13)); row.names(output_list[[sp]]) <- years}
+    for (i in 1:length(years)){
+      
+      current_years <- years[1:i]
+      step_run <- rsim.run(scene, method="AB", years=current_years)
+      
+      deriv.table <- data.frame(step_run$end_state["Biomass"],
+                                step_run$dyt[c("TotGain", "TotLoss", "DerivT", 
+                                               "FoodLoss", "FoodGain", "UnAssimLoss",
+                                               "ActiveRespLoss", "DetritalGain", 
+                                               "FishingGain", "MzeroLoss",
+                                               "FishingLoss", "DetritalLoss")], 
+                                row.names=step_run$params$spname)
+      
+      for (sp in target_species){
+      output_list[[sp]][as.character(years[i]),] <- deriv.table[sp,]
+      }
+    }
 
+  # ---------------------------------------------------------------------------- #
+  # several species plots
+  # ---------------------------------------------------------------------------- #
+ 
+  par(mfrow= c(length(target_species), 3))
+  par(mar= c(4,4,3,1))
+  
+  for(sp in target_species){
+    out <- output_list[[sp]]
+    
+    colnames(out) <- colnames(deriv.table)
+    out[,2:13] <- out[,2:13]/out$Biomass
+    
+    plot(rownames(out),log(out$Biomass),xlab="year", ylab="log Biomass", main=sp)
+    
+    plot(rownames(out), out$FishingLoss, xlab="year", ylab="F rate", main=sp)
+  
+    plot(rownames(out), out$FoodGain - out$UnAssimLoss - out$ActiveRespLoss, xlab="year", 
+         ylab="Net feeding rate", main=sp )
+  }
+  
+  par(mfrow=c(1,1))
+  
+  
+  
+  
   

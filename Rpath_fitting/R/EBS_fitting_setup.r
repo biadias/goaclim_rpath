@@ -4,32 +4,32 @@ library(dplyr)
 
 # Fitting functions that will move to Rpath package are in the following files
 fup <- function(){
-  source("R/merge_ecofitting.R")
-  source("R/ecofitting_plots.R")
+  source("Rpath_fitting/R/merge_ecofitting.R")
+  source("Rpath_fitting/R/ecofitting_plots.R")
 }
 fup() 
 
 # Base Ecopath Files 
-Ebase <- "ebs/model/ebs_aclim3_76bio_base.csv"  # Base biomass, production, fishing, etc.
-Ediet <- "ebs/model/ebs_aclim3_76bio_diet.csv"  # Diet matrix
-Eped  <- "ebs/model/ebs_aclim3_76bio_pedigree.csv"  # Data pedigree = quality of input data
-Estz  <- "ebs/model/ebs_aclim3_76bio_stanzas.csv"  # Stanzas
-Estg  <- "ebs/model/ebs_aclim3_76bio_stanza_groups.csv" # Stanza groups
+Ebase <- "Rpath_fitting/ebs/model/ebs_aclim3_76bio_base.csv"  # Base biomass, production, fishing, etc.
+Ediet <- "Rpath_fitting/ebs/model/ebs_aclim3_76bio_diet.csv"  # Diet matrix
+Eped  <- "Rpath_fitting/ebs/model/ebs_aclim3_76bio_pedigree.csv"  # Data pedigree = quality of input data
+Estz  <- "Rpath_fitting/ebs/model/ebs_aclim3_76bio_stanzas.csv"  # Stanzas
+Estg  <- "Rpath_fitting/ebs/model/ebs_aclim3_76bio_stanza_groups.csv" # Stanza groups
 
 # FITTING DATA FILES
 datfiles <- list(
-  catchfile           = "ebs/data/ebs_aclim3_76bio_catch_long.csv",
-  surveyfile_shelf    = "ebs/data/ebs_fitting_shelf_index.csv",
-  surveyfile_slope    = "ebs/data/ebs_slope_fitting_index_aclim3_Q1.csv",
-  surveyfile_ai_sebs  = "ebs/data/ai_sebs_fitting_index.csv",
-  surveyfile_mammals  = "ebs/data/ebs_aclim3_mammal_index.csv",
-  surveyfile_birds    = "ebs/data/seabird_colony_data.csv",
-  surveyfile_zoop     = "ebs/data/ebs_zooplankton_pedigree.csv",
+  catchfile           = "Rpath_fitting/ebs/data/ebs_aclim3_76bio_catch_long.csv",
+  surveyfile_shelf    = "Rpath_fitting/ebs/data/ebs_fitting_shelf_index.csv",
+  surveyfile_slope    = "Rpath_fitting/ebs/data/ebs_slope_fitting_index_aclim3_Q1.csv",
+  surveyfile_ai_sebs  = "Rpath_fitting/ebs/data/ai_sebs_fitting_index.csv",
+  surveyfile_mammals  = "Rpath_fitting/ebs/data/ebs_aclim3_mammal_index.csv",
+  surveyfile_birds    = "Rpath_fitting/ebs/data/seabird_colony_data.csv",
+  surveyfile_zoop     = "Rpath_fitting/ebs/data/ebs_zooplankton_pedigree.csv",
   # hindcast_ocean      = "ebs/climate/a2_hind.csv",
-  hindcast_a3         = "ebs/climate/a3_hindcast.csv",
-  hindcast_consump    = "ebs/data/cons_force_hind_bt_all.csv",
-  hindcast_repsir     = "ebs/data/resp_force_hind_bt_all.csv",
-  bioenergetics       = "ebs/data/ebs_aclim3_bioen.csv"
+  hindcast_a3         = "Rpath_fitting/ebs/climate/a3_hindcast.csv",
+  hindcast_consump    = "Rpath_fitting/ebs/data/cons_force_hind_bt_all.csv",
+  hindcast_repsir     = "Rpath_fitting/ebs/data/resp_force_hind_bt_all.csv",
+  bioenergetics       = "Rpath_fitting/ebs/data/ebs_aclim3_bioen.csv"
 )  
 
 # OLD FILE COPY DELETED - TOO COMPLICATED, UPDATE above datfiles by hand
