@@ -61,6 +61,9 @@ plot_scenario_comparison <- function(sim_list, species_to_plot, start_year = 199
     # Free Y scales so each species' plot fits its own biomass magnitude
     facet_wrap(~ Species, scales = "free_y") + 
     scale_colour_manual(values = c("SSP 585" = "#d55e00",
+                                   "Persist (consumption only)" = "#0072b2",
+                                   "Persist (respiration only)" = "#56b4e9",
+                                   "Persist (no bioenergetic modifiers)" = "#f0e442",
                                    "SSP 126" = "#009e73", 
                                    "SSP 245" = "#e69f00", 
                                    "Persist" = "#000000")) +

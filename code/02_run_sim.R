@@ -9,7 +9,7 @@
 # running the simulations for the best model scenario (GOA_fit_results_59M04par.rds) 
 # for the GFDL SSP 126 and SSP 585 scenarios, as well as a persistence scenario.
 # ---------------------------------------------------------------------------- #
-source("code/00_setup_forecast.R")
+#source("code/00_setup_forecast.R")
 source("code/01_load_best_model.R") # Loads the best model scenario and sets up scene_bioen
 source("Rpath_fitting/GOA/wgoa_bioenergetics_code/bioenergetic_projections.r") # Make sure this is adapted for GOA and matches the years used in the projections
 source("code/Function_F_clim_sim_scene.R")
@@ -80,7 +80,7 @@ scene_gfdl_585 <- F_clim_sim_scene(scene = scene_bioen_best,
                                    verbose = TRUE)
 
 # ---------------------------------------------------------------------------- #
-# 2. Run Forecast Simulations
+# 2. Run Forecast Simulations ####
 # ---------------------------------------------------------------------------- #
 # Run the dynamic simulations using Adams-Bashforth (AB) method
 
@@ -90,7 +90,7 @@ forecast_gfdl_245     <- rsim.run(scene_gfdl_245, method = "AB", years = all_yea
 forecast_gfdl_585     <- rsim.run(scene_gfdl_585, method = "AB", years = all_years)
 
 # ---------------------------------------------------------------------------- #
-# 3. Calculate B0
+# 3. Calculate B0 ####
 # ---------------------------------------------------------------------------- #
 # source("R/goa_bref.R")
 
@@ -101,7 +101,7 @@ bzero_g585    <- bzero_func(scene_gfdl_585, managed_sp, F_equil, hind_years, all
 
 
 # ---------------------------------------------------------------------------- #
-# 4. Calculate Reference Points (Optional)
+# 4. Calculate Reference Points (Optional) ####
 # ---------------------------------------------------------------------------- #
 # Calculate Biomass Reference Points #WORK IN PROGRESS
 #persist_bref <- goa_bref(bzero_persist)
@@ -110,4 +110,37 @@ bzero_g585    <- bzero_func(scene_gfdl_585, managed_sp, F_equil, hind_years, all
 
 # Save Reference Points
 # save(bzero_persist, bzero_g126, bzero_g585, file = "data/brp/goa_gfdl_brps.RData")
+
+
+# ---------------------------------------------------------------------------- #
+# 5. Test fitted model ####
+# ---------------------------------------------------------------------------- #
+
+# cons only
+scene_gfdl_persist_cons <- F_clim_sim_scene(scene = scene_bioen_best,
+                                       ssp = "persist",
+                                       cons = TRUE, resp = FALSE, buf = FALSE,
+                                       bioen_sp = bioen_sp,
+                                       tdc_hind = tdc_hind_bt, 
+                                       tdr_hind = tdr_hind_bt,
+                                       climate_dir= "data/climate/",
+                                       hind_yrs = hind_years,
+                                       proj_yrs = 2021:2099,
+                                       hind_data_start_yr = 1991,
+                                       climate_data_start_yr = 1980,
+                                       verbose = TRUE) 
+
+# resp only
+scene_gfdl_persist_res <- F_clim_sim_scene(scene = scene_bioen_best,
+                                       ssp = "persist",
+                                       cons = FALSE, resp = TRUE, buf = FALSE,
+                                       bioen_sp = bioen_sp,
+                                       tdc_hind = tdc_hind_bt, 
+                                       tdr_hind = tdr_hind_bt,
+                                       climate_dir= "data/climate/",
+                                       hind_yrs = hind_years,
+                                       proj_yrs = 2021:2099,
+                                       hind_data_start_yr = 1991,
+                                       climate_data_start_yr = 1980,
+                                       verbose = TRUE) 
 

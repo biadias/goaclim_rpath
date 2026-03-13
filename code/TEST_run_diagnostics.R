@@ -13,6 +13,8 @@
   scene <- scene_gfdl_126
   scene <- scene_gfdl_245
   scene <- scene_gfdl_585
+  scene <- scene_gfdl_persist_cons
+  scene <- scene_gfdl_persist_res
   #years <- hind_years
   years <- all_years
 

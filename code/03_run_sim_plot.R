@@ -16,6 +16,9 @@ source("code/Function_plot_scenario_comparison.R")
 # ---------------------------------------------------------------------------- #
 #This is saved in the 02_run_sim.R
 forecast_gfdl_persist <- rsim.run(scene_gfdl_persist, method = "AB", years = all_years)
+forecast_gfdl_persist_cons <- rsim.run(scene_gfdl_persist_cons, method = "AB", years = all_years)
+forecast_gfdl_persist_res <- rsim.run(scene_gfdl_persist_res, method = "AB", years = all_years)
+forecast_gfdl_persist_none <- rsim.run(scene_gfdl_persist_none, method = "AB", years = all_years)
 forecast_gfdl_126     <- rsim.run(scene_gfdl_126, method = "AB", years = all_years)
 forecast_gfdl_245     <- rsim.run(scene_gfdl_245, method = "AB", years = all_years)
 forecast_gfdl_585     <- rsim.run(scene_gfdl_585, method = "AB", years = all_years)
@@ -25,9 +28,12 @@ forecast_gfdl_585     <- rsim.run(scene_gfdl_585, method = "AB", years = all_yea
 # The names you use here (e.g., "SSP 126") will become the labels in the plot legend!
 my_scenarios <- list(
   "Persist" = forecast_gfdl_persist,
-  "SSP 126" = forecast_gfdl_126,
-  "SSP 245" = forecast_gfdl_245,
-  "SSP 585" = forecast_gfdl_585
+  "Persist (consumption only)" = forecast_gfdl_persist_cons,
+  "Persist (respiration only)" = forecast_gfdl_persist_res,
+  "Persist (no bioenergetic modifiers)" = forecast_gfdl_persist_none
+  #"SSP 126" = forecast_gfdl_126,
+  #"SSP 245" = forecast_gfdl_245,
+  #"SSP 585" = forecast_gfdl_585
 )
 
 plot_spp <- c("walleye_pollock_adult", "pacific_cod_adult", "arrowtooth_flounder_adult")
