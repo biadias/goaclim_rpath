@@ -58,8 +58,8 @@ run_rpath_optim <- function(scene_obj,
     
     clusterEvalQ(cl, {
       library(Rpath)
-      source("R/GOA_fitting_setup_a_la_carte.R")
-      source("R/fitting_aic.R")
+      source("Rpath_fitting/R/GOA_fitting_setup_a_la_carte.R")
+      source("Rpath_fitting/R/fitting_aic.R")
     })
     
     clusterExport(

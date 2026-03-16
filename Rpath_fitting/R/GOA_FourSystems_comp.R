@@ -3,7 +3,7 @@
 
 library(Rpath)
 library(dplyr)
-source("R/xml_convert.r")
+source("Rpath_fitting/R/xml_convert.r")
 
 xml_unbal <- function(eiifile){
   unbal <- import.eiixml(eiifile)

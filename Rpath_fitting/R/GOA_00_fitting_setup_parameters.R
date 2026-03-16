@@ -4,16 +4,16 @@
 # E-MAIL OF CORRESPONDENCE AUTHOR: bia.dias@noaa.gov
 # DATE: 26 January 2026
 #
-# R/GOA_02_fitting_setup.R
+# Rpath_fitting/R/GOA_02_fitting_setup.R
 # Purpose: Script for setting up the fitting scenarios for the GOA model.
 # 
 # Rpath_fitting/R/GOA_fitting_setup_a_la_carte.r to set up base scenario objects.
 # adding info
 # ---------------------------------------------------------------------------- #
 # ---------------------------------------------------------------------------- #
-source("R/GOA_fitting_setup_a_la_carte.r")
-source("R/fitting_aic.R")
-source("R/ecofitting_plot_multi.R")
+source("Rpath_fitting/R/GOA_fitting_setup_a_la_carte.r")
+source("Rpath_fitting/R/fitting_aic.R")
+source("Rpath_fitting/R/ecofitting_plot_multi.R")
 
 # ---------------------------------------------------------------------------- #
 # 63 Parameters Setup ####

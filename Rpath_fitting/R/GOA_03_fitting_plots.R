@@ -1,6 +1,6 @@
 
-source("R/ecofitting_plot_multi.R")
-#source("R/ecofitting_plot_multi_v2.R")
+source("Rpath_fitting/R/ecofitting_plot_multi.R")
+#source("Rpath_fitting/R/ecofitting_plot_multi_v2.R")
 my_runs <- list(Base_61M02par, Bioen_61M02par, Base_59M03par, Bioen_63par, Bioen_59M03par)
 #my_runs <- list(run_par59M02_bioen, run_par59M03_bioen,run_par59M02_base, run_par59M03_primprod, run_par59M03_full)
 #run_names <- list("Bioen59M0_Pcod_Poll", "bioen59M0_Pcod_Poll_Arrow", "Base59M02_Pcod_Poll", "PP59M0_Pcod_Poll_Arrow", "PP&Bioen59M0_Pcod_Poll_Arrow")

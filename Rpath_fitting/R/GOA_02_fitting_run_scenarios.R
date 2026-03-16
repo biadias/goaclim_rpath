@@ -11,8 +11,8 @@
 # ---------------------------------------------------------------------------- #
 # ---------------------------------------------------------------------------- #
 
-source("R/GOA_00_fitting_setup_parameters.R")
-source("R/GOA_01_fitting_optimization.R")
+source("Rpath_fitting/R/GOA_00_fitting_setup_parameters.R")
+source("Rpath_fitting/R/GOA_01_fitting_optimization.R")
 
 scenarios_to_run <- list(
   "Base" = scene_base,
