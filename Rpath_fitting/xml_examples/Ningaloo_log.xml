@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <Platform>Microsoft Windows NT 10.0.26100.0</Platform>
+  <Is64BitOS>True</Is64BitOS>
+  <ModelName>Ningaloo</ModelName>
+  <Created>3:23:07 PM Wednesday, August 13, 2025</Created>
+<Session_Started
+  Date="3:23:07 PM Wednesday, August 13, 2025">
+  <Model>Ningaloo</Model>
+  <LogFile>C:\NOAA\Rpath_fitting\xml_examples\Ningaloo_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="3:23:07 PM Wednesday, August 13, 2025">
+  <Message>Ecopath model 'C:\NOAA\Rpath_fitting\xml_examples\Ningaloo.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Critical_Message
+  Date="3:23:36 PM Wednesday, August 13, 2025">
+  <Message>Multi-stanza calculations do not work correctly with fractional habitat areas. Please set all Ecopath habitat area proportions to 1 for stanza groups, and instead correct the biomass of the leading life stage</Message>
+  <Message_Type>InvalidModel_Stanza_Area</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Critical_Message>
+<Critical_Message
+  Date="3:23:36 PM Wednesday, August 13, 2025">
+  <Message>Multi-stanza calculations do not work correctly with fractional habitat areas. Please set all Ecopath habitat area proportions to 1 for stanza groups, and instead correct the biomass of the leading life stage</Message>
+  <Message_Type>InvalidModel_Stanza_Area</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Critical_Message>
+<Information_Message
+  Date="3:23:48 PM Wednesday, August 13, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="3:24:06 PM Wednesday, August 13, 2025">
+  <Message>Basic estimates saved to 'C:\NOAA\Rpath_fitting\xml_examples\Ningaloo-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Entry>
+  <Formcannotberesolved>frmEwE6 cmdNavigate OnInvoke</Formcannotberesolved>
+</Entry>
+<Log_Message
+  Date="3:25:32 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:25:32 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:25:32 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:25:32 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:25:32 PM Wednesday, August 13, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:25:32 PM Wednesday, August 13, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+<Session_Started
+  Date="3:25:32 PM Wednesday, August 13, 2025">
+  <Model>Ningaloo</Model>
+  <LogFile>C:\NOAA\Rpath_fitting\xml_examples\Ningaloo_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="3:25:32 PM Wednesday, August 13, 2025">
+  <Message>Ecopath model 'C:\NOAA\Rpath_fitting\xml_examples\Ningaloo.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Critical_Message
+  Date="3:25:43 PM Wednesday, August 13, 2025">
+  <Message>Multi-stanza calculations do not work correctly with fractional habitat areas. Please set all Ecopath habitat area proportions to 1 for stanza groups, and instead correct the biomass of the leading life stage</Message>
+  <Message_Type>InvalidModel_Stanza_Area</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Critical_Message>
+<Critical_Message
+  Date="3:25:43 PM Wednesday, August 13, 2025">
+  <Message>Multi-stanza calculations do not work correctly with fractional habitat areas. Please set all Ecopath habitat area proportions to 1 for stanza groups, and instead correct the biomass of the leading life stage</Message>
+  <Message_Type>InvalidModel_Stanza_Area</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Critical_Message>
+<Information_Message
+  Date="3:30:55 PM Wednesday, August 13, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="3:31:34 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:31:34 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:31:34 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:31:34 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:31:34 PM Wednesday, August 13, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="3:31:34 PM Wednesday, August 13, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+</doc>
