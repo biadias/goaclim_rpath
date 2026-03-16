@@ -144,3 +144,16 @@ scene_gfdl_persist_res <- F_clim_sim_scene(scene = scene_bioen_best,
                                        climate_data_start_yr = 1980,
                                        verbose = TRUE) 
 
+
+scene_gfdl_persist_none <- F_clim_sim_scene(scene = scene_bioen_best,
+                                           ssp = "persist",
+                                           cons = FALSE, resp = FALSE, buf = FALSE,
+                                           bioen_sp = bioen_sp,
+                                           tdc_hind = tdc_hind_bt, 
+                                           tdr_hind = tdr_hind_bt,
+                                           climate_dir= "data/climate/",
+                                           hind_yrs = hind_years,
+                                           proj_yrs = 2021:2099,
+                                           hind_data_start_yr = 1991,
+                                           climate_data_start_yr = 1980,
+                                           verbose = TRUE) 

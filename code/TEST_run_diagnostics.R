@@ -28,7 +28,8 @@
   
 # Get flows to a single predator.  Note: annual_Qlink is a single snapshot at a point each year 
 # for each pred/prey link, taken at the measure month (same as annual biomass etc).
-  predator <- "walleye_pollock_adult"
+  #predator <- "walleye_pollock_adult"
+  predator <- "arrowtooth_flounder_adult"
   
   flow_mat           <- drun$annual_Qlink[ , which(to_species==predator)]
   colnames(flow_mat) <- from_species[which(to_species==predator)]

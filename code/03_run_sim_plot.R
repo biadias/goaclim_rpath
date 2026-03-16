@@ -28,19 +28,27 @@ forecast_gfdl_585     <- rsim.run(scene_gfdl_585, method = "AB", years = all_yea
 # The names you use here (e.g., "SSP 126") will become the labels in the plot legend!
 my_scenarios <- list(
   "Persist" = forecast_gfdl_persist,
-  "Persist (consumption only)" = forecast_gfdl_persist_cons,
-  "Persist (respiration only)" = forecast_gfdl_persist_res,
-  "Persist (no bioenergetic modifiers)" = forecast_gfdl_persist_none
-  #"SSP 126" = forecast_gfdl_126,
-  #"SSP 245" = forecast_gfdl_245,
-  #"SSP 585" = forecast_gfdl_585
+  #"Persist (consumption only)" = forecast_gfdl_persist_cons,
+  #"Persist (respiration only)" = forecast_gfdl_persist_res,
+  #"Persist (no bioenergetic modifiers)" = forecast_gfdl_persist_none
+  "SSP 126" = forecast_gfdl_126,
+  "SSP 245" = forecast_gfdl_245,
+  "SSP 585" = forecast_gfdl_585
 )
 
-plot_spp <- c("walleye_pollock_adult", "pacific_cod_adult", "arrowtooth_flounder_adult")
+#plot_spp <- c("walleye_pollock_adult", "pacific_cod_adult", "arrowtooth_flounder_adult")
+plot_arrow_prey <- c("euphausiids", "pandalid_shrimp", "pacific_capelin","pacific_sandlance",
+                     "walleye_pollock_adult", "walleye_pollock_juvenile", "pacific_cod_adult",
+                     "arrowtooth_flounder_adult", "arrowtooth_flounder_juvenile")
+plot_arrow_pred <- c("steller_sea_lion",
+                     "longnose_skate",  
+                      "pacific_halibut_adult", "arrowtooth_flounder_adult", "shallow_water_flatfish", 
+                     "pacific_cod_adult"
+                     )
 
 my_plot <- plot_scenario_comparison(
   sim_list = my_scenarios, 
-  species_to_plot = plot_spp, 
+  species_to_plot = plot_arrow_pred, 
   start_year = 1991, 
   variable = "Biomass"  # You can also change this to "Catch"
 )
