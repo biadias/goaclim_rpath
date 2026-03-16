@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <Platform>Microsoft Windows NT 10.0.22631.0</Platform>
+  <Is64BitOS>True</Is64BitOS>
+  <ModelName>New model2</ModelName>
+  <Created>9:42:38 AM Wednesday, September 24, 2025</Created>
+<Session_Started
+  Date="9:42:38 AM Wednesday, September 24, 2025">
+  <Model>New model2</Model>
+  <LogFile>C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\New model2_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="9:42:38 AM Wednesday, September 24, 2025">
+  <Message>Ecopath model 'C:\Users\kerim.aydin\Work\src\sean_rpath\Rpath_fitting\xml_examples\New model2.EwEmdb' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Warning_Message
+  Date="9:43:07 AM Wednesday, September 24, 2025">
+  <Message>Enter Biomass for all detritus groups before proceeding to Ecosim.</Message>
+  <Message_Type>InvalidModel_B_Detritus</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Warning_Message
+  Date="9:43:07 AM Wednesday, September 24, 2025">
+  <Message>Catch information (Landing + Discard) is missing for one of more fleets.</Message>
+  <Message_Type>NoCatchForFleet</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>FleetInput</Message_DataType>
+</Warning_Message>
+<Warning_Message
+  Date="9:43:07 AM Wednesday, September 24, 2025">
+  <Message>Enter Biomass for all detritus groups before proceeding to Ecosim.</Message>
+  <Message_Type>InvalidModel_B_Detritus</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Warning_Message
+  Date="9:43:09 AM Wednesday, September 24, 2025">
+  <Message>Catch information (Landing + Discard) is missing for one of more fleets.</Message>
+  <Message_Type>NoCatchForFleet</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>FleetInput</Message_DataType>
+</Warning_Message>
+<Information_Message
+  Date="9:43:11 AM Wednesday, September 24, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="9:45:06 AM Wednesday, September 24, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:45:06 AM Wednesday, September 24, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:45:07 AM Wednesday, September 24, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:45:07 AM Wednesday, September 24, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:45:07 AM Wednesday, September 24, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="9:45:07 AM Wednesday, September 24, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+</doc>

@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <Platform>Microsoft Windows NT 10.0.26100.0</Platform>
+  <Is64BitOS>True</Is64BitOS>
+  <ModelName>Greenland, West Coast</ModelName>
+  <Created>2:31:33 PM Wednesday, August 13, 2025</Created>
+<Session_Started
+  Date="2:31:33 PM Wednesday, August 13, 2025">
+  <Model>Greenland, West Coast</Model>
+  <LogFile>C:\Users\andrew.beet\Documents\myWork\demo_repos\Rpath_fitting\xml_examples\Greenland, West Coast_log.xml</LogFile>
+  <Is64BitExe>True</Is64BitExe>
+  <CultureOS>English (United States)</CultureOS>
+  <CultureUI>English (United States)</CultureUI>
+  <DecimalSeparator>.</DecimalSeparator>
+</Session_Started>
+<Information_Message
+  Date="2:31:33 PM Wednesday, August 13, 2025">
+  <Message>Ecopath model 'C:\Users\andrew.beet\Documents\myWork\demo_repos\Rpath_fitting\xml_examples\Greenland, West Coast.eiixml' loaded.</Message>
+  <Message_Type>DataAddedOrRemoved</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Question_Message
+  Date="2:31:41 PM Wednesday, August 13, 2025">
+  <Message>Biomass, PB, QB and EE for 'Toothed whales' are entered. Do you want to estimate biomass accumulation?</Message>
+  <Message_Type>Estimate_BA</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupInput</Message_DataType>
+  <Message_Reply>CANCEL</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Question_Message
+  Date="2:31:41 PM Wednesday, August 13, 2025">
+  <Message>Biomass, PB, QB and EE for 'Toothed whales' are entered. Do you want to estimate biomass accumulation?</Message>
+  <Message_Type>Estimate_BA</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupInput</Message_DataType>
+  <Message_Reply>CANCEL</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Question_Message
+  Date="2:32:03 PM Wednesday, August 13, 2025">
+  <Message>Do you want to estimate net migration for 'Toothed whales'?</Message>
+  <Message_Type>Estimate_Net_Migration</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupInput</Message_DataType>
+  <Message_Reply>NO</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Question_Message
+  Date="2:32:03 PM Wednesday, August 13, 2025">
+  <Message>Do you want to estimate net migration for 'Toothed whales'?</Message>
+  <Message_Type>Estimate_Net_Migration</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupInput</Message_DataType>
+  <Message_Reply>NO</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Question_Message
+  Date="2:32:06 PM Wednesday, August 13, 2025">
+  <Message>Biomass, PB, QB and EE for 'Seals' are entered. Do you want to estimate biomass accumulation?</Message>
+  <Message_Type>Estimate_BA</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupInput</Message_DataType>
+  <Message_Reply>CANCEL</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Question_Message
+  Date="2:32:06 PM Wednesday, August 13, 2025">
+  <Message>Biomass, PB, QB and EE for 'Seals' are entered. Do you want to estimate biomass accumulation?</Message>
+  <Message_Type>Estimate_BA</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupInput</Message_DataType>
+  <Message_Reply>CANCEL</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Question_Message
+  Date="2:32:13 PM Wednesday, August 13, 2025">
+  <Message>Do you want to estimate net migration for 'Seals'?</Message>
+  <Message_Type>Estimate_Net_Migration</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupInput</Message_DataType>
+  <Message_Reply>NO</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Question_Message
+  Date="2:32:13 PM Wednesday, August 13, 2025">
+  <Message>Do you want to estimate net migration for 'Seals'?</Message>
+  <Message_Type>Estimate_Net_Migration</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>EcoPathGroupInput</Message_DataType>
+  <Message_Reply>NO</Message_Reply>
+  <Message_Suppressable>True</Message_Suppressable>
+  <Message_Suppressed>False</Message_Suppressed>
+</Question_Message>
+<Warning_Message
+  Date="2:32:14 PM Wednesday, August 13, 2025">
+  <Message>Enter Biomass for all detritus groups before proceeding to Ecosim.</Message>
+  <Message_Type>InvalidModel_B_Detritus</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Warning_Message
+  Date="2:32:14 PM Wednesday, August 13, 2025">
+  <Message>Enter Biomass for all detritus groups before proceeding to Ecosim.</Message>
+  <Message_Type>InvalidModel_B_Detritus</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Warning_Message>
+<Information_Message
+  Date="2:32:16 PM Wednesday, August 13, 2025">
+  <Message>Ecopath run completed.</Message>
+  <Message_Type>Any</Message_Type>
+  <Message_Source>Ecopath</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Information_Message
+  Date="2:32:23 PM Wednesday, August 13, 2025">
+  <Message>Basic estimates saved to 'C:\Users\andrew.beet\Documents\myWork\demo_repos\Rpath_fitting\xml_examples\Greenland, West Coast-Basic estimates.csv'.</Message>
+  <Message_Type>DataExport</Message_Type>
+  <Message_Source>External</Message_Source>
+  <Message_DataType>NotSet</Message_DataType>
+</Information_Message>
+<Log_Message
+  Date="2:32:53 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:32:53 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:32:53 PM Wednesday, August 13, 2025">
+  <Message>Ecospace scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:32:53 PM Wednesday, August 13, 2025">
+  <Message>Ecotracer scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:32:53 PM Wednesday, August 13, 2025">
+  <Message>Ecosim scenario closed</Message>
+</Log_Message>
+<Log_Message
+  Date="2:32:53 PM Wednesday, August 13, 2025">
+  <Message>Model closed</Message>
+</Log_Message>
+</doc>

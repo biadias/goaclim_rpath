@@ -1,0 +1,56 @@
+---
+title: "Rpath XML tests"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(Rpath)
+library(dplyr)
+library(data.table)
+#source("R/xml_convert.r")
+source("R/xml_test_functions.r")
+
+ewe_csvs <- list.files("xml_examples", pattern="-Basic estimates.csv")
+model_names <- stringr::str_remove_all(ewe_csvs,"-Basic estimates.csv")
+
+# List of no warnings/errors other than fleet renamings
+# generated 15-August 3:24pm Pacific
+no_errors <- c("Alaska, Prince William Sound", "Alto Golfo de California", 
+"Apalachicola Bay", "Australia North West Shelf", "Azores", "Azores archipelago", 
+"Baja California", "Bamboung", "BlackSea", "Bolinao Coral Reef", 
+"British Columbia coast", "Canada, Grand Banks of Newfoundland", 
+"Cape Verde", "Carretas-Pereyra coastal lagoon system", "Celtic Sea", 
+"Contemporary Alosine", "Danajon Bank", "Eastern Bering Sea", 
+"Eritrea", "Florida Bay", "Galapagos", "Grand Banks of Newfoundland", 
+"Gulf of Maine", "Gulf of Mexico", "Gulf of Nicoya", "Gulf of Salamanca", 
+"Independence Bay", "Kuosheng Bay", "Liberia", "Miramare", "Morocco", 
+"Narragansett Bay food web", "North Atlantic", "North Benguela", 
+"North Brazil", "North East Pacific", "Northern Benguela", "Northern Gulf of St Lawrence", 
+"Peru", "Ria-Lake Tapajos", "Ria Formosa", "Sechura Bay", "Senegambia", 
+"Sierra Leone", "Sinaloa sur MEXICO", "Sirinhaém River", "Sørfjord", 
+"South West Viet nam", "Southern Gulf of St. Lawrence", "Sri Lanka", 
+"Strait of Georgia", "Terminos Lagoon", "Thau", "Venezuela shelf", 
+"West Coast of Peninbsular Malaysia", "West Scotland", "Western Antarctic Peninsula", 
+"Western Bering Sea", "Western Tropical Pacific Ocean")
+
+models_filtered <- model_names # model_names[!model_names %in% no_errors]
+```
+```{r ecocheck, results='asis', echo=FALSE}
+tests<-list()
+for (m in models_filtered){
+  cat("\n##",m,"\n")
+  tryCatch({
+    tests[[m]]   <- rpath.ewe.comptable(m, "xml_examples")
+    test_results <- rpath.ewe.check.table(tests[[m]])
+    for(r in 1:nrow(test_results)){
+      if (test_results$flag[r]=="***"){
+    warning(test_results$parameter[r], " of ", test_results$max_group[r],
+            " diff: ", test_results$max_diff[r],
+            " (TYPE ",tests[[m]][test_results$max_group[r],"type"],")")
+      }
+    }
+    print(knitr::kable(test_results,"simple")); cat("\n")
+    },error=function(e){warning(paste("\nERROR :",conditionMessage(e),"\n"))
+  })    
+}  
+```

@@ -1,0 +1,106 @@
+---
+title: "Fitting"
+author: "Kerim Aydin"
+date: "`r Sys.Date()`"
+output: html_document
+params:
+  test: NULL
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Setup
+
+```{r Ecopath}
+
+library(Rpath)
+rsim.plot(params$test)
+#source("fits/clim_sim_hcr_obs_err_2_fits.r")
+#source("fits/bioen_projections_fits.r")
+#setwd("C:/Users/kerim.aydin/Work/src/sean_rpath/aclim2_rpath")
+# Helper functions preceded with TMP for eventual package inclusion
+
+source("R/tmp_ecofitting.R")
+
+# need to have repo permissions to use these files directly
+#mdir <- "https://raw.githubusercontent.com/aw2113/aclim3_rpath/refs/heads/main/"
+
+# Setup Base Ecopath 
+  Ebase <- "model/ebs_aclim3_74bio_base.csv"  # Base biomass, production, fishing, etc.
+  Ediet <- "model/ebs_aclim3_74bio_diet.csv"  # Diet matrix
+  Eped  <- "model/ebs_aclim3_74bio_pedigree.csv"  # Data pedigree = quality of input data
+  Estz  <- "model/ebs_aclim3_74bio_stanzas.csv"  # Stanzas
+  Estg  <- "model/ebs_aclim3_74bio_stanza_groups.csv" # Stanza groups
+  
+  #download.file(paste(mdir,Ebase,sep=''), Ebase)
+  #download.file(paste(mdir,Ediet,sep=''), Ediet)
+  #download.file(paste(mdir,Eped,sep=''), Eped)  
+  #download.file(paste(mdir,Estz,sep=''), Estz)
+  #download.file(paste(mdir,Estg,sep=''), Estg)
+  
+  datfiles <- list(
+  catchfile           = "data/ebs_aclim3_74bio_catch_long.csv",
+  surveyfile_shelf    = "data/ebs_aclim3_74bio_fitting_survey_index_Q1.csv",
+  surveyfile_slope    = "data/EBS_slope_jan2025_fitting_index_aclim3_Q1.csv",
+  surveyfile_mammals  = "data/ebs_aclim3_74bio_mammal_index.csv",
+  surveyfile_birds    = "data/seabird_colony_data.csv")
+  
+  #for(i in datfiles){download.file(paste(mdir,i,sep=''),i)} 
+  
+  bio_dat <- rbind(read.csv(datfiles$surveyfile_shelf),read.csv(datfiles$surveyfile_slope),
+                   read.csv(datfiles$surveyfile_mammals),read.csv(datfiles$surveyfile_birds))
+  
+  unbal <- rpath.stanzas(read.rpath.params(Ebase, Ediet, Eped, Estg, Estz)) # unbalanced
+  bal   <- rpath(unbal) # balanced
+
+# Setup years and base ecosim scenario
+  hind_years <- 1991:2021
+  scene0 <- rsim.scenario(bal, unbal, years = hind_years)
+  # check if in equilibrium
+  # run.hind <- rsim.run(scene0, method='AB', years=hind_years)
+  # rsim.plot(run.hind)
+
+  
+# Read in biomass to fit 
+  scene1 <- TMP.read.fitting.biomass(scene0, bio_dat)
+  #scene1 <- read.fitting.biomass(scene0, "fits/EBS_2023_fitting_survey_index_2_Q1.csv")
+
+# Read in catch to fit.  This does not on its own apply read-in catch to catch forcing.  
+  scene2 <- read.fitting.catch(scene1, datfiles$catchfile)
+
+# This function copies the fitting catch table into the forced_catch matrix 
+# This does not zero out previous Effort-applied (equilibrium) catch
+  scene3 <- fitcatch.to.forcecatch(scene2)
+
+# Zeroing out effort matrix manually (this will turn off detritus flows that are by gear)
+  scene3$fishing$ForcedEffort[] <- 0  
+  
+  
+scene_fit <- scene3
+
+```
+
+## Table of negative-log likelihoods
+```{r fittable}
+run1 <- rsim.run(scene_fit, method='AB', years=hind_years)
+rsim.fit.table(scene_fit,run1)
+
+```
+
+## Results
+```{r fitplots, fig.height=1.8}
+#for(sp in rpath.living(bal)){
+s_list <- c(rpath.living(bal),rpath.detrital(bal))
+#s_list <-c("pollock_adu","pcod_adu","arrowtooth_adu") 
+# for(sp in s_list){
+#   #par(mfrow=c(1,2))
+#   #par(mar=c(5,4,4,2))
+#   #par(oma=c(0,0,0,0))
+#   TMP.rsim.plot.full(scene_fit, run1, sp)
+#   #TMP.rsim.plot.biomass(scene_fit, run1, sp)
+#   #TMP.rsim.plot.catch(scene_fit, run1, sp)
+# }
+
+```

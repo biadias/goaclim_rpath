@@ -1,0 +1,96 @@
+---
+title: "Fitting notes"
+author: "Kerim Aydin"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Rsim master equations
+
+Rsim uses the following master equation:
+$$
+\frac{dB_{i}}{dt} = (1-f^{A}_{i,t}\cdot A_{i}-U_{i})\cdot\sum_{prey}Q_{prey,i}\\ - f^m_{i,t}\cdot \sum_{pred}Q_{i,pred}-f^m_{i,t}\cdot M^{0}_{i}\cdot B_{i}-f^e_{i,t}B_{i}\\-Catch
+\tag{1}
+$$
+where
+
+ * $A_i$ is the fraction of consumption lost to respiration. 
+ * $U_i$ is the fraction of consumption lost to detritus (unassimilated).
+ * The fraction $(1-A_i-U_i)$ is the growth efficency ($GE$) from Ecopath, which is equal to Ecopath $PB/QB$. 
+ * $Q_{i,j}$ is the consumption equation for prey i, predator j (discussed below).
+ * $M^0$ is "unexplained" mortality calculated from Ecopath $EE$.
+ * $f^A$ is a time-dependent forcing function for respiration, with a default of 1.0.
+ * $f^m$ is a time-dependent forcing function for natural mortality (applied to both $Q_{i,pred}$ and $M^0$ terms), with a default of 1.0.
+ * $f^e$ is a time-dependent forcing function for migration, with a default of 0.0.  Note is it described as "emmigration" (departure of biomass from the system), so positive values for $f_e$ result in a biomass loss fromt he system, and negative values result in biomass gain.
+ * $Catch$ is the fisheries catch function (discussed below).
+ 
+ 
+Note that while $A_{i}$ is a fraction of consumption, the forcing function $f^A$ is not constrained to keep the overall consumption fraction at 1.0, so biomass can be "created" (brought into the system) if the sum  $(1-f^{A}_{i,t}\cdot A_{i}-U_{i})$ exceeds 1.0 or "destroyed" if the sum is less than 0.
+
+Rpath does not allow for the input of explicit immigration/emmigration terms as part of the Ecopath balance.  If a group includes Biomass Accumulation ($BA$) as part of the balance, the $BA$ is not explicity included in the above equation, so the Rsim system of equations begins out of balance, increasing or decreasing initially at the input $BA$ (increase/decrease is in absolute terms, not as a rate).
+
+## Fisheries Catch
+
+Fisheries catch is modeled as:
+$$
+Catch = \sum_{gears}q_{gear,i} E_{gear,t} B_{i} + F_{i,t} B_{i} + min(L_{i,t},(1.0-\epsilon)\cdot (B_{i}+P_{i})) 
+$$
+where:
+
+ * $q_{gear,i}$ is the catchability of $B_{i}$ by gear.
+ * $E_{gear,t}$ is the time-dependent Effort for each gear (default 1).
+ * $F_{i,t}$ is a forcing function for applying a time-dependent fishing rate for landings (default 0).
+ * $L_{i,t}$ is a forcing function for applying a time-dependent absolute landings (default 0).
+ * $\epsilon$ is the minimum value for biomass in the model; if the derivative calculation results in a $B_{i} < \epsilon \cdot B_{i}$ at any timestep, the biomass is set to $\epsilon * B_{i}$.  Rpath uses an $\epsilon$ value of $10^{-15}$. 
+
+The term $q_{gear,i} E_{gear,t} B_{i}$ is separated into landings (biomass removed from the system) and discards sent to detritus (as entered in the Ecopath balance).  The terms $F_{i,t} B_{i}$ and $L_{i,t}$ represent landings only and are removed from the system. 
+To avoid creating biomass during the fishing calculations, if an absolute catch value $L_{i,t}$ would exceed the total of Biomass $B_i$ plus Production $P_i$ for a group in a given timestep, the amount of landings are instead $(1.0-\epsilon)\cdot (B_{i}+P_{i})$; the discrepancy between input landings and achieved landings can become a likelihood component during fishing.
+
+Note that while inputs to absolute catch $L_{i,t}$ prevent the creation of landings greater than the stock can sustain, this correction/check is not applied to the Effort or F forcings.  If a species catch is driven by $L_{i,t}$, it is recommended to 0 out Effort and F for appropriate accounting of total catch. 
+
+
+## Consumption Equations
+Walters et al. (1997) derives the equation for calulating consumption $Q_{i,j}$ based on prey biomass $B_i$, and predator biomass $B_j$ based on foraging arena theory as:
+$$
+Q_{i,j}=\frac {a_{i,j}v_{i.j}B_{i}B_{j}} {2v_{i,j}+a_{i,j}B_{j}} 
+\tag{2}
+$$
+Here, $a_{i,j}$ is generally interpreted as the search rate of predator $j$ for prey $i$, while $v_{i,j}$ is the "vulnerability" of prey $i$ to predator $j$ as derived by the foraging arena theory.  This equation includes a density-dependent predator response with an asymtote; as predator $B_j \to \infty$ while prey $B_{i}$ remains fixed, $Q_{i,j} \to v_{i,j}B_{i}$. 
+
+Given the difficulty of measuring $a_{i,j}$ and $v_{i,j}$ directly, Walters et al. (1997) reparameterizes the equations based using the ecopath-calculated values for consumption and biomass as fixed parameters ($\hat{Q}_{i,j}$, $\hat{B}_{i}$, and $\hat{B}_{j}$) and defining the parameter $X_{i,j}$ as ratio of the asymptotic consumption to the Ecopath consumption, so 
+$$
+X_{i,j} = \frac {v_{i,j}\hat{B_{i}}} {\hat{Q}_{i,j}} 
+\tag{3}
+$$  
+Since the asymptotic consumption must be greater than the Ecopath reference consumption, this ratio $X_{i,j}$ has the range $(1..\infty]$ with the default value of 2.0 representing half-saturation point of the density dependence curve.
+
+Further, the Ecopath-calculated consumption $\hat{Q}_{i,j}$ in equation (3) can be replaced by the formula for $Q$ of equation (2) where Biomasses are at their Ecopath equilibrium, and cancelling terms, gives:
+$$
+X_{i,j} = 
+\frac {v_{i,j}\hat{B_{i}} \cdot (2v_{i,j}+a_{i,j}\hat{B}_{j})} {a_{i,j}v_{i.j}\hat{B}_{i} \hat{B}_{j}} = \frac{2v_{i,j}+a_{i,j}\hat{B}_{j}}{a_{i,j}\hat{B}_{j}}
+$$ 
+This can be simplified to:
+$$
+X_{i,j} - 1 = \frac{2v_{i,j}}{a_{i,j}\hat{B}_{j}}
+\tag{4}
+$$
+Taking the log of each side gives:
+$$
+\log(X_{i,j} - 1) = \log(2v_{i,j}) - \log({a_{i,j}\hat{B}_{j}})
+$$
+Since  $X_{i,j}$ has the range $(1..\infty]$ with a default of 2.0, the resulting $(X_{i,j}-1)$ has the range $(0..\infty]$ with a default of 1.0, and $\log(X_{i,j}-1)$ has the range $[-\infty..\infty]$ with a default centered at 0. 
+
+Considering $(X_{i,j}-1)$ in log-space across the range of $[-\infty..\infty]$ avoids boundary issues better acknowledges that $X_{i,j}$ is a ratio of effects allowing for symmetrical evaluation of top-down and bottom-up effects; for example making it clear that on the traditionally-used $X_{i,j}$ scale, an $X_{i,j}$ of $10.000$ $(\log(X_{i,j}-1) \approx 2.197)$ is as "top-down" as an $X_{i,j}$ of $1.111$ $(\log(X_{i,j}-1) \approx -2.197)$ is "bottom-up".  
+
+While $v_{i,j}$ and $a_{i,j}$ are unique parameters for each predator/prey pair, the fraction on the right of equation (4) contains a primarily "prey effect" $(v_{i,j})$ in the numerator and a "predator effect" ($a_{i,j}\hat{B}_{j}$) in the denominator. To reduce the parameter space, we assume that each species has a "log prey effect" $py$ common across all of its predators, and a "log predator effect" $lpd$ common across all of its prey:
+$$
+\log(X_{i,j} - 1) = lpy_i + lpd_j
+$$
+(changing the sign of $lpd_j$ in log-space for greater generality).  Fitting the parameters $lpy_i$ and $lpd_j$ (two parameters total per species) greatly reduces the parameter space in a systematic way over fitting unique 
+Further, examining the $X_{i,j}$ allows for the future inclusion of other effects on predator/prey overlap (e.g. habitat shifts affecting overlap of multiple species) to be included additively as an effect on $\log(X_{i,j} - 1)$.    
+
+## Todo: Foraging time, handling time
