@@ -8,6 +8,7 @@
 # Purpose: Script for setting up the fitting scenarios for the GOA model.
 # 
 # Rpath_fitting/R/GOA_fitting_setup_a_la_carte.r to set up base scenario objects.
+# adding info
 # ---------------------------------------------------------------------------- #
 # ---------------------------------------------------------------------------- #
 source("R/GOA_fitting_setup_a_la_carte.r")
