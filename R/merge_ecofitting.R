@@ -474,6 +474,12 @@ rsim.fit.apply <- function(values, species, vartype, scene.params){
   preydiff <- as.numeric(preyvuls[scene.params$spname[scene.params$PreyFrom+1]])
   preydiff[is.na(preydiff)] <- 0
   
+# Single link vulnerability, indexed by link number
+  #ppvuls   <- values[vartype=="ppvul"]
+  #pp_index <- as.numeric(species[vartype=="ppvul"])
+  #ppdiff <- rep(0, scene.params$)
+  #ppdiff[pp_index] <- ppvuls
+  
 # Apply pred and prey vuls above to actual pred/prey VV in scenario
   scene.params$VV <- (1 + exp(log(scene.params$VV-1) + preddiff + preydiff))
   
