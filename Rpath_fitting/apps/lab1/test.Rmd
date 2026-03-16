@@ -1,7 +1,0 @@
----
-title: "Rpath Demo"
-output: html_document
----
-
-This is a *test* of markdown.
-
