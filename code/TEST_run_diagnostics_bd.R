@@ -135,6 +135,58 @@
   par(mfrow=c(1,1))
   
   
+
+  # ---------------------------------------------------------------------------- #
+  # flow matrix ####
+  # ---------------------------------------------------------------------------- #
+  
+  drun <- rsim.run(scene, "AB", years)
+  
+  # lookup vectors
+  from_species <- scene$params$spname[scene$params$PreyFrom + 1] #+1 here is due to R to C++ array conversion
+  to_species   <- scene$params$spname[scene$params$PreyTo   + 1] #+1 here is due to R to C++ array conversion
+  link_lookup <- matrix(c(from_species,to_species),ncol=2) # lookup maps link num to prey/pred matrix by name
+  
+# Blank matrix with species names in rows/cols
+  na_flow_mat <- matrix(NA, length(scene$params$spname), length(scene$params$spname))
+  rownames(na_flow_mat) <- scene$params$spname
+  colnames(na_flow_mat) <- scene$params$spname
+  
+# vulnerability list and matrix
+  vul <- scene$params$VV
+  vlist <- data.frame(from_species,to_species,vul) # human readable list of v
+  vulmat <- na_flow_mat
+  vulmat[link_lookup] <- vul # pred/prey matrix of vuls
   
   
-  
+# Flow matrix over time
+    base_flows <- na_flow_mat
+    base_flows[link_lookup] <- drun$annual_Qlink[as.character(years[1]),]
+    
+  for(yy in years){
+    year_flows <- na_flow_mat
+    year_flows[link_lookup] <- drun$annual_Qlink[as.character(yy),] 
+    flow_anom <- year_flows/base_flows
+    image(flow_anom,zlim=c(0,2), col=hcl.colors(30, palette = "Blue-Red"),xaxt="n",yaxt="n",xlab=yy)
+  }
+    
+    # as a GIF   
+    library(magick)
+    gif_filebase <- "BS_full"
+    for(yy in years){
+      year_flows <- na_flow_mat
+      year_flows[link_lookup] <- drun$annual_Qlink[as.character(yy),] 
+      flow_anom <- year_flows/base_flows
+      fp <- file.path("tmp", paste0(gif_filebase, yy, ".png"))
+      png(fp, width=600,height=600)
+      image(flow_anom,zlim=c(0,2), col=hcl.colors(30, palette = "Blue-Red"),xaxt="n",yaxt="n",xlab=yy)
+      dev.off()
+    }    
+    
+    imgs <- list.files("tmp", pattern=paste0(gif_filebase,"*"),full.names = TRUE)
+    img_list <- lapply(imgs, image_read)
+    img_joined <- image_join(img_list)
+    img_animated <- image_animate(img_joined, fps = 2)
+    #img_animated
+    image_write(image = img_animated, path = paste0("images/", gif_filebase, ".gif"))
+    
