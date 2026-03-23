@@ -21,35 +21,47 @@ source("code/Function_F_clim_sim_scene.R")
 # 1. Build GFDL-Specific Climate Scenarios ####
 # ---------------------------------------------------------------------------- #
 
+# Managed scpecies
+managed_sp_list <- c("walleye_pollock_adult", "pacific_cod_adult", "sablefish_adult")
+
+
 # Persistence (Base expectation holding recent climate constant)
 
 scene_gfdl_persist <- F_clim_sim_scene(scene = scene_bioen_best,
-                                            ssp = "persist",
-                                            cons = TRUE, resp = TRUE, buf = FALSE,
-                                            bioen_sp = bioen_sp,
-                                            tdc_hind = tdc_hind_bt, 
-                                            tdr_hind = tdr_hind_bt,
-                                            climate_dir= "data/climate/",
-                                            hind_yrs = hind_years,
-                                            proj_yrs = 2021:2099,
-                                            hind_data_start_yr = 1991,
-                                            climate_data_start_yr = 1980,
-                                            verbose = TRUE) 
+                                       ssp = "persist",
+                                       cons = TRUE,resp = TRUE,buf = FALSE,
+                                       bioen_sp = bioen_sp,
+                                       tdc_hind = tdc_hind_bt,
+                                       tdr_hind = tdr_hind_bt,
+                                       managed_sp = managed_sp_list,
+                                       f_equil = F_equil,
+                                       f_zero = F_zero,
+                                       f_ref_yrs = 2016:2020,
+                                       climate_dir = "data/climate/",
+                                       hind_yrs = hind_years,
+                                       proj_yrs = 2021:2099,
+                                       hind_data_start_yr = 1991,
+                                       climate_data_start_yr = 1980,
+                                       verbose = TRUE) 
 
 
 # B) GFDL SSP 126 (Low emission mitigation scenario)
 scene_gfdl_126 <- F_clim_sim_scene(scene = scene_bioen_best,
-                                        ssp = "126",
-                                        cons = TRUE, resp = TRUE, buf = FALSE,
-                                        bioen_sp = bioen_sp,
-                                        tdc_hind = tdc_hind_bt, 
-                                        tdr_hind = tdr_hind_bt,
-                                        climate_dir= "data/climate/",
-                                        hind_yrs = hind_years,
-                                        proj_yrs = 2021:2099,
-                                        hind_data_start_yr = 1991,
-                                        climate_data_start_yr = 1980,
-                                        verbose = TRUE)
+                                   ssp = "126",
+                                   cons = TRUE, resp = TRUE, buf = FALSE,
+                                   bioen_sp = bioen_sp,
+                                   tdc_hind = tdc_hind_bt, 
+                                   tdr_hind = tdr_hind_bt,
+                                   managed_sp = managed_sp_list,
+                                   f_equil = F_equil,
+                                   f_zero = F_zero,
+                                   f_ref_yrs = 2016:2020,
+                                   climate_dir= "data/climate/",
+                                   hind_yrs = hind_years,
+                                   proj_yrs = 2021:2099,
+                                   hind_data_start_yr = 1991,
+                                   climate_data_start_yr = 1980,
+                                   verbose = TRUE)
 
 # C) GFDL SSP 245 (middle of the road fossil-fueled development scenario)
 scene_gfdl_245 <- F_clim_sim_scene(scene = scene_bioen_best,
@@ -58,6 +70,10 @@ scene_gfdl_245 <- F_clim_sim_scene(scene = scene_bioen_best,
                                    bioen_sp = bioen_sp,
                                    tdc_hind = tdc_hind_bt, 
                                    tdr_hind = tdr_hind_bt,
+                                   managed_sp = managed_sp_list,
+                                   f_equil = F_equil,
+                                   f_zero = F_zero,
+                                   f_ref_yrs = 2016:2020,
                                    climate_dir= "data/climate/",
                                    hind_yrs = hind_years,
                                    proj_yrs = 2021:2099,
@@ -72,6 +88,10 @@ scene_gfdl_585 <- F_clim_sim_scene(scene = scene_bioen_best,
                                    bioen_sp = bioen_sp,
                                    tdc_hind = tdc_hind_bt, 
                                    tdr_hind = tdr_hind_bt,
+                                   managed_sp = managed_sp_list,
+                                   f_equil = F_equil,
+                                   f_zero = F_zero,
+                                   f_ref_yrs = 2016:2020,
                                    climate_dir= "data/climate/",
                                    hind_yrs = hind_years,
                                    proj_yrs = 2021:2099,
@@ -157,3 +177,43 @@ scene_gfdl_persist_none <- F_clim_sim_scene(scene = scene_bioen_best,
                                            hind_data_start_yr = 1991,
                                            climate_data_start_yr = 1980,
                                            verbose = TRUE) 
+
+# ---------------------------------------------------------------------------- #
+# 6. Topic 2  ####
+# ---------------------------------------------------------------------------- #
+
+# Define the species we want to calculate B0 for
+managed_sp_list <- c("walleye_pollock_adult", "pacific_cod_adult", "sablefish_adult")
+
+# Create a container for results
+b0_results <- data.frame(Species = managed_sp_list, B0_2099 = NA)
+
+for (sp in managed_sp_list) {
+  message(paste("Processing B0 for:", sp))
+  
+  # Create scenario where ONLY 'sp' has F=0
+  this_scene <- F_clim_sim_scene(
+    scene           = scene_bioen_best, 
+    cons = FALSE, resp = FALSE, buf = FALSE,
+    ssp             = "126", 
+    managed_sp      = managed_sp_list, # All other managed species stay at mean F
+    f_equil         = F_equil, 
+    f_zero          = F_zero,
+    zero_fishing_sp = sp,         # Toggle this specific species to 0
+    bioen_sp        = bioen_sp_noceph,
+    tdc_hind_bt     = tdc_hind_bt,
+    tdr_hind_bt     = tdr_hind_bt,
+    hind_yrs        = 1991:2020,         # Good practice to pass these explicitly
+    proj_yrs        = 2021:2099,
+    verbose         = FALSE              # Set to FALSE to keep console clean during loops
+  )
+  
+  # Run simulation
+  this_run <- rsim.run(this_scene, method = "AB", years = all_years)
+  
+  # Extract mean biomass of the last 10 years
+  final_b0 <- mean(tail(this_run$annual_Biomass[, sp], 10))
+  b0_results[b0_results$Species == sp, "B0_2099"] <- final_b0
+}
+
+print(b0_results)

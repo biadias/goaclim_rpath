@@ -46,9 +46,10 @@ plot_arrow_pred <- c("steller_sea_lion",
                      "pacific_cod_adult"
                      )
 
+plot_ground <- c("arrowtooth_flounder_adult", "pacific_cod_adult","walleye_pollock_adult" )
 my_plot <- plot_scenario_comparison(
   sim_list = my_scenarios, 
-  species_to_plot = plot_arrow_pred, 
+  species_to_plot = plot_ground, 
   start_year = 1991, 
   variable = "Biomass"  # You can also change this to "Catch"
 )

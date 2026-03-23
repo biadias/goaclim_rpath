@@ -1,4 +1,4 @@
-source("GOA/wgoa_bioenergetics_code/bioenergetic_projections.r")
+source("Rpath_fitting/GOA/wgoa_bioenergetics_code/bioenergetic_projections.r")
 
 wgoa_add_bioenergetics <- function(ssp){
 #hind_years <- 1991:2020 # just for knowledge, it won't be used. 

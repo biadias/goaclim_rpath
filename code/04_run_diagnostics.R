@@ -29,7 +29,8 @@ my_vv_table <- get_vv_comparison(original_scene = scene_bioen,
 # ---------------------------------------------------------------------------- #
 
 years <- all_years
-target_species <- c("walleye_pollock_adult", "pacific_cod_adult", "arrowtooth_flounder_adult")
+target_species <- c("walleye_pollock_adult", "pacific_cod_adult", "arrowtooth_flounder_adult",
+                    "walleye_pollock_juvenile", "pacific_cod_juvenile","arrowtooth_flounder_juvenile")
 predator <- "arrowtooth_flounder_adult"
 
 # ---------------------------------------------------------------------------- #
@@ -37,11 +38,11 @@ predator <- "arrowtooth_flounder_adult"
 # ---------------------------------------------------------------------------- #
 
 scenarios <- list(
-  gfdl_persist      = scene_gfdl_persist,
+  gfdl_persist_F2016_2020      = scene_gfdl_persist,
   #bioen             = scene_bioen,
-  gfdl_126          = scene_gfdl_126,
-  gfdl_245          = scene_gfdl_245,
-  gfdl_585          = scene_gfdl_585
+  gfdl_126_F2016_2020          = scene_gfdl_126,
+  gfdl_245_F2016_2020          = scene_gfdl_245,
+  gfdl_585_F2016_2020          = scene_gfdl_585
   #gfdl_persist_cons = scene_gfdl_persist_cons,
   #gfdl_persist_res  = scene_gfdl_persist_res
 )
@@ -122,6 +123,35 @@ for (scenario_name in names(all_results)) {
   cat("Saved:", file_name, "\n")
 }
 
+
+# ATF juv
+my_sp <- "arrowtooth_flounder_juvenile"
+
+for (scenario_name in names(all_results)) {
+  
+  # 1. Extract the specific data dataframe
+  species_data <- all_results[[scenario_name]]$derivatives[[my_sp]]
+  
+  # 2. Generate the plot
+  p <- plot_deriv_change_heatmap(
+    species_data = species_data, 
+    species_name = paste(scenario_name, my_sp)
+  )
+  
+  # 3. Create a dynamic file name
+  # Example: "figures/diagnostics/ATF_heatmap_deriv_gfdl_126.pdf"
+  file_name <- paste0("figures/diagnostics/ATFjuv_heatmap_deriv_", scenario_name, ".pdf")
+  
+  # 4. Save the plot
+  ggsave(
+    filename = file_name, 
+    plot = p, 
+    width = 11, 
+    height = 8.5
+  )
+  
+  cat("Saved:", file_name, "\n")
+}
 
 # POL
 my_sp <- "walleye_pollock_adult"

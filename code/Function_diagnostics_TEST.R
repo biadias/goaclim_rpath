@@ -201,6 +201,9 @@ plot_sp_derivates <- function(output_list, target_species, scenario_name = NULL)
     graphics::plot(rownames(out), out$FoodGain - out$UnAssimLoss - out$ActiveRespLoss, xlab="year", 
          ylab="Net feeding rate", main=paste(sp, scenario_name, sep=" "))
     
+    graphics::plot(rownames(out), out$ActiveRespLoss, xlab="year", ylab="F rate",
+                   ylab ="resp loss", main = paste(sp, scenario_name, sep=" "))
+    
   }
 }
 
