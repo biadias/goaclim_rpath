@@ -28,7 +28,7 @@ fup()
 #### A. LOAD WGOA and EGOA models #############################################################
 
 ##### 1.Load and test WGOA model ####
-WGOA_EwE_file <- "GOA/WGOA_23Jan2026_simpleDet.eiixml" 
+WGOA_EwE_file <- "GOA/WGOA_19March2026_simpleDet.eiixml" 
 # changed following two lines
 w.unbal  <-  create.rpath.from.eiixml(WGOA_EwE_file)  #xml_unbal(WGOA_EwE_file)
 w.unbal  <-  rpath.stanzas(w.unbal)

@@ -9,6 +9,19 @@
 ################################################################################
 rsim.plot.fitbio.small.bd <- function(scene, run_list, species, datasource, cols) {
   bio.obj <- rsim.fit.obj(scene, run_list[[1]])$Biomass
+  #if(is.na(datasource)){
+  #  qdat <- bio.obj[0, ] # Create empty df with same columns
+  #  mn <- numeric(0)
+  #  up <- numeric(0)
+  #  dn <- numeric(0)
+  #} else {
+  #  qdat <- bio.obj[bio.obj$Group == species & bio.obj$Source %in% datasource, ]
+  #  mn  <- qdat$obs / qdat$survey_q
+  #  sdlog <- sqrt(log(1.0 + (qdat$sd / qdat$survey_q)^2 / (mn * mn)))
+  #  up <- mn * exp(1.96 * sdlog)
+  #  dn <- mn / exp(1.96 * sdlog)
+  #}
+  
   qdat <- bio.obj[bio.obj$Group == species &
                     bio.obj$Source %in% datasource, ]
   par(mar = c(3, 2, 2, 1))
