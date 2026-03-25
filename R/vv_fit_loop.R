@@ -8,7 +8,7 @@
 # Rpath_fitting/R/EBS_fitting.r to set up base scenario object.
 # ---------------------------------------------------------------------------- #
 
-vv_fit_loop <- function(bal, scene, fit_years, base_nll) {
+vv_fit_loop <- function(bal, scene, fit_years, base_nll, base.like) {
   
   bal       <- bal       # balanced Ecopath
   scene_vv  <- scene     # scenario object
@@ -57,14 +57,14 @@ vv_fit_loop <- function(bal, scene, fit_years, base_nll) {
                                          opt_vartype, scene_vv$params)
     # get new likelihood
     opt_nll <- rsim.fit.run(NA, NA, NA, scene = scene_apply, run_method = "AB", 
-                            run_years = hind_years, verbose = F)
+                            run_years = fit_years, verbose = F)
     vv_out[i, 4] <- opt_nll
     # store change in likelihood
     vv_out[i, 5] <- opt_nll - base_nll
     # get the individual group likelihood
     run.vv_out <- rsim.fit.run(opt_call$par, opt_species, opt_vartype, 
                                scene = scene_vv, run_method = "AB", 
-                               run_years = hind_years, verbose = T) 
+                               run_years = fit_years, verbose = T) 
     group_nll_vv_out <- rsim.fit.table(scene_vv, run.vv_out)
     vv_out[i, 6] <- group_nll_vv_out[i+1, "Biomass"]
     # get the change in individual group likelihood

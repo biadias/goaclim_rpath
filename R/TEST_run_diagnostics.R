@@ -129,5 +129,32 @@ library(magick)
     img_animated <- image_animate(img_joined, fps = 2)
     #img_animated
     image_write(image = img_animated, path = paste0("images/", gif_filebase, ".gif"))
+
+        
+# AGE STRUCTURE #################################################################
+    
+    # run the first year using rsim.run
+    step_run <- rsim.run(scene, method="AB", years=years[1])
+    # TODO being lazy and not storing first derivative step, will modify later
+    
+    # step through all years except the first year, saving results from dyt (main derivative) in output data frame  
+    output <- data.frame(matrix(NA, length(years), 13)); row.names(output) <- years
+    for (yy in years[-1]){ # years[-1] does all years except the first
+      step_run <- rsim.step(scene, step_run, method="AB", year.end=yy)
+      
+      # deriv.table contains the derivative values for all species for a particular
+      # timestep - here we're only saving 1 species in output, but others could be 
+      # extracted from this table.
+      deriv.table <- data.frame(step_run$end_state["Biomass"],
+                                step_run$dyt[c("TotGain", "TotLoss", "DerivT", "FoodLoss", "FoodGain", "UnAssimLoss",
+                                               "ActiveRespLoss", "DetritalGain", "FishingGain", "MzeroLoss", "FishingLoss", "DetritalLoss")], 
+                                row.names=step_run$params$spname)
+      
+      # save the one species we want in the output data frame
+      #output[as.character(yy),] <- deriv.table[this.species,]
+    }
+    #colnames(output) <- colnames(deriv.table)
+    
+    
     
     

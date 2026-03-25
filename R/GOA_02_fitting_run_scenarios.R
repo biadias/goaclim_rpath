@@ -84,7 +84,11 @@ for (scen_name in names(scenarios_to_run)) {
 }
 
 # Save results
+<<<<<<< Updated upstream
 saveRDS(fit_results_63par, file = "GOA/GOA_fit_results_63par.rds")
+=======
+saveRDS(fit_results_63par_v2, file = "GOA/GOA_fit_results_63par.rds")
+>>>>>>> Stashed changes
 #fit_results_63par <- readRDS("GOA/GOA_fit_results_63par.rds")
 
 # ---------------------------------------------------------------------------- #
@@ -253,7 +257,7 @@ aicc_table <- aicc_table[order(aicc_table$AICc), ]
 
 print(aicc_table)
 
-write.csv(aicc_table, "GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260227.csv", row.names = FALSE)
+write.csv(aicc_table, "GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260324.csv", row.names = FALSE)
 
 # Combine all tables (work in progress)
 

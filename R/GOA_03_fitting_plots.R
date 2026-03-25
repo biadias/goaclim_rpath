@@ -1,10 +1,30 @@
 
 source("R/ecofitting_plot_multi.R")
 #source("R/ecofitting_plot_multi_v2.R")
+<<<<<<< Updated upstream
 my_runs <- list(Base_61M02par, Bioen_61M02par, Base_59M03par, Bioen_63par, Bioen_59M03par)
 #my_runs <- list(run_par59M02_bioen, run_par59M03_bioen,run_par59M02_base, run_par59M03_primprod, run_par59M03_full)
 #run_names <- list("Bioen59M0_Pcod_Poll", "bioen59M0_Pcod_Poll_Arrow", "Base59M02_Pcod_Poll", "PP59M0_Pcod_Poll_Arrow", "PP&Bioen59M0_Pcod_Poll_Arrow")
 run_names <- list("Base61M02_Pcod_Poll", "Bioen61M02_Pcod_Poll", "Base_59M03_Pcod_Poll_Arrow", "Bioen_63par","Bioen59M0_Pcod_Poll_Arrow")
+=======
+fit_results_63par_v2$Bioen
+
+my_runs <- list(
+  fit_results_63par_v2$Bioen$final_run,
+  fit_results_63par_v2$Base$final_run,
+  fit_results_63par_v2$PrimProd$final_run,
+  fit_results_63par$Bioen$final_run,
+  fit_results_63par$Base$final_run,
+  fit_results_63par$PrimProd$final_run
+)
+
+  #Base_61M02par, Bioen_61M02par, Base_59M03par, Bioen_63par, Bioen_59M03par)
+#my_runs <- list(run_par59M02_bioen, run_par59M03_bioen,run_par59M02_base, run_par59M03_primprod, run_par59M03_full)
+#run_names <- list("Bioen59M0_Pcod_Poll", "bioen59M0_Pcod_Poll_Arrow", "Base59M02_Pcod_Poll", "PP59M0_Pcod_Poll_Arrow", "PP&Bioen59M0_Pcod_Poll_Arrow")
+#run_names <- list("Base61M02_Pcod_Poll", "Bioen61M02_Pcod_Poll", "Base_59M03_Pcod_Poll_Arrow", "Bioen_63par","Bioen59M0_Pcod_Poll_Arrow")
+run_names <- list("Bioenpar63_new", "Basepar63_new","PPpar63_new" ,
+                  "Bioenpar63_old", "Basepar63_old", "PPpar63_old")
+>>>>>>> Stashed changes
 
 plot.species <- c(rpath.living(bal),rpath.detrital(bal))
 #plot.species2 <- c( "arrowtooth_flounder_adult" ,   "arrowtooth_flounder_juvenile" ,
@@ -12,7 +32,11 @@ plot.species <- c(rpath.living(bal),rpath.detrital(bal))
 #                   "walleye_pollock_adult" ,        "walleye_pollock_juvenile" )
 
 # Call the function
+<<<<<<< Updated upstream
 rsim.runplot.multi(scene_bioen, my_runs, plot.species, run_names=run_names)
+=======
+rsim.runplot.multi(scene_bioen, my_runs, plot.species, run_names=run_names, inset=c(0.02, -0.01))
+>>>>>>> Stashed changes
 rsim.runplot(scene_base, fit_results_63par$Base$final_run, plot.species, "63par")
 
 

@@ -23,35 +23,35 @@ sv_groups_63par        <- c(
   "walleye_pollock_adult",
   "pandalid_shrimp",
   "pacific_sandlance",
-  "tanner_crab" ,
+  "tanner_crab",
   "benthic_zooplankton",
-  "pacific_halibut_adult",
   "pacific_cod_adult",
-  "arrowtooth_flounder_adult" ,
-  "salmon_returning",
+  "pacific_halibut_adult",
+  "arrowtooth_flounder_adult",
   "shelf_demersal_fish",
   "shelf_forage_fish",
-  "offal",#only preyvul for this group
+  "offal", #only preyvul for this group
+  "salmon_returning",
   "infauna",
-  "pacific_herring_juvenile",
   "sablefish_adult",
-  "pacific_herring_adult",
+  "pacific_herring_juvenile",
   "arrowtooth_flounder_juvenile",
+  "pacific_herring_adult",
   "mysids",
-  "deep_water_flatfish",
+  "squid",
   "pacific_capelin",
-  "large_microzooplankton" ,
-  "pacific_ocean_perch_adult",
-  "squid", 
+  "deep_water_flatfish",
   "shallow_water_flatfish",
-  "motile_epifauna",
   "octopus",
   "nonpandalid_shrimp",
-  "walleye_pollock_juvenile",
-  "euphausiids",
+  "large_microzooplankton",
+  "motile_epifauna",
+  "salmon_shark",
+  "thornyheads",
+  "pacific_cod_juvenile",
   "rex_sole_adult",
-  "pacific_cod_juvenile"
-)
+  "pacific_ocean_perch_adult")
+  
 
 #Vectors
 
@@ -71,35 +71,34 @@ par61M02_groups        <- c(
   "walleye_pollock_adult",
   "pandalid_shrimp",
   "pacific_sandlance",
-  "tanner_crab" ,
+  "tanner_crab",
   "benthic_zooplankton",
-  "pacific_halibut_adult",
   "pacific_cod_adult",
-  "arrowtooth_flounder_adult" ,
-  "salmon_returning",
+  "pacific_halibut_adult",
+  "arrowtooth_flounder_adult",
   "shelf_demersal_fish",
   "shelf_forage_fish",
-  "offal",#only preyvul for this group
+  "offal", #only preyvul for this group
+  "salmon_returning",
   "infauna",
-  "pacific_herring_juvenile",
   "sablefish_adult",
-  "pacific_herring_adult",
+  "pacific_herring_juvenile",
   "arrowtooth_flounder_juvenile",
+  "pacific_herring_adult",
   "mysids",
-  "deep_water_flatfish",
+  "squid",
   "pacific_capelin",
-  "large_microzooplankton" ,
-  "pacific_ocean_perch_adult",
-  "squid", 
+  "deep_water_flatfish",
   "shallow_water_flatfish",
-  "motile_epifauna",
   "octopus",
   "nonpandalid_shrimp",
-  "walleye_pollock_juvenile",
-  "euphausiids",
-  "rex_sole_adult"
-  #"pacific_cod_juvenile"
-)
+  "large_microzooplankton",
+  "motile_epifauna",
+  "salmon_shark",
+  "thornyheads",
+  "pacific_cod_juvenile",
+  "rex_sole_adult")
+  #"pacific_ocean_perch_adult")
 par61M02_vartype <- c(rep("mzero", length(mzero_groups_2)),
                       rep("preyvul", length(par61M02_groups)),
                       rep("predvul",(length(par61M02_groups)-1))) 
@@ -120,35 +119,34 @@ par59M03_groups        <- c(
   "walleye_pollock_adult",
   "pandalid_shrimp",
   "pacific_sandlance",
-  "tanner_crab" ,
+  "tanner_crab",
   "benthic_zooplankton",
-  "pacific_halibut_adult",
   "pacific_cod_adult",
-  "arrowtooth_flounder_adult" ,
-  "salmon_returning",
+  "pacific_halibut_adult",
+  "arrowtooth_flounder_adult",
   "shelf_demersal_fish",
   "shelf_forage_fish",
-  "offal",#only preyvul for this group
+  "offal", #only preyvul for this group
+  "salmon_returning",
   "infauna",
-  "pacific_herring_juvenile",
   "sablefish_adult",
-  "pacific_herring_adult",
+  "pacific_herring_juvenile",
   "arrowtooth_flounder_juvenile",
+  "pacific_herring_adult",
   "mysids",
-  "deep_water_flatfish",
+  "squid",
   "pacific_capelin",
-  "large_microzooplankton" ,
-  "pacific_ocean_perch_adult",
-  "squid", 
+  "deep_water_flatfish",
   "shallow_water_flatfish",
-  "motile_epifauna",
   "octopus",
   "nonpandalid_shrimp",
-  "walleye_pollock_juvenile",
-  "euphausiids"
+  "large_microzooplankton",
+  "motile_epifauna",
+  "salmon_shark",
+  "thornyheads",
+  "pacific_cod_juvenile")
   #"rex_sole_adult",
-  #"pacific_cod_juvenile"
-)
+  #"pacific_ocean_perch_adult")
 
 
 par59M03_vartype <- c(rep("mzero", length(mzero_groups_3)),
@@ -171,34 +169,34 @@ par59M04_groups        <- c(
   "walleye_pollock_adult",
   "pandalid_shrimp",
   "pacific_sandlance",
-  "tanner_crab" ,
+  "tanner_crab",
   "benthic_zooplankton",
-  "pacific_halibut_adult",
   "pacific_cod_adult",
-  "arrowtooth_flounder_adult" ,
-  "salmon_returning",
+  "pacific_halibut_adult",
+  "arrowtooth_flounder_adult",
   "shelf_demersal_fish",
   "shelf_forage_fish",
-  "offal",#only preyvul for this group
+  "offal", #only preyvul for this group
+  "salmon_returning",
   "infauna",
-  "pacific_herring_juvenile",
   "sablefish_adult",
-  "pacific_herring_adult",
+  "pacific_herring_juvenile",
   "arrowtooth_flounder_juvenile",
+  "pacific_herring_adult",
   "mysids",
-  "deep_water_flatfish",
+  "squid",
   "pacific_capelin",
-  "large_microzooplankton" ,
-  "pacific_ocean_perch_adult",
-  "squid", 
+  "deep_water_flatfish",
   "shallow_water_flatfish",
-  "motile_epifauna",
   "octopus",
   "nonpandalid_shrimp",
-  "walleye_pollock_juvenile",
-  "euphausiids"
+  "large_microzooplankton",
+  "motile_epifauna",
+  "salmon_shark",
+  "thornyheads",
+  "pacific_cod_juvenile"
   #"rex_sole_adult",
-  #"pacific_cod_juvenile"
+  #"pacific_ocean_perch_adult"
 )
 
 par59M04_vartype <- c(rep("mzero", length(mzero_groups_4)),
@@ -211,11 +209,6 @@ par59M04_species <- c(mzero_groups_4,
 par59M04_start   <- c(scene_base$params$MzeroMort[mzero_groups_4],
                       rep(0,(length(par59M04_species)-length(mzero_groups_4))))
 
-
-
-
-
-
 # ---------------------------------------------------------------------------- #
 # 57 Parameters + 5 M0 Setup (Pollock, Cod, Arrowtooth, POP, DWFlat ) ####
 # ---------------------------------------------------------------------------- #
@@ -226,34 +219,34 @@ par57M05_groups        <- c(
   "walleye_pollock_adult",
   "pandalid_shrimp",
   "pacific_sandlance",
-  "tanner_crab" ,
+  "tanner_crab",
   "benthic_zooplankton",
-  "pacific_halibut_adult",
   "pacific_cod_adult",
-  "arrowtooth_flounder_adult" ,
-  "salmon_returning",
+  "pacific_halibut_adult",
+  "arrowtooth_flounder_adult",
   "shelf_demersal_fish",
   "shelf_forage_fish",
-  "offal",#only preyvul for this group
+  "offal", #only preyvul for this group
+  "salmon_returning",
   "infauna",
-  "pacific_herring_juvenile",
   "sablefish_adult",
-  "pacific_herring_adult",
+  "pacific_herring_juvenile",
   "arrowtooth_flounder_juvenile",
+  "pacific_herring_adult",
   "mysids",
-  "deep_water_flatfish",
+  "squid",
   "pacific_capelin",
-  "large_microzooplankton" ,
-  "pacific_ocean_perch_adult",
-  "squid", 
+  "deep_water_flatfish",
   "shallow_water_flatfish",
-  "motile_epifauna",
   "octopus",
   "nonpandalid_shrimp",
-  "walleye_pollock_juvenile"
-  #"euphausiids"
+  "large_microzooplankton",
+  "motile_epifauna",
+  "salmon_shark",
+  "thornyheads"
+  #"pacific_cod_juvenile",
   #"rex_sole_adult",
-  #"pacific_cod_juvenile"
+  #"pacific_ocean_perch_adult")
 )
 
 par57M05_vartype <- c(rep("mzero", length(mzero_groups_5)),
@@ -265,3 +258,4 @@ par57M05_species <- c(mzero_groups_5,
 
 par57M05_start   <- c(scene_base$params$MzeroMort[mzero_groups_5],
                       rep(0,(length(par57M05_species)-length(mzero_groups_5))))
+
