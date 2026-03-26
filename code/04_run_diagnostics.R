@@ -29,8 +29,9 @@ my_vv_table <- get_vv_comparison(original_scene = scene_bioen,
 # ---------------------------------------------------------------------------- #
 
 years <- all_years
-target_species <- c("walleye_pollock_adult", "pacific_cod_adult", "arrowtooth_flounder_adult",
-                    "walleye_pollock_juvenile", "pacific_cod_juvenile","arrowtooth_flounder_juvenile")
+target_species <- c("walleye_pollock_adult", "pacific_cod_adult", "arrowtooth_flounder_adult")
+target_sp_juv <- c("walleye_pollock_juvenile", "pacific_cod_juvenile",
+                   "arrowtooth_flounder_juvenile")
 predator <- "arrowtooth_flounder_adult"
 
 # ---------------------------------------------------------------------------- #
@@ -38,11 +39,11 @@ predator <- "arrowtooth_flounder_adult"
 # ---------------------------------------------------------------------------- #
 
 scenarios <- list(
-  gfdl_persist_F2016_2020      = scene_gfdl_persist,
+  persist_F5      = scene_gfdl_persist,
   #bioen             = scene_bioen,
-  gfdl_126_F2016_2020          = scene_gfdl_126,
-  gfdl_245_F2016_2020          = scene_gfdl_245,
-  gfdl_585_F2016_2020          = scene_gfdl_585
+  ssp126_F5          = scene_gfdl_126,
+  ssp245_F5          = scene_gfdl_245,
+  ssp585_F5          = scene_gfdl_585
   #gfdl_persist_cons = scene_gfdl_persist_cons,
   #gfdl_persist_res  = scene_gfdl_persist_res
 )
@@ -72,24 +73,27 @@ for(scenario_name in names(scenarios)) {
                                         years = years,
                                         target_species = target_species)
   
-  cat("Plotting derivates to PDF...\n")
-  pdf_path <- file.path("figures/diagnostics", paste0("derivatives_", scenario_name, ".pdf"))
-  pdf(file = pdf_path, width = 11, height = 8.5)
-  
-  plot_sp_derivates(output_list=deriv_info,
-                         target_species=target_species,
-                         scenario_name=scenario_name)
-  dev.off()
-  
   all_results[[scenario_name]] <- list(
     diets = diet_info,
     derivatives = deriv_info
   )
                         
 }
-#saveRDS(all_results,"results/diagnostics/derivates_59vM04_ssps.rds" )
+saveRDS(all_results,"results/diagnostics/derivates_59vM04_ssps.rds" )
 
-
+for(scenario_name in names(scenarios)) {
+  cat("Plotting derivates to PDF...\n")
+  pdf_path <- file.path("figures/diagnostics", paste0("derivatives_", scenario_name, ".pdf"))
+  pdf(file = pdf_path, width = 11, height = 8.5)
+  
+  current_deriv_info <- all_results[[scenario_name]]$derivatives
+  
+  
+  plot_sp_derivates(output_list=current_deriv_info,
+                  target_species=target_species,
+                  scenario_name=scenario_name)
+  dev.off()
+}
 # ---------------------------------------------------------------------------- #
 # Plot Heatmap ####
 # ---------------------------------------------------------------------------- #

@@ -186,7 +186,7 @@ return(output_list)
 #' 
 
 plot_sp_derivates <- function(output_list, target_species, scenario_name = NULL) {
-  oldpar <- graphics::par(mfrow = c(length(target_species),3), mar=c(4,4,3,1))
+  oldpar <- graphics::par(mfrow = c(length(target_species),4), mar=c(4,4,3,1))
   on.exit(graphics::par(oldpar))
   
   for(sp in target_species){
@@ -201,8 +201,8 @@ plot_sp_derivates <- function(output_list, target_species, scenario_name = NULL)
     graphics::plot(rownames(out), out$FoodGain - out$UnAssimLoss - out$ActiveRespLoss, xlab="year", 
          ylab="Net feeding rate", main=paste(sp, scenario_name, sep=" "))
     
-    graphics::plot(rownames(out), out$ActiveRespLoss, xlab="year", ylab="F rate",
-                   ylab ="resp loss", main = paste(sp, scenario_name, sep=" "))
+    graphics::plot(rownames(out), out$ActiveRespLoss, xlab="year", ylab="resp loss",
+                  main = paste(sp, scenario_name, sep=" "))
     
   }
 }

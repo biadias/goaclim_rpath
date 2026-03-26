@@ -61,11 +61,20 @@ plot_scenario_comparison <- function(sim_list, species_to_plot, start_year = 199
     # Free Y scales so each species' plot fits its own biomass magnitude
     facet_wrap(~ Species, scales = "free_y") + 
     scale_colour_manual(values = c("SSP 585" = "#d55e00",
+                                   "SSP 585 (consumption only)" = "#0072b2",
+                                   "SSP 585 (respiration only)" = "#56b4e9",
+                                   "SSP 585 (no bioenergetic modifiers)" = "#f0e442",
                                    "Persist (consumption only)" = "#0072b2",
                                    "Persist (respiration only)" = "#56b4e9",
                                    "Persist (no bioenergetic modifiers)" = "#f0e442",
                                    "SSP 126" = "#009e73", 
+                                   "SSP 126 (consumption only)" = "#0072b2",
+                                   "SSP 126 (respiration only)" = "#56b4e9",
+                                   "SSP 126 (no bioenergetic modifiers)" = "#f0e442",
                                    "SSP 245" = "#e69f00", 
+                                   "SSP 245 (consumption only)" = "#0072b2",
+                                   "SSP 245 (respiration only)" = "#56b4e9",
+                                   "SSP 245 (no bioenergetic modifiers)" = "#f0e442",
                                    "Persist" = "#000000")) +
     # Add a vertical dashed line where the projection begins (end of 2020)
     geom_vline(xintercept = 2021, linetype = "dashed", color = "gray50") + 

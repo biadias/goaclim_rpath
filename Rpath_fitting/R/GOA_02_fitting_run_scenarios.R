@@ -84,11 +84,11 @@ for (scen_name in names(scenarios_to_run)) {
 }
 
 # Save results
-<<<<<<< Updated upstream
-saveRDS(fit_results_63par, file = "GOA/GOA_fit_results_63par.rds")
-=======
+
+#saveRDS(fit_results_63par, file = "GOA/GOA_fit_results_63par.rds")
+
 saveRDS(fit_results_63par_v2, file = "GOA/GOA_fit_results_63par.rds")
->>>>>>> Stashed changes
+
 #fit_results_63par <- readRDS("GOA/GOA_fit_results_63par.rds")
 
 # ---------------------------------------------------------------------------- #

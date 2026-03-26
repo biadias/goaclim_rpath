@@ -133,50 +133,45 @@ bzero_g585    <- bzero_func(scene_gfdl_585, managed_sp, F_equil, hind_years, all
 
 
 # ---------------------------------------------------------------------------- #
-# 5. Test fitted model ####
+# 5. Test fitted model cons res for sll ssps ####
 # ---------------------------------------------------------------------------- #
 
-# cons only
-scene_gfdl_persist_cons <- F_clim_sim_scene(scene = scene_bioen_best,
-                                       ssp = "persist",
-                                       cons = TRUE, resp = FALSE, buf = FALSE,
-                                       bioen_sp = bioen_sp,
-                                       tdc_hind = tdc_hind_bt, 
-                                       tdr_hind = tdr_hind_bt,
-                                       climate_dir= "data/climate/",
-                                       hind_yrs = hind_years,
-                                       proj_yrs = 2021:2099,
-                                       hind_data_start_yr = 1991,
-                                       climate_data_start_yr = 1980,
-                                       verbose = TRUE) 
+ssp_scenarios <- c("persist", "126", "245", "585")
+bio_modes <- list(
+  cons = list(cons = TRUE,  resp = FALSE),
+  resp = list(cons = FALSE, resp = TRUE),
+  none = list(cons = FALSE, resp = FALSE)
+)
 
-# resp only
-scene_gfdl_persist_res <- F_clim_sim_scene(scene = scene_bioen_best,
-                                       ssp = "persist",
-                                       cons = FALSE, resp = TRUE, buf = FALSE,
-                                       bioen_sp = bioen_sp,
-                                       tdc_hind = tdc_hind_bt, 
-                                       tdr_hind = tdr_hind_bt,
-                                       climate_dir= "data/climate/",
-                                       hind_yrs = hind_years,
-                                       proj_yrs = 2021:2099,
-                                       hind_data_start_yr = 1991,
-                                       climate_data_start_yr = 1980,
-                                       verbose = TRUE) 
-
-
-scene_gfdl_persist_none <- F_clim_sim_scene(scene = scene_bioen_best,
-                                           ssp = "persist",
-                                           cons = FALSE, resp = FALSE, buf = FALSE,
-                                           bioen_sp = bioen_sp,
-                                           tdc_hind = tdc_hind_bt, 
-                                           tdr_hind = tdr_hind_bt,
-                                           climate_dir= "data/climate/",
-                                           hind_yrs = hind_years,
-                                           proj_yrs = 2021:2099,
-                                           hind_data_start_yr = 1991,
-                                           climate_data_start_yr = 1980,
-                                           verbose = TRUE) 
+all_scenes <- list()
+for(s in ssp_scenarios){
+  for(m in names(bio_modes)){
+    run_name <- paste0(s,"_", m)
+    
+    all_scenes[[run_name]] <- F_clim_sim_scene(
+      scene=scene_bioen_best,
+      ssp=s,
+      cons=bio_modes[[m]]$cons,
+      resp=bio_modes[[m]]$resp,
+      buf= FALSE,
+      bioen_sp = bioen_sp,
+      tdc_hind = tdc_hind_bt, 
+      tdr_hind = tdr_hind_bt,
+      managed_sp = managed_sp_list,
+      f_equil = F_equil,
+      f_zero = F_zero,
+      f_ref_yrs = 2016:2020,
+      climate_dir = "data/climate/",
+      hind_yrs = hind_years,
+      proj_yrs = 2021:2099,
+      hind_data_start_yr = 1991,
+      climate_data_start_yr = 1980,
+      verbose = FALSE
+      
+    )
+  }
+}
+#saveRDS(all_scenes, file="results/diagnostics/all_scenes_cons_resp_ssps.rds")
 
 # ---------------------------------------------------------------------------- #
 # 6. Topic 2  ####

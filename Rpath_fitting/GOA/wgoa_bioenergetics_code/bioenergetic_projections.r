@@ -10,10 +10,9 @@
 source("Rpath_fitting/GOA/wgoa_bioenergetics_code/bioenergetic_pars2.r")
 
 bioen_params <- function(ssp) {
-  
-
+  ssp_clean <- gsub("ssp","", ssp)
   # get the raw temperature projection output from ROMSNPZ scenario
-  climate_file <- paste0("Rpath_fitting/GOA/wgoa_data_rpath_fitting/ssp", ssp,"_wide_WGOA_temp_1000",".csv")
+  climate_file <- paste0("Rpath_fitting/GOA/wgoa_data_rpath_fitting/ssp", ssp_clean,"_wide_WGOA_temp_1000",".csv")
   climate_proj <- read.csv(climate_file, row.names = NULL)
   bot_temp     <- as.matrix(climate_proj$btemp[493:1440])
   row.names(bot_temp) <- climate_proj$tstep[493:1440]
