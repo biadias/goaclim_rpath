@@ -12,9 +12,11 @@
 source("code/02_run_sim.R") 
 source("code/Function_plot_scenario_comparison.R") 
 # ---------------------------------------------------------------------------- #
-# 1. Run the simulations (this generates the actual output matrices)
+# 1. Run the simulations (this generates the actual output matrices)####
 # ---------------------------------------------------------------------------- #
 #This is saved in the 02_run_sim.R
+all_scenes <- readRDS("results/diagnostics/all_scenes_cons_resp_ssps.rds")
+
 forecast_gfdl_persist      <- rsim.run(scene_gfdl_persist, method = "AB", years = all_years)
 forecast_gfdl_persist_cons <- rsim.run(all_scenes$persist_cons, method = "AB", years = all_years)
 forecast_gfdl_persist_resp <- rsim.run(all_scenes$persist_resp, method = "AB", years = all_years)
@@ -34,7 +36,7 @@ forecast_gfdl_585_none     <- rsim.run(all_scenes$`585_none`, method = "AB", yea
 
 
 # ---------------------------------------------------------------------------- #
-# 2. Plot ssps
+# 2. Plot ssps####
 # ---------------------------------------------------------------------------- #
 # The names here (e.g., "SSP 126") will become the labels in the plot legend!
 my_scenarios <- list(
@@ -45,19 +47,48 @@ my_scenarios <- list(
 )
 
 #plot_spp <- c("walleye_pollock_adult", "pacific_cod_adult", "arrowtooth_flounder_adult")
-plot_arrow_prey <- c("euphausiids", "pandalid_shrimp", "pacific_capelin","pacific_sandlance",
-                     "walleye_pollock_adult", "walleye_pollock_juvenile", "pacific_cod_adult",
-                     "arrowtooth_flounder_adult", "arrowtooth_flounder_juvenile")
-plot_arrow_pred <- c("steller_sea_lion",
-                     "longnose_skate",  
-                      "pacific_halibut_adult", "arrowtooth_flounder_adult", "shallow_water_flatfish", 
-                     "pacific_cod_adult"
-                     )
+plot_arrow_prey <- c(
+  "euphausiids",
+  "pandalid_shrimp",
+  "pacific_capelin",
+  "pacific_sandlance",
+  "walleye_pollock_adult",
+  "walleye_pollock_juvenile",
+  "pacific_cod_adult",
+  "arrowtooth_flounder_adult",
+  "arrowtooth_flounder_juvenile"
+)
+plot_arrow_pred <- c(
+  "steller_sea_lion",
+  "longnose_skate",
+  "pacific_halibut_adult",
+  "arrowtooth_flounder_adult",
+  "shallow_water_flatfish",
+  "pacific_cod_adult"
+)
 
-plot_ground <- c("arrowtooth_flounder_adult", "pacific_cod_adult","walleye_pollock_adult" )
+plot_ground <- c(
+  "arrowtooth_flounder_adult",
+  "pacific_cod_adult",
+  "walleye_pollock_adult")
+
+plot_ground_juv <- c(
+  "arrowtooth_flounder_juvenile",
+  "pacific_cod_juvenile",
+  "walleye_pollock_juvenile")
+
+fg1 <- plot.species[1:12]
+fg2 <- plot.species[13:24]
+fg3 <- plot.species[25:36]
+fg4 <- plot.species[37:48]
+fg5 <- plot.species[49:60]
+fg6 <- plot.species[61:72]
+fg6 <- plot.species[73:84]
+
+
 ssp_comps <- plot_scenario_comparison(
   sim_list = my_scenarios, 
-  species_to_plot = plot_ground, 
+  species_to_plot = fg6, 
   start_year = 1991, 
   variable = "Biomass"  # You can also change this to "Catch"
 )
@@ -66,7 +97,7 @@ print(ssp_comps)
 
 
 # ---------------------------------------------------------------------------- #
-# 2. Plot ssp 126 res con
+# 2. Plot ssp 126 res con ####
 # ---------------------------------------------------------------------------- #
 
 # The names you use here (e.g., "SSP 126") will become the labels in the plot legend!
@@ -98,7 +129,7 @@ ssp126 <- plot_scenario_comparison(
 print(ssp126)
 
 # ---------------------------------------------------------------------------- #
-# 2. Plot ssp 245 res con
+# 2. Plot ssp 245 res con####
 # ---------------------------------------------------------------------------- #
 
 # The names you use here (e.g., "SSP 126") will become the labels in the plot legend!
@@ -120,7 +151,7 @@ ssp245 <- plot_scenario_comparison(
 print(ssp245)
 
 # ---------------------------------------------------------------------------- #
-# 2. Plot ssp 585 res con
+# 2. Plot ssp 585 res con####
 # ---------------------------------------------------------------------------- #
 
 # The names you use here (e.g., "SSP 126") will become the labels in the plot legend!
