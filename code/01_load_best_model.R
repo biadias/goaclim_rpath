@@ -8,7 +8,6 @@
 # Purpose: Loading the best scenario to the set up scene_bioen
 # ---------------------------------------------------------------------------- #
 
-
 # ---------------------------------------------------------------------------- #
 # 1. Load the best model scenario ####
 # ---------------------------------------------------------------------------- #
@@ -73,7 +72,7 @@ scene_bioen_best <- scene_bioen
 
 
 scene_bioen_best$params <- rsim.fit.apply(
-  values = combined_pars, # Uses the fitted vector from your RDS
+  values = combined_pars, # Uses the fitted vector from the RDS object
   species = par59M04_species,  # Your combined species vector (M0 + prey + pred)
   vartype = par59M04_vartype,  # Your combined vartype vector
   scene.params = scene_bioen$params

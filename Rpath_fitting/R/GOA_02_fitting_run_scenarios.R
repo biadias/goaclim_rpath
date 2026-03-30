@@ -59,6 +59,7 @@ for(scen_name in names(scenarios_to_run)) {
   )
 }
 
+#saveRDS(results_nofit, file = "Rpath_fitting/GOA/GOA_fit_results_nofit.rds")
 
 # ---------------------------------------------------------------------------- #
 # Run 1: 63 Parameters Fitting (Vulnerabilities) ####

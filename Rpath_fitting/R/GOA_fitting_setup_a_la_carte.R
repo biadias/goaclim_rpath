@@ -20,15 +20,15 @@ library(janitor)
 # Support function files that may be moved to Rpath when finalized
 fup <- function() {
   #source("R/xml_convert.r") # comment out this line
-  source("R/merge_ecofitting.R")
-  source("R/ecofitting_plots.R")
+  source("Rpath_fitting/R/merge_ecofitting.R")
+  source("Rpath_fitting/R/ecofitting_plots.R")
 }
 fup()
 
 #### A. LOAD WGOA and EGOA models #############################################################
 
 ##### 1.Load and test WGOA model ####
-WGOA_EwE_file <- "GOA/WGOA_19March2026_simpleDet.eiixml" 
+WGOA_EwE_file <- "Rpath_fitting/GOA/WGOA_19March2026_simpleDet.eiixml" 
 # changed following two lines
 w.unbal  <-  create.rpath.from.eiixml(WGOA_EwE_file)  #xml_unbal(WGOA_EwE_file)
 w.unbal  <-  rpath.stanzas(w.unbal)
@@ -49,14 +49,14 @@ w.bal    <-  rpath(w.unbal) # balanced
 
 #### B. WGOA MODEL AND DATA SETUP #############################################################
 datfiles <- list(
-  catchfile             = "GOA/wgoa_data_rpath_fitting/wgoa_catches_ft_cas_long_haladded.csv",
+  catchfile             = "Rpath_fitting/GOA/wgoa_data_rpath_fitting/wgoa_catches_ft_cas_long_haladded.csv",
   # Halibut from IPHC added
-  surveyfile_shelf      = "GOA/wgoa_data_rpath_fitting/wgoa_race_biomass_ts_fitting_index_v2_tons_ka.csv",
-  surveyfile_nonrace    = "GOA/wgoa_data_rpath_fitting/wgoa_nonrace_biomass_ts_fitting_index.csv",
-  surveyfile_gak        = "GOA/wgoa_data_rpath_fitting/gak_zooplankton_b_ts_v2.csv",
-  surveyfile_ecofoci    = "GOA/wgoa_data_rpath_fitting/goaecofoci_zooplankton_b_ts_v2.csv",
-  surveyfile_wintshelik = "GOA/wgoa_data_rpath_fitting/wgoa_pollock_shelikof_v2_biomass_ts_fitting_index_v2_tons_ka.csv",
-  surveyfile_sable_ll   = "GOA/wgoa_data_rpath_fitting/wgoa_sablefish_ll_v2_biomass_ts_fitting_index_v3.csv"
+  surveyfile_shelf      = "Rpath_fitting/GOA/wgoa_data_rpath_fitting/wgoa_race_biomass_ts_fitting_index_v2_tons_ka.csv",
+  surveyfile_nonrace    = "Rpath_fitting/GOA/wgoa_data_rpath_fitting/wgoa_nonrace_biomass_ts_fitting_index.csv",
+  surveyfile_gak        = "Rpath_fitting/GOA/wgoa_data_rpath_fitting/gak_zooplankton_b_ts_v2.csv",
+  surveyfile_ecofoci    = "Rpath_fitting/GOA/wgoa_data_rpath_fitting/goaecofoci_zooplankton_b_ts_v2.csv",
+  surveyfile_wintshelik = "Rpath_fitting/GOA/wgoa_data_rpath_fitting/wgoa_pollock_shelikof_v2_biomass_ts_fitting_index_v2_tons_ka.csv",
+  surveyfile_sable_ll   = "Rpath_fitting/GOA/wgoa_data_rpath_fitting/wgoa_sablefish_ll_v2_biomass_ts_fitting_index_v3.csv"
 )
 
 ecofoci <- read.csv(datfiles$surveyfile_ecofoci) %>%
@@ -185,7 +185,7 @@ scene_base <- scene5
 
 scene_bioen <- scene_base
 
-source("GOA/wgoa_bioenergetics_code/wgoa_add_bioen_to_scene.r")
+source("Rpath_fitting/GOA/wgoa_bioenergetics_code/wgoa_add_bioen_to_scene.r")
 scene_bd <- wgoa_add_bioenergetics("ssp126")
 # Since scene_bd was created in bioenergetics functions without having other
 # forcing added, copy the affected search parameters from scene_bd to scene_bioen
@@ -199,7 +199,7 @@ scene_bioen$forcing$ForcedActresp[1:hindmonths, ] <- scene_bd$forcing$ForcedActr
 
 scene_primprod <- scene_base
 
-hindcast_pp <- read.csv("GOA/wgoa_data_rpath_fitting/Long_WGOA_NPZ_PP_monthly_B_added.csv")
+hindcast_pp <- read.csv("Rpath_fitting/GOA/wgoa_data_rpath_fitting/Long_WGOA_NPZ_PP_monthly_B_added.csv")
 ppl_totP <- as.numeric(bal$Biomass["large_phytoplankton"] * bal$PB["large_phytoplankton"])
 ppl_force <- hindcast_pp %>%
   filter(simulation == "ssp126" &

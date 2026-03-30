@@ -11,7 +11,7 @@
 # adding info
 # ---------------------------------------------------------------------------- #
 # ---------------------------------------------------------------------------- #
-source("Rpath_fitting/R/GOA_fitting_setup_a_la_carte.r")
+source("Rpath_fitting/R/GOA_fitting_setup_a_la_carte.R")
 source("Rpath_fitting/R/fitting_aic.R")
 source("Rpath_fitting/R/ecofitting_plot_multi.R")
 
