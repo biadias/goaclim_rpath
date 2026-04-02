@@ -126,6 +126,105 @@ get_predator_diet <- function(scene, years, predator) {
   return(list(flow =flow_mat, diet= diet_mat))
 }
 
+#' Diet and Flow plots for a predator
+#' This functions plots the flow and diet proportion matrices extracted by `get_predator_diet()` 
+#' 
+#' @param flow_mat the flow matrices extracted from `get_predator_diet()`
+#' @param diet_mat the diet proportion matrices extracted from `get_predator_diet()`
+#' @param predator a character string of the predator name to extract the matrices
+#' @param n_prey the number of prey species to plot (default=7)
+#' 
+#' @return a plot with two panels: the left panel shows the flow matrix (absolute flows) and the right panel shows the diet matrix (proportions), both for the specified predator. The x-axis will be labeled with prey species names, and the y-axis will represent time (years). The color intensity in each panel will indicate the magnitude of flow or diet proportion, respectively.
+#' 
+#' @export
+#' 
+#' @examples 
+#' \dontrun{get_predator_diet_plot(flow_mat, diet_mat, predator = "arrowtooth_flounder_adult", n_prey=7, scenario_name="SSP 126")}
+#' 
+
+
+get_predator_diet_plot <- function(flow_mat, diet_mat, predator, n_prey=7,
+                                   scenario_name = NULL) {
+  if (!requireNamespace("ggplot2", quietly = TRUE)) stop("Package 'ggplot2' is required.")
+  if (!requireNamespace("tidyr", quietly = TRUE)) stop("Package 'tidyr' is required.")
+  if (!requireNamespace("patchwork", quietly = TRUE)) stop("Package 'patchwork' is required.")
+  if(!requireNamespace("grDevices", quietly = TRUE)) stop("Package 'viridis' is required.")
+ 
+  if(!is.null(rownames(flow_mat))){
+    years <- as.numeric(rownames(flow_mat))
+  } else {
+    years <- 1:nrow(flow_mat)
+  }
+  
+  total_consumption <- rowSums(flow_mat, na.rm = TRUE)
+  mean_diet <- colMeans(diet_mat, na.rm=TRUE)
+  top_prey <- names(sort(mean_diet, decreasing=TRUE))[1:n_prey]
+  
+  df_flow <- as.data.frame(flow_mat[, top_prey, drop = FALSE])
+  df_flow$Year <- years
+  flow_long <- tidyr::pivot_longer(df_flow, cols = -Year, names_to = "Prey", values_to = "Flow")
+  flow_long$Prey <- factor(flow_long$Prey, levels = top_prey)
+  
+  df_total <- data.frame(Year = years, Total_Consumption = total_consumption)
+  
+  
+  df_diet <- as.data.frame(diet_mat[, top_prey, drop = FALSE])
+  df_diet$Year <- years
+  
+  diet_long <- tidyr::pivot_longer(df_diet, cols = -Year, names_to = "Prey", values_to = "Proportion")
+  diet_long$Prey <- factor(diet_long$Prey, levels = top_prey) # Lock factor order
+  
+  title_suffix <- ifelse(is.null(scenario_name), "", paste(" |", scenario_name))
+  
+  
+  rsim_pal_dark <-  c("#EC7604", "#EF5703" ,"#D37844" ,"#C07B65" ,"#967F89", "#6C83AE" ,"#4982AF" ,"#2D7D8B", "#117867", "#166158", "#254451", "#35274A")
+  rsim_pal_light <- c("#FFAB88", "#FF9D8A", "#FFA57B", "#EFA793", "#C5AEB8", "#9DB3DF", "#82B4E2", "#71B2C1", "#64B1A0", "#68A097", "#738A97", "#807693")
+  
+  my_colors <- colorRampPalette(rsim_pal_dark)(n_prey)
+  
+  # FLOW
+  
+  plot_flow <- ggplot2::ggplot() +
+    # Dynamic prey lines
+    ggplot2::geom_line(data = flow_long, ggplot2::aes(x = Year, y = Flow, color = Prey), linewidth = 1.2) +
+    # Total consumption overlay (Hardcoded to black, mapped to linetype for legend generation)
+    ggplot2::geom_line(data = df_total, ggplot2::aes(x = Year, y = Total_Consumption, linetype = "Total Consumption"), color = "black", linewidth = 1.2) +
+    ggplot2::theme_light() +
+    ggplot2::labs(title = paste0("Absolute Flow: ", predator, title_suffix),
+                  x = "Year",
+                  y = "Flow (t.km^-2.year^-1)") +
+    # option = "viridis" provides a perceptually uniform, colorblind-safe palette
+    ggplot2::scale_color_manual(name = "Prey Group", values=my_colors) + 
+    ggplot2::scale_linetype_manual(name = "Total", values = c("Total Consumption" = "solid")) + 
+    ggplot2::scale_x_continuous(breaks = seq(min(years), max(years), 10)) +
+    ggplot2::theme(plot.title = ggplot2::element_text(face = "bold", size = 11))
+  
+  # DIET
+  
+  plot_diet <- ggplot2::ggplot(data = diet_long, ggplot2::aes(x = Year, y = Proportion, color = Prey)) +
+    ggplot2::geom_line(linewidth = 1.2) +
+    ggplot2::theme_light() +
+    ggplot2::labs(title = paste0("Diet Proportions: ", predator, title_suffix),
+                  x = "Year",
+                  y = "Diet Proportion") +
+    ggplot2::scale_color_manual(name = "Prey Group", values=my_colors) +
+    ggplot2::scale_x_continuous(breaks = seq(min(years), max(years), 10)) +
+    ggplot2::theme(plot.title = ggplot2::element_text(face = "bold", size = 11))
+  
+  # Combine plots side-by-side using patchwork
+  # guides = "collect" ensures the Prey Group legend is shared
+  combined_plot <- plot_flow + plot_diet + patchwork::plot_layout(nrow = 2, guides = "collect")
+  
+  return(combined_plot)
+  
+   
+}
+
+
+
+
+
+
 
 #' Extract derivatives (derivT) for target species over time
 #' 

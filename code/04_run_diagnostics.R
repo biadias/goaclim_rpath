@@ -79,7 +79,7 @@ for(scenario_name in names(scenarios)) {
   )
                         
 }
-saveRDS(all_results,"results/diagnostics/derivates_59vM04_ssps.rds" )
+#saveRDS(all_results,"results/diagnostics/derivates_59vM04_ssps.rds" )
 
 for(scenario_name in names(scenarios)) {
   cat("Plotting derivates to PDF...\n")
@@ -214,3 +214,16 @@ for (scenario_name in names(all_results)) {
   
   cat("Saved:", file_name, "\n")
 }
+
+
+# ---------------------------------------------------------------------------- #
+# Consumption (flows) and diet diagnostics - WORK IN PROGRESS####
+# ---------------------------------------------------------------------------- #
+
+all_results <- readRDS("results/diagnostics/derivates_59vM04_ssps.rds" )
+
+flow_mat <- all_results$ssp126_F5$diets$flow
+diet_mat <- all_results$ssp126_F5$diets$diet
+
+get_predator_diet_plot(flow_mat, diet_mat, predator = "arrowtooth_flounder_adult", 
+                       scenario_name = "SSP 126")
