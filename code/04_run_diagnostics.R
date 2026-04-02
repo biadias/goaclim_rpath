@@ -28,7 +28,7 @@ my_vv_table <- get_vv_comparison(original_scene = scene_bioen,
 # Set up global variables ####
 # ---------------------------------------------------------------------------- #
 
-years <- all_years
+all_years
 target_species <- c("walleye_pollock_adult", "pacific_cod_adult", "arrowtooth_flounder_adult")
 target_sp_juv <- c("walleye_pollock_juvenile", "pacific_cod_juvenile",
                    "arrowtooth_flounder_juvenile")
@@ -39,6 +39,7 @@ predator <- "arrowtooth_flounder_adult"
 # ---------------------------------------------------------------------------- #
 
 scenarios <- list(
+  null_F5         = scene_bioen_best,
   persist_F5      = scene_gfdl_persist,
   #bioen             = scene_bioen,
   ssp126_F5          = scene_gfdl_126,
@@ -65,12 +66,12 @@ for(scenario_name in names(scenarios)) {
   
   cat("extracting diet info...\n")
   diet_info <- get_predator_diet(scene=current_scene, 
-                                 years=years, 
+                                 years=all_years, 
                                  predator=predator)
   
   cat("extracting derivates...\n")
   deriv_info <- get_species_derivatives(scene = current_scene,
-                                        years = years,
+                                        years = all_years,
                                         target_species = target_species)
   
   all_results[[scenario_name]] <- list(
@@ -221,9 +222,11 @@ for (scenario_name in names(all_results)) {
 # ---------------------------------------------------------------------------- #
 
 all_results <- readRDS("results/diagnostics/derivates_59vM04_ssps.rds" )
-
-flow_mat <- all_results$ssp126_F5$diets$flow
-diet_mat <- all_results$ssp126_F5$diets$diet
+#null_F5 is just the scene_bioen_best without a rsim run and the other params set up by the F_clim_sim_scene()
+flow_mat <- all_results$null_F5$diets$flow
+diet_mat <- all_results$null_F5$diets$diet
 
 get_predator_diet_plot(flow_mat, diet_mat, predator = "arrowtooth_flounder_adult", 
-                       scenario_name = "SSP 126")
+                       scenario_name = "null")
+
+

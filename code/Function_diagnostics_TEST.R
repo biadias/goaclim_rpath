@@ -213,18 +213,12 @@ get_predator_diet_plot <- function(flow_mat, diet_mat, predator, n_prey=7,
   
   # Combine plots side-by-side using patchwork
   # guides = "collect" ensures the Prey Group legend is shared
-  combined_plot <- plot_flow + plot_diet + patchwork::plot_layout(nrow = 2, guides = "collect")
+  combined_plot <- plot_flow + plot_diet + patchwork::plot_layout(ncol = 2, guides = "collect")
   
   return(combined_plot)
   
    
 }
-
-
-
-
-
-
 
 #' Extract derivatives (derivT) for target species over time
 #' 
