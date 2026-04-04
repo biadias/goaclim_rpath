@@ -116,34 +116,34 @@ rc_scaled_b[is.nan(rc_scaled_b)] <- 1e-08
 #rc_scaled_s[is.nan(rc_scaled_s)] <- 1e-08
 
 # Kitchell curve plots -------------------------------------------------------
-#  par(mfrow = c(2, 1))
-#  # rc unscaled
-#  plot(
-#    Ctemp,
-#    rc[, "arrowtooth_flounder_adult"],
-#    type = 'n',
-#    xlab = "Celcius",
-#    ylab = "rc (proportion max consumption)",
-#    ylim = c(0, 1.1)
-#  )
-#  for (i in 1:18) {
-#    lines(Ctemp, rc[, i], col = viridis(18)[i], lwd = 2)
-#  }
-#  # rc scaled to mean bottom temp 1991–1994
-#  plot(
-#    Ctemp,
-#    rc_scaled_b[, "arrowtooth_flounder_adult"],
-#    type = 'n',
-#    xlab = "Celcius",
-#    ylab = "rc_scaled_b (proportion max consumption)",
-#    ylim = c(0, max(rc_scaled_b, na.rm = TRUE)),
-#    main = "rc_scaled to mean bottom temp"
-#  )
-#  for (i in 1:18) {
-#    lines(Ctemp, rc_scaled_b[, i], col = viridis(18)[i], lwd = 2)
-#    abline(v = mean_bot_temps[i], lty = 2, col = "gray50")
-#  }
-#  abline(h=1)
+  par(mfrow = c(2, 1))
+  # rc unscaled
+  plot(
+    Ctemp,
+    rc[, "arrowtooth_flounder_adult"],
+    type = 'n',
+    xlab = "Celcius",
+    ylab = "rc (proportion max consumption)",
+    ylim = c(0, 1.1)
+  )
+  for (i in 1:18) {
+    lines(Ctemp, rc[, i], col = viridis(18)[i], lwd = 2)
+  }
+  # rc scaled to mean bottom temp 1991–1994
+  plot(
+    Ctemp,
+    rc_scaled_b[, "arrowtooth_flounder_adult"],
+    type = 'n',
+    xlab = "Celcius",
+    ylab = "rc_scaled_b (proportion max consumption)",
+    ylim = c(0, max(rc_scaled_b, na.rm = TRUE)),
+    main = "rc_scaled to mean bottom temp_ATF"
+  )
+  for (i in 1:18) {
+    lines(Ctemp, rc_scaled_b[, i], col = viridis(18)[i], lwd = 2)
+    abline(v = mean_bot_temps[i], lty = 2, col = "gray50")
+  }
+  abline(h=1)
 # # # rc scaled to mean surface temp 1991–1994
 # # plot(
 # #   Ctemp,
@@ -373,24 +373,24 @@ row.names(ActiveRespFrac_b) <- rc_rows
 #row.names(ActiveRespFrac_s) <- rc_rows
 
 # plot ActiveRespFrac
-# par(mfrow = c(4, 8))
-# for (i in 1:31) {
-#   plot(
-#     Ctemp,
-#     ActiveRespFrac_b[, i],
-#     type = 'l',
-#     lwd = 2,
-#     main = bioen_sp[i],
-#     ylim = c(0, 1),
-#     ylab = "ActiveRespFrac",
-#     xlab = "temp (C)",
-#     col = "blue"
-#   )
-#   abline(v = bioen_pars[i,5], lty = 2, col = "blue")
-#   lines(Ctemp, ActiveRespFrac_s[, i], lwd=2, col = "red", lty=2)
-#   abline(v = bioen_pars[i,4], lty = 2, col = "red")
-# }
-# par(mfrow=c(1,1))
+par(mfrow = c(1, 2))
+for (i in 1:2) {
+  plot(
+    Ctemp,
+    ActiveRespFrac_b[, i],
+    type = 'l',
+    lwd = 2,
+    main = bioen_sp[i],
+    ylim = c(0, 1),
+    ylab = "ActiveRespFrac",
+    xlab = "temp (C)",
+    col = "blue"
+  )
+  abline(v = bioen_pars[i,5], lty = 2, col = "blue")
+  lines(Ctemp, ActiveRespFrac_b[, i], lwd=2, col = "red", lty=2)
+  abline(v = bioen_pars[i,4], lty = 2, col = "red")
+}
+par(mfrow=c(1,1))
 
 #------------------------------------------------------------------------------#
 # Annual respiration modifier (ForcedActResp)

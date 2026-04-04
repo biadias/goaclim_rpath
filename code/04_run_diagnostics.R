@@ -23,7 +23,6 @@ my_vv_table <- get_vv_comparison(original_scene = scene_bioen,
 
 #write.csv(my_vv_table, "results/diagnostics/result_59_M04_vv_comparison_bioen.csv", row.names = FALSE)
 
-
 # ---------------------------------------------------------------------------- #
 # Set up global variables ####
 # ---------------------------------------------------------------------------- #

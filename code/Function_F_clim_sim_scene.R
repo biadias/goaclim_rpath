@@ -6,7 +6,7 @@
 #' DATE: 25 February 2026
 #' @description
 #'
-#' code/00_Function_F_clim_sim_scene.R
+#' code/Function_F_clim_sim_scene.R
 #' Purpose: Function to set-up a scenario object to be used in solving for target F.
 #' Adapted for the GOA fit model (from GOA_fit_results_59M04par.rds).
 #' ---------------------------------------------------------------------------- #
@@ -15,6 +15,8 @@
 #' @param cons whether to apply the bioenergetics consumption multiplier (TRUE/FALSE). Default \code{TRUE}.
 #' @param resp whether to apply the bioenergetics respiration multiplier (TRUE/FALSE). Default \code{TRUE}.
 #' @param buf whether to apply the primary production forcing (bottom up forcing-buf) (TRUE/FALSE). Default \code{TRUE}.
+#' @param pcod_rec whether to apply the Pacific cod recruitment forcing (TRUE/FALSE). Default \code{TRUE}.
+#' @param pcod_rec_method Character. Which thermal curve to use (Laurel and Rogers 2020). Options: \code{"cauchy"} or \code{"gaussian"}. Default \code{"cauchy"}.
 #' @param bioen_sp Character vector. List of species to apply bioenergetics
 #' @param tdc_hind_bt Data frame. Hindcast of bottom temperature consumption multipliers.
 #' @param tdr_hind_bt Data frame. Hindcast of bottom temperature respiration multipliers.
@@ -40,6 +42,8 @@ F_clim_sim_scene <- function(scene,
                              cons = TRUE,
                              resp = TRUE,
                              buf = TRUE,
+                             pcod_rec = TRUE,
+                             pcod_rec_method = "cauchy",
                              bioen_sp,
                              tdc_hind_bt,
                              tdr_hind_bt,
@@ -48,7 +52,7 @@ F_clim_sim_scene <- function(scene,
                              f_zero,
                              f_ref_yrs = 2016:2020,
                              zero_fishing_sp = NULL,
-                             climate_dir = "climate_data/",
+                             climate_dir = "data/climate",
                              hind_yrs = 1991:2020,
                              proj_yrs = 2021:2099,
                              hind_data_start_yr = 1991,
@@ -63,7 +67,7 @@ F_clim_sim_scene <- function(scene,
     "scene has to be provided" = !missing(scene),
     "bioen_sp must be provided" = !missing(bioen_sp),
     "cons, resp, and buf must be logical" = is.logical(cons) &&
-      is.logical(resp) && is.logical(buf)
+      is.logical(resp) && is.logical(buf) && is.logical(pcod_rec)
   )
   
   if (verbose)
@@ -175,6 +179,58 @@ F_clim_sim_scene <- function(scene,
   }
   if (verbose)
     message("Climate scenario setup complete.")
+  
+  # -------------------------------------------------------------------------- #
+  # Pacific Cod Recruitment Forcing (Temperature Proxy)
+  # -------------------------------------------------------------------------- #
+  if (pcod_rec) {
+    if (verbose)
+      message(sprintf("Applying Pacific cod recruitment forcing based on temperature proxy using %s method", pcod_rec_method))
+    
+    laurel_rogers_survival_proxy <- function(temp, method="cauchy"){
+      if(method == "cauchy"){
+        return(1 / (1 + ((temp - 4.192) / 2.2125)^2))
+        # Note: The parameters for the Cauchy function (location = 4.192, scale = 2.2125)
+      } else if(method == "gaussian"){
+        return(exp(-0.5 *((temp-4.5)/1.5)^2))
+        # Note: The parameters for the Gaussian function (mean = 4.5, sd = 1.5) 
+      } else {
+        stop("Invalid method. Choose 'cauchy' or 'gaussian'.")
+      }
+    }
+    
+    ssp_clean <- gsub("ssp","", ssp)
+    # get the raw temperature projection output from ROMSNPZ scenario
+    climate_file <- paste0("Rpath_fitting/GOA/wgoa_data_rpath_fitting/ssp", ssp_clean,"_wide_WGOA_temp_1000",".csv")
+    climate_proj <- read.csv(climate_file, row.names = NULL)
+    bot_temp     <- as.matrix(climate_proj$btemp[493:1440])
+    row.names(bot_temp) <- climate_proj$tstep[493:1440]
+    
+    
+    # Load the monthly temperature data for the projection period
+    ssp_clean <- gsub("ssp","", ssp)
+    temp_file <- file.path(climate_dir, paste0("ssp", ssp_clean, "_wide_WGOA_temp_1000.csv"))
+    
+    if (!file.exists(temp_file))
+      stop(sprintf("Temperature data file not found: %s", temp_file))
+    
+    temp_proj <- read.csv(temp_file, row.names = NULL)
+    temp_proj_vector <- temp_proj[data_idx_proj, "btemp"] # 'btemp' is the bottom temperature
+    
+    # Apply the recruitment forcing based on the chosen method
+    if (pcod_rec_method == "cauchy") {
+      rec_multiplier <- 1 / (1 + ((temp_proj_vector - 4.192) / 2.2125)^2)
+    } else if (pcod_rec_method == "gaussian") {
+      rec_multiplier <- exp(-0.5 * ((temp_proj_vector - 4.5) / 1.5)^2)
+    } else {
+      stop("Invalid pcod_rec_method. Choose 'cauchy' or 'gaussian'.")
+    }
+    
+    # Set the recruitment forcing in the scenario
+    scene$forcing$ForcedRecs[ts_projection, "pacific_cod_adult"] <- rec_multiplier
+  }
+  
+  
   
   # -------------------------------------------------------------------------- #
   # Fishing scenarios
