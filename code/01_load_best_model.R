@@ -58,22 +58,22 @@ par59M04_species <- c(mzero_groups_4,
                       par59M04_groups, 
                       par59M04_groups[1:(length(par59M04_groups)-1)])
 
-par59M04_start   <- c(scene_bioen$params$MzeroMort[mzero_groups_4],
+par59M04_start   <- c(scene_base$params$MzeroMort[mzero_groups_4],
                       rep(0,(length(par59M04_species)-length(mzero_groups_4))))
 
 
 # create scenario object to apply the fit vulnerabilities
 combined_pars <- c(
-  result_59_M04$Bioen$opt_object_s2$par, 
-  result_59_M04$Bioen$opt_object_s1$par
+  result_59_M04$Base$opt_object_s2$par, 
+  result_59_M04$Base$opt_object_s1$par
 )
 
-scene_bioen_best <- scene_bioen
+scene_base_best <- scene_base
 
 
-scene_bioen_best$params <- rsim.fit.apply(
+scene_base_best$params <- rsim.fit.apply(
   values = combined_pars, # Uses the fitted vector from the RDS object
   species = par59M04_species,  # Your combined species vector (M0 + prey + pred)
   vartype = par59M04_vartype,  # Your combined vartype vector
-  scene.params = scene_bioen$params
+  scene.params = scene_base$params
 )

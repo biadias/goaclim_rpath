@@ -85,13 +85,19 @@ fg5 <- plot.species[49:60]
 fg6 <- plot.species[61:72]
 fg6 <- plot.species[73:84]
 
+vector_list <- list(fg1, fg2, fg3, fg4, fg5, fg6)
 
-ssp_comps <- plot_scenario_comparison(
-  sim_list = my_scenarios, 
-  species_to_plot = fg6, 
-  start_year = 1991, 
-  variable = "Biomass"  # You can also change this to "Catch"
-)
+
+for(i in 1:length(vector_list)){
+  
+  ssp_comps[[i]] <- plot_scenario_comparison(
+    sim_list = my_scenarios, 
+    species_to_plot = vector_list[[i]], 
+    start_year = 1991, 
+    variable = "Biomass"  # You can also change this to "Catch"
+  )
+  print(ssp_comps[[i]])
+}
 
 print(ssp_comps)
 

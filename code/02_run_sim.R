@@ -149,7 +149,7 @@ for(s in ssp_scenarios){
     run_name <- paste0(s,"_", m)
     
     all_scenes[[run_name]] <- F_clim_sim_scene(
-      scene=scene_bioen_best,
+      scene=scene_base_best,
       ssp=s,
       cons=bio_modes[[m]]$cons,
       resp=bio_modes[[m]]$resp,
