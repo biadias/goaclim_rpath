@@ -191,7 +191,7 @@ F_clim_sim_scene <- function(scene,
     
     laurel_rogers_survival_proxy <- function(temp, method="cauchy"){
       if(method == "cauchy"){
-        return(1 / (1 + ((temp - 4.192) / 2.2125)^2))
+        return(1 / (1 + ((temp - 4.192) / 2.125)^2)) #change to 1 later
         # Note: The parameters for the Cauchy function (location = 4.192, scale = 2.2125)
       } else if(method == "gaussian"){
         return(exp(-0.5 *((temp-4.5)/1.5)^2))
@@ -234,7 +234,7 @@ F_clim_sim_scene <- function(scene,
     
     
     
-    force_pattern <- rep(1, total_months)
+    force_pattern <- rep(1, total_months) # change to 1
 #    total_years <- total_months / 12
     
     for (yr in 1:total_years) {

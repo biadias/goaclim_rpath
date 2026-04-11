@@ -55,35 +55,65 @@ plot_scenario_comparison <- function(sim_list, species_to_plot, start_year = 199
   plot_data$Species <- factor(plot_data$Species, levels = species_to_plot)
 
   
+ # # Create the ggplot
+ # p <- ggplot(plot_data, aes(x = Year, y = Value, color = Scenario)) +
+ #   geom_line(size = 1) +
+ #   # Free Y scales so each species' plot fits its own biomass magnitude
+ #   facet_wrap(~ Species, scales = "free_y") + 
+ #   scale_colour_manual(values = c("SSP 585" = "#d55e00",
+ #                                  "SSP 585 (consumption only)" = "#0072b2",
+ #                                  "SSP 585 (respiration only)" = "#56b4e9",
+ #                                  "SSP 585 (no bioenergetic modifiers)" = "#f0e442",
+ #                                  "Persist (consumption only)" = "#0072b2",
+ #                                  "Persist (respiration only)" = "#56b4e9",
+ #                                  "Persist (no bioenergetic modifiers)" = "#f0e442",
+ #                                  "Persist_pcod" = "grey",
+ #                                  "null" = "grey20",
+ #                                  "SSP 126" = "#009e73", 
+ #                                  "SSP 126 (consumption only)" = "#0072b2",
+ #                                  "SSP 126 (respiration only)" = "#56b4e9",
+ #                                  "SSP 126 (no bioenergetic modifiers)" = "#f0e442",
+ #                                  "SSP 245" = "#e69f00", 
+ #                                  "SSP 245 (consumption only)" = "#0072b2",
+ #                                  "SSP 245 (respiration only)" = "#56b4e9",
+ #                                  "SSP 245 (no bioenergetic modifiers)" = "#f0e442",
+ #                                  "Persist" = "#000000")) +
+ #   # Add a vertical dashed line where the projection begins (end of 2020)
+ #   geom_vline(xintercept = 2021, linetype = "dashed", color = "gray50") + 
+ #   theme_bw() +
+ #   labs(
+ #     #title = paste("Comparison of", variable, "Across Climate Scenarios"),
+ #     #subtitle = "Dashed line indicates start of projection (2021)",
+ #     x = "Year",
+ #     y = paste(variable, "(t/km^2)"),
+ #     color = "Scenario"
+ #   ) +
+ #   theme(
+ #     legend.position = "bottom",
+ #     strip.background = element_rect(fill = "gray90"),
+ #     strip.text = element_text(face = "bold")
+ #   )
+  n_scenarios <- length(sim_list)
+  base_cb_palette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
+                       "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+  
+  # Interpolate if there are more scenarios than base colors
+  if (n_scenarios <= length(base_cb_palette)) {
+    dynamic_colors <- base_cb_palette[1:n_scenarios]
+  } else {
+    dynamic_colors <- grDevices::colorRampPalette(base_cb_palette)(n_scenarios)
+  }
+  
   # Create the ggplot
   p <- ggplot(plot_data, aes(x = Year, y = Value, color = Scenario)) +
-    geom_line(size = 1) +
+    geom_line(linewidth = 1) + 
     # Free Y scales so each species' plot fits its own biomass magnitude
     facet_wrap(~ Species, scales = "free_y") + 
-    scale_colour_manual(values = c("SSP 585" = "#d55e00",
-                                   "SSP 585 (consumption only)" = "#0072b2",
-                                   "SSP 585 (respiration only)" = "#56b4e9",
-                                   "SSP 585 (no bioenergetic modifiers)" = "#f0e442",
-                                   "Persist (consumption only)" = "#0072b2",
-                                   "Persist (respiration only)" = "#56b4e9",
-                                   "Persist (no bioenergetic modifiers)" = "#f0e442",
-                                   "Persist_pcod" = "grey",
-                                   "null" = "grey20",
-                                   "SSP 126" = "#009e73", 
-                                   "SSP 126 (consumption only)" = "#0072b2",
-                                   "SSP 126 (respiration only)" = "#56b4e9",
-                                   "SSP 126 (no bioenergetic modifiers)" = "#f0e442",
-                                   "SSP 245" = "#e69f00", 
-                                   "SSP 245 (consumption only)" = "#0072b2",
-                                   "SSP 245 (respiration only)" = "#56b4e9",
-                                   "SSP 245 (no bioenergetic modifiers)" = "#f0e442",
-                                   "Persist" = "#000000")) +
+    scale_color_manual(values = dynamic_colors) + # Apply the dynamic general palette
     # Add a vertical dashed line where the projection begins (end of 2020)
     geom_vline(xintercept = 2021, linetype = "dashed", color = "gray50") + 
     theme_bw() +
     labs(
-      #title = paste("Comparison of", variable, "Across Climate Scenarios"),
-      #subtitle = "Dashed line indicates start of projection (2021)",
       x = "Year",
       y = paste(variable, "(t/km^2)"),
       color = "Scenario"
@@ -93,6 +123,7 @@ plot_scenario_comparison <- function(sim_list, species_to_plot, start_year = 199
       strip.background = element_rect(fill = "gray90"),
       strip.text = element_text(face = "bold")
     )
+  
   
   return(p)
 }
