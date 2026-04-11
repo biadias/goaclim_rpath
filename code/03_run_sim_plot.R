@@ -101,7 +101,12 @@ for(i in 1:length(vector_list)){
 
 print(ssp_comps)
 
-
+plot_scenario_comparison(
+  sim_list = my_scenarios, 
+  species_to_plot = plot_ground_juv, 
+  start_year = 1991, 
+  variable = "Biomass"  # You can also change this to "Catch"
+)
 # ---------------------------------------------------------------------------- #
 # 2. Plot ssp 126 res con ####
 # ---------------------------------------------------------------------------- #
