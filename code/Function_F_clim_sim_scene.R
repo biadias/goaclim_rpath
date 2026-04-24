@@ -18,8 +18,8 @@
 #' @param pcod_rec whether to apply the Pacific cod recruitment forcing (TRUE/FALSE). Default \code{FALSE}.
 #' @param pcod_rec_method Character. Which thermal curve to use (Laurel and Rogers 2020). Options: \code{"cauchy"} or \code{"gaussian"}. Default \code{"cauchy"}.
 #' @param bioen_sp Character vector. List of species to apply bioenergetics
-#' @param tdc_hind_bt Data frame. Hindcast of bottom temperature consumption multipliers.
-#' @param tdr_hind_bt Data frame. Hindcast of bottom temperature respiration multipliers.
+#' @param tdc_hind Data frame. Hindcast of bottom temperature consumption multipliers. It can be sst or bottom temp depending on the fg niche
+#' @param tdr_hind Data frame. Hindcast of bottom temperature respiration multipliers. It can be sst or bottom temp depending on the fg niche
 #' @param managed_sp a vector of managed species that I want to change the Fs.
 #' @param f_equil F equilibrium for non_managed stocks
 #' @param f_zero F zero for the given species in zero_fishing_sp
@@ -46,8 +46,8 @@ F_clim_sim_scene <- function(scene,
                              pcod_rec = FALSE,
                              pcod_rec_method = "cauchy",
                              bioen_sp,
-                             tdc_hind_bt,
-                             tdr_hind_bt,
+                             tdc_hind,
+                             tdr_hind,
                              managed_sp,
                              f_equil,
                              f_zero,
@@ -152,7 +152,7 @@ F_clim_sim_scene <- function(scene,
       message("Applying consumption multipliers.")
     for (i in bioen_sp_noceph) {
       #Hindcast
-      scene$forcing$ForcedSearch[ts_hindcast, i] <- tdc_hind_bt[data_idx_hind, i]
+      scene$forcing$ForcedSearch[ts_hindcast, i] <- tdc_hind[data_idx_hind, i]
       #Projection
       
       if (ssp == "persist") {
@@ -169,7 +169,7 @@ F_clim_sim_scene <- function(scene,
       message("Applying respiration multipliers.")
     for (i in bioen_sp_noceph) {
       #Hindcast
-      scene$forcing$ForcedActresp[ts_hindcast, i] <- tdr_hind_bt[data_idx_hind, i]
+      scene$forcing$ForcedActresp[ts_hindcast, i] <- tdr_hind[data_idx_hind, i]
       
       #Projection
       if (ssp == "persist") {

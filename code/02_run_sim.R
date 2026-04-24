@@ -11,7 +11,7 @@
 # ---------------------------------------------------------------------------- #
 #source("code/00_setup_forecast.R")
 source("code/01_load_best_model.R") # Loads the best model scenario and sets up scene_bioen
-source("Rpath_fitting/GOA/wgoa_bioenergetics_code/bioenergetic_projections.r") # Make sure this is adapted for GOA and matches the years used in the projections
+source("code/bioenergetic_projections_v2.r") # Make sure this is adapted for GOA and matches the years used in the projections
 source("code/Function_F_clim_sim_scene.R")
 
 
@@ -31,8 +31,8 @@ scene_gfdl_persist <- F_clim_sim_scene(scene = scene_bioen_best,
                                        ssp = "persist",
                                        cons = TRUE,resp = TRUE,buf = FALSE,
                                        bioen_sp = bioen_sp,
-                                       tdc_hind = tdc_hind_bt,
-                                       tdr_hind = tdr_hind_bt,
+                                       tdc_hind = tdc_hind,
+                                       tdr_hind = tdr_hind,
                                        managed_sp = managed_sp_list,
                                        f_equil = F_equil,
                                        f_zero = F_zero,
@@ -50,8 +50,8 @@ scene_gfdl_126 <- F_clim_sim_scene(scene = scene_bioen_best,
                                    ssp = "126",
                                    cons = TRUE, resp = TRUE, buf = FALSE,
                                    bioen_sp = bioen_sp,
-                                   tdc_hind = tdc_hind_bt, 
-                                   tdr_hind = tdr_hind_bt,
+                                   tdc_hind = tdc_hind, 
+                                   tdr_hind = tdr_hind,
                                    managed_sp = managed_sp_list,
                                    f_equil = F_equil,
                                    f_zero = F_zero,
@@ -68,8 +68,8 @@ scene_gfdl_245 <- F_clim_sim_scene(scene = scene_bioen_best,
                                    ssp = "245",
                                    cons = TRUE, resp = TRUE, buf = FALSE,
                                    bioen_sp = bioen_sp,
-                                   tdc_hind = tdc_hind_bt, 
-                                   tdr_hind = tdr_hind_bt,
+                                   tdc_hind = tdc_hind, 
+                                   tdr_hind = tdr_hind,
                                    managed_sp = managed_sp_list,
                                    f_equil = F_equil,
                                    f_zero = F_zero,
@@ -86,8 +86,8 @@ scene_gfdl_585 <- F_clim_sim_scene(scene = scene_bioen_best,
                                    ssp = "585",
                                    cons = TRUE, resp = TRUE, buf = FALSE,
                                    bioen_sp = bioen_sp,
-                                   tdc_hind = tdc_hind_bt, 
-                                   tdr_hind = tdr_hind_bt,
+                                   tdc_hind = tdc_hind, 
+                                   tdr_hind = tdr_hind,
                                    managed_sp = managed_sp_list,
                                    f_equil = F_equil,
                                    f_zero = F_zero,
@@ -115,9 +115,9 @@ forecast_gfdl_585     <- rsim.run(scene_gfdl_585, method = "AB", years = all_yea
 # source("R/goa_bref.R")
 
 # Calculate Unfished Biomass (B0)
-bzero_persist <- bzero_func(scene_gfdl_persist, managed_sp, F_equil, hind_years, all_years)
-bzero_g126    <- bzero_func(scene_gfdl_126, managed_sp, F_equil, hind_years, all_years)
-bzero_g585    <- bzero_func(scene_gfdl_585, managed_sp, F_equil, hind_years, all_years)
+#bzero_persist <- bzero_func(scene_gfdl_persist, managed_sp, F_equil, hind_years, all_years)
+#bzero_g126    <- bzero_func(scene_gfdl_126, managed_sp, F_equil, hind_years, all_years)
+#bzero_g585    <- bzero_func(scene_gfdl_585, managed_sp, F_equil, hind_years, all_years)
 
 
 # ---------------------------------------------------------------------------- #
@@ -149,14 +149,14 @@ for(s in ssp_scenarios){
     run_name <- paste0(s,"_", m)
     
     all_scenes[[run_name]] <- F_clim_sim_scene(
-      scene=scene_base_best,
+      scene=scene_bioen_best,
       ssp=s,
       cons=bio_modes[[m]]$cons,
       resp=bio_modes[[m]]$resp,
       buf= FALSE,
       bioen_sp = bioen_sp,
-      tdc_hind = tdc_hind_bt, 
-      tdr_hind = tdr_hind_bt,
+      tdc_hind = tdc_hind, 
+      tdr_hind = tdr_hind,
       managed_sp = managed_sp_list,
       f_equil = F_equil,
       f_zero = F_zero,
@@ -181,34 +181,35 @@ for(s in ssp_scenarios){
 managed_sp_list <- c("walleye_pollock_adult", "pacific_cod_adult", "sablefish_adult")
 
 # Create a container for results
-b0_results <- data.frame(Species = managed_sp_list, B0_2099 = NA)
+#b0_results <- data.frame(Species = managed_sp_list, B0_2099 = NA)
 
-for (sp in managed_sp_list) {
-  message(paste("Processing B0 for:", sp))
-  
-  # Create scenario where ONLY 'sp' has F=0
-  this_scene <- F_clim_sim_scene(
-    scene           = scene_bioen_best, 
-    cons = FALSE, resp = FALSE, buf = FALSE,
-    ssp             = "126", 
-    managed_sp      = managed_sp_list, # All other managed species stay at mean F
-    f_equil         = F_equil, 
-    f_zero          = F_zero,
-    zero_fishing_sp = sp,         # Toggle this specific species to 0
-    bioen_sp        = bioen_sp_noceph,
-    tdc_hind_bt     = tdc_hind_bt,
-    tdr_hind_bt     = tdr_hind_bt,
-    hind_yrs        = 1991:2020,         # Good practice to pass these explicitly
-    proj_yrs        = 2021:2099,
-    verbose         = FALSE              # Set to FALSE to keep console clean during loops
-  )
-  
-  # Run simulation
-  this_run <- rsim.run(this_scene, method = "AB", years = all_years)
-  
-  # Extract mean biomass of the last 10 years
-  final_b0 <- mean(tail(this_run$annual_Biomass[, sp], 10))
-  b0_results[b0_results$Species == sp, "B0_2099"] <- final_b0
-}
-
-print(b0_results)
+#for (sp in managed_sp_list) {
+#  message(paste("Processing B0 for:", sp))
+#  
+#  # Create scenario where ONLY 'sp' has F=0
+#  this_scene <- F_clim_sim_scene(
+#    scene           = scene_bioen_best, 
+#    cons = FALSE, resp = FALSE, buf = FALSE,
+#    ssp             = "126", 
+#    managed_sp      = managed_sp_list, # All other managed species stay at mean F
+#    f_equil         = F_equil, 
+#    f_zero          = F_zero,
+#    zero_fishing_sp = sp,         # Toggle this specific species to 0
+#    bioen_sp        = bioen_sp_noceph,
+#    tdc_hind     = tdc_hind,
+#    tdr_hind     = tdr_hind,
+#    hind_yrs        = 1991:2020,         # Good practice to pass these explicitly
+#    proj_yrs        = 2021:2099,
+#    verbose         = FALSE              # Set to FALSE to keep console clean during loops
+#  )
+#  
+#  # Run simulation
+#  this_run <- rsim.run(this_scene, method = "AB", years = all_years)
+#  
+#  # Extract mean biomass of the last 10 years
+#  final_b0 <- mean(tail(this_run$annual_Biomass[, sp], 10))
+#  b0_results[b0_results$Species == sp, "B0_2099"] <- final_b0
+#}
+#
+#print(b0_results)
+#

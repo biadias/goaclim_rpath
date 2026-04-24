@@ -203,8 +203,8 @@ scene_base <- scene5
 # Start with base scene and add bioenergetics forcing
 
 scene_bioen <- scene_base
-source("Rpath_fitting/GOA/wgoa_bioenergetics_code/wgoa_add_bioen_to_scene.R")
-scene_bd <- wgoa_add_bioenergetics("ssp126")
+source("code/wgoa_add_bioen_to_scene_v2.R")
+scene_bd <- wgoa_add_bioenergetics_v2("ssp126")
 # Since scene_bd was created in bioenergetics functions without having other
 # forcing added, copy the affected search parameters from scene_bd to scene_bioen
 hind_years
