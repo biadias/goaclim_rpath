@@ -11,7 +11,7 @@
 # ---------------------------------------------------------------------------- #
 # ---------------------------------------------------------------------------- #
 
-source("Rpath_fitting/R/GOA_00_fitting_setup_parameters.R")
+source("Rpath_fitting/R/GOA_00_fitting_setup_parameters_v2.R")
 source("Rpath_fitting/R/GOA_01_fitting_optimization.R")
 
 scenarios_to_run <- list(
@@ -88,7 +88,7 @@ for (scen_name in names(scenarios_to_run)) {
 
 #saveRDS(fit_results_63par, file = "GOA/GOA_fit_results_63par.rds")
 
-saveRDS(fit_results_63par_v2, file = "GOA/GOA_fit_results_63par.rds")
+saveRDS(fit_results_63par, file = "Rpath_fitting/GOA/GOA_fit_results_63par_v2.rds")
 
 #fit_results_63par <- readRDS("GOA/GOA_fit_results_63par.rds")
 
@@ -114,7 +114,7 @@ for (scen_name in names(scenarios_to_run)) {
 }
 
 # Save results
-saveRDS(results_61M02par, file = "GOA/GOA_fit_results_61M02par.rds")
+saveRDS(results_61M02par, file = "Rpath_fitting/GOA/GOA_fit_results_61M02par_v2.rds")
 
 # ---------------------------------------------------------------------------- #
 # Run 3: 59 Parameters Fitting (Vulnerabilities + M03) ####
@@ -136,7 +136,7 @@ for (scen_name in names(scenarios_to_run)) {
   results_59M03par[[scen_name]] <- fit_result
 }
 # Save results
-saveRDS(results_59M03par, file = "GOA/GOA_fit_results_59M03par.rds")
+saveRDS(results_59M03par, file = "Rpath_fitting/GOA/GOA_fit_results_59M03par_v2.rds")
 
 
 # ---------------------------------------------------------------------------- #
@@ -161,7 +161,7 @@ for (scen_name in names(scenarios_to_run)) {
   results_59M04par[[scen_name]] <- fit_result
 }
 # Save results
-saveRDS(results_59M04par, file = "GOA/GOA_fit_results_59M04par.rds")
+saveRDS(results_59M04par, file = "Rpath_fitting/GOA/GOA_fit_results_59M04par_v2.rds")
 
 # ---------------------------------------------------------------------------- #
 # Run 5: 57 Parameters Fitting (Vulnerabilities + M05) ####
@@ -183,7 +183,7 @@ for (scen_name in names(scenarios_to_run)) {
   results_57M05par[[scen_name]] <- fit_result
 }
 # Save results
-saveRDS(results_57M05par, file = "GOA/GOA_fit_results_57M05par.rds")
+saveRDS(results_57M05par, file = "Rpath_fitting/GOA/GOA_fit_results_57M05par_v2.rds")
 
 # ---------------------------------------------------------------------------- #
 
@@ -239,7 +239,7 @@ stats_63par <-  do.call(rbind, lapply(fit_results_63par, extract_stats))
 stats_61M02par <- do.call(rbind, lapply(results_61M02par, extract_stats))
 stats_59M03par <- do.call(rbind, lapply(results_59M03par, extract_stats))
 stats_59M04par <- do.call(rbind, lapply(results_59M04par, extract_stats))
-#stats_57M05par <- do.call(rbind, lapply(results_57M05par, extract_stats))
+stats_57M05par <- do.call(rbind, lapply(results_57M05par, extract_stats))
 stats_nofit <- do.call(rbind, lapply(results_nofit, extract_stats_nofit))
 
 
@@ -258,7 +258,8 @@ aicc_table <- aicc_table[order(aicc_table$AICc), ]
 
 print(aicc_table)
 
-write.csv(aicc_table, "GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260324.csv", row.names = FALSE)
+#write.csv(aicc_table, "GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260324.csv", row.names = FALSE)
+write.csv(aicc_table, "Rpath_fitting/GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260420.csv", row.names = FALSE)
 
 # Combine all tables (work in progress)
 
