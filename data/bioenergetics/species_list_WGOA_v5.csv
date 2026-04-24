@@ -1,0 +1,115 @@
+EwE_num,EwE_name,Code,Common_name,Sciname
+"01,02,03",Transient killer whales,KWT,Orca,Orcinus orca
+"01,02,03",Resident killer whales,KWR,Orca,Orcinus orca
+"01,02,03",Offshore killer whales,KWT,Orca,Orcinus orca
+4,Other toothed whales,DOL,Harbor porpoise,Phocoena phocoena
+4,Other toothed whales,DOL,Dalls porpoise,Phocoenoides dalli
+5,Humpback whale,BAL,Humpback whale,Megaptera novaeangliae
+6,Other baleen whales,BAL,Minke whale,Balaenoptera acutorostrata
+6,Other baleen whales,BAL,Fin whale,Balaenoptera physalus
+7,Dolphins & porpoises,DOL,Harbor porpoise,Phocoena phocoena
+7,Dolphins & porpoises,DOL,Dalls porpoise,Phocoenoides dalli
+8,Northern elephant seal,PIN,Northern elephant seal,Mirounga angustirostris
+"09,10",Northern fur seal adult,PIN,Northern fur seal,Callorhinus ursinus
+"09,10",Northern fur seal juvenile,PIN,Northern fur seal,Callorhinus ursinus
+11,Steller sea lion,PIN,Steller sea lion,Eumetopias jubatus
+12,Harbor seal,PIN,harbor seal,Phoca vitulina
+13,Sea otter,OTT,otter,Enhydra lutris
+14,Piscivorous surface birds,BIR,Black-legged kittiwake,Rissa tridactyla
+14,Piscivorous surface birds,BIR,Glaucous-winged gull,Larus glaucescens
+14,Piscivorous surface birds,BIR,Arctic tern,Sterna paradisaea
+15,Planktivorous surface birds,BIR,Leach's storm-petrel,Oceanodroma leucorhoa
+15,Planktivorous surface birds,BIR,Fork-tailed storm-petrel,Oceanodroma furcata
+16,Piscivorous diving birds,BIR,Common murre,Uria aalge
+16,Piscivorous diving birds,BIR,Tufted puffin,Fratercula cirrhata
+16,Piscivorous diving birds,BIR,Marbled murrelet,Brachyramphus marmoratus
+16,Piscivorous diving birds,BIR,Cormorants,Phalacrocorax spp.
+17,Planktivorous diving birds,BIR,Parakeet auklet,Aethia psittacula
+17,Planktivorous diving birds,BIR,Crested auklet,Aethia cristatella
+"18,19",Salmon returning,SAL_R,Chinook,Oncorhynchus tshawytscha
+"18,19",Salmon returning,SAL_R,chum,Oncorhynchus keta
+"18,19",Salmon returning,SAL_R,coho,Oncorhynchus kisutch
+"18,19",Salmon returning,SAL_R,pink,Oncorhynchus gorbuscha
+"18,19",Salmon returning,SAL_R,sockeye,Oncorhynchus nerka
+"18,19",Salmon outgoing,,,
+"18,19",Salmon outgoing,SAL_O,Chinook,Oncorhynchus tshawytscha
+20,Pacific hake,HAK,Pacific hake,Merluccius productus
+"21,22",Pacific herring adult,HER,Pacific herring,Clupea pallasii
+"21,22",Pacific herring juvenile,HER,Pacific herring,Clupea pallasii
+23,Pacific sandlance,SAN,Pacific sandlance,Ammodytes personatus
+24,Pacific capelin,CAP,capelin,Mallotus villosus
+25,Shelf forage fish,FOR,Eulachon,Thaleichthys pacificus
+25,Shelf forage fish,FOR,Sand lance,Ammodytes personatus
+25,Shelf forage fish,FOR,Capelin,Mallotus villosus
+26,Slope forage fish,FOR,Myctophids,Myctophidae
+26,Slope forage fish,FOR,Deep-sea smelts,Bathylagidae
+27,Pacific dogfish,SPD,Spiny dogfish,Squalus suckleyi
+28,Salmon shark,SAS,Salmon shark,Lamna ditropis
+29,Pacific sleeper shark,SLS,Sleeper shark,Somniosus pacificus
+30,Big skate,SKA,Big skate,Beringraja binoculata
+31,Longnose skate,SKA,Longnose skate,Raja rhina
+32,Other skates,SKA,Other skates,Bathyraja spp.
+"33,34",Pacific halibut adult,HAL,Pacific Halibut,Hippoglossus stenolepis
+"33,34",Pacific halibut juvenile,HAL,Pacific Halibut,Hippoglossus stenolepis
+"35,36",Arrowtooth flounder adult,ARW_L,arrowtooth,Atheresthes stomias
+"35,36",Arrowtooth flounder juvenile,ARW_S,arrowtooth,Atheresthes stomias
+"37,38",Rex sole adult,REX,Rex sole,Glyptocephalus zachirus
+"37,38",Rex sole juvenile,REX,Rex sole,Glyptocephalus zachirus
+"39,40",Flathead sole adult,FLA,Flathead sole,Hippoglossoides elassodon
+"39,40",Flathead sole juvenile,FLA,Flathead sole,Hippoglossoides elassodon
+41,Shallow-water flatfish,FLA,southern rock sole,Lepidopsetta bilineata
+41,Shallow-water flatfish,FLA,northern rock sole,Lepidopsetta polyxystra
+41,Shallow-water flatfish,FLA,yellowfin sole,Limanda aspera
+42,Deep-water flatfish,FLA,Dover sole,Microstomus pacificus
+42,Deep-water flatfish,FLA,Greenland turbot,Reinhardtius hippoglossoides
+"43,44",Pacific ocean perch adult,POP,Pacific ocean perch,Sebastes alutus
+"43,45",Pacific ocean perch juvenile,POP,Pacific ocean perch,Sebastes alutus
+45,Slope rockfish,ROC,rougheye rockfish,Sebastes aleutianus
+45,Slope rockfish,ROC,shortraker rockfish,Sebastes borealis
+46,Demersal shelf rockfish,ROC,yelloweye rockfish,Sebastes ruberrimus
+47,Pelagic shelf rockfish,ROC,dusky rockfish,Sebastes variabilis
+48,Thornyheads,THO,shortspine thornyhead,Sebastolobus alascanus
+"49,50",Sablefish adult,SAB,sablefish,Anoplopoma fimbria
+"49,50",Sablefish juvenile,SAB,sablefish,Anoplopoma fimbria
+"51,52",Pacific cod adult,COD,Pacific cod,Gadus macrocephalus
+"51,52",Pacific cod juvenile,COD,Pacific cod,Gadus macrocephalus
+"53,54",Walleye pollock adult,POL,walleye pollock,Gadus chalcogrammus
+"53,54",Walleye pollock juvenile,POL,walleye pollock,Gadus chalcogrammus
+55,Large sculpins,SCU,Great sculpin,Myoxocephalus polyacanthos
+55,Large sculpins,SCU,Yellow Irish lord,Hemilepidotus jordani
+56,Lingcod,LIC,lingcod,Ophiodon elongatus
+57,Atka mackerel,ATK,Atka mackerel,Pleurogrammus monopterygius
+58,Shelf demersal fish,DEM,Pacific tomcod,Microgadus proximus
+58,Shelf demersal fish,DEM,Snailfish,Liparidae
+59,Slope demersal fish,DEM,Grenadiers/Rattails,Macrouridae
+60,Miscellaneous deep-sea fish,DEM,Miscellaneous deep-sea fish,Myctophidae/Bathylagidae
+61,Squid,SQD,squid,Berryteuthis/Gonatus
+62,Octopus,OCT,North Pacific octopus,Enteroctopus dofleini
+63,Tanner crab,TAN,Tanner crab,Chionoecetes bairdi
+64,King crab,KIN,King crab,Paralithodes camtschaticus
+65,Pandalid shrimp,DEP,Northern pink shrimp ,Pandalus borealis
+65,Pandalid shrimp,DEP,Sidestriped shrimp,Pandalopsis dispar
+65,Pandalid shrimp,DEP,Humpy shrimp,Pandalus goniurus
+65,Pandalid shrimp,DEP,Coonstriped shrimp,Pandalus hypsinotus
+65,Pandalid shrimp,DEP,Spot shrimp,Pandalus platyceros
+66,Nonpandalid shrimp,SHR,crangonid shrimp,Crangon spp.
+67,Motile epifauna,INV,"Motile epifauna (snails, crabs)",Gastropoda/Brachyura
+68,Benthic zooplankton,ZOO,Benthic zooplankton,Mysidacea/Amphipoda
+69,Sessile epifauna,INV,"Sessile epifauna (corals, sponges)",Anthozoa/Porifera
+70,Infauna,INV,"Infauna (clams, worms)",Bivalvia/Polychaeta
+71,Gelatinous carnivores,ZOO,Gelatinous carnivores,Cnidaria/Ctenophora
+72,Other gelatinous zooplankton,ZOO,Other gelatinous zooplankton,Salpidae
+73,Mysids,ZOO,Mysids,Mysidacea
+74,Pelagic amphipods,ZOO,Pelagic amphipods,Amphipoda
+75,Euphausiids,ZOO,euphausiids,Euphausia pacifica
+76,Large copepods,ZOO,large copepods,Neocalanus spp.
+77,Small copepods,ZOO,Small copepods,Cyclopoida
+78,Large microzooplankton,ZOO,Large microzooplankton,Protozoa
+79,Small microzooplankton,ZOO,Small microzooplankton,Protozoa
+80,Large phytoplankton,PHY,Large phytoplankton,Diatoms
+81,Small phytoplankton,PHY,Small phytoplankton,Flagellates
+82,Macroalgae,MAC,Macroalgae,Phaeophyceae
+83,Benthic microbes,DET,Benthic microbes,Bacteria
+84,Discards,DET,Discards,Fishery discards
+85,Offal,DET,Offal,Fishery offal
+86,Detritus,DET,Detritus,Organic detritus
