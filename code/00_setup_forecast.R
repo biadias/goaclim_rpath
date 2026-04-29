@@ -102,7 +102,7 @@ all_gears    <- bal$Group[(bal$NUM_LIVING+bal$NUM_DEAD+1):(bal$NUM_GROUPS)]
 # Equilibrium F and Biomass
 F_equil <- (rowSums(bal$Landings)+rowSums(bal$Discards))/(bal$Biomass)
 names(F_equil) <- bal$Group
-F_equil  <- F_equil[c(all_living,all_detritus)]
+F_equil  <- F_equil[c(all_living,all_detritus)] #F_equil/12
 # F_zero scenario
 F_zero <- rep(0,(bal$NUM_LIVING + bal$NUM_DEAD + 1))
 names(F_zero) <- c("Outside",bal$Group[c(all_living,all_detritus)])

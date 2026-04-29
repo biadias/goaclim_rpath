@@ -185,8 +185,9 @@ scene_base <- scene5
 
 scene_bioen <- scene_base
 
-source("Rpath_fitting/GOA/wgoa_bioenergetics_code/wgoa_add_bioen_to_scene.r")
-scene_bd <- wgoa_add_bioenergetics("ssp126")
+#source("Rpath_fitting/GOA/wgoa_bioenergetics_code/wgoa_add_bioen_to_scene.r")
+source("code/wgoa_add_bioen_to_scene_v2.R")
+scene_bd <- wgoa_add_bioenergetics_v2("ssp126")
 # Since scene_bd was created in bioenergetics functions without having other
 # forcing added, copy the affected search parameters from scene_bd to scene_bioen
 hindmonths <- dim(scene_bioen$forcing$ForcedSearch)[1]
@@ -241,3 +242,5 @@ scene_full$forcing$ForcedSearch[, "small_phytoplankton"] <- pps_force$P_anom #pp
 # END MODEL AND DATA SETUP
 ################################################################################
 #
+
+

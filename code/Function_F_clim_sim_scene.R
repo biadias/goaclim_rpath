@@ -24,7 +24,7 @@
 #' @param f_equil F equilibrium for non_managed stocks
 #' @param f_zero F zero for the given species in zero_fishing_sp
 #' @param f_ref_yrs years to calculate the mean F rate
-#' @param f_scenario Character. Options: "mean" (historical average for managed), "zero" (off for managed), or "zero_all" (off for ALL species in the model). Default \code{"mean"}. 
+#' @param f_scenario Character. Options: "mean" (historical average for managed), "equil" (equilibrium for all species), "zero" (off for managed), or "zero_all" (off for ALL species in the model). Default \code{"mean"}. 
 #' @param zero_fishing_sp vector of species to set Fzero
 #' @param climate_dir Character. Path to the csv files.
 #' @param hind_yrs Numeric vector. Hindcast period.\code{1991:2020}.
@@ -140,7 +140,7 @@ F_clim_sim_scene <- function(scene,
   # ---------------------------------------------------------------------- #
   # Bioen forcing - consumption and respiration multipliers ####
   # ---------------------------------------------------------------------- #
-  bioen_sp_noceph <- bioen_sp[!bioen_sp %in% c("octopus", "squids")]
+  bioen_sp_noceph <- bioen_sp[!bioen_sp %in% c("octopus", "squid")]
   if (ssp != "persist" && (cons == TRUE || resp == TRUE)) {
     if (verbose)
       message("Applying bioenergetic forcing for SSP scenario using climate data.")
@@ -182,6 +182,76 @@ F_clim_sim_scene <- function(scene,
   if (verbose)
     message("Climate scenario setup complete.")
   
+# -------------------------------------------------------------------------- #
+# Pacific Cod Recruitment Forcing (Temperature Proxy)
+# -------------------------------------------------------------------------- #
+# if (pcod_rec) {
+#   if (verbose)
+#     message(sprintf("Applying Pacific cod recruitment forcing based on temperature proxy using %s method", pcod_rec_method))
+#   
+#   laurel_rogers_survival_proxy <- function(temp, method="cauchy"){
+#     if(method == "cauchy"){
+#       return(0.453 / (1 + ((temp - 4.192) / 2.125)^2)) #change to 1 later
+#       # Note: The parameters for the Cauchy function (location = 4.192, scale = 2.2125)
+#     } else if(method == "gaussian"){
+#       return(exp(-0.5 *((temp-4.5)/1.5)^2))
+#       # Note: The parameters for the Gaussian function (mean = 4.5, sd = 1.5) 
+#     } else {
+#       stop("Invalid method. Choose 'cauchy' or 'gaussian'.")
+#     }
+#   }
+#   
+#   if(ssp=="persist"){
+#     temp_ssp <- "126"
+#   } else {
+#     temp_ssp <- gsub("ssp","", ssp)
+#   }
+# 
+#   # get the raw temperature projection output from ROMSNPZ scenario
+#   temp_file <- paste0(climate_dir,"ssp", temp_ssp,"_wide_WGOA_temp_1000",".csv")
+#   
+#   if (!file.exists(temp_file)) stop(sprintf("Temp data file not found: %s", temp_file))
+#   monthly_temps <- read.csv(temp_file, row.names = NULL)
+#   
+#   total_years <- length(hind_yrs)+length(proj_yrs)
+#   total_months <- total_years * 12 #1:1308 here and 133:1440 tstep
+#
+#   temp_offset <- (min(hind_yrs) - climate_data_start_yr) * 12
+#   data_idx_all <- (temp_offset + 1):(temp_offset + total_months) # 1:1308 (1991:2099)
+#   
+#   #climate_proj <- read.csv(climate_file, row.names = NULL)
+#   #bot_temp     <- as.matrix(climate_proj$btemp[133:1440])
+#   #row.names(bot_temp) <- climate_proj$tstep[133:1440]
+#   
+#   actual_temps_vector <- monthly_temps$btemp[data_idx_all]
+#   
+#   if(ssp=="persist"){
+#     hind_temps <- actual_temps_vector[1:n_hind_months]
+#     monthly_mean_temps <- tapply(hind_temps, rep(1:12, length(hind_yrs)), mean)
+#     proj_temps <- rep(monthly_mean_temps, length(proj_yrs))
+#     actual_temps_vector[(n_hind_months + 1):total_months] <- proj_temps
+#   }
+#   
+#   
+#   
+#   force_pattern <- rep(1, total_months) # change to 1
+#    total_years <- total_months / 12
+#   
+#   for (yr in 1:total_years) {
+#     for (m in 1:12) {
+#       month_idx <- (yr - 1) * 12 + m
+#       if (m %in% c(2, 3, 4)) {
+#         current_temp <- actual_temps_vector[month_idx]
+#         force_pattern[month_idx] <- laurel_rogers_survival_proxy(current_temp, method = pcod_rec_method)
+#       }
+#     }
+#   }
+#   
+#   
+#   # Apply to scenario object
+#   scene$forcing$ForcedRecs[, "pacific_cod_adult"] <- force_pattern
+# }
+  
   # -------------------------------------------------------------------------- #
   # Pacific Cod Recruitment Forcing (Temperature Proxy) ####
   # -------------------------------------------------------------------------- #
@@ -191,7 +261,7 @@ F_clim_sim_scene <- function(scene,
     
     laurel_rogers_survival_proxy <- function(temp, method="cauchy"){
       if(method == "cauchy"){
-        return(1 / (1 + ((temp - 4.192) / 2.125)^2)) #change to 1 later
+        return(0.453 / (1 + ((temp - 4.192) / 2.125)^2)) #change to 1 later
         # Note: The parameters for the Cauchy function (location = 4.192, scale = 2.2125)
       } else if(method == "gaussian"){
         return(exp(-0.5 *((temp-4.5)/1.5)^2))
@@ -206,7 +276,7 @@ F_clim_sim_scene <- function(scene,
     } else {
       temp_ssp <- gsub("ssp","", ssp)
     }
-  
+    
     # get the raw temperature projection output from ROMSNPZ scenario
     temp_file <- paste0(climate_dir,"ssp", temp_ssp,"_wide_WGOA_temp_1000",".csv")
     
@@ -215,40 +285,64 @@ F_clim_sim_scene <- function(scene,
     
     total_years <- length(hind_yrs)+length(proj_yrs)
     total_months <- total_years * 12 #1:1308 here and 133:1440 tstep
-
+    
     temp_offset <- (min(hind_yrs) - climate_data_start_yr) * 12
     data_idx_all <- (temp_offset + 1):(temp_offset + total_months) # 1:1308 (1991:2099)
     
-    #climate_proj <- read.csv(climate_file, row.names = NULL)
-    #bot_temp     <- as.matrix(climate_proj$btemp[133:1440])
-    #row.names(bot_temp) <- climate_proj$tstep[133:1440]
+    btemp_vec <- monthly_temps$btemp[data_idx_all] 
     
-    actual_temps_vector <- monthly_temps$btemp[data_idx_all]
+    # Compute annual Feb-Apr mean temperature per year #
+    # Returns one value per year (length = total_years)
+    feb_apr_idx <- function(year_idx) {
+      base <- (year_idx - 1) * 12
+      base + c(2, 3, 4)  # February, March, April
+    }
+    annual_FebApr_temp <- sapply(seq_len(total_years), function(yr) {
+      mean(btemp_vec[feb_apr_idx(yr)], na.rm = TRUE)
+    })
     
-    if(ssp=="persist"){
-      hind_temps <- actual_temps_vector[1:n_hind_months]
-      monthly_mean_temps <- tapply(hind_temps, rep(1:12, length(hind_yrs)), mean)
-      proj_temps <- rep(monthly_mean_temps, length(proj_yrs))
-      actual_temps_vector[(n_hind_months + 1):total_months] <- proj_temps
+    # Reference: hindcast climatological Feb-Apr mean #
+    # This is the temperature at which the multiplier = 1.0 by construction.
+    n_hind_years   <- length(hind_yrs)
+    ref_FebApr_T   <- mean(annual_FebApr_temp[1:n_hind_years], na.rm = TRUE)
+    ref_proxy      <- laurel_rogers_survival_proxy(ref_FebApr_T,
+                                                   method = pcod_rec_method)
+    
+    if (verbose) {
+      message(sprintf(
+        "  Hindcast Feb-Apr btemp climatology: %.3f C (proxy = %.4f)",
+        ref_FebApr_T, ref_proxy))
     }
     
+    # Build annual multiplier (normalized) #
+    annual_proxy      <- laurel_rogers_survival_proxy(annual_FebApr_temp,
+                                                      method = pcod_rec_method)
+    annual_multiplier <- annual_proxy / ref_proxy
     
-    
-    force_pattern <- rep(1, total_months) # change to 1
-#    total_years <- total_months / 12
-    
-    for (yr in 1:total_years) {
-      for (m in 1:12) {
-        month_idx <- (yr - 1) * 12 + m
-        if (m %in% c(2, 3, 4)) {
-          current_temp <- actual_temps_vector[month_idx]
-          force_pattern[month_idx] <- laurel_rogers_survival_proxy(current_temp, method = pcod_rec_method)
-        }
-      }
+    # For 'persist': set projection years to climatological mean #
+    # so they all equal 1.0 (matching the reference)
+    if (ssp == "persist") {
+      annual_multiplier[(n_hind_years + 1):total_years] <- 1.0
     }
     
+    # Force hindcast to 1.0 (fit calibration window untouched) #
+    annual_multiplier[1:n_hind_years] <- 1.0
     
-    # Apply to scenario object
+    # Expand annual to monthly (12 months per year, same value) #
+    force_pattern <- rep(annual_multiplier, each = 12)
+    
+    # Diagnostics #
+    if (verbose) {
+      proj_mult <- annual_multiplier[(n_hind_years + 1):total_years]
+      message(sprintf(
+        "  Projection multiplier range: [%.3f, %.3f], mean: %.3f",
+        min(proj_mult), max(proj_mult), mean(proj_mult)))
+      message(sprintf(
+        "  End-of-century (last 20 yrs) mean multiplier: %.3f",
+        mean(tail(proj_mult, 20))))
+    }
+    
+    # Apply to scenario #
     scene$forcing$ForcedRecs[, "pacific_cod_adult"] <- force_pattern
   }
   
@@ -272,14 +366,19 @@ F_clim_sim_scene <- function(scene,
   bio_ref <- run.hind$annual_Biomass[ref_idx, managed_sp, drop = FALSE]
   f_mean_ref <- apply(catch_ref / bio_ref, 2, mean, na.rm = TRUE)
   
-  if (verbose)
-    message("applying F_equil and scene fishing rates")
+  if (verbose) {
+    message("Reference F (catch/biomass) by managed species, ",
+            min(f_ref_yrs), "-", max(f_ref_yrs), ":")
+    print(round(f_mean_ref, 3))
+    message("For comparison, F_equil (Ecopath baseline) for these species:")
+    print(round(f_equil[managed_sp], 3))
+  }
   
   max_rows <- nrow(scene$fishing$ForcedFRate)
   if(max_rows<500){
-    target_indices <- which(all_years %in% proj_yrs)
+    target_indices <- which(all_years %in% proj_yrs) # yearly rows
   } else {
-    target_indices <- ts_projection
+    target_indices <- ts_projection #monthly rows
   }
   
   valid_equil_names <- intersect(names(f_equil), colnames(scene$fishing$ForcedFRate))
@@ -288,42 +387,105 @@ F_clim_sim_scene <- function(scene,
   
   
   
-  if(f_scenario =="zero_all"){
-    scene$fishing$ForcedFRate[target_indices, all_sp] <- 0
-  } else {
-    if(length(background_sp) > 0) {
+# if(f_scenario =="zero_all"){
+#   scene$fishing$ForcedFRate[target_indices, all_sp] <- 0
+# } else {
+#   if(length(background_sp) > 0) {
+#   scene$fishing$ForcedFRate[target_indices, background_sp] <- matrix(
+#     f_equil[background_sp], 
+#     nrow = length(target_indices), 
+#     ncol = length(background_sp), 
+#     byrow = TRUE
+#   )
+# }
+# 
+#   if(f_scenario == "mean") {
+#     scene$fishing$ForcedFRate[target_indices, managed_sp] <- matrix(
+#       f_mean_ref[managed_sp], 
+#       nrow = length(target_indices), 
+#       ncol = length(managed_sp), 
+#       byrow = TRUE
+#     )
+#   } else if(f_scenario == "zero") {
+#     scene$fishing$ForcedFRate[target_indices, managed_sp] <- 0
+#   } else {
+#     stop("Invalid f_scenario. Choose 'mean', 'zero', or 'zero_all'.")
+#   }
+#   
+#   if (!is.null(zero_fishing_sp)) {
+#     scene$fishing$ForcedFRate[target_indices, zero_fishing_sp] <- matrix(
+#       f_zero[zero_fishing_sp],
+#       nrow = length(target_indices),
+#       ncol = length(zero_fishing_sp),
+#       byrow = TRUE
+#     )
+#   }
+# }
+
+  # ---- ALWAYS apply F_equil to background species in projection ----------- #
+  # This is the symmetric baseline that BOTH F0 and Fmean share. Without this,
+  # the two scenarios differ in their treatment of the WHOLE food web, not
+  # just managed species, and you can't isolate the effect of managed-species
+  # fishing.
+  
+  if (length(background_sp) > 0) {
     scene$fishing$ForcedFRate[target_indices, background_sp] <- matrix(
-      f_equil[background_sp], 
-      nrow = length(target_indices), 
-      ncol = length(background_sp), 
+      f_equil[background_sp],
+      nrow  = length(target_indices),
+      ncol  = length(background_sp),
       byrow = TRUE
     )
   }
   
-    if(f_scenario == "mean") {
-      scene$fishing$ForcedFRate[target_indices, managed_sp] <- matrix(
-        f_mean_ref[managed_sp], 
-        nrow = length(target_indices), 
-        ncol = length(managed_sp), 
-        byrow = TRUE
-      )
-    } else if(f_scenario == "zero") {
-      scene$fishing$ForcedFRate[target_indices, managed_sp] <- 0
-    } else {
-      stop("Invalid f_scenario. Choose 'mean', 'zero', or 'zero_all'.")
-    }
+  # ---- Apply the chosen managed-species F scenario ------------------------- #
+  if (f_scenario == "mean") {
+    if (verbose) message("Applying f_mean_ref to managed species.")
+    scene$fishing$ForcedFRate[target_indices, managed_sp] <- matrix(
+      f_mean_ref[managed_sp],
+      nrow  = length(target_indices),
+      ncol  = length(managed_sp),
+      byrow = TRUE
+    )
     
-    if (!is.null(zero_fishing_sp)) {
-      scene$fishing$ForcedFRate[target_indices, zero_fishing_sp] <- matrix(
-        f_zero[zero_fishing_sp],
-        nrow = length(target_indices),
-        ncol = length(zero_fishing_sp),
-        byrow = TRUE
-      )
-    }
+  } else if (f_scenario == "zero") {
+    if (verbose) message("Applying F = 0 to managed species (background unchanged).")
+    scene$fishing$ForcedFRate[target_indices, managed_sp] <- 0
+    
+  } else if (f_scenario == "equil") {
+    if (verbose) message("Applying F_equil to managed species (status-quo Ecopath).")
+    scene$fishing$ForcedFRate[target_indices, managed_sp] <- matrix(
+      f_equil[managed_sp],
+      nrow  = length(target_indices),
+      ncol  = length(managed_sp),
+      byrow = TRUE
+    )
+    
+  } else if (f_scenario == "zero_all") {
+    #  Use only when you
+    # actually want to release fishing on every species in the model.
+    if (verbose) message("Applying F = 0 to ALL species (whole-ecosystem release).")
+    all_sp <- colnames(scene$fishing$ForcedFRate)
+    scene$fishing$ForcedFRate[target_indices, all_sp] <- 0
+    
+  } else {
+    stop("Invalid f_scenario. Choose 'mean', 'zero', 'equil', or 'zero_all'.")
   }
   
+  # ---- Optional override list --------------------------------------------- #
+  if (!is.null(zero_fishing_sp)) {
+    scene$fishing$ForcedFRate[target_indices, zero_fishing_sp] <- 0
+  }
+ 
   if (verbose)
-    message("All done!")
-  return(scene)
-}
+   message("All done!")
+ return(scene) 
+
+  }  
+  
+  
+
+
+
+  
+  
+  
