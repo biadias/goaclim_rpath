@@ -24,9 +24,9 @@ fup <- function() {
   source("Rpath_fitting/R/ecofitting_plots.R")
 }
 fup()
-
-#### A. LOAD WGOA and EGOA models #############################################################
-
+# ---------------------------------------------------------------------------- #
+#### A. LOAD WGOA and EGOA models ##############################################
+# ---------------------------------------------------------------------------- #
 ##### 1.Load and test WGOA model ####
 WGOA_EwE_file <- "Rpath_fitting/GOA/WGOA_19March2026_simpleDet.eiixml" 
 # changed following two lines
@@ -46,8 +46,9 @@ w.bal    <-  rpath(w.unbal) # balanced
 #      # e.scene0 <- rsim.scenario(e.bal, e.unbal, years=1990:2089)
 #      # e.run0   <- rsim.run(e.scene0, method="AB", years = 1990:2089)
 #      # rsim.plot(e.run0) # should be flatline
-
-#### B. WGOA MODEL AND DATA SETUP #############################################################
+# ---------------------------------------------------------------------------- #
+#### B. WGOA MODEL AND DATA SETUP ##############################################
+# ---------------------------------------------------------------------------- #
 datfiles <- list(
   catchfile             = "Rpath_fitting/GOA/wgoa_data_rpath_fitting/wgoa_catches_ft_cas_long_haladded.csv",
   # Halibut from IPHC added
@@ -74,8 +75,10 @@ wintshelik <- read.csv(datfiles$surveyfile_wintshelik) %>%
 sable_ll <- read.csv(datfiles$surveyfile_sable_ll) %>%
   mutate(Value = as.numeric(Value))
 
-
+# ---------------------------------------------------------------------------- #
 ##### 1.Read biomass and catch timeseries into data frames ####
+# ---------------------------------------------------------------------------- #
+
 #do any needed data cleanup  #
 bio_dat <- rbind(
   read.csv(datfiles$surveyfile_shelf),
@@ -95,7 +98,9 @@ bio_dat <- rbind(bio_dat, nr)
 catch_dat <- read.csv(datfiles$catchfile)
 catch_dat$Group <- make_clean_names(catch_dat$Group, allow_dupes = TRUE)
 
+# ---------------------------------------------------------------------------- #
 ##### 2.Balance model for fitting  ####
+# ---------------------------------------------------------------------------- #
 unbal <- w.unbal
 bal   <- rpath(unbal)
 
@@ -139,8 +144,9 @@ for (i in 1:length(all_series)) {
   scene4 <- rsim.fit.set.q(scene4, species, survey, years = first_year, type =
                              first_year)
 }
-
+# ---------------------------------------------------------------------------- #
 ##### 3. Remove biomass data series we aren't using/don't trust ####
+# ---------------------------------------------------------------------------- #
 removed_series <- c(
   "atka_mackerel:race_wgoa",
   "lingcod:race_wgoa",
@@ -164,7 +170,9 @@ removed_series <- c(
 
 scene5 <- rsim.fit.remove.bio.timeseries(scene4, removed_series)
 
+# ---------------------------------------------------------------------------- #
 ##### 4.Rsim & plot ####
+# ---------------------------------------------------------------------------- #
 plot.species <- c(rpath.living(bal),rpath.detrital(bal))  
 # Run and calculate without changing any fitting values  
 run.base <- rsim.fit.run(NA, NA, NA, scene=scene5, run_method="AB", 
@@ -178,9 +186,9 @@ run.base.nll <- rsim.fit.run(NA, NA, NA, scene=scene5, run_method="AB",
 ##Base scene (scene_base) of fit model (no bioenergetics, no primary production forcing)
 scene_base <- scene5
 
-# ============================================================================ #
-
+# ---------------------------------------------------------------------------- #
 ##### 5. Only add bioenergetics forcing ####
+# ---------------------------------------------------------------------------- #
 # Start with base scene and add bioenergetics forcing
 
 scene_bioen <- scene_base
@@ -194,8 +202,9 @@ hindmonths <- dim(scene_bioen$forcing$ForcedSearch)[1]
 scene_bioen$forcing$ForcedSearch[1:hindmonths, ]  <- scene_bd$forcing$ForcedSearch[1:hindmonths, ]
 scene_bioen$forcing$ForcedActresp[1:hindmonths, ] <- scene_bd$forcing$ForcedActresp[1:hindmonths, ]
 
-#=================================================================#
+# ---------------------------------------------------------------------------- #
 ##### 6. Only add primary production forcing ####
+# ---------------------------------------------------------------------------- #
 # Start with base scene and add primary production forcing
 
 scene_primprod <- scene_base
@@ -227,8 +236,9 @@ scene_primprod$forcing$ForcedSearch[, "small_phytoplankton"] <- pps_force$P_anom
 #scene_fit$forcing$ForcedBio[,"small_phytoplankton"] <- scene_fit$params$B_BaseRef["small_phytoplankton"] * pps_force$anomaly_ratio
 
 
-# ============================================================================ #
+# ---------------------------------------------------------------------------- #
 ##### 7.Add both primary production and bioenergetics ####
+# ---------------------------------------------------------------------------- #
 # Start with the scene_bioen (adds to all groups) then add primary production forcing (only to the phyto groups)
 #if start with scene_primprod and then add scene_bioen it overwrites the primprod groups
 scene_full <- scene_bioen
@@ -237,10 +247,38 @@ scene_full <- scene_bioen
 scene_full$forcing$ForcedSearch[, "large_phytoplankton"] <- ppl_force$P_anom #ppl_force$P_add
 scene_full$forcing$ForcedSearch[, "small_phytoplankton"] <- pps_force$P_anom #pps_force$P_add
 
+# ---------------------------------------------------------------------------- #
+##### 8. Add Pacific cod recruitment forcing variants ####
+# ---------------------------------------------------------------------------- #
+# Layer cod recruitment forcing on top of each existing scene.
+# Anomaly forcing: hindcast multiplier mean = 1.0, year-to-year variation
+# follows Laurel and Rogers 2020 survival proxy applied to Feb-Apr mean btemp.
 
-#################################################################################
-# END MODEL AND DATA SETUP
-################################################################################
-#
+source("Rpath_fitting/GOA/wgoa_bioenergetics_code/wgoa_add_pcod_rec_to_scene.R")
+
+# Choose method once (cauchy is the more common Laurel-Rogers form)
+pcod_rec_method <- "cauchy"
+
+scene_base_pcod     <- add_pcod_rec_forcing(scene_base,
+                                            hind_years = hind_years,
+                                            rec_method = pcod_rec_method)
+
+scene_bioen_pcod    <- add_pcod_rec_forcing(scene_bioen,
+                                            hind_years = hind_years,
+                                            rec_method = pcod_rec_method)
+
+scene_primprod_pcod <- add_pcod_rec_forcing(scene_primprod,
+                                            hind_years = hind_years,
+                                            rec_method = pcod_rec_method)
+
+scene_full_pcod     <- add_pcod_rec_forcing(scene_full,
+                                            hind_years = hind_years,
+                                            rec_method = pcod_rec_method)
+
+
+# ---------------------------------------------------------------------------- #
+# END MODEL AND DATA SETUP ####
+# ---------------------------------------------------------------------------- #
+
 
 

@@ -162,7 +162,7 @@ for (scen_name in names(scenarios_to_run)) {
 }
 # Save results
 saveRDS(results_59M04par, file = "Rpath_fitting/GOA/GOA_fit_results_59M04par_v2.rds")
-
+fit_results_59M04par<- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M04par_v2.rds")
 # ---------------------------------------------------------------------------- #
 # Run 5: 57 Parameters Fitting (Vulnerabilities + M05) ####
 # ---------------------------------------------------------------------------- #
@@ -259,7 +259,7 @@ aicc_table <- aicc_table[order(aicc_table$AICc), ]
 print(aicc_table)
 
 #write.csv(aicc_table, "GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260324.csv", row.names = FALSE)
-write.csv(aicc_table, "Rpath_fitting/GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260420.csv", row.names = FALSE)
+write.csv(aicc_table, "Rpath_fitting/GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260430.csv", row.names = FALSE)
 
 # Combine all tables (work in progress)
 

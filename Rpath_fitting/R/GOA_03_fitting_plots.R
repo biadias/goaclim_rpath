@@ -3,8 +3,8 @@ source("Rpath_fitting/R/ecofitting_plot_multi.R")
 #source("Rpath_fitting/R/ecofitting_plot_multi_v2.R")
 readRDS("Rpath_fitting/GOA/GOA_fit_results_59M04par.rds") -> fit_results_59M04par_old
 
-my_runs <- list(fit_results_59M04par_old$Bioen$final_run,
-                results_59M04par$Bioen$final_run)
+#my_runs <- list(fit_results_59M04par_old$Bioen$final_run,
+#                results_59M04par$Bioen$final_run)
 #my_runs <- list(results_59M04par$Base$final_run, 
 #                results_59M04par$Bioen$final_run, 
 #                results_59M03par$Base$final_run,
@@ -13,11 +13,16 @@ my_runs <- list(fit_results_59M04par_old$Bioen$final_run,
 #my_runs <- list(Base_61M02par, Bioen_61M02par, Base_59M03par, Bioen_63par, Bioen_59M03par)
 #my_runs <- list(run_par59M02_bioen, run_par59M03_bioen,run_par59M02_base, run_par59M03_primprod, run_par59M03_full)
 #run_names <- list("Bioen59M0_Pcod_Poll", "bioen59M0_Pcod_Poll_Arrow", "Base59M02_Pcod_Poll", "PP59M0_Pcod_Poll_Arrow", "PP&Bioen59M0_Pcod_Poll_Arrow")
-my_runs <- list(V59M04_Bioen$final_run , V59M04_Base$final_run, V59M04_Full$final_run)
+#my_runs <- list(V59M04_Bioen$final_run , V59M04_Base$final_run, V59M04_Full$final_run)
 
+
+my_runs <- list(results_59M04par$Bioen$final_run, results_59M04par_codrec$Bioen_pcod$final_run, results_59M04par$Full$final_run,
+                results_59M04par_codrec$Full_pcod$final_run, results_59M03par_codrec_noM0cod$Bioen_pcod$final_run)
 run_names <- list("Bioen_59M04par", 
-                  "Base_59M04par",
-                  "Full_59M04par")
+                  "Bioen_pcod_59M04par",
+                  "Full_59M04par",
+                  "Full_pcod_59M04par",
+                  "codrec_nocodM0")
 
 #run_names <- list("Bioen_59M04par_bioen_dem", 
 #                  "Bioen_59M04par_bioen_peldem")
