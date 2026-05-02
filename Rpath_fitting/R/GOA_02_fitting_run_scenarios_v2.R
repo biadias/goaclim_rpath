@@ -475,7 +475,7 @@ print(aicc_table)
 #write.csv(aicc_table, "GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260324.csv", row.names = FALSE)
 write.csv(
   aicc_table,
-  "Rpath_fitting/GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260423.csv",
+  "Rpath_fitting/GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260430.csv",
   row.names = FALSE
 )
 
