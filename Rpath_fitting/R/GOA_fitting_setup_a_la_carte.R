@@ -153,7 +153,7 @@ removed_series <- c(
   "pacific_hake:race_wgoa",
   "pacific_herring_adult:craig_index",
   "salmon_shark:race_wgoa",
-  "walleye_pollock_adult:race_wgoa",#removing this time series_replacing by shelikoff index
+  #"walleye_pollock_adult:race_wgoa",#removing this time series_replacing by shelikoff index
   "sablefish_adult:race_wgoa",
   "miscellaneous_deep_sea_fish:race_wgoa", 
   "squid:race_wgoa",

@@ -92,49 +92,80 @@ F_clim_sim_scene <- function(scene,
   data_idx_proj <- (proj_offset + 1):(proj_offset + n_proj_months)     # 493:1440 (2021:2099)
   
   # -------------------------------------------------------------------------- #
-  # Bottom-up forcing (buf) - primary production forcing We don't need right now ####
+  # Bottom-up forcing (buf) - primary production forcing ####
+  # Anomaly reference: monthly means from ssp126 over hind_yrs (1991:2020),
+  # matching the reference used in the fitting scene setup.
+  # Source file: Long_WGOA_NPZ_PP_monthly_B_added.csv (covers 1980:2099, all SSPs).
+  # Change to the function 2026/05/05
   # -------------------------------------------------------------------------- #
   
   if (buf == FALSE) {
     if (verbose)
       message("Not applying primary production forcing")
-    # If not applying buf, ensure that the primary producer groups are set to 1 in the forcing matrices
+    
     scene$forcing$ForcedSearch[ts_projection, "large_phytoplankton"] <- 1
     scene$forcing$ForcedSearch[ts_projection, "small_phytoplankton"] <- 1
   } else{
+    pp_file <- "Rpath_fitting/GOA/wgoa_data_rpath_fitting/Long_WGOA_NPZ_PP_monthly_B_added.csv"
+    if(!file.exists(pp_file))
+      stop(sprintf("Primary production file not found: %s", pp_file))
+    pp_raw <- read.csv(pp_file)
+    
+    # Hindcast monthly means (ssp126, hind_yrs) — anomaly reference for all SSPs
+    pp_ref <- pp_raw %>%
+      dplyr::filter(simulation == "ssp126", year %in% hind_yrs) %>% 
+      dplyr::group_by(varname, month) %>% 
+      dplyr::summarise(Pmean =mean(P_tkm2_mon, na.rm=TRUE), .groups = "drop")
+    
+    #Helper: compute monthly P_anom series for one varname and SSP, filtered to
+    #the requestd years, using the hind_yrs ssp126 monthly mean as the reference
+    
+    pp_anom_series <- function(varname_sel, years_sel, ssp_sel){
+      pp_raw %>% 
+        dplyr::filter(simulation == paste0("ssp", ssp_sel),
+                      varname    == varname_sel,
+                      year      %in% years_sel) %>% 
+        dplyr::arrange(year, month) %>% 
+        dplyr::left_join(
+          dplyr::filter(pp_ref, varname == varname_sel),
+                   by = c("varname", "month")
+                  ) %>% 
+        dplyr::mutate(P_anom = P_tkm2_mon/Pmean) %>% 
+        dplyr::pull(P_anom)
+    }
+    
+    
     if (ssp == "persist") {
       if (verbose)
-        message(
-          "Applying primary production forcing for 'persist' scenario by averaging the hindcast data."
-        ) # change this if different
-      scene$forcing$ForcedSearch[ts_projection, "large_phytoplankton"] <- mean(scene$forcing$ForcedSearch[ts_mean_ref, "large_phytoplankton"], na.rm = TRUE)
-      scene$forcing$ForcedSearch[ts_projection, "small_phytoplankton"] <- mean(scene$forcing$ForcedSearch[ts_mean_ref, "small_phytoplankton"], na.rm = TRUE)
+        message("buf: persist — repeating 1991-2020 monthly PP climatology for projection")
+
+      # Repeat the 12-month seasonal cycle of hindcast means across projection years.
+      # By construction mean(P_anom) = 1.0 per month, but the seasonal shape is preserved.
+      for (grp in list(c("prod_PhL", "large_phytoplankton"),
+                       c("prod_PhS", "small_phytoplankton"))) {
+        monthly_clim <- pp_anom_series(grp[1], hind_yrs, "126")  %>% 
+          matrix(ncol = 12, byrow = TRUE) %>%
+          colMeans()                               # 12 monthly climatological means
+        scene$forcing$ForcedSearch[ts_projection, grp[2]] <-
+          rep(monthly_clim, length(proj_yrs))      # repeat seasonal cycle
+      }
+
     } else {
       if (verbose)
-        message(
-          sprintf(
-            "Applying primary production forcing for SSP %s scenario using climate data.",
-            ssp
-          )
-        )
-      climate_file <- file.path(climate_dir,
-                                paste0("ssp", ssp, "_wide_WGOA_B_1000.csv")) # I need to make this file
-      
-      if (!file.exists(climate_file))
-        stop(sprintf("Climate data file not found: %s", climate_file))
-      climate_proj <- read.csv(climate_file, row.names = NULL)
-      
-      scene$forcing$ForcedSearch[ts_projection, "large_phytoplankton"] <- climate_proj[data_idx_proj, "large_phytoplankton_ano"]
-      scene$forcing$ForcedSearch[ts_projection, "small_phytoplankton"] <- climate_proj[data_idx_proj, "small_phytoplankton_ano"]
+        message(sprintf("buf: applying SSP %s primary production forcing", ssp))
+
+      scene$forcing$ForcedSearch[ts_projection, "large_phytoplankton"] <-
+        pp_anom_series("prod_PhL", proj_yrs, ssp)
+      scene$forcing$ForcedSearch[ts_projection, "small_phytoplankton"] <-
+        pp_anom_series("prod_PhS", proj_yrs, ssp)
     }
-    #zero trap, in order for the biomass not fall under 0
+
+    # Zero trap — prevent phytoplankton forcing from hitting exactly zero
     epsilon <- 1e-15
-    scene$forcing$ForcedSearch[ts_projection, "large_phytoplankton"] <- ifelse(scene$forcing$ForcedSearch[ts_projection, "large_phytoplankton"] < epsilon,
-                                                                               epsilon,
-                                                                               scene$forcing$ForcedSearch[ts_projection, "large_phytoplankton"])
-    scene$forcing$ForcedSearch[ts_projection, "small_phytoplankton"] <- ifelse(scene$forcing$ForcedSearch[ts_projection, "small_phytoplankton"] < epsilon,
-                                                                               epsilon,
-                                                                               scene$forcing$ForcedSearch[ts_projection, "small_phytoplankton"])
+    for (grp in c("large_phytoplankton", "small_phytoplankton")) {
+      v <- scene$forcing$ForcedSearch[ts_projection, grp]
+      scene$forcing$ForcedSearch[ts_projection, grp] <- pmax(v, epsilon)
+    }
   }
   
   # ---------------------------------------------------------------------- #
@@ -314,36 +345,32 @@ F_clim_sim_scene <- function(scene,
         ref_FebApr_T, ref_proxy))
     }
     
-    # Build annual multiplier (normalized) #
+    # Build annual multiplier (normalized) — projection years only #
     annual_proxy      <- laurel_rogers_survival_proxy(annual_FebApr_temp,
                                                       method = pcod_rec_method)
     annual_multiplier <- annual_proxy / ref_proxy
-    
-    # For 'persist': set projection years to climatological mean #
-    # so they all equal 1.0 (matching the reference)
+
+    # For 'persist': projection years hold at climatological mean (= 1.0) #
     if (ssp == "persist") {
       annual_multiplier[(n_hind_years + 1):total_years] <- 1.0
     }
-    
-    # Force hindcast to 1.0 (fit calibration window untouched) #
-    annual_multiplier[1:n_hind_years] <- 1.0
-    
-    # Expand annual to monthly (12 months per year, same value) #
-    force_pattern <- rep(annual_multiplier, each = 12)
-    
+
+    # Expand projection years only to monthly #
+    proj_multiplier <- annual_multiplier[(n_hind_years + 1):total_years]
+    force_pattern   <- rep(proj_multiplier, each = 12)
+
     # Diagnostics #
     if (verbose) {
-      proj_mult <- annual_multiplier[(n_hind_years + 1):total_years]
       message(sprintf(
         "  Projection multiplier range: [%.3f, %.3f], mean: %.3f",
-        min(proj_mult), max(proj_mult), mean(proj_mult)))
+        min(force_pattern), max(force_pattern), mean(force_pattern)))
       message(sprintf(
         "  End-of-century (last 20 yrs) mean multiplier: %.3f",
-        mean(tail(proj_mult, 20))))
+        mean(tail(force_pattern, 20 * 12))))
     }
-    
-    # Apply to scenario #
-    scene$forcing$ForcedRecs[, "pacific_cod_adult"] <- force_pattern
+
+    # Apply to projection rows only; hindcast keeps calibrated fitted values #
+    scene$forcing$ForcedRecs[ts_projection, "pacific_cod_adult"] <- force_pattern
   }
   
    

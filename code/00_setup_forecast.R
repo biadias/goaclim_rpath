@@ -17,7 +17,6 @@
 #library(devtools)
 #install_github('NOAA-EDAB/Rpath', ref="dev")
 library(Rpath)
-library(dplyr)
 library(tidyverse)
 library(janitor)
 library(here)
@@ -165,10 +164,9 @@ removed_series <- c(
   "pacific_hake:race_wgoa",
   "pacific_herring_adult:craig_index",
   "salmon_shark:race_wgoa",
-  "walleye_pollock_adult:race_wgoa",#removing this time series_replacing by shelikoff index
+  #"walleye_pollock_adult:race_wgoa",#removing this time series_replacing by shelikoff index
   "sablefish_adult:race_wgoa",
   "miscellaneous_deep_sea_fish:race_wgoa", 
-  "squid:race_wgoa",
   "nonpandalid_shrimp:race_wgoa",
   "other_gelatinous_zooplankton:race_wgoa",
   "squid:race_wgoa",
@@ -267,6 +265,34 @@ scene_full <- scene_bioen
 #see scene_primprod above for all the calcs leading up to this
 scene_full$forcing$ForcedSearch[1:end_hind, "large_phytoplankton"] <- ppl_force$P_anom #ppl_force$P_add
 scene_full$forcing$ForcedSearch[1:end_hind, "small_phytoplankton"] <- pps_force$P_anom #pps_force$P_add
+
+# ---------------------------------------------------------------------------- #
+##### 8. Add Pacific cod recruitment forcing variants ####
+# ---------------------------------------------------------------------------- #
+# Layer cod recruitment forcing on top of each existing scene.
+# Anomaly forcing: hindcast multiplier mean = 1.0, year-to-year variation
+# follows Laurel and Rogers 2020 survival proxy applied to Feb-Apr mean btemp.
+
+source("Rpath_fitting/GOA/wgoa_bioenergetics_code/wgoa_add_pcod_rec_to_scene.R")
+
+# Choose method once (cauchy is the more common Laurel-Rogers form)
+pcod_rec_method <- "cauchy"
+
+scene_base_pcod     <- add_pcod_rec_forcing(scene_base,
+                                            hind_years = hind_years,
+                                            rec_method = pcod_rec_method)
+
+scene_bioen_pcod    <- add_pcod_rec_forcing(scene_bioen,
+                                            hind_years = hind_years,
+                                            rec_method = pcod_rec_method)
+
+scene_primprod_pcod <- add_pcod_rec_forcing(scene_primprod,
+                                            hind_years = hind_years,
+                                            rec_method = pcod_rec_method)
+
+scene_full_pcod     <- add_pcod_rec_forcing(scene_full,
+                                            hind_years = hind_years,
+                                            rec_method = pcod_rec_method)
 
 
 # ---------------------------------------------------------------------------- #

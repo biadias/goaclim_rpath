@@ -92,11 +92,14 @@ add_pcod_rec_forcing <- function(scene,
   
   # ---- Expand to monthly (12 months per year) --------------------------- #
   force_pattern <- rep(annual_multiplier, each = 12)
-  
-  if (length(force_pattern) != nrow(scene$forcing$ForcedRecs))
-    stop(sprintf("Forcing length mismatch: pattern=%d, scene rows=%d",
-                 length(force_pattern), nrow(scene$forcing$ForcedRecs)))
-  
+  end_hind      <- length(hind_years) * 12
+
+  # The scene may span beyond hind_years (e.g. into a forecast period).
+  # Apply forcing only to hindcast rows; remaining rows are left unchanged.
+  if (end_hind > nrow(scene$forcing$ForcedRecs))
+    stop(sprintf("Hindcast forcing (%d months) exceeds scene length (%d rows).",
+                 end_hind, nrow(scene$forcing$ForcedRecs)))
+
   # ---- Diagnostics ------------------------------------------------------ #
   if (verbose) {
     message(sprintf("  Hindcast Feb-Apr btemp climatology: %.3f C",
@@ -115,8 +118,8 @@ add_pcod_rec_forcing <- function(scene,
                     annual_multiplier[which.min(feb_apr$FebApr_btemp)]))
   }
   
-  # ---- Apply to scene --------------------------------------------------- #
-  scene$forcing$ForcedRecs[, "pacific_cod_adult"] <- force_pattern
+  # ---- Apply to scene (hindcast rows only) ------------------------------ #
+  scene$forcing$ForcedRecs[1:end_hind, "pacific_cod_adult"] <- force_pattern
   
   return(scene)
 }
