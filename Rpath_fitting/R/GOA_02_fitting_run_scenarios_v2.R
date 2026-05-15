@@ -475,7 +475,7 @@ stats_59M03par <- do.call(rbind, lapply(results_59M03par, function(r) extract_st
 stats_59M04par <- do.call(rbind, lapply(results_59M04par, function(r) extract_stats(r)))
 #stats_57M05par <- do.call(rbind, lapply(results_57M05par, function(r) extract_stats(r)))
 
-# With cod recruitment – 1 pollock time series (current v4 runs)
+# With cod recruitment – 1 pollock time series shelikof (current v4 runs)
 stats_63par_codrec           <- do.call(rbind, lapply(fit_results_63par_codrec,         function(r) extract_stats(r, pollock_ts = 1L)))
 stats_61M02par_codrec        <- do.call(rbind, lapply(results_61M02par_codrec,          function(r) extract_stats(r, pollock_ts = 1L)))
 stats_59M03par_codrec        <- do.call(rbind, lapply(results_59M03par_codrec,          function(r) extract_stats(r, pollock_ts = 1L)))
@@ -483,7 +483,7 @@ stats_59M04par_codrec        <- do.call(rbind, lapply(results_59M04par_codrec,  
 stats_59_m03_nopollM0_codrec <- do.call(rbind, lapply(results_59M03par_codrec_noM0poll, function(r) extract_stats(r, pollock_ts = 1L)))
 #stats_57M05par_codrec        <- do.call(rbind, lapply(results_57M05par_codrec,          function(r) extract_stats(r, pollock_ts = 1L)))
 
-# With cod recruitment – 2 pollock time series (v1 / v3 RDS)
+# With cod recruitment – 2 pollock time series race/shelikof (v1 / v3 RDS)
 # Suffix "_v1" is appended to Model names to ensure uniqueness in the table.
 stats_63par_codrec_v1           <- do.call(rbind, lapply(fit_results_63par_codrec_v1,         function(r) extract_stats(r, pollock_ts = 2L, model_suffix = "_v1")))
 stats_61M02par_codrec_v1        <- do.call(rbind, lapply(results_61M02par_codrec_v1,          function(r) extract_stats(r, pollock_ts = 2L, model_suffix = "_v1")))
