@@ -183,7 +183,7 @@ for (scen_name in names(scenarios_to_run)) {
   )
 }
 
-#saveRDS(results_nofit, file = "Rpath_fitting/GOA/GOA_fit_results_nofit.rds")
+saveRDS(results_nofit, file = "Rpath_fitting/GOA/GOA_fit_results_nofit_v4.rds")
 
 # ---------------------------------------------------------------------------- #
 # Run 1: 63 Parameters Fitting (Vulnerabilities) ####
@@ -215,14 +215,15 @@ for (scen_name in names(scenarios_to_run)) {
 #saveRDS(fit_results_63par, file = "GOA/GOA_fit_results_63par.rds")
 
 #saveRDS(fit_results_63par, file = "Rpath_fitting/GOA/GOA_fit_results_63par_v3.rds")
-saveRDS(fit_results_63par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_63par_codrec_v3.rds")
+saveRDS(fit_results_63par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_63par_codrec_v4.rds")
 
-results_63par <- readRDS("Rpath_fitting/GOA/GOA_fit_results_63par.rds")
-
+#results_63par <- readRDS("Rpath_fitting/GOA/GOA_fit_results_63par.rds")
+fit_results_63par_codrec_v1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_63par_codrec_v3.rds")
+#fit_results_63par_codrec_v4 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_63par_codrec_v4.rds")
 # ---------------------------------------------------------------------------- #
 # Run 2: 61 Parameters Fitting (Vulnerabilities + M02) ####
 # ---------------------------------------------------------------------------- #
-mzero_groups_2     <- c("walleye_pollock_adult", "pacific_cod_adult")
+mzero_groups_2     <- c("walleye_pollock_adult", "pacific_cod_adult") 
 
 results_61M02par_codrec <- list()
 for (scen_name in names(scenarios_to_run)) {
@@ -245,9 +246,9 @@ for (scen_name in names(scenarios_to_run)) {
 }
 
 # Save results
-saveRDS(results_61M02par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_61M02par_codrec_v3.rds")
-results_61M02par <- readRDS("Rpath_fitting/GOA/GOA_fit_results_61M02par_v3.rds")
-
+saveRDS(results_61M02par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_61M02par_codrec_v4.rds")
+#results_61M02par <- readRDS("Rpath_fitting/GOA/GOA_fit_results_61M02par_v3.rds")
+results_61M02par_codrec_v1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_61M02par_codrec_v3.rds")
 
 # ---------------------------------------------------------------------------- #
 # Run 3: 59 Parameters Fitting (Vulnerabilities + M03) ####
@@ -275,16 +276,16 @@ for (scen_name in names(scenarios_to_run)) {
   results_59M03par_codrec[[scen_name]] <- fit_result
 }
 # Save results
-saveRDS(results_59M03par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_v3.rds")
+saveRDS(results_59M03par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_v4.rds")
 
 results_59M03par <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03par_v3.rds")
+results_59M03par_codrec_v1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_v3.rds")
 
 # ---------------------------------------------------------------------------- #
 # Run 4: 59 Parameters Fitting (Vulnerabilities + M04) ####
 # Best model ####
 # ---------------------------------------------------------------------------- #
 
-#BIA you are here!! ####
 mzero_groups_4     <- c(
   "walleye_pollock_adult",
   "pacific_cod_adult",
@@ -313,12 +314,15 @@ for (scen_name in names(scenarios_to_run)) {
   results_59M04par_codrec[[scen_name]] <- fit_result
 }
 # Save results
-saveRDS(results_59M04par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_59M04par_codrec_v3.rds")
+saveRDS(results_59M04par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_59M04par_codrec_v4.rds")
 results_59M04par <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M04par_v3.rds")
-
+results_59M04par_codrec_v1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M04par_codrec_v3.rds")
 # ---------------------------------------------------------------------------- #
 # Run 5: 57 Parameters Fitting (Vulnerabilities + M05) ####
 # ---------------------------------------------------------------------------- #
+
+
+
 mzero_groups_5     <- c(
   "walleye_pollock_adult",
   "pacific_cod_adult",
@@ -355,14 +359,14 @@ for (scen_name in names(scenarios_to_run)) {
 # Best model ####
 # ---------------------------------------------------------------------------- #
 
-#BIA you are here!! ####
+
 mzero_groups_3     <- c(
-  "walleye_pollock_adult",
-  #"pacific_cod_adult",
+  #"walleye_pollock_adult",
+  "pacific_cod_adult",
   "arrowtooth_flounder_adult",
   "deep_water_flatfish"
 )
-results_59M03par_codrec_noM0cod <- list()
+results_59M03par_codrec_noM0poll <- list()
 for (scen_name in names(scenarios_to_run)) {
   p <- get_top_params(scen_sensitivities[[scen_name]], bal = bal, mzero_list = mzero_groups_3)
   starts <- c(scenarios_to_run[[scen_name]]$params$MzeroMort[mzero_groups_3], rep(0, length(p$species) -
@@ -372,7 +376,7 @@ for (scen_name in names(scenarios_to_run)) {
   
   fit_result <- run_rpath_optim(
     scene_obj = current_scene,
-    scene_name = paste0(scen_name, "_59M03par_noM0cod"),
+    scene_name = paste0(scen_name, "_59M03par_noM0poll"),
     species_vec = p$species,
     vartype_vec = p$vartype,
     start_vec = starts,
@@ -381,127 +385,231 @@ for (scen_name in names(scenarios_to_run)) {
     #penalty_weight_mzero = 10,
     use_parallel = TRUE
   )
-  results_59M03par_codrec_noM0cod[[scen_name]] <- fit_result
+  results_59M03par_codrec_noM0poll[[scen_name]] <- fit_result
 }
 # Save results
-saveRDS(results_59M03par_codrec_noM0cod, file = "Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_noM0cod_v3.rds")
-
+saveRDS(results_59M03par_codrec_noM0poll, file = "Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_noM0poll_v4.rds")
+results_59M03par_codrec_noM0poll_v1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_noM0poll_v3.rds")
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------------------------------------------------- #
 # Model Comparison ####
 # ---------------------------------------------------------------------------- #
-extract_stats <- function(res) {
-  if (is.null(res))
-    return(NULL)
-  if (!is.null(res$opt_object_s1)) {
-    n_p1 <- length(res$opt_object_s1$par)
-    conv_s1 <- res$opt_object_s1$convergence == 0
-  } else {
-    n_p1 <- 0
-    conv_s1 <- NA
-  }
-  if (!is.null(res$opt_object_s2)) {
-    n_p2 <- length(res$opt_object_s2$par)
-    conv_s2 <- res$opt_object_s2$convergence == 0
-  } else {
-    n_p2 <- 0
-    conv_s2 <- NA
-  }
+
+# Helper: parse a model name string into its component dimensions.
+# Names follow the pattern: {Interaction}[_pcod]_{ParamSet}
+# e.g. "Base_pcod_59M04par", "Bioen_63par", "Full_pcod_59M03par_noM0poll"
+parse_model_name <- function(model_name) {
+  # Strip trailing _v1 suffix before parsing (added externally to ensure uniqueness)
+  nm <- sub("_v1$", "", model_name)
+  # Try pcod variant first (more specific)
+  m <- regmatches(nm, regexec("^(Base|PrimProd|Bioen|Full)_pcod_(.+)$", nm))[[1]]
+  if (length(m) == 3)
+    return(data.frame(Interaction = m[2], Has_Cod_Rec = TRUE,
+                      Param_Set   = m[3], stringsAsFactors = FALSE))
+  # Fallback: no pcod
+  m <- regmatches(nm, regexec("^(Base|PrimProd|Bioen|Full)_(.+)$", nm))[[1]]
+  if (length(m) == 3)
+    return(data.frame(Interaction = m[2], Has_Cod_Rec = FALSE,
+                      Param_Set   = m[3], stringsAsFactors = FALSE))
+  data.frame(Interaction = NA_character_, Has_Cod_Rec = NA,
+             Param_Set   = NA_character_, stringsAsFactors = FALSE)
+}
+
+# Extract stats from a fitted model result.
+# pollock_ts: number of pollock time series used (1 = current v4, 2 = v1/v3 RDS).
+# model_suffix: appended to the Model name to ensure uniqueness across TS versions.
+extract_stats <- function(res, pollock_ts = NA_integer_, model_suffix = "") {
+  if (is.null(res)) return(NULL)
+  n_p1    <- if (!is.null(res$opt_object_s1)) length(res$opt_object_s1$par) else 0L
+  conv_s1 <- if (!is.null(res$opt_object_s1)) res$opt_object_s1$convergence == 0 else NA
+  n_p2    <- if (!is.null(res$opt_object_s2)) length(res$opt_object_s2$par) else 0L
+  conv_s2 <- if (!is.null(res$opt_object_s2)) res$opt_object_s2$convergence == 0 else NA
+  model_id <- paste0(res$name, model_suffix)
+  parsed   <- parse_model_name(model_id)
   data.frame(
-    Model = res$name,
+    Model          = model_id,
+    Interaction    = parsed$Interaction,
+    Has_Cod_Rec    = parsed$Has_Cod_Rec,
+    Pollock_TS     = pollock_ts,
+    Param_Set      = parsed$Param_Set,
     Num_Parameters = n_p1 + n_p2,
-    AICc = res$aicc[[2]],
-    NLL = res$nll,
-    NLLp = res$nll_penalized,
-    Time_Min = round(res$time[3] / 60, 2),
-    converged_s1 = conv_s1,
-    converged_s2 = conv_s2,
+    AICc           = res$aicc[[2]],
+    NLL            = res$nll,
+    NLLp           = res$nll_penalized,
+    Time_Min       = round(res$time[3] / 60, 2),
+    converged_s1   = conv_s1,
+    converged_s2   = conv_s2,
     stringsAsFactors = FALSE
   )
 }
 
-extract_stats_nofit <- function(res) {
-  if (is.null(res))
-    return(NULL)
+# Extract stats from a non-fitted (baseline) result.
+extract_stats_nofit <- function(res, pollock_ts = NA_integer_, model_suffix = "") {
+  if (is.null(res)) return(NULL)
+  model_id <- paste0(res$scen_name, model_suffix)
+  parsed   <- parse_model_name(model_id)
   data.frame(
-    Model = res$scen_name,
-    Num_Parameters = NA,
-    AICc = res$aic[[2]],
-    NLL = res$nll,
-    NLLp = NA,
-    Time_Min = NA,
-    converged_s1 = NA,
-    converged_s2 = NA,
+    Model          = model_id,
+    Interaction    = parsed$Interaction,
+    Has_Cod_Rec    = parsed$Has_Cod_Rec,
+    Pollock_TS     = pollock_ts,
+    Param_Set      = "NoFit",
+    Num_Parameters = NA_integer_,
+    AICc           = res$aic[[2]],
+    NLL            = res$nll,
+    NLLp           = NA_real_,
+    Time_Min       = NA_real_,
+    converged_s1   = NA,
+    converged_s2   = NA,
     stringsAsFactors = FALSE
   )
 }
-stats_63par <-  do.call(rbind, lapply(results_63par, extract_stats))
-stats_61M02par <- do.call(rbind, lapply(results_61M02par, extract_stats))
-stats_59M03par <- do.call(rbind, lapply(results_59M03par, extract_stats))
-stats_59M04par <- do.call(rbind, lapply(results_59M04par, extract_stats))
-#stats_57M05par <- do.call(rbind, lapply(results_57M05par, extract_stats))
-stats_nofit <- do.call(rbind, lapply(results_nofit, extract_stats_nofit))
 
+# --- Extract stats per run block --- #
 
-#COD Rec function
-stats_63par_codrec <-  do.call(rbind, lapply(fit_results_63par_codrec, extract_stats))
-stats_61M02par_codrec <- do.call(rbind, lapply(results_61M02par_codrec, extract_stats))
-stats_59M03par_codrec <- do.call(rbind, lapply(results_59M03par_codrec, extract_stats))
-stats_59M04par_codrec <- do.call(rbind, lapply(results_59M04par_codrec, extract_stats))
-#stats_57M05par_codrec <- do.call(rbind, lapply(results_57M05par_codrec, extract_stats))
-stats_59_m03_nocodM0_codrec <- do.call(rbind, lapply(results_59M03par_codrec_noM0cod,extract_stats))
+# No cod recruitment (old runs, no pollock TS distinction)
+stats_63par    <- do.call(rbind, lapply(results_63par,    function(r) extract_stats(r)))
+stats_61M02par <- do.call(rbind, lapply(results_61M02par, function(r) extract_stats(r)))
+stats_59M03par <- do.call(rbind, lapply(results_59M03par, function(r) extract_stats(r)))
+stats_59M04par <- do.call(rbind, lapply(results_59M04par, function(r) extract_stats(r)))
+#stats_57M05par <- do.call(rbind, lapply(results_57M05par, function(r) extract_stats(r)))
 
+# With cod recruitment – 1 pollock time series (current v4 runs)
+stats_63par_codrec           <- do.call(rbind, lapply(fit_results_63par_codrec,         function(r) extract_stats(r, pollock_ts = 1L)))
+stats_61M02par_codrec        <- do.call(rbind, lapply(results_61M02par_codrec,          function(r) extract_stats(r, pollock_ts = 1L)))
+stats_59M03par_codrec        <- do.call(rbind, lapply(results_59M03par_codrec,          function(r) extract_stats(r, pollock_ts = 1L)))
+stats_59M04par_codrec        <- do.call(rbind, lapply(results_59M04par_codrec,          function(r) extract_stats(r, pollock_ts = 1L)))
+stats_59_m03_nopollM0_codrec <- do.call(rbind, lapply(results_59M03par_codrec_noM0poll, function(r) extract_stats(r, pollock_ts = 1L)))
+#stats_57M05par_codrec        <- do.call(rbind, lapply(results_57M05par_codrec,          function(r) extract_stats(r, pollock_ts = 1L)))
+
+# With cod recruitment – 2 pollock time series (v1 / v3 RDS)
+# Suffix "_v1" is appended to Model names to ensure uniqueness in the table.
+stats_63par_codrec_v1           <- do.call(rbind, lapply(fit_results_63par_codrec_v1,         function(r) extract_stats(r, pollock_ts = 2L, model_suffix = "_v1")))
+stats_61M02par_codrec_v1        <- do.call(rbind, lapply(results_61M02par_codrec_v1,          function(r) extract_stats(r, pollock_ts = 2L, model_suffix = "_v1")))
+stats_59M03par_codrec_v1        <- do.call(rbind, lapply(results_59M03par_codrec_v1,          function(r) extract_stats(r, pollock_ts = 2L, model_suffix = "_v1")))
+stats_59M04par_codrec_v1        <- do.call(rbind, lapply(results_59M04par_codrec_v1,          function(r) extract_stats(r, pollock_ts = 2L, model_suffix = "_v1")))
+stats_59_m03_nopollM0_codrec_v1 <- do.call(rbind, lapply(results_59M03par_codrec_noM0poll_v1, function(r) extract_stats(r, pollock_ts = 2L, model_suffix = "_v1")))
+
+# Baseline (no fitting) – based on current v4 scenarios (1 pollock TS)
+stats_nofit <- do.call(rbind, lapply(results_nofit, function(r) extract_stats_nofit(r, pollock_ts = 1L)))
+
+# --- Build combined AICc table --- #
 aicc_table <- rbind(
+  stats_nofit,
+  # No cod recruitment
   stats_63par,
   stats_61M02par,
   stats_59M03par,
   stats_59M04par,
   #stats_57M05par,
-  stats_nofit,
+  # Cod recruitment, 1 pollock TS (current v4)
   stats_63par_codrec,
   stats_61M02par_codrec,
   stats_59M03par_codrec,
   stats_59M04par_codrec,
-  stats_59_m03_nocodM0_codrec
+  stats_59_m03_nopollM0_codrec,
+  #stats_57M05par_codrec,
+  # Cod recruitment, 2 pollock TS (v1 / v3 RDS)
+  stats_63par_codrec_v1,
+  stats_61M02par_codrec_v1,
+  stats_59M03par_codrec_v1,
+  stats_59M04par_codrec_v1,
+  stats_59_m03_nopollM0_codrec_v1
 )
 
-min_aicc <- min(aicc_table$AICc, na.rm = TRUE)
+min_aicc              <- min(aicc_table$AICc, na.rm = TRUE)
 aicc_table$Delta_AICc <- aicc_table$AICc - min_aicc
-aicc_table <- aicc_table[order(aicc_table$AICc), ]
+aicc_table            <- aicc_table[order(aicc_table$AICc), ]
 
+cat("=== Full model ranking ===\n")
 print(aicc_table)
 
-#write.csv(aicc_table, "GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260324.csv", row.names = FALSE)
+# --- Interaction-level summary (fitted models only) --- #
+# Best AICc per combination of Interaction x Has_Cod_Rec x Pollock_TS.
+# This lets you directly compare which environmental driver setup wins,
+# and whether 1 vs 2 pollock TS makes a consistent difference.
+fitted_only <- aicc_table[aicc_table$Param_Set != "NoFit", ]
+
+# Use a string group key to avoid NA being silently dropped by split()
+fitted_only$grp_key <- paste(fitted_only$Interaction,
+                              fitted_only$Has_Cod_Rec,
+                              ifelse(is.na(fitted_only$Pollock_TS), "NoCodRec", fitted_only$Pollock_TS),
+                              sep = ".")
+
+interaction_summary <- do.call(rbind, lapply(
+  split(fitted_only, fitted_only$grp_key),
+  function(grp) {
+    if (nrow(grp) == 0) return(NULL)
+    best           <- grp[which.min(grp$AICc), ]
+    best$N_Configs <- nrow(grp)   # how many param-set configs were evaluated
+    best
+  }
+))
+interaction_summary$grp_key    <- NULL   # remove helper column
+fitted_only$grp_key            <- NULL
+interaction_summary <- interaction_summary[order(interaction_summary$AICc), ]
+interaction_summary$Delta_AICc <- interaction_summary$AICc - min_aicc
+
+cat("\n=== Best model per interaction type (fitted only) ===\n")
+print(interaction_summary[, c("Interaction", "Has_Cod_Rec", "Pollock_TS", "Param_Set",
+                               "Num_Parameters", "AICc", "Delta_AICc", "NLL",
+                               "N_Configs", "converged_s1", "converged_s2")])
+
+# --- Save outputs --- #
 write.csv(
   aicc_table,
-  "Rpath_fitting/GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260430.csv",
+  "Rpath_fitting/GOA/wgoa_data_rpath_fitting/GOA_Model_AIC_Ranking_20260514.csv",
+  row.names = FALSE
+)
+write.csv(
+  interaction_summary[, c("Interaction", "Has_Cod_Rec", "Pollock_TS", "Param_Set",
+                           "Num_Parameters", "AICc", "Delta_AICc", "NLL",
+                           "N_Configs", "converged_s1", "converged_s2")],
+  "Rpath_fitting/GOA/wgoa_data_rpath_fitting/GOA_Interaction_Best_AIC_20260514.csv",
   row.names = FALSE
 )
 
-# Combine all tables (work in progress)
-
-#Because cod recruitment forcing was required for projection consistency with bioenergetic theory, 
-#we used the best-fitting pcod variant for projection. The pcod variant had a higher AICc than the 
-#equivalent non-pcod model (ΔAICc = 27.6), reflecting partial redundancy between the temperature-driven 
-#recruitment proxy and fitted density-independent mortality terms.
-
-
-
+# --- Retrieve any model result by name --- #
+# For v1 models, strip the "_v1" suffix before looking up in the v1 result lists.
 find_model_result <- function(target_name) {
-  all_results <- c(results_nofit,
-                   fit_results_63par,
-                   results_61M02par,
-                   results_59M03par)
-  return(all_results[[target_name]]) # Requires names to be assigned to the combined list
+  is_v1    <- grepl("_v1$", target_name)
+  base_name <- sub("_v1$", "", target_name)
+
+  pool <- if (is_v1) {
+    c(fit_results_63par_codrec_v1,
+      results_61M02par_codrec_v1,
+      results_59M03par_codrec_v1,
+      results_59M04par_codrec_v1,
+      results_59M03par_codrec_noM0poll_v1)
+  } else {
+    c(results_nofit,
+      results_63par,
+      results_61M02par,
+      results_59M03par,
+      results_59M04par,
+      fit_results_63par_codrec,
+      results_61M02par_codrec,
+      results_59M03par_codrec,
+      results_59M04par_codrec,
+      results_59M03par_codrec_noM0poll)
+  }
+
+  idx <- which(sapply(pool, function(r) {
+    nm <- if (!is.null(r$name)) r$name else r$scen_name
+    identical(nm, base_name)
+  }))
+  if (length(idx) == 0) return(NULL)
+  pool[[idx[1]]]
 }
-combined_like_tables <- do.call(rbind, lapply(rownames(aicc_table), function(nm) {
+
+# Build a combined likelihood table across all models (work in progress)
+combined_like_tables <- do.call(rbind, lapply(aicc_table$Model, function(nm) {
   res <- find_model_result(nm)
-  if (!is.null(res)) {
-    lt <- res$like_table
+  if (!is.null(res) && !is.null(res$like_table)) {
+    lt       <- res$like_table
     lt$Model <- nm
     return(lt)
-  } else {
-    return(NULL)
   }
+  return(NULL)
 }))
