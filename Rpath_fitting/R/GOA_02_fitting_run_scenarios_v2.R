@@ -355,7 +355,7 @@ for (scen_name in names(scenarios_to_run)) {
 #saveRDS(results_57M05par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_57M05par_codrec_v3.rds")
 
 # ---------------------------------------------------------------------------- #
-# Run 6: 59 Parameters Fitting (Vulnerabilities + M04) ####
+# Run 6: 59 Parameters Fitting (Vulnerabilities + M03 no_pollock) ####
 # Best model ####
 # ---------------------------------------------------------------------------- #
 

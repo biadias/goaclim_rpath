@@ -1,7 +1,11 @@
 # ---------------------------------------------------------------------------- #
 # 1. Build GFDL-Specific Climate Scenarios ####
 # ---------------------------------------------------------------------------- #
+#source("code/00_setup_forecast.R")
+source("code/01_load_best_model.R")
 source("code/Function_F_clim_sim_scene.R")
+
+
 # Managed scpecies
 managed_sp_list <- c("walleye_pollock_adult", "pacific_cod_adult", "arrowtooth_flounder_adult",
                      "flathead_sole_adult","octopus","deep_water_flatfish","sablefish_adult",
@@ -362,6 +366,9 @@ scene_585_fmean <- F_clim_sim_scene(scene = scene_bioen_best,
                                    hind_data_start_yr = 1991,
                                    climate_data_start_yr = 1980,
                                    verbose = TRUE)
+# ---------------------------------------------------------------------------- #
+# 2. Run scenarios in bulk ####
+# ---------------------------------------------------------------------------- #
 
 scenario_grid <- expand.grid(
   ssp        = c("persist", "126", "245", "585"),
@@ -402,7 +409,7 @@ names(scenes) <- paste(scenario_grid$ssp,
 
 
 # ---------------------------------------------------------------------------- #
-# 2. Run Forecast Simulations ####
+# 3. Run Forecast Simulations ####
 # ---------------------------------------------------------------------------- #
 # Run the dynamic simulations using Adams-Bashforth (AB) method
 
@@ -450,7 +457,7 @@ forecast_585_pcod_fmean <- rsim.run(scenes$`585_pcod_nbuf_mean`,      method = "
 forecast_585_fmean      <- rsim.run(scenes$`585_npcod_nbuf_mean`,     method = "AB", years = all_years)
 
 # ---------------------------------------------------------------------------- #
-# 3. Compile and Plot by SSP Scenario ####
+# 4. Compile and Plot by SSP Scenario ####
 # ---------------------------------------------------------------------------- #
 source("code/Function_plot_scenario_comparison.R")
 
@@ -465,10 +472,10 @@ plot_ground <- c(
 ## a) Plot Persistence Scenarios ####
 list_persist <- list(
   #"F0 w/ Pcod Rec persc"    = forecast_persist_pcod_f0c,
-  "F0 w/ Pcod Rec persist"    = forecast_persist_pcod_f0,
-  "F0 w/o Pcod Rec"   = forecast_persist_f0,
-  "Fmean w/ Pcod Rec" = forecast_persist_pcod_fmean,
-  "Fmean w/o Pcod Rec"= forecast_persist_fmean
+  "F0 w/ Pcod Rec persist"    = fore_pers_pcod_f0,
+  "F0 w/o Pcod Rec"   = fore_pers_f0,
+  "Fmean w/ Pcod Rec" = fore_pers_pcod_fmean,
+  "Fmean w/o Pcod Rec"= fore_pers_fmean
 )
 plot_scenario_comparison(sim_list = list_persist, species_to_plot = plot_ground, 
                          start_year = 1991, variable = "Biomass")
@@ -521,15 +528,15 @@ plot_scenario_comparison(sim_list = list_ssps, species_to_plot = plot_ground,
 
 # 6. Plot SSPs NOCOD_rec Scenarios
 list_ssps_fmean <- list(
-  #"F0 126"    = forecast_126_f0,
-  #"F0 245"    = forecast_245_f0,
-  #"F0 585"    = forecast_585_f0,
+  "F0 126"    = forecast_126_f0,
+  "F0 245"    = forecast_245_f0,
+  "F0 585"    = forecast_585_f0,
   "Fmean 126" = forecast_126_fmean,
   "Fmean 245" = forecast_245_fmean,
-  "Fmean 585" = forecast_585_fmean,
-  "Fmean w/ Pcod Rec 126" = forecast_126_pcod_fmean,
-  "Fmean w/ Pcod Rec 245" = forecast_245_pcod_fmean,
-  "Fmean w/ Pcod Rec 585" = forecast_585_pcod_fmean
+  "Fmean 585" = forecast_585_fmean#,
+  #"Fmean w/ Pcod Rec 126" = forecast_126_pcod_fmean,
+  #"Fmean w/ Pcod Rec 245" = forecast_245_pcod_fmean,
+  #"Fmean w/ Pcod Rec 585" = forecast_585_pcod_fmean
 )
 
 plot_scenario_comparison(sim_list = list_ssps_fmean, species_to_plot = plot_ground, 
@@ -548,5 +555,37 @@ list_ssps_f0 <- list(
 plot_scenario_comparison(sim_list = list_ssps_f0, species_to_plot = plot_ground, 
                          start_year = 1991, variable = "Biomass")
 
+# 7. Plot SSPs F0 Fmean PP Scenarios
+list_ssps <- list(
+  "F0 persist Pcod" = fore_pers_f0,
+  "F0 126 Pcod"    = forecast_126_f0,
+  "F0 245 Pcod"    = forecast_245_f0,
+  "F0 585 Pcod"    = forecast_585_f0,
+  "Fmean persist Pcod"= fore_pers_fmean,
+  "Fmean 126 Pcod"    = forecast_126_fmean,
+  "Fmean 245 Pcod"    = forecast_245_fmean,
+  "Fmean 585 Pcod"    = forecast_585_fmean
+)
+
+plot_scenario_comparison(sim_list = list_ssps, species_to_plot = plot_ground, 
+                         start_year = 1991, variable = "Biomass")
+fore_pers_buf_pcod_f0
+fore_pers_buf_pcod_fmean
+forecast_126_buf_pcod_f0
+forecast_126_buf_pcod_fmean
+forecast_245_buf_pcod_f0
+forecast_245_buf_pcod_fmean
+forecast_585_buf_pcod_f0
+forecast_585_buf_pcod_fmean
+
+
+
+list_ssps_pp <- list( "F0 persist Pcod rec PP" = fore_pers_buf_pcod_f0, "F0 126 Pcod rec PP" = forecast_126_buf_pcod_f0, "F0 245 Pcod rec PP" = forecast_245_buf_pcod_f0, "F0 585 Pcod rec PP" = forecast_585_buf_pcod_f0, "Fmean persist Pcod rec PP"= fore_pers_buf_pcod_fmean, "Fmean 126 Pcod rec PP" = forecast_126_buf_pcod_fmean, "Fmean 245 Pcod rec PP" = forecast_245_buf_pcod_fmean, "Fmean 585 Pcod rec PP" = forecast_585_buf_pcod_fmean )
+
+list_ssps_pcod<- list( "F0 persist Pcod rec" = fore_pers_pcod_f0, "F0 126 Pcod rec" = forecast_126_pcod_f0, "F0 245 Pcod rec" = forecast_245_pcod_f0, "F0 585 Pcod rec" = forecast_585_pcod_f0, "Fmean persist Pcod rec"= fore_pers_pcod_fmean, "Fmean 126 Pcod rec" = forecast_126_pcod_fmean, "Fmean 245 Pcod rec" = forecast_245_pcod_fmean, "Fmean 585 Pcod rec" = forecast_585_pcod_fmean )
+
+list_ssps <- list( "F0 persist Pcod" = fore_pers_f0, "F0 126 Pcod" = forecast_126_f0, "F0 245 Pcod" = forecast_245_f0, "F0 585 Pcod" = forecast_585_f0, "Fmean persist Pcod"= fore_pers_fmean, "Fmean 126 Pcod" = forecast_126_fmean, "Fmean 245 Pcod" = forecast_245_fmean, "Fmean 585 Pcod" = forecast_585_fmean )
+
 #BIA YOU ARE HERE ####
 #Question: How can i cap pollock biomass? is there a density dependence function I can use? ####
+#answer: We fixed the CVs for pollock based on the figure from the Stock Assessment

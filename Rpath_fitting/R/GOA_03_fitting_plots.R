@@ -1,7 +1,13 @@
 
 source("Rpath_fitting/R/ecofitting_plot_multi.R")
+source("Rpath_fitting/R/GOA_fitting_setup_a_la_carte.R")
 #source("Rpath_fitting/R/ecofitting_plot_multi_v2.R")
 readRDS("Rpath_fitting/GOA/GOA_fit_results_59M04par.rds") -> fit_results_59M04par_old
+results_59M03par_codrec_noM0poll_pol2 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_noM0poll_v3.rds")
+results_59M03par_codrec_noM0poll_pol1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_noM0poll_v4.rds")
+results_59M04par_codrec_pol2 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_v3.rds")
+results_59M04par_codrec_pol1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_v4.rds")
+
 
 
 #COMPARE THE RESULTS BETWEEN THE DIFFERENT POLLOCK INTERACTIONS
@@ -21,13 +27,15 @@ readRDS("Rpath_fitting/GOA/GOA_fit_results_59M04par.rds") -> fit_results_59M04pa
 #my_runs <- list(V59M04_Bioen$final_run , V59M04_Base$final_run, V59M04_Full$final_run)
 
 
-my_runs <- list(results_59M04par$Bioen$final_run, results_59M04par_codrec$Bioen_pcod$final_run, results_59M04par$Full$final_run,
-                results_59M04par_codrec$Full_pcod$final_run, results_59M03par_codrec_noM0poll$Bioen_pcod$final_run)
-run_names <- list("Bioen_59M04par", 
-                  "Bioen_pcod_59M04par",
-                  "Full_59M04par",
-                  "Full_pcod_59M04par",
-                  "codrec_nopollM0")
+my_runs <- list(results_59M03par_codrec_noM0poll_pol2$Bioen_pcod$final_run, 
+                results_59M03par_codrec_noM0poll_pol1$Bioen_pcod$final_run, 
+                results_59M04par_codrec_pol2$Bioen_pcod$final_run,
+                results_59M04par_codrec_pol1$Bioen_pcod$final_run)
+
+run_names <- list("Bioen_59M03par_codrec_noM0poll_pol2", 
+                  "Bioen_59M03par_codrec_noM0poll_pol1",
+                  "Bioen_59M04par_codrec_pol2",
+                  "Bioen_59M04par_codrec_pol1")
 
 #run_names <- list("Bioen_59M04par_bioen_dem", 
 #                  "Bioen_59M04par_bioen_peldem")
@@ -43,7 +51,7 @@ plot.species <- c(rpath.living(bal),rpath.detrital(bal))
 
 # Call the function
 rsim.runplot.multi(scene_bioen, my_runs, plot.species, run_names=run_names, inset=c(-0.1,0))
-rsim.runplot(scene_bioen, results_59M03par_codrec_noM0poll$Bioen_pcod$final_run, plot.species, "59M03par_codrec_noM0poll")
+rsim.runplot(scene_bioen, results_59M03par_codrec_noM0poll_pol1$Bioen_pcod$final_run, plot.species, "59M03par_codrec_noM0poll")
 
 
 

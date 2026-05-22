@@ -14,8 +14,8 @@
 # ---------------------------------------------------------------------------- #
 
 
-#library(devtools)
-#install_github('NOAA-EDAB/Rpath', ref="dev")
+library(devtools)
+install_github('NOAA-EDAB/Rpath', ref="ssb_output_diag")
 library(Rpath)
 library(tidyverse)
 library(janitor)
@@ -164,7 +164,7 @@ removed_series <- c(
   "pacific_hake:race_wgoa",
   "pacific_herring_adult:craig_index",
   "salmon_shark:race_wgoa",
-  #"walleye_pollock_adult:race_wgoa",#removing this time series_replacing by shelikoff index
+  "walleye_pollock_adult:race_wgoa",#removing this time series_replacing by shelikoff index
   "sablefish_adult:race_wgoa",
   "miscellaneous_deep_sea_fish:race_wgoa", 
   "nonpandalid_shrimp:race_wgoa",
