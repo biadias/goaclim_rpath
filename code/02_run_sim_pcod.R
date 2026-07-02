@@ -462,12 +462,12 @@ forecast_585_fmean      <- rsim.run(scenes$`585_npcod_nbuf_mean`,     method = "
 source("code/Function_plot_scenario_comparison.R")
 
 plot_ground <- c(
-  "arrowtooth_flounder_adult",
+  #"arrowtooth_flounder_adult",
   "pacific_cod_adult",
-  "walleye_pollock_adult",
-  "arrowtooth_flounder_juvenile",
-  "pacific_cod_juvenile",
-  "walleye_pollock_juvenile")
+  #"walleye_pollock_adult",
+  #"arrowtooth_flounder_juvenile",
+  "pacific_cod_juvenile")
+  #"walleye_pollock_juvenile")
 
 ## a) Plot Persistence Scenarios ####
 list_persist <- list(
