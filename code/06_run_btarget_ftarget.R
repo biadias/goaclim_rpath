@@ -337,4 +337,5 @@ print(round(Fcomp, 4))
 #NOTES ####
 # Observation error from Andy code! Ask Andy about it. 
 # Single run, but I also will have the observation error/variance that Andy developed on it.
+# One B0 under the persist scenario (Climate stable) 
 # 

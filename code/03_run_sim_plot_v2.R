@@ -1,3 +1,18 @@
+# ---------------------------------------------------------------------------- #
+# AUTHORS: Bia Dias
+# AFFILIATIONS: CICOES University of Washington
+# E-MAIL OF CORRESPONDENCE AUTHOR: bia.dias@noaa.gov
+# DATE: 03 March 2026
+#
+# code/02_run_sim.R
+# Purpose: Running the F_clim_sim_scene function to set up the scenarios and then 
+# running the simulations for the best model scenario (GOA_fit_results_59M04par.rds) 
+# for the GFDL SSP 126, SSP 425, SSP 585 scenarios, as well as a persistence scenario.
+# ---------------------------------------------------------------------------- #
+source("code/02_run_sim_pcod.R") 
+source("code/Function_plot_scenario_comparison.R") 
+
+
 list_ssps_pp <- list( "F0 persist Pcod rec PP" = fore_pers_buf_pcod_f0, "F0 126 Pcod rec PP" = forecast_126_buf_pcod_f0, "F0 245 Pcod rec PP" = forecast_245_buf_pcod_f0, "F0 585 Pcod rec PP" = forecast_585_buf_pcod_f0, "Fmean persist Pcod rec PP"= fore_pers_buf_pcod_fmean, "Fmean 126 Pcod rec PP" = forecast_126_buf_pcod_fmean, "Fmean 245 Pcod rec PP" = forecast_245_buf_pcod_fmean, "Fmean 585 Pcod rec PP" = forecast_585_buf_pcod_fmean )
 
 list_ssps_pcod<- list( "F0 persist Pcod rec" = fore_pers_pcod_f0, "F0 126 Pcod rec" = forecast_126_pcod_f0, "F0 245 Pcod rec" = forecast_245_pcod_f0, "F0 585 Pcod rec" = forecast_585_pcod_f0, "Fmean persist Pcod rec"= fore_pers_pcod_fmean, "Fmean 126 Pcod rec" = forecast_126_pcod_fmean, "Fmean 245 Pcod rec" = forecast_245_pcod_fmean, "Fmean 585 Pcod rec" = forecast_585_pcod_fmean )
@@ -8,8 +23,10 @@ list_ssps <- list( "F0 persist Pcod" = fore_pers_f0, "F0 126 Pcod" = forecast_12
 # PLOT — save 3-page PDF, one page per recruitment/buffer scenario
 # --------------------------------------------------------------------------- #
 
-species_list <- c("arrowtooth_flounder_adult", "pacific_cod_adult", "walleye_pollock_adult",
-                  "arrowtooth_flounder_juvenile", "pacific_cod_juvenile", "walleye_pollock_juvenile")
+species_list <- c(#"arrowtooth_flounder_adult", 
+  "pacific_cod_adult", #"walleye_pollock_adult",
+                  #"arrowtooth_flounder_juvenile", 
+  "pacific_cod_juvenile")#, "walleye_pollock_juvenile")
 
 cols <- c("persist" = "black", "126" = "#009E73", "245" = "#56B4E9", "585" = "#E69F00")
 ltys <- c("F0" = 2, "Fmean" = 1)
@@ -39,7 +56,7 @@ global_max <- setNames(
   species_list
 )
 
-out_path <- "C:/Users/biadias/Documents/goaclim_rpath/figures/biomass_trajectories_v2.pdf"
+out_path <- "C:/Users/biadias/Documents/goaclim_rpath/figures/biomass_trajectories_pcod.pdf"
 pdf(out_path, width = 14, height = 6)
 
 for (list_label in names(scenario_lists)) {
@@ -56,7 +73,7 @@ for (list_label in names(scenario_lists)) {
     
     plot(years, rep(NA_real_, length(years)),
          type = "n",
-         ylim = c(0, global_max[sp] * 1.1),
+         #ylim = c(0, global_max[sp] * 1.1),
          xlab = "Year",
          ylab = "Biomass",
          main = sp)
