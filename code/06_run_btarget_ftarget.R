@@ -49,7 +49,8 @@ last10_hind_rows <- (length(hind_years) - 9):length(hind_years)     # 21:30  (20
 
 # Output directory
 bftarget_dir <- "data/bftarget"
-if (!dir.exists(bftarget_dir)) dir.create(bftarget_dir, recursive = TRUE)
+if (!dir.exists(bftarget_dir))
+  dir.create(bftarget_dir, recursive = TRUE)
 
 # ---------------------------------------------------------------------------- #
 # 1. Helper functions ####
@@ -60,15 +61,11 @@ if (!dir.exists(bftarget_dir)) dir.create(bftarget_dir, recursive = TRUE)
 # species start at column 2. Returns a single-column named matrix (species
 # as row names), consistent with EBS indexing: result[species_name, ].
 end_cent_biomass <- function(rsim) {
-  mean_bio_groups <- matrix(
-    data = NA,
-    nrow = length(2:dim(rsim$out_Biomass)[2]),
-    ncol = 1
-  )
+  mean_bio_groups <- matrix(data = NA,
+                            nrow = length(2:dim(rsim$out_Biomass)[2]),
+                            ncol = 1)
   for (i in 1:(length(2:dim(rsim$out_Biomass)[2]))) {
-    mean_bio_groups[i, ] <- mean(
-      rsim$out_Biomass[(dim(rsim$out_Biomass)[1] - 59):dim(rsim$out_Biomass)[1], i + 1]
-    )
+    mean_bio_groups[i, ] <- mean(rsim$out_Biomass[(dim(rsim$out_Biomass)[1] - 59):dim(rsim$out_Biomass)[1], i + 1])
   }
   row.names(mean_bio_groups) <-
     colnames(rsim$out_Biomass[, 2:dim(rsim$out_Biomass)[2]])
@@ -77,10 +74,20 @@ end_cent_biomass <- function(rsim) {
 
 # Objective function for cif_wgoa: normalized sum of squared deviations
 # between simulated end-of-century biomass and target biomass
-sumsq_btarg <- function(F_pars, scene, target_bio, managed_sp, all_years, proj_rows) {
+sumsq_btarg <- function(F_pars,
+                        scene,
+                        target_bio,
+                        managed_sp,
+                        all_years,
+                        proj_rows) {
   F_pars <- pmax(F_pars, 0)
   scene$fishing$ForcedFRate[proj_rows, managed_sp] <-
-    matrix(F_pars, nrow = length(proj_rows), ncol = length(managed_sp), byrow = TRUE)
+    matrix(
+      F_pars,
+      nrow = length(proj_rows),
+      ncol = length(managed_sp),
+      byrow = TRUE
+    )
   run_tmp <- rsim.run(scene, method = "AB", years = all_years)
   sim_bio <- end_cent_biomass(run_tmp)[managed_sp, ]   # named vector from matrix rows
   sum(((sim_bio - target_bio) / pmax(target_bio, 1e-9))^2, na.rm = TRUE)
@@ -88,10 +95,14 @@ sumsq_btarg <- function(F_pars, scene, target_bio, managed_sp, all_years, proj_r
 
 # Climate-informed F (cif): L-BFGS-B optimization across all managed species
 # simultaneously. Starting values are F_meanlast10.
-cif_wgoa <- function(scene, target_biomass, managed_sp,
-                     F_meanlast10, all_years, proj_rows) {
+cif_wgoa <- function(scene,
+                     target_biomass,
+                     managed_sp,
+                     F_meanlast10,
+                     all_years,
+                     proj_rows) {
   pars <- F_meanlast10[managed_sp]
-
+  
   optim(
     par     = pars,
     fn      = sumsq_btarg,
@@ -101,7 +112,7 @@ cif_wgoa <- function(scene, target_biomass, managed_sp,
     all_years  = all_years,
     proj_rows  = proj_rows,
     method  = "L-BFGS-B",
-    lower   = rep(0,       length(pars)),
+    lower   = rep(0, length(pars)),
     upper   = rep(max(pars) * 5 + 0.01, length(pars)),
     control = list(maxit = 200, factr = 1e9)
   )
@@ -115,42 +126,53 @@ cif_wgoa <- function(scene, target_biomass, managed_sp,
 # (2011-2020) as catch / biomass.
 
 scene_hind <- F_clim_sim_scene(
-  scene      = scene_bioen_best, ssp = "persist",
-  cons = TRUE, resp = TRUE, buf = FALSE,
-  pcod_rec = TRUE, pcod_rec_method = "cauchy",
-  bioen_sp = bioen_sp, tdc_hind = tdc_hind, tdr_hind = tdr_hind,
+  scene      = scene_bioen_best,
+  ssp = "persist",
+  cons = TRUE,
+  resp = TRUE,
+  buf = FALSE,
+  pcod_rec = TRUE,
+  pcod_rec_method = "cauchy",
+  bioen_sp = bioen_sp,
+  tdc_hind = tdc_hind,
+  tdr_hind = tdr_hind,
   managed_sp  = managed_sp_list,
-  f_equil     = F_equil, f_zero = F_zero, f_scenario = "mean",
-  f_ref_yrs   = 2016:2020, #change that!!!
+  f_equil     = F_equil,
+  f_zero = F_zero,
+  f_scenario = "mean",
+  f_ref_yrs   = 2016:2020,
+  #change that!!!
   climate_dir = "data/climate/",
-  hind_yrs = hind_years, proj_yrs = 2021:2099,
-  hind_data_start_yr = 1991, climate_data_start_yr = 1980,
+  hind_yrs = hind_years,
+  proj_yrs = 2021:2099,
+  hind_data_start_yr = 1991,
+  climate_data_start_yr = 1980,
   verbose = FALSE
 )
 
 run_hind <- rsim.run(scene_hind, method = "AB", years = all_years)
 
 # F = catch / biomass, averaged over 2011-2020
-catch_last10 <- run_hind$annual_Catch[last10_hind_rows,   managed_sp_list]
+catch_last10 <- run_hind$annual_Catch[last10_hind_rows, managed_sp_list]
 bio_last10   <- run_hind$annual_Biomass[last10_hind_rows, managed_sp_list]
 F_last10     <- catch_last10 / bio_last10
 F_meanlast10 <- colMeans(F_last10, na.rm = TRUE)
 F_meanlast10[is.nan(F_meanlast10) | is.infinite(F_meanlast10)] <- 0
 
 # ---------------------------------------------------------------------------- #
-# 3. B0 per SSP #### change this! 
+# 3. B0 per SSP #### change this!
 # ---------------------------------------------------------------------------- #
 # For each SSP, loop over managed species:
 #   - all other species remain at F_meanlast10 in the projection period
 #   - set F = 0 for the focal species, run the sim, record end-century biomass
-#   - that biomass is B0 for the focal species under that climate scenario 
+#   - that biomass is B0 for the focal species under that climate scenario
 
 #NOTES: background F (low level F, fixed F for everything that was not focused)
-#F=0 for the managed species and Fmean2016-2020 for the other species. 
-#We want the SSBout 
+#F=0 for the managed species and Fmean 2016-2020 for the other species.
+#We want the SSBout
 #run to 2100
-#F=0 one at the time with Fmean for the other species. 
-#F40 is the same approach than described above. 
+#F=0 one at the time with Fmean for the other species.
+#F40 is the same approach than described above.
 
 B0_all <- vector("list", length(ssps))
 names(B0_all) <- ssps
@@ -159,36 +181,54 @@ for (ssp in ssps) {
   message("\n============================================================")
   message("B0 calculation | SSP: ", ssp)
   message("============================================================")
-
+  
   # Build climate scene for this SSP
   scene_ssp <- F_clim_sim_scene(
-    scene      = scene_bioen_best, ssp = ssp,
-    cons = TRUE, resp = TRUE, buf = FALSE,
-    pcod_rec = TRUE, pcod_rec_method = "cauchy",
-    bioen_sp = bioen_sp, tdc_hind = tdc_hind, tdr_hind = tdr_hind,
+    scene      = scene_bioen_best,
+    ssp = ssp,
+    cons = TRUE,
+    resp = TRUE,
+    buf = FALSE,
+    pcod_rec = TRUE,
+    pcod_rec_method = "cauchy",
+    bioen_sp = bioen_sp,
+    tdc_hind = tdc_hind,
+    tdr_hind = tdr_hind,
     managed_sp  = managed_sp_list,
-    f_equil     = F_equil, f_zero = F_zero, f_scenario = "mean",
+    f_equil     = F_equil,
+    f_zero = F_zero,
+    f_scenario = "mean",
     f_ref_yrs   = 2016:2020,
     climate_dir = "data/climate/",
-    hind_yrs = hind_years, proj_yrs = 2021:2099,
-    hind_data_start_yr = 1991, climate_data_start_yr = 1980,
+    hind_yrs = hind_years,
+    proj_yrs = 2021:2099,
+    hind_data_start_yr = 1991,
+    climate_data_start_yr = 1980,
     verbose = FALSE
   )
-
+  
   # Projection period: F_equil for all groups, then F_meanlast10 for managed
   frate_cols   <- colnames(scene_ssp$fishing$ForcedFRate)
   equil_cols   <- intersect(frate_cols, names(F_equil))
   managed_cols <- intersect(frate_cols, managed_sp_list)
-
+  
   scene_ssp$fishing$ForcedFRate[proj_rows, equil_cols] <-
-    matrix(F_equil[equil_cols],
-           nrow = length(proj_rows), ncol = length(equil_cols), byrow = TRUE)
+    matrix(
+      F_equil[equil_cols],
+      nrow = length(proj_rows),
+      ncol = length(equil_cols),
+      byrow = TRUE
+    )
   scene_ssp$fishing$ForcedFRate[proj_rows, managed_cols] <-
-    matrix(F_meanlast10[managed_cols],
-           nrow = length(proj_rows), ncol = length(managed_cols), byrow = TRUE)
-
+    matrix(
+      F_meanlast10[managed_cols],
+      nrow = length(proj_rows),
+      ncol = length(managed_cols),
+      byrow = TRUE
+    )
+  
   B0_vec <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
-
+  
   ptm <- proc.time()
   for (sp in managed_sp_list) {
     message("  B0 for: ", sp)
@@ -197,9 +237,8 @@ for (ssp in ssps) {
     B0_vec[sp] <- end_cent_biomass(run_b0)[sp, ]   # [species, ] from named matrix
     scene_ssp$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast10[sp]  # reset
   }
-  message("SSP ", ssp, " B0 elapsed: ",
-          round((proc.time() - ptm)[3] / 60, 2), " min")
-
+  message("SSP ", ssp, " B0 elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " min")
+  
   B0_all[[ssp]] <- B0_vec
 }
 
@@ -211,7 +250,7 @@ for (ssp in ssps) {
 #   - Most groundfish:  Blim = 0.05 * B40
 #   - Pacific cod:      Blim = 0.50 * B40 (precautionary buffer)
 
-#B0 stable climate only. 
+#B0 stable climate only.
 # end of July for the reference points and August the code for HCRs
 
 Btarg_all <- vector("list", length(ssps))
@@ -219,17 +258,17 @@ names(Btarg_all) <- ssps
 
 for (ssp in ssps) {
   B0 <- B0_all[[ssp]]
-
+  
   B40 <- 0.40 * B0
   B35 <- 0.35 * B0
-
+  
   # Btarget: B40 for all managed groundfish in the WGOA
   Btarg <- B40
-
+  
   # Blim (verify against NPFMC FMP guidance before use)
   Blim                          <- 0.05 * B40 #0.02*B0/ 0.05 of B40, 0.02 of B0
   Blim["pacific_cod_adult"]     <- 0.50 * B40["pacific_cod_adult"] # REVIEW THIS FOR COD - Ask Andy####
-
+  
   target_bio <- cbind(
     B20           = 0.20 * B0,
     B25           = 0.25 * B0,
@@ -243,11 +282,11 @@ for (ssp in ssps) {
     Blim          = Blim,
     Btarget_SQ    = Btarg
   )
-
+  
   outfile <- file.path(bftarget_dir, paste0("B_target_WGOA_GFDL_", ssp, ".csv"))
   write.csv(target_bio, file = outfile, row.names = TRUE)
   message("Saved: ", outfile)
-
+  
   Btarg_all[[ssp]] <- target_bio
 }
 
@@ -259,7 +298,7 @@ for (ssp in ssps) {
 # biomass and Btarget (= B40 for all species here).
 # Starting values = F_meanlast10. Uses L-BFGS-B via cif_wgoa().
 
-#review this: have one species at time. 
+#review this: have one species at time.
 
 
 Fopt_all <- vector("list", length(ssps))
@@ -269,35 +308,53 @@ for (ssp in ssps) {
   message("\n============================================================")
   message("Ftarget optimisation | SSP: ", ssp)
   message("============================================================")
-
+  
   scene_ssp <- F_clim_sim_scene(
-    scene      = scene_bioen_best, ssp = ssp,
-    cons = TRUE, resp = TRUE, buf = FALSE,
-    pcod_rec = TRUE, pcod_rec_method = "cauchy",
-    bioen_sp = bioen_sp, tdc_hind = tdc_hind, tdr_hind = tdr_hind,
+    scene      = scene_bioen_best,
+    ssp = ssp,
+    cons = TRUE,
+    resp = TRUE,
+    buf = FALSE,
+    pcod_rec = TRUE,
+    pcod_rec_method = "cauchy",
+    bioen_sp = bioen_sp,
+    tdc_hind = tdc_hind,
+    tdr_hind = tdr_hind,
     managed_sp  = managed_sp_list,
-    f_equil     = F_equil, f_zero = F_zero, f_scenario = "mean",
+    f_equil     = F_equil,
+    f_zero = F_zero,
+    f_scenario = "mean",
     f_ref_yrs   = 2016:2020,
     climate_dir = "data/climate/",
-    hind_yrs = hind_years, proj_yrs = 2021:2099,
-    hind_data_start_yr = 1991, climate_data_start_yr = 1980,
+    hind_yrs = hind_years,
+    proj_yrs = 2021:2099,
+    hind_data_start_yr = 1991,
+    climate_data_start_yr = 1980,
     verbose = FALSE
   )
-
+  
   # Projection period baseline: F_equil for all, F_meanlast10 for managed
   frate_cols   <- colnames(scene_ssp$fishing$ForcedFRate)
   equil_cols   <- intersect(frate_cols, names(F_equil))
   managed_cols <- intersect(frate_cols, managed_sp_list)
-
+  
   scene_ssp$fishing$ForcedFRate[proj_rows, equil_cols] <-
-    matrix(F_equil[equil_cols],
-           nrow = length(proj_rows), ncol = length(equil_cols), byrow = TRUE)
+    matrix(
+      F_equil[equil_cols],
+      nrow = length(proj_rows),
+      ncol = length(equil_cols),
+      byrow = TRUE
+    )
   scene_ssp$fishing$ForcedFRate[proj_rows, managed_cols] <-
-    matrix(F_meanlast10[managed_cols],
-           nrow = length(proj_rows), ncol = length(managed_cols), byrow = TRUE)
-
+    matrix(
+      F_meanlast10[managed_cols],
+      nrow = length(proj_rows),
+      ncol = length(managed_cols),
+      byrow = TRUE
+    )
+  
   target_biomass <- Btarg_all[[ssp]][, "Btarget_SQ"]
-
+  
   ptm <- proc.time()
   Fopt_all[[ssp]] <- cif_wgoa(
     scene          = scene_ssp,
@@ -307,35 +364,35 @@ for (ssp in ssps) {
     all_years      = all_years,
     proj_rows      = proj_rows
   )
-  message("SSP ", ssp, " Ftarget elapsed: ",
-          round((proc.time() - ptm)[3] / 60, 2), " min")
-  message("Convergence: ", Fopt_all[[ssp]]$convergence,
-          "  (0 = success)")
+  message("SSP ", ssp, " Ftarget elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " min")
+  message("Convergence: ", Fopt_all[[ssp]]$convergence, "  (0 = success)")
 }
 
 # ---------------------------------------------------------------------------- #
 # 6. Save Ftarget results ####
 # ---------------------------------------------------------------------------- #
 
-Ftarg_matrix <- do.call(cbind, lapply(ssps, function(ssp) Fopt_all[[ssp]]$par))
+Ftarg_matrix <- do.call(cbind, lapply(ssps, function(ssp)
+  Fopt_all[[ssp]]$par))
 colnames(Ftarg_matrix) <- ssps
 rownames(Ftarg_matrix) <- managed_sp_list
 
-write.csv(Ftarg_matrix,
-          file = file.path(bftarget_dir, "Ftarget_WGOA_GFDL_allSSPs.csv"),
-          row.names = TRUE)
-message("Saved: ", file.path(bftarget_dir, "Ftarget_WGOA_GFDL_allSSPs.csv"))
+write.csv(
+  Ftarg_matrix,
+  file = file.path(bftarget_dir, "Ftarget_WGOA_GFDL_allSSPs.csv"),
+  row.names = TRUE
+)
+message("Saved: ",
+        file.path(bftarget_dir, "Ftarget_WGOA_GFDL_allSSPs.csv"))
 
 # Quick check: compare Ftarget to F_meanlast10
-Fcomp <- data.frame(
-  F_meanlast10 = F_meanlast10[managed_sp_list],
-  Ftarg_matrix
-)
+Fcomp <- data.frame(F_meanlast10 = F_meanlast10[managed_sp_list], Ftarg_matrix)
 print(round(Fcomp, 4))
 
 
 #NOTES ####
-# Observation error from Andy code! Ask Andy about it. 
+# Observation error from Andy code! Ask Andy about it.
 # Single run, but I also will have the observation error/variance that Andy developed on it.
-# One B0 under the persist scenario (Climate stable) 
-# 
+# One B0 under the persist scenario (Climate stable)
+#
+  
