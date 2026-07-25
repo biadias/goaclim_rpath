@@ -9,10 +9,22 @@
 # climate-informed target fishing mortality (Ftarget) under GFDL SSP 126,
 # SSP 245, and SSP 585, plus a persistence scenario for the WGOA fit Rpath model.
 # ---------------------------------------------------------------------------- #
-remotes::install_github("noaa-edab/Rpath@ssb_output_diag", build_vignettes = TRUE)
-library(Rpath)
+
+#pak::pkg_install("noaa-edab/Rpath@ssb_output_diag")
+#library(Rpath)
 source("code/01_load_best_model.R")
 source("code/Function_F_clim_sim_scene.R")
+
+# Run a quick test
+#test_run <- rsim.run(scene_bioen_pcod, method = "AB", years = all_years)
+
+# Check the exact row names the model outputs
+#rownames(end_cent_biomass(test_run))
+#rownames(end_cent_SSB(test_run))
+
+# Compare them to what you are passing in
+#print(managed_sp_list)
+
 
 
 # ---------------------------------------------------------------------------- #
@@ -41,6 +53,21 @@ managed_sp_list <- c(
   "salmon_shark",
   "pacific_sleeper_shark"
 )
+
+tier3_sp_list <- c("walleye_pollock_adult","pacific_cod_adult", "sablefish_adult",
+                   "atka_mackerel","slope_rockfish", 
+                   #"demersal_shelf_rockfish", # check with Bridget about this one
+                   "pelagic_shelf_rockfish",
+                   "arrowtooth_flounder_adult","shallow_water_flatfish",
+                   "rex_sole_adult","flathead_sole_adult", "deep_water_flatfish" )
+
+
+ssb_stocks_list <- c("pacific_herring_adult","pacific_halibut_adult",
+                "arrowtooth_flounder_adult", "rex_sole_adult",
+                "flathead_sole_adult","pacific_ocean_perch_adult",
+                "sablefish_adult", "pacific_cod_adult",
+                "walleye_pollock_adult")
+
 
 ssps <- c("persist", "126", "245", "585")
 
@@ -127,6 +154,8 @@ sumsq_btarg <- function(F_pars,
   sum(((sim_bio - target_bio) / pmax(target_bio, 1e-9))^2, na.rm = TRUE)
 }
 
+
+
 # Climate-informed F (cif): L-BFGS-B optimization across all managed species
 # simultaneously. Starting values are F_meanlast.
 #
@@ -195,7 +224,7 @@ run_hind <- rsim.run(scene_hind, method = "AB", years = all_years)
 # Stanza "Oldest" species that are also in managed_sp_list.
 # These species use SSB (not total biomass) as their reference point.
 ssb_stocks <- intersect(scene_hind$stanzas$Oldest, managed_sp_list)
-message("SSB stocks (stanza Oldest %in% managed_sp_list): ",
+message("SSB stocks (stanza Oldest intersect managed_sp_list): ",
         paste(ssb_stocks, collapse = ", "))
 
 # F = catch / biomass, averaged over 2016-2020
@@ -345,14 +374,14 @@ target_bio <- cbind(
   Btarget_SQ = Btarg #SQ = Status quo target*
 )
 
-outfile <- file.path(bftarget_dir, paste0("B_target_WGOA_GFDL_", ssp, ".csv"))
+outfile <- file.path(bftarget_dir, paste0("B_SSB_target_WGOA_GFDL_", ssp, ".csv"))
 write.csv(target_bio, file = outfile, row.names = TRUE)
 message("Saved: ", outfile)
 
 Btarg_all[[ssp]] <- target_bio
 
 # ---------------------------------------------------------------------------- #
-# 5. Climate-informed Ftarget – persistence scenario ####
+# 5. Climate-informed Ftarget – persistence scenario Fopt_persist ####
 # ---------------------------------------------------------------------------- #
 # Find the vector of F (one per managed species) that minimizes the sum of
 # squared deviations between simulated end-of-century biomass/SSB and Btarget.
@@ -368,7 +397,7 @@ Btarg_all[[ssp]] <- target_bio
 # Because optim() was solving for all species simultaneously, Fopt_persist$par 
 # is the vector of 20 optimized (managed_species) F values (one for each species) 
 # that collectively minimized the overall difference between the simulated 
-# biomasses and the $B_{40}$ targets.
+# biomasses and the B40 targets.
 
 message("\n============================================================")
 message("Ftarget optimisation | SSP: persist")
@@ -438,7 +467,7 @@ message("persist Ftarget elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " mi
 message("Convergence: ", Fopt_persist$convergence, "  (0 = success)")
 
 # ---------------------------------------------------------------------------- #
-# 6. Save Ftarget results ####
+# 6. Save Ftarget results simultaneously ####
 # ---------------------------------------------------------------------------- #
 
 Ftarg_matrix <- matrix(
@@ -449,10 +478,10 @@ Ftarg_matrix <- matrix(
 
 write.csv(
   Ftarg_matrix,
-  file = file.path(bftarget_dir, "Ftarget_WGOA_GFDL_persist.csv"),
+  file = file.path(bftarget_dir, "Fopt_target_WGOA_GFDL_persist.csv"),
   row.names = TRUE
 )
-message("Saved: ", file.path(bftarget_dir, "Ftarget_WGOA_GFDL_persist.csv"))
+message("Saved: ", file.path(bftarget_dir, "Fopt_target_WGOA_GFDL_persist.csv"))
 
 # Quick check: compare Ftarget to F_meanlast
 Fcomp <- data.frame(
@@ -466,5 +495,189 @@ print(round(Fcomp, 4))
 # Observation error from Andy code! Ask Andy about it.
 # Single run, but I also will have the observation error/variance that Andy developed on it.
 # One B0 under the persist scenario (Climate stable)
-#
+
+# ---------------------------------------------------------------------------- #
+# 7.Climate-informed Ftarget– persistence scenario (Individual sp Loop)#####
+# ---------------------------------------------------------------------------- #
+# Find the F for EACH managed species individually that drives its end-of-century 
+# biomass/SSB to its specific B40 and B35 target, while all other species are held 
+# at status quo (F_meanlast) or background level (F_equil).
+
+message("\n============================================================")
+message("Ftarget individual optimization | SSP: persist")
+message("============================================================")
+
+# Helper function for single-species optimization
+sumsq_btarg_single <- function(F_val,
+                               sp,
+                               scene,
+                               target_bio_val,
+                               is_ssb,
+                               all_years,
+                               proj_rows) {
+  # Non-negative F, just in case
+  F_val <- max(F_val, 0)
   
+  # Set F only for the focal species
+  scene$fishing$ForcedFRate[proj_rows, sp] <- F_val
+  
+  # Run the simulation
+  run_tmp <- rsim.run(scene, method = "AB", years = all_years)
+  
+  # Extract simulated end-of-century metric for the focal species
+  if (is_ssb) {
+    sim_val <- end_cent_SSB(run_tmp)[sp, ]
+  } else {
+    sim_val <- end_cent_biomass(run_tmp)[sp, ]
+  }
+  
+  # Return squared relative difference
+  return(((sim_val - target_bio_val) / max(target_bio_val, 1e-9))^2)
+}
+
+
+# Initialize the baseline scenario
+scene_persist_f40 <- F_clim_sim_scene(
+  scene                 = scene_bioen_best,
+  ssp                   = "persist",
+  cons                  = TRUE,
+  resp                  = TRUE,
+  buf                   = FALSE,
+  pcod_rec              = TRUE,
+  pcod_rec_method       = "cauchy",
+  bioen_sp              = bioen_sp,
+  tdc_hind              = tdc_hind,
+  tdr_hind              = tdr_hind,
+  managed_sp            = managed_sp_list,
+  f_equil               = F_equil,
+  f_zero                = F_zero,
+  f_scenario            = "mean",
+  f_ref_yrs             = 2016:2020,
+  climate_dir           = "data/climate/",
+  hind_yrs              = hind_years,
+  proj_yrs              = 2021:2099,
+  hind_data_start_yr    = 1991,
+  climate_data_start_yr = 1980,
+  verbose               = FALSE
+)
+
+
+
+# Set baseline projection rates: background F for non-managed, status quo F for managed
+frate_cols   <- colnames(scene_persist_f40$fishing$ForcedFRate)
+equil_cols   <- intersect(frate_cols, names(F_equil))
+managed_cols <- intersect(frate_cols, managed_sp_list)
+
+scene_persist_f40$fishing$ForcedFRate[proj_rows, equil_cols] <-
+  matrix(F_equil[equil_cols], nrow = length(proj_rows), ncol = length(equil_cols), byrow = TRUE)
+
+scene_persist_f40$fishing$ForcedFRate[proj_rows, managed_cols] <-
+  matrix(F_meanlast10[managed_cols], nrow = length(proj_rows), ncol = length(managed_cols), byrow = TRUE)
+
+
+## 7.1 optimize F40 (target Fishing Mortality) Run the individual optimization loop ####
+F40_persist <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
+
+ptm <- proc.time()
+for (sp in managed_sp_list) {
+  message("  Optimizing F40 for: ", sp)
+  
+  # Determine if this species uses SSB or total biomass
+  is_ssb <- sp %in% ssb_stocks
+  
+  # Get target value (B40_SSB or B40)
+  target_val <- if (is_ssb) {
+    Btarg_all[["persist"]][sp, "B40_SSB"]
+  } else {
+    Btarg_all[["persist"]][sp, "B40"]
+  }
+  
+  # Establish a reasonable upper search bound for F (5x status quo F, with a floor of 2.0)
+  upper_bound <- F_meanlast[sp] * 5 + 0.1
+  if (upper_bound < 0.2) {
+    upper_bound <- 2.0  # Safe window if status quo F is near zero
+  }
+  
+  # Run 1D optimization
+  opt_res <- optimize( # 1D optimization with optimize() instead of optim() 
+    f              = sumsq_btarg_single,
+    interval       = c(0, upper_bound),
+    sp             = sp,
+    scene          = scene_persist_f40,
+    target_bio_val = target_val,
+    is_ssb         = is_ssb,
+    all_years      = all_years,
+    proj_rows      = proj_rows,
+    tol            = 1e-4
+  )
+  
+  # Record results
+  F40_persist[sp] <- opt_res$minimum
+  
+  # RESET focal species F back to status quo (F_meanlast) before moving to next species
+  scene_persist_fopt$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast[sp]
+}
+
+message("persist F40 individual optimization elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " min")
+  
+## 7.2 optimize F35 = OFL target Fishing Mortality. Run the individual optimization loop ####
+
+F35_persist <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
+
+ptm <- proc.time()
+for (sp in managed_sp_list) {
+  message("  Optimizing F35 for: ", sp)
+  is_ssb <- sp %in% ssb_stocks
+  
+  target_val_35 <- if (is_ssb) {
+    Btarg_all[["persist"]][sp, "B35_SSB"]
+  } else {
+    Btarg_all[["persist"]][sp, "B35"]
+  }
+  
+  upper_bound <- F_meanlast[sp] * 5 + 0.1
+  if (upper_bound < 0.2) {
+    upper_bound <- 2.0  # Safe window if status quo F is near zero
+  }
+  
+  opt_res_35 <- optimize(
+    f              = sumsq_btarg_single,
+    interval       = c(0, upper_bound),
+    sp             = sp,
+    scene          = scene_persist_f40,
+    target_bio_val = target_val_35,
+    is_ssb         = is_ssb,
+    all_years      = all_years,
+    proj_rows      = proj_rows,
+    tol            = 1e-4
+  )
+  
+  F35_persist[sp] <- opt_res_35$minimum
+  scene_persist_fopt$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast[sp]
+}
+message("persist F35 individual optimization elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " min")
+
+# ---------------------------------------------------------------------------- #
+# 8. Save Ftarget and Tier 3 F results ####
+# ---------------------------------------------------------------------------- #
+
+Tier3_F_matrix <- data.frame(
+  F40_ABC = F40_persist,
+  F35_OFL = F35_persist
+)
+
+write.csv(
+  Tier3_F_matrix,
+  file = file.path(bftarget_dir, "F_Tier3_WGOA_GFDL_persist.csv"),
+  row.names = TRUE
+)
+message("Saved: ", file.path(bftarget_dir, "F_Tier3_WGOA_GFDL_persist.csv"))
+
+# Quick check comparison
+Fcomp <- data.frame(
+  F_meanlast10  = F_meanlast10[managed_sp_list],
+  F40_ABC       = F40_persist,
+  F35_OFL       = F35_persist
+)
+print(round(Fcomp, 4))
+

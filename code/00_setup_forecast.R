@@ -15,7 +15,7 @@
 
 
 library(devtools)
-install_github('NOAA-EDAB/Rpath', ref="ssb_output_diag")
+#install_github('NOAA-EDAB/Rpath', ref="ssb_output_diag")
 library(Rpath)
 library(tidyverse)
 library(janitor)
