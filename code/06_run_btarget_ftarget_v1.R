@@ -6,8 +6,8 @@
 #
 # code/06_run_btarget_ftarget.R
 # Purpose: Estimate biomass reference points (B0, Btarget, Blim) and
-# climate-informed target fishing mortality (Ftarget) under GFDL SSP 126,
-# SSP 245, and SSP 585, plus a persistence scenario for the WGOA fit Rpath model.
+# climate-informed target fishing mortality (Ftarget) under persist scenario
+# for the WGOA fit Rpath model.
 # ---------------------------------------------------------------------------- #
 
 #pak::pkg_install("noaa-edab/Rpath@ssb_output_diag")
@@ -298,22 +298,27 @@ scene_persist$fishing$ForcedFRate[proj_rows, managed_cols] <-
 
 # Containers for B0 (biomass and SSB)
 B0_biomass_persist <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
-B0_SSB_persist     <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
+B0_SSB_persist     <- setNames(rep(NA, length(managed_sp_list)), managed_sp_list)
 
 ptm <- proc.time()
 for (sp in managed_sp_list) {
   message("  B0 persist | F=0 for: ", sp)
   
-  # Set focal species F = 0; all others stay at F_meanlast
+  # Set focal species F = 0
   scene_persist$fishing$ForcedFRate[proj_rows, sp] <- 0
   
   run_b0 <- rsim.run(scene_persist, method = "AB", years = all_years)
   
-  # Record end-of-century biomass and SSB for the focal species
+  # Record total end-of-century biomass (EVERY species has this)
   B0_biomass_persist[sp] <- end_cent_biomass(run_b0)[sp, ]
-  B0_SSB_persist[sp]     <- end_cent_SSB(run_b0)[sp, ]
   
-  # Reset focal species F back to F_meanlast
+  # Record end-of-century SSB (ONLY if the species is a multi-stanza stock)
+  if (sp %in% ssb_stocks) {
+    B0_SSB_persist[sp] <- end_cent_SSB(run_b0)[sp, ]
+  }
+  
+  # Reset focal species F back to status quo 
+  # Note: Ensure this variable name matches what you defined earlier! (F_meanlast or F_meanlast10)
   scene_persist$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast[sp]
 }
 message("persist B0 elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " min")
@@ -615,7 +620,7 @@ for (sp in managed_sp_list) {
   F40_persist[sp] <- opt_res$minimum
   
   # RESET focal species F back to status quo (F_meanlast) before moving to next species
-  scene_persist_fopt$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast[sp]
+  scene_persist_f40$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast[sp]
 }
 
 message("persist F40 individual optimization elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " min")
@@ -653,7 +658,7 @@ for (sp in managed_sp_list) {
   )
   
   F35_persist[sp] <- opt_res_35$minimum
-  scene_persist_fopt$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast[sp]
+  scene_persist_f40$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast[sp]
 }
 message("persist F35 individual optimization elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " min")
 
@@ -675,7 +680,7 @@ message("Saved: ", file.path(bftarget_dir, "F_Tier3_WGOA_GFDL_persist.csv"))
 
 # Quick check comparison
 Fcomp <- data.frame(
-  F_meanlast10  = F_meanlast10[managed_sp_list],
+  F_meanlast  = F_meanlast[managed_sp_list],
   F40_ABC       = F40_persist,
   F35_OFL       = F35_persist
 )
