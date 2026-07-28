@@ -318,7 +318,7 @@ for (sp in managed_sp_list) {
   }
   
   # Reset focal species F back to status quo 
-  # Note: Ensure this variable name matches what you defined earlier! (F_meanlast or F_meanlast10)
+  # Note: Ensure this variable name matches what you defined earlier! (F_meanlast or F_meanlast)
   scene_persist$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast[sp]
 }
 message("persist B0 elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " min")
@@ -337,12 +337,12 @@ B0_all <- list(
 # B40 is the standard target for WGOA groundfish (no crab species).
 # Blim rules follow NPFMC FMP conventions -- verify before use in assessments:
 #   - Most groundfish:  Blim = 0.05 * B40
-#   - Pacific cod:      Blim = 0.50 * B40 (precautionary buffer)
+#   - Pacific cod:      Blim = 0.50 * B40 (precautionary buffer) or B20 when the stock is below a certain threshold
 #
 # Reference points are derived from B0_biomass (total biomass) and also
 # tabulated from B0_SSB (spawning stock biomass) for stocks where SSB is used.
 
-# end of July for the reference points and August the code for HCRs
+# FLAG end of July for the reference points and August the code for HCRs ####
 
 Btarg_all <- vector("list", 1L)
 names(Btarg_all) <- "persist"
@@ -379,7 +379,7 @@ target_bio <- cbind(
   Btarget_SQ = Btarg #SQ = Status quo target*
 )
 
-outfile <- file.path(bftarget_dir, paste0("B_SSB_target_WGOA_GFDL_", ssp, ".csv"))
+outfile <- file.path(bftarget_dir, paste0("B_SSB_target_WGOA_", ssp, ".csv"))
 write.csv(target_bio, file = outfile, row.names = TRUE)
 message("Saved: ", outfile)
 
@@ -483,10 +483,10 @@ Ftarg_matrix <- matrix(
 
 write.csv(
   Ftarg_matrix,
-  file = file.path(bftarget_dir, "Fopt_target_WGOA_GFDL_persist.csv"),
+  file = file.path(bftarget_dir, "Fopt_target_WGOA_persist.csv"),
   row.names = TRUE
 )
-message("Saved: ", file.path(bftarget_dir, "Fopt_target_WGOA_GFDL_persist.csv"))
+message("Saved: ", file.path(bftarget_dir, "Fopt_target_WGOA_persist.csv"))
 
 # Quick check: compare Ftarget to F_meanlast
 Fcomp <- data.frame(
@@ -536,6 +536,10 @@ sumsq_btarg_single <- function(F_val,
     sim_val <- end_cent_biomass(run_tmp)[sp, ]
   }
   
+  if(sim_val <(0.01* target_bio_val)){
+    return(1000 + F_val)
+  }
+  
   # Return squared relative difference
   return(((sim_val - target_bio_val) / max(target_bio_val, 1e-9))^2)
 }
@@ -577,7 +581,7 @@ scene_persist_f40$fishing$ForcedFRate[proj_rows, equil_cols] <-
   matrix(F_equil[equil_cols], nrow = length(proj_rows), ncol = length(equil_cols), byrow = TRUE)
 
 scene_persist_f40$fishing$ForcedFRate[proj_rows, managed_cols] <-
-  matrix(F_meanlast10[managed_cols], nrow = length(proj_rows), ncol = length(managed_cols), byrow = TRUE)
+  matrix(F_meanlast[managed_cols], nrow = length(proj_rows), ncol = length(managed_cols), byrow = TRUE)
 
 
 ## 7.1 optimize F40 (target Fishing Mortality) Run the individual optimization loop ####
@@ -600,7 +604,7 @@ for (sp in managed_sp_list) {
   # Establish a reasonable upper search bound for F (5x status quo F, with a floor of 2.0)
   upper_bound <- F_meanlast[sp] * 5 + 0.1
   if (upper_bound < 0.2) {
-    upper_bound <- 2.0  # Safe window if status quo F is near zero
+    upper_bound <- 2.0  # Safe window if status quo F is near zero ##FLAG
   }
   
   # Run 1D optimization
@@ -673,10 +677,10 @@ Tier3_F_matrix <- data.frame(
 
 write.csv(
   Tier3_F_matrix,
-  file = file.path(bftarget_dir, "F_Tier3_WGOA_GFDL_persist.csv"),
+  file = file.path(bftarget_dir, "F_Tier3_WGOA_persist_v2.csv"),
   row.names = TRUE
 )
-message("Saved: ", file.path(bftarget_dir, "F_Tier3_WGOA_GFDL_persist.csv"))
+message("Saved: ", file.path(bftarget_dir, "F_Tier3_WGOA_GFDL_persist_v2.csv"))
 
 # Quick check comparison
 Fcomp <- data.frame(
