@@ -26,7 +26,7 @@ get_vv_comparison <- function(original_scene, fit_results, plot = TRUE, scene_na
   library(scales)
 
   old_vv <- original_scene$params$VV
-  new_vv <- fit_results$final_scene$params$VV
+  new_vv <- fit_results$params$VV #changed from fit_results$scene$params$VV (since I have the full best scene I don't have to run all the versions (bioen, base full) again)
   prey_idx <- original_scene$params$PreyFrom + 1
   pred_idx <- original_scene$params$PreyTo + 1
   sp_names <- original_scene$params$spname
@@ -94,4 +94,8 @@ get_vv_comparison <- function(original_scene, fit_results, plot = TRUE, scene_na
   return(vv_comp)
 }
 
+# ---------------------------------------------------------------------------- #
+
+View(my_vv_table)
+write.csv(my_vv_table, "results/vulnerability_comparison_best_scene_20260821.csv", row.names = FALSE)
 

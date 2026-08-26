@@ -28,7 +28,7 @@ source("code/Function_F_clim_sim_scene.R")
 
 
 # ---------------------------------------------------------------------------- #
-# 0. Configuration ####
+#  Configuration ####
 # ---------------------------------------------------------------------------- #
 
 managed_sp_list <- c(
@@ -65,7 +65,7 @@ tier3_sp_list <- c("walleye_pollock_adult","pacific_cod_adult", "sablefish_adult
 ssb_stocks_list <- c("pacific_herring_adult","pacific_halibut_adult",
                 "arrowtooth_flounder_adult", "rex_sole_adult",
                 "flathead_sole_adult","pacific_ocean_perch_adult",
-                "sablefish_adult", "pacific_cod_adult",
+                "pacific_cod_adult",
                 "walleye_pollock_adult")
 
 
@@ -224,6 +224,7 @@ run_hind <- rsim.run(scene_hind, method = "AB", years = all_years)
 # Stanza "Oldest" species that are also in managed_sp_list.
 # These species use SSB (not total biomass) as their reference point.
 ssb_stocks <- intersect(scene_hind$stanzas$Oldest, managed_sp_list)
+ssb_stocks <- setdiff(ssb_stocks, "sablefish_adult") #taking sablefish out of the SSB calculation. 
 message("SSB stocks (stanza Oldest intersect managed_sp_list): ",
         paste(ssb_stocks, collapse = ", "))
 
@@ -379,7 +380,7 @@ target_bio <- cbind(
   Btarget_SQ = Btarg #SQ = Status quo target*
 )
 
-outfile <- file.path(bftarget_dir, paste0("B_SSB_target_WGOA_", ssp, ".csv"))
+outfile <- file.path(bftarget_dir, paste0("B_SSB_target_WGOA_nosable", ssp, ".csv"))
 write.csv(target_bio, file = outfile, row.names = TRUE)
 message("Saved: ", outfile)
 
@@ -483,10 +484,10 @@ Ftarg_matrix <- matrix(
 
 write.csv(
   Ftarg_matrix,
-  file = file.path(bftarget_dir, "Fopt_target_WGOA_persist.csv"),
+  file = file.path(bftarget_dir, "Fopt_target_WGOA_persist_nosablessb.csv"),
   row.names = TRUE
 )
-message("Saved: ", file.path(bftarget_dir, "Fopt_target_WGOA_persist.csv"))
+message("Saved: ", file.path(bftarget_dir, "Fopt_target_WGOA_persist_nosablessb.csv"))
 
 # Quick check: compare Ftarget to F_meanlast
 Fcomp <- data.frame(
@@ -677,16 +678,218 @@ Tier3_F_matrix <- data.frame(
 
 write.csv(
   Tier3_F_matrix,
-  file = file.path(bftarget_dir, "F_Tier3_WGOA_persist_v2.csv"),
+  file = file.path(bftarget_dir, "F_Tier3_WGOA_persist_v2_nosablessb.csv"),
   row.names = TRUE
 )
-message("Saved: ", file.path(bftarget_dir, "F_Tier3_WGOA_GFDL_persist_v2.csv"))
+message("Saved: ", file.path(bftarget_dir, "F_Tier3_WGOA_persist_v2_nosablessb.csv"))
+
 
 # Quick check comparison
 Fcomp <- data.frame(
   F_meanlast  = F_meanlast[managed_sp_list],
+  Ftarg_persist   = Ftarg_matrix[, "persist"],
   F40_ABC       = F40_persist,
   F35_OFL       = F35_persist
 )
 print(round(Fcomp, 4))
+
+# ---------------------------------------------------------------------------- #
+# 9. Grid-Search Ftarget (3rd Method) – Predefined F Ranges ####
+# ---------------------------------------------------------------------------- #
+# Method 3: Iterate through a predefined vector of fishing mortality rates 
+# based on 2024 F40% base values. F ranges use larger increments from 0 to -30% 
+# of the base F, and finer increments between -30% and +30%.
+
+stopifnot(
+  "Btarg_all[['persist']] is NULL — re-run Step 4 before proceeding." =
+    !is.null(Btarg_all[["persist"]])
+)
+
+message("\n============================================================")
+message("Ftarget Grid Search (3rd Method) | SSP: persist")
+message("============================================================")
+
+# Base F40 values from the most recent assessments mapped to WGOA groups
+base_F40_table <- c(
+  "walleye_pollock_adult"     = 0.280,
+  "pacific_cod_adult"         = 0.460,  
+  "sablefish_adult"           = 0.086, # this is from Meaghan's document 
+  "pacific_ocean_perch_adult" = 0.064,
+  "slope_rockfish"            = 0.061,  # Based on Northern Rockfish
+  "pelagic_shelf_rockfish"    = 0.092,  # Based on Dusky Rockfish
+  "demersal_shelf_rockfish"   = 0.038,  # Based on Rougheye & Blackspotted
+  "arrowtooth_flounder_adult" = 0.136,
+  "flathead_sole_adult"       = 0.290,
+  "deep_water_flatfish"       = 0.117,  # Based on Dover Sole
+  "rex_sole_adult"            = 0.198,
+  "shallow_water_flatfish"    = 0.201  # Based on Northern Rock Sole
+)
+
+# Function to generate custom F search range 
+generate_F_search <- function(base_F) {
+  if (is.na(base_F) || base_F == 0) return(seq(0, 0.5, by = 0.01))
+  
+  f_minus_50 <- 0.50 * base_F
+  f_minus_30 <- 0.70 * base_F
+  f_plus_30  <- 1.30 * base_F
+  f_plus_100 <- max(2.00 * base_F, 0.5)  #FLAG#####  
+  #floor of 0.5 guards near-zero F_meanlast species #comfirm if that is the case
+  
+  vec1 <- seq(0, f_minus_50, length.out = 5)                      
+  vec2 <- seq(f_minus_50, f_minus_30, length.out = 5)             
+  vec3 <- seq(f_minus_30, f_plus_30, length.out = 30)  # fine: ±30% of base
+  vec4 <- seq(f_plus_30, f_plus_100, length.out = 15)  # extension: +30% to +100%
+  
+  f_vec <- unique(sort(c(vec1, vec2, vec3, vec4)))
+  return(f_vec)
+}
+
+# result vec
+F40_grid <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
+F35_grid <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
+grid_plot_data <- list()
+
+ptm_grid <- proc.time()
+
+for (sp in managed_sp_list) {
+  message("  Grid search optimizing F40 and F35 for: ", sp)
+  
+  is_ssb <- sp %in% ssb_stocks
+  target_40 <- if(is_ssb) Btarg_all[["persist"]][sp, "B40_SSB"] else Btarg_all[["persist"]][sp, "B40"]
+  target_35 <- if(is_ssb) Btarg_all[["persist"]][sp, "B35_SSB"] else Btarg_all[["persist"]][sp, "B35"]
+  
+  base_f <- if (sp %in% names(base_F40_table)) base_F40_table[sp] else F_meanlast[sp]
+  f_test_vec <- generate_F_search(base_f)
+  
+  best_F40 <- NA
+  best_F35 <- NA
+  min_diff_40 <- Inf
+  min_diff_35 <- Inf
+  
+  # Vectors to store simulation curve for this species
+  sp_f_vals <- numeric(length(f_test_vec))
+  sp_sim_bio <- numeric(length(f_test_vec))
+  
+  for (idx in seq_along(f_test_vec)) {
+    f_val <- f_test_vec[idx]
+    
+    # Set F only for the mnged species
+    scene_persist_f40$fishing$ForcedFRate[proj_rows, sp] <- max(f_val, 0)
+    
+    # Run the simulation
+    run_tmp <- rsim.run(scene_persist_f40, method = "AB", years = all_years)
+    
+    # Extract simulated end-of-century metric for the mnged species
+    sim_val <- if(is_ssb) end_cent_SSB(run_tmp)[sp, ] else end_cent_biomass(run_tmp)[sp, ]
+    
+    sp_f_vals[idx] <- f_val
+    sp_sim_bio[idx] <- sim_val
+    
+    # Penalty ####
+    if (sim_val < (0.01 * target_40)) {
+      diff_40 <- 1000 + f_val
+      diff_35 <- 1000 + f_val
+    } else {
+      diff_40 <- ((sim_val - target_40) / max(target_40, 1e-9))^2
+      diff_35 <- ((sim_val - target_35) / max(target_35, 1e-9))^2
+    }
+    
+    if (diff_40 < min_diff_40) {
+      min_diff_40 <- diff_40
+      best_F40 <- f_val
+    }
+    
+    if (diff_35 < min_diff_35) {
+      min_diff_35 <- diff_35
+      best_F35 <- f_val
+    }
+  }
+  
+  F40_grid[sp] <- best_F40
+  F35_grid[sp] <- best_F35
+  
+  # Store species profile data for ggplot
+  grid_plot_data[[sp]] <- data.frame(
+    species = sp,
+    f_val = sp_f_vals,
+    sim_bio = sp_sim_bio,
+    target_b40 = target_40,
+    target_b35 = target_35,
+    is_ssb = is_ssb
+  )
+  
+  # RESET focal species F back to status quo (F_meanlast)
+  scene_persist_f40$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast[sp]
+}
+
+message("persist F40/F35 grid search elapsed: ", round((proc.time() - ptm_grid)[3] / 60, 2), " min")
+
+# ---------------------------------------------------------------------------- #
+# 10. Save Grid Search Results and Compare ####
+# ---------------------------------------------------------------------------- #
+
+Grid_F_matrix <- data.frame(
+  F40_ABC_Grid = F40_grid,
+  F35_OFL_Grid = F35_grid
+)
+
+write.csv(
+  Grid_F_matrix,
+  file = file.path(bftarget_dir, "F_Tier3_WGOA_persist_GridSearch_nosablessb.csv"),
+  row.names = TRUE
+)
+message("Saved: ", file.path(bftarget_dir, "F_Tier3_WGOA_persist_GridSearch_nosablessb.csv"))
+
+Fcomp_final <- data.frame(
+  F_meanlast  = F_meanlast[managed_sp_list],
+  Ftarg_persist   = Ftarg_matrix[, "persist"],
+  F40_Opt     = F40_persist,
+  F40_Grid    = F40_grid,
+  F35_Opt     = F35_persist,
+  F35_Grid    = F35_grid
+)
+
+message("\nComparison of Ftarget optimization vs grid search:")
+print(round(Fcomp_final, 4))
+
+write.csv(Fcomp_final, 
+          file = file.path(bftarget_dir, "Fcomp_final_20260825.csv"),
+          row.names = TRUE)
+
+
+# ---------------------------------------------------------------------------- #
+# 11. Plot Grid Search Profiles ####
+# ---------------------------------------------------------------------------- #
+message("\nGenerating grid search profile plots...")  
+
+# Combine all species data into one data frame
+df_plot <- do.call(rbind, grid_plot_data)
+
+# Create the faceted plot
+p_grid <- ggplot(df_plot, aes(x = f_val, y = sim_bio)) +
+  geom_line(color = "#0072B2", linewidth = 1) +
+  geom_point(color = "#0072B2", size = 1.2) +
+  geom_hline(aes(yintercept = target_b40, color = "B40 Target"), linetype = "dashed", linewidth = 0.8) +
+  geom_hline(aes(yintercept = target_b35, color = "B35 Target"), linetype = "dotdash", linewidth = 0.8) +
+  facet_wrap(~ species, scales = "free_y", ncol = 4) +
+  scale_color_manual(name = "Reference Points", 
+                     values = c("B40 Target" = "#009E73", "B35 Target" = "#E69F00")) +
+  labs(
+    title = "Grid Search: Simulated End-of-Century Biomass vs. Fishing Mortality (F)",
+    subtitle = "Intersections indicate F40 and F35 target rates",
+    x = "Fishing Mortality Rate (F)",
+    y = "End-of-Century Biomass / SSB (t)"
+  ) +
+  theme_bw() +
+  theme(
+    legend.position = "bottom",
+    strip.background = element_rect(fill = "grey90"),
+    strip.text = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+# Save the plot
+plot_path <- file.path(bftarget_dir, "GridSearch_Profiles_persist.png")
+ggsave(plot_path, plot = p_grid, width = 14, height = 10, bg = "white", dpi = 300)
+message("Saved plot: ", plot_path)
 
