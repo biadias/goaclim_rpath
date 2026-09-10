@@ -101,9 +101,9 @@ p1a <- ggplot(compare_df, aes(x = F40_ABC, y = F40_ABC_Grid)) +
   theme_minimal() +
   coord_fixed(
     ratio = 1,
-    xlim = c(0, 1.5),
+    xlim = c(0, 1),
     #max(compare_df$F40_ABC, compare_df$Fopt_Simultaneous)),
-    ylim = c(0, 1.5)
+    ylim = c(0, 1)
   ) #max(compare_df$F40_ABC, compare_df$Fopt_Simultaneous)))
 
 ggsave(
@@ -359,4 +359,19 @@ ggplot(df_long, aes(x=f, y=value)) +
        subtitle=paste0("Dotted vertical = F_meanlast (", round(F_meanlast[sp],4), ")"),
        x="Fishing Mortality Rate (F)", y="End-of-century value (t/km²)") +
   theme_bw()
+
+# ---------------------------------------------------------------------------- #
+# 6. Fishing Table Function to extract q (catchability) ####
+# ---------------------------------------------------------------------------- #
+
+fishing.table <- function(scenario){
+  # the +1s for the usual c to R offsets
+  spar        <- scenario$params
+  group       <- spar$spname[spar$FishFrom+1]
+  gear        <- spar$spname[spar$FishThrough+1]
+  # destination 'Outside' is landings, all others are discard groups
+  destination <- spar$spname[spar$FishTo+1]
+  q           <- spar$FishQ
+  return(data.frame(group,gear,destination,q))
+}
 

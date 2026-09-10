@@ -68,6 +68,36 @@ ssb_stocks_list <- c("pacific_herring_adult","pacific_halibut_adult",
                 "pacific_cod_adult",
                 "walleye_pollock_adult")
 
+ssb_stocks <- ssb_stocks_list
+
+# SSL prey stocks with a B20 cutoff
+ssl_sp <- c("atka_mackerel", "pacific_cod_adult", "walleye_pollock_adult")
+# non-SSL prey stocks (including oth_skate)
+nonssl_sp <- c(
+  "arrowtooth_flounder_adult",
+  "flathead_sole_adult",
+  "octopus",
+  "deep_water_flatfish",
+  "sablefish_adult",
+  "shallow_water_flatfish",
+  "rex_sole_adult",
+  "pacific_ocean_perch_adult",
+  "slope_rockfish",
+  "demersal_shelf_rockfish",
+  "pelagic_shelf_rockfish",
+  "big_skate",
+  "longnose_skate",
+  "other_skates",
+  "pacific_halibut_adult",
+  "salmon_shark",
+  "pacific_sleeper_shark"
+)
+groundfish <- c(ssl_sp, nonssl_sp)
+managed_sp <- managed_sp_list
+non_managed_sp <- bal$Group[!(bal$Group %in% c(managed_sp, all_gears))]
+
+# species that use medium-lived error parameters in the management loop
+medLH <- c("walleye_pollock_adult", "atka_mackerel", "octopus")
 
 ssps <- c("persist", "126", "245", "585")
 
@@ -376,6 +406,7 @@ target_bio <- cbind(
   B0_SSB     = B0_SSB,
   B40_SSB    = 0.40 * B0_SSB,
   B35_SSB    = 0.35 * B0_SSB,
+  B50_SSB    = 0.50 * B0_SSB,
   Blim       = Blim,
   Btarget_SQ = Btarg #SQ = Status quo target*
 )
@@ -667,13 +698,55 @@ for (sp in managed_sp_list) {
 }
 message("persist F35 individual optimization elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " min")
 
+## 7.3 optimize F50 target Fishing Mortality. Run the individual optimization loop ####
+
+F50_persist <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
+
+ptm <- proc.time()
+for (sp in managed_sp_list) {
+  message("  Optimizing F50 for: ", sp)
+  is_ssb <- sp %in% ssb_stocks
+  
+  target_val_50 <- if (is_ssb) {
+    Btarg_all[["persist"]][sp, "B50_SSB"]
+  } else {
+    Btarg_all[["persist"]][sp, "B50"]
+  }
+  
+  upper_bound <- F_meanlast[sp] * 5 + 0.1
+  if (upper_bound < 0.2) {
+    upper_bound <- 2.0  # Safe window if status quo F is near zero
+  }
+  
+  opt_res_50 <- optimize(
+    f              = sumsq_btarg_single,
+    interval       = c(0, upper_bound),
+    sp             = sp,
+    scene          = scene_persist_f40,
+    target_bio_val = target_val_50,
+    is_ssb         = is_ssb,
+    all_years      = all_years,
+    proj_rows      = proj_rows,
+    tol            = 1e-4
+  )
+  
+  F50_persist[sp] <- opt_res_50$minimum
+  scene_persist_f40$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast[sp]
+}
+message("persist F50 individual optimization elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " min")
+
+
+
+
+
 # ---------------------------------------------------------------------------- #
 # 8. Save Ftarget and Tier 3 F results ####
 # ---------------------------------------------------------------------------- #
 
 Tier3_F_matrix <- data.frame(
   F40_ABC = F40_persist,
-  F35_OFL = F35_persist
+  F35_OFL = F35_persist,
+  F50= F50_persist
 )
 
 write.csv(
@@ -686,10 +759,11 @@ message("Saved: ", file.path(bftarget_dir, "F_Tier3_WGOA_persist_v2_nosablessb.c
 
 # Quick check comparison
 Fcomp <- data.frame(
-  F_meanlast  = F_meanlast[managed_sp_list],
-  Ftarg_persist   = Ftarg_matrix[, "persist"],
+  F_meanlast    = F_meanlast[managed_sp_list],
+  Ftarg_persist = Ftarg_matrix[, "persist"],
   F40_ABC       = F40_persist,
-  F35_OFL       = F35_persist
+  F35_OFL       = F35_persist,
+  F50           = F50_persist
 )
 print(round(Fcomp, 4))
 
@@ -747,24 +821,28 @@ generate_F_search <- function(base_F) {
 # result vec
 F40_grid <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
 F35_grid <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
+F50_grid <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
 grid_plot_data <- list()
 
 ptm_grid <- proc.time()
 
 for (sp in managed_sp_list) {
-  message("  Grid search optimizing F40 and F35 for: ", sp)
+  message("  Grid search optimizing F40, F35 and F50 for: ", sp)
   
   is_ssb <- sp %in% ssb_stocks
   target_40 <- if(is_ssb) Btarg_all[["persist"]][sp, "B40_SSB"] else Btarg_all[["persist"]][sp, "B40"]
   target_35 <- if(is_ssb) Btarg_all[["persist"]][sp, "B35_SSB"] else Btarg_all[["persist"]][sp, "B35"]
+  target_50 <- if(is_ssb) Btarg_all[["persist"]][sp, "B50_SSB"] else Btarg_all[["persist"]][sp, "B50"]
   
   base_f <- if (sp %in% names(base_F40_table)) base_F40_table[sp] else F_meanlast[sp]
   f_test_vec <- generate_F_search(base_f)
   
   best_F40 <- NA
   best_F35 <- NA
+  best_F50 <- NA
   min_diff_40 <- Inf
   min_diff_35 <- Inf
+  min_diff_50 <- Inf
   
   # Vectors to store simulation curve for this species
   sp_f_vals <- numeric(length(f_test_vec))
@@ -789,9 +867,11 @@ for (sp in managed_sp_list) {
     if (sim_val < (0.01 * target_40)) {
       diff_40 <- 1000 + f_val
       diff_35 <- 1000 + f_val
+      diff_50 <- 1000 + f_val
     } else {
       diff_40 <- ((sim_val - target_40) / max(target_40, 1e-9))^2
       diff_35 <- ((sim_val - target_35) / max(target_35, 1e-9))^2
+      diff_50 <- ((sim_val - target_50) / max(target_50, 1e-9))^2
     }
     
     if (diff_40 < min_diff_40) {
@@ -803,10 +883,16 @@ for (sp in managed_sp_list) {
       min_diff_35 <- diff_35
       best_F35 <- f_val
     }
+    
+    if (diff_50 < min_diff_50) {
+      min_diff_50 <- diff_50
+      best_F50 <- f_val
+    }
   }
   
   F40_grid[sp] <- best_F40
   F35_grid[sp] <- best_F35
+  F50_grid[sp] <- best_F50
   
   # Store species profile data for ggplot
   grid_plot_data[[sp]] <- data.frame(
@@ -815,6 +901,7 @@ for (sp in managed_sp_list) {
     sim_bio = sp_sim_bio,
     target_b40 = target_40,
     target_b35 = target_35,
+    target_b50 = target_50,
     is_ssb = is_ssb
   )
   
@@ -828,9 +915,15 @@ message("persist F40/F35 grid search elapsed: ", round((proc.time() - ptm_grid)[
 # 10. Save Grid Search Results and Compare ####
 # ---------------------------------------------------------------------------- #
 
+write.csv(grid_plot_data,
+          file = file.path(bftarget_dir, "grid_plot_data_F_Tier3_WGOA_persist_GridSearch_nosablessb.csv"),
+          row.names = TRUE
+)
+
 Grid_F_matrix <- data.frame(
   F40_ABC_Grid = F40_grid,
-  F35_OFL_Grid = F35_grid
+  F35_OFL_Grid = F35_grid,
+  F50_Grid     = F50_grid
 )
 
 write.csv(
@@ -846,14 +939,16 @@ Fcomp_final <- data.frame(
   F40_Opt     = F40_persist,
   F40_Grid    = F40_grid,
   F35_Opt     = F35_persist,
-  F35_Grid    = F35_grid
+  F35_Grid    = F35_grid,
+  F50_Opt     = F50_persist,
+  F50_Grid    = F50_grid
 )
 
 message("\nComparison of Ftarget optimization vs grid search:")
 print(round(Fcomp_final, 4))
 
 write.csv(Fcomp_final, 
-          file = file.path(bftarget_dir, "Fcomp_final_20260825.csv"),
+          file = file.path(bftarget_dir, "Fcomp_final_20260909.csv"),
           row.names = TRUE)
 
 
@@ -867,29 +962,37 @@ df_plot <- do.call(rbind, grid_plot_data)
 
 # Create the faceted plot
 p_grid <- ggplot(df_plot, aes(x = f_val, y = sim_bio)) +
-  geom_line(color = "#0072B2", linewidth = 1) +
-  geom_point(color = "#0072B2", size = 1.2) +
+  geom_line(color = "#e6a024", linewidth = 1) +
+  geom_point(color = "#e6a024", size = 1.2) +
   geom_hline(aes(yintercept = target_b40, color = "B40 Target"), linetype = "dashed", linewidth = 0.8) +
   geom_hline(aes(yintercept = target_b35, color = "B35 Target"), linetype = "dotdash", linewidth = 0.8) +
   facet_wrap(~ species, scales = "free_y", ncol = 4) +
   scale_color_manual(name = "Reference Points", 
                      values = c("B40 Target" = "#009E73", "B35 Target" = "#E69F00")) +
   labs(
-    title = "Grid Search: Simulated End-of-Century Biomass vs. Fishing Mortality (F)",
-    subtitle = "Intersections indicate F40 and F35 target rates",
+    #title = "Grid Search: Simulated End-of-Century Biomass vs. Fishing Mortality (F)",
+    #subtitle = "Intersections indicate F40 and F35 target rates",
     x = "Fishing Mortality Rate (F)",
     y = "End-of-Century Biomass / SSB (t)"
   ) +
-  theme_bw() +
+  theme_minimal() +
   theme(
     legend.position = "bottom",
-    strip.background = element_rect(fill = "grey90"),
-    strip.text = element_text(face = "bold"),
-    axis.text.x = element_text(angle = 45, hjust = 1)
+    #strip.background = element_rect(fill = "grey90"),
+    strip.text = element_text(face = "bold", size= 14),
+    axis.text.x = element_text(angle = 45, hjust = 1, size=14),
+    axis.text.y = element_text(size=14),
+    axis.title = element_text(size=14),
+    legend.text = element_text(size=14),
+    legend.title = element_text(size=14),
+    panel.background = element_rect(fill = "transparent", color = NA), # Transparent panel
+    plot.background = element_rect(fill = "transparent", color = NA),  # Transparent background
+    legend.background = element_rect(fill = "transparent", color = NA), # Transparent legend
+    legend.box.background = element_rect(fill = "transparent", color = NA) # Transparent legend box
   )
 
 # Save the plot
-plot_path <- file.path(bftarget_dir, "GridSearch_Profiles_persist.png")
-ggsave(plot_path, plot = p_grid, width = 14, height = 10, bg = "white", dpi = 300)
+plot_path <- file.path(bftarget_dir, "GridSearch_Profiles_persist_v2.png")
+ggsave(plot_path, plot = p_grid, width = 14, height = 10, bg = "transparent", dpi = 300)
 message("Saved plot: ", plot_path)
 
