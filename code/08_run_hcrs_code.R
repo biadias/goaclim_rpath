@@ -54,6 +54,7 @@ names(B40) <- rownames(target_bio)
 # Run the fuction
 # ---------------------------------------------------------------------------- #
 
+
 hcrs_options <- c(1, 2,3,5,10)
 sim_results <- list()
 
@@ -102,6 +103,9 @@ for(ssp in ssps){
 }
 
 message("All done!!!")
+
+
+write.csv(sim_results$SSPpersist_HCR1$sim_out, "results/hcr1_persist_ssmat_wgoa20261020.csv")
 
 # ---------------------------------------------------------------------------- #
 # Plot ####
@@ -234,3 +238,72 @@ hcr_plot <- ggplot(plot_data, aes(x = Year, y = Biomass, color = HCR, linetype =
 plot_path <- file.path(bftarget_dir, "HCRs.png")
 ggsave(plot_path, plot = hcr_plot , width = 12, height = 10, bg = "transparent", dpi = 300)
 message("Saved plot: ", plot_path)
+
+
+# ---------------------------------------------------------------------------- #
+# SAVE DATA ####
+# ---------------------------------------------------------------------------- #
+
+all_sim_data <- data.frame()
+
+for (run_name in names(sim_results)) {
+  run_parts <- strsplit(run_name, "_")[[1]]
+  # Remove "SSP" and "HCR" text if you only want the values, or leave as is
+  ssp_val <- run_parts[1]
+  hcr_val <- run_parts[2]
+  
+  rsim_obj <- sim_results[[run_name]]$sim_out
+  
+  # 1. Total Biomass
+  bio_matrix <- rsim_obj$annual_Biomass
+  bio_df <- as.data.frame(bio_matrix)
+  bio_df$Year <- as.numeric(rownames(bio_matrix))
+  bio_df$SSP  <- ssp_val
+  bio_df$HCR  <- hcr_val
+  bio_df$Metric <- "Total_Biomass"
+  
+  # 2. SSB (Averaged across months)
+  n_years <- length(all_years)
+  annual_ssb_matrix <- matrix(NA, nrow = n_years, ncol = ncol(rsim_obj$out_SSB))
+  colnames(annual_ssb_matrix) <- colnames(rsim_obj$out_SSB)
+  rownames(annual_ssb_matrix) <- all_years
+  
+  for (y in 1:n_years) {
+    m_start <- (y - 1) * 12 + 1
+    m_end   <- y * 12
+    annual_ssb_matrix[y, ] <- colMeans(rsim_obj$out_SSB[m_start:m_end, , drop = FALSE])
+  }
+  ssb_df <- as.data.frame(annual_ssb_matrix)
+  ssb_df$Year <- all_years
+  ssb_df$SSP  <- ssp_val
+  ssb_df$HCR  <- hcr_val
+  ssb_df$Metric <- "SSB"
+  
+  # 3. Catches
+  catch_matrix <- rsim_obj$annual_Catch
+  catch_df <- as.data.frame(catch_matrix)
+  catch_df$Year <- as.numeric(rownames(catch_matrix))
+  catch_df$SSP  <- ssp_val
+  catch_df$HCR  <- hcr_val
+  catch_df$Metric <- "Catch"
+  
+  # Combine Metrics for this run
+  all_sim_data <- bind_rows(all_sim_data, bio_df, ssb_df, catch_df)
+}
+
+# Save the combined raw data (Wide format)
+write.csv(all_sim_data, file.path(bftarget_dir, "hcr_sim_output_wide20261020.csv"), row.names = FALSE)
+
+# Pivot to long format for easier analysis and plotting
+sim_data_long <- all_sim_data %>%
+  select(Year, SSP, HCR, Metric, all_of(managed_sp_list)) %>%
+  pivot_longer(
+    cols = all_of(managed_sp_list), 
+    names_to = "Species", 
+    values_to = "Value"
+  )
+
+# Save the long format data
+write.csv(sim_data_long, file.path(bftarget_dir, "hcr_sim_output_long20261020.csv"), row.names = FALSE)
+
+

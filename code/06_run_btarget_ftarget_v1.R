@@ -124,7 +124,7 @@ end_cent_biomass <- function(rsim) {
                             nrow = length(2:dim(rsim$out_Biomass)[2]),
                             ncol = 1)
   for (i in 1:(length(2:dim(rsim$out_Biomass)[2]))) {
-    mean_bio_groups[i, ] <- mean(rsim$out_Biomass[(dim(rsim$out_Biomass)[1] - 59):dim(rsim$out_Biomass)[1], i + 1])
+    mean_bio_groups[i, ] <- mean(rsim$out_Biomass[(dim(rsim$out_Biomass)[1] - 59):dim(rsim$out_Biomass)[1], i + 1]) #60 months =5 years
   }
   row.names(mean_bio_groups) <-
     colnames(rsim$out_Biomass[, 2:dim(rsim$out_Biomass)[2]])
@@ -349,7 +349,7 @@ for (sp in managed_sp_list) {
   }
   
   # Reset focal species F back to status quo 
-  # Note: Ensure this variable name matches what you defined earlier! (F_meanlast or F_meanlast)
+  # Note: Ensure this variable name matches what you defined earlier! (F_meanlast)
   scene_persist$fishing$ForcedFRate[proj_rows, sp] <- F_meanlast[sp]
 }
 message("persist B0 elapsed: ", round((proc.time() - ptm)[3] / 60, 2), " min")
