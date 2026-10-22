@@ -36,7 +36,7 @@ managed_sp_list <- c(
   "pacific_cod_adult",
   "arrowtooth_flounder_adult",
   "flathead_sole_adult",
-  "octopus",
+  #"octopus",
   "deep_water_flatfish",
   "sablefish_adult",
   "shallow_water_flatfish",
@@ -45,13 +45,14 @@ managed_sp_list <- c(
   "slope_rockfish",
   "demersal_shelf_rockfish",
   "pelagic_shelf_rockfish",
-  "atka_mackerel",
+  #"atka_mackerel",
   "big_skate",
   "longnose_skate",
   "other_skates",
-  "pacific_halibut_adult",
-  "salmon_shark",
-  "pacific_sleeper_shark"
+  "thornyheads"
+  #"pacific_halibut_adult",
+  #"salmon_shark",
+  #"pacific_sleeper_shark"
 )
 
 tier3_sp_list <- c("walleye_pollock_adult","pacific_cod_adult", "sablefish_adult",
@@ -76,7 +77,7 @@ ssl_sp <- c("atka_mackerel", "pacific_cod_adult", "walleye_pollock_adult")
 nonssl_sp <- c(
   "arrowtooth_flounder_adult",
   "flathead_sole_adult",
-  "octopus",
+  #"octopus",
   "deep_water_flatfish",
   "sablefish_adult",
   "shallow_water_flatfish",
@@ -89,8 +90,9 @@ nonssl_sp <- c(
   "longnose_skate",
   "other_skates",
   "pacific_halibut_adult",
-  "salmon_shark",
-  "pacific_sleeper_shark"
+  "thornyheads"
+  #"salmon_shark",
+  #"pacific_sleeper_shark"
 )
 groundfish <- c(ssl_sp, nonssl_sp)
 managed_sp <- managed_sp_list
