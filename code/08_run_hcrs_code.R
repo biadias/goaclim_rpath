@@ -8,6 +8,8 @@
 #
 # 
 # ---------------------------------------------------------------------------- #
+library(Rpath)
+library(tidyverse)
 source("code/08_function_hcrs.R")
 load("~/goaclim_rpath/data/bftarget/06_run_btarget_ftarget.RData")
 #NOTE: I need to fix this, so I don't need to rely on .RData. 
@@ -55,7 +57,8 @@ names(B40) <- rownames(target_bio)
 # ---------------------------------------------------------------------------- #
 
 
-hcrs_options <- c(1, 2,3,5,10)
+hcrs_options <- c(0, 1, 2, 3, 5, 10)  # 0 = status-quo F with Tier 3 shape
+ssps <- "persist"  # persist only for now
 sim_results <- list()
 
 for(ssp in ssps){
@@ -105,7 +108,7 @@ for(ssp in ssps){
 message("All done!!!")
 
 
-write.csv(sim_results$SSPpersist_HCR1$sim_out, "results/hcr1_persist_ssmat_wgoa20261020.csv")
+write.csv(sim_results$SSPpersist_HCR1$ss_mat, "results/hcr1_persist_ssmat_wgoa20261020.csv")
 
 # ---------------------------------------------------------------------------- #
 # Plot ####

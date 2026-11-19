@@ -13,7 +13,12 @@
 # 2) scene: Rsim scenario object
 # 3) target_F: target F rates for managed stocks
 # 4) target_B: corresponding target biomass for managed stocks
-# 5) hcr: harvest control rule index (currently HCR = 1 status quo)
+# 6) meanF_sp: managed-list species bypassing the HCR (atka). All groups not in
+#    managed_sp are also fished at mean F 2016-2020 (target_F)
+# 7) seed: optional RNG seed (error draws are identical across HCRs per seed)
+# 5) hcr: harvest control rule index. 0 = status-quo F (target_F, mean
+#    2016-2020) with Tier 3 shape; 1 = Tier 3 status quo (F40, B40, B20 cutoff
+#    for SSL prey species); 2, 3, 5, 10 as described in the ACLIM HCR docs.
 #
 # Assumed to be available in the global environment:
 #   B_equil, F_equil
@@ -67,7 +72,11 @@ rsim.plotly<-function(rsim,species){
 
 # ---------------------------------------------------------------------------- #
 
-a3_hcr_clim_sim <- function(ssps, scene, target_F, target_B, cap= FALSE, hcr=1) {
+a3_hcr_clim_sim <- function(ssps, scene, target_F, target_B, cap= FALSE, hcr=1,
+                            meanF_sp = "atka_mackerel", seed = NULL) {
+  # seed: sets the RNG before observation and implementation error are drawn.
+  # The same seed gives the same error draws under every HCR (paired runs).
+  if (!is.null(seed)) set.seed(seed)
   cap <- cap
   if (cap == TRUE)  {
     cat("cap ON\n")
@@ -123,8 +132,23 @@ a3_hcr_clim_sim <- function(ssps, scene, target_F, target_B, cap= FALSE, hcr=1) 
   alpha_state <- rep(0.05, length(managed_sp))
   names(alpha_state) <- managed_sp
   
+  # implementation error
+  sigma_impl <- 0.1 # Adjust this standard deviation as needed for WGOA
+  impl_error_mat <- matrix(
+    rnorm(length(fore_years) * length(managed_sp), 0, sigma_impl),
+    nrow = length(fore_years), 
+    ncol = length(managed_sp)
+  )
+  row.names(impl_error_mat) <- fore_years
+  colnames(impl_error_mat) <- managed_sp
   
-  # 2. Forecast Loop
+  # All projection fishing is applied through ForcedCatch. Zero the forced F
+  # rates set by F_clim_sim_scene (Fmean / F_equil), otherwise Rpath applies
+  # them on top of the HCR catch and fishing is double counted.
+  proj_f_rows <- rownames(scene$fishing$ForcedFRate) %in% as.character(fore_years)
+  scene$fishing$ForcedFRate[proj_f_rows, ] <- 0
+  
+  # 2. Forecast Loop ####
   
   # projections with HCRs and maybe ATTACH like CAP -------------------------- #
   # else {
@@ -174,9 +198,14 @@ a3_hcr_clim_sim <- function(ssps, scene, target_F, target_B, cap= FALSE, hcr=1) 
     # B. Set Targets & Thresholds based on HCR ####
     # ---------------------------------------------------------------------- #
     
-    if(hcr %in% c(1,3)){
-      Ftarget[managed_sp] <- if(hcr==1) F_target else F50
-      Btarget[managed_sp] <- if(hcr==1) B_target else B50
+    # hcr 0: status-quo F (mean 2016-2020) with the Tier 3 shape
+    # hcr 1: Tier 3 status quo (Fmax = F40, Btarget = B40)
+    if(hcr == 0){
+      Ftarget[managed_sp] <- F_target[managed_sp]
+      Btarget[managed_sp] <- B_target
+    }else if(hcr == 3){
+      Ftarget[managed_sp] <- F50[managed_sp]
+      Btarget[managed_sp] <- B50[managed_sp]
     }else{
       Ftarget[managed_sp] <- F40[managed_sp]
       Btarget[managed_sp] <- B40[managed_sp]
@@ -187,9 +216,7 @@ a3_hcr_clim_sim <- function(ssps, scene, target_F, target_B, cap= FALSE, hcr=1) 
     # (worst case: pacific_cod at 4.7x, pollock at 1.4x).
     ssb_in_managed <- intersect(ssb_stocks, managed_sp)
     
-    if (hcr == 1) {
-      # Assuming HCR 1 uses status quo; make sure "Btarget_SQ_SSB" exists in your target_B, 
-      # or default it to B40_SSB
+    if (hcr %in% c(0, 1)) {
       Btarget[ssb_in_managed] <- target_B[ssb_in_managed, "B40_SSB"] 
     } else if (hcr == 3) {
       Btarget[ssb_in_managed] <- target_B[ssb_in_managed, "B50_SSB"]
@@ -201,10 +228,10 @@ a3_hcr_clim_sim <- function(ssps, scene, target_F, target_B, cap= FALSE, hcr=1) 
     beta_vec <- rep(0.05, length(managed_sp))
     names(beta_vec) <- managed_sp
     
-    if(hcr==1){
+    if(hcr %in% c(0, 1)){
       #FLAG ####
-      beta_vec[ssl_sp] <- 0.50 #steller prey limits (check if that stands for WGOA)
-      beta_vec[nonssl_sp] <- 0.05
+      # Steller sea lion prey limit (B20); only for SSL species that are managed
+      beta_vec[intersect(ssl_sp, managed_sp)] <- 0.50
       
     }else if(hcr==2){
       beta_vec[] <- 0.625
@@ -251,7 +278,7 @@ a3_hcr_clim_sim <- function(ssps, scene, target_F, target_B, cap= FALSE, hcr=1) 
         
       } else {
         # Healthy status (> 1.0) dictates strategy
-        if (hcr %in% c(1, 2, 3)) {
+        if (hcr %in% c(0, 1, 2, 3)) {
           F_ABC[sp] <- f_lim
           
         } else if (hcr == 5) {
@@ -267,9 +294,17 @@ a3_hcr_clim_sim <- function(ssps, scene, target_F, target_B, cap= FALSE, hcr=1) 
       }
     }
     
-    C_ABC <- F_ABC * catch_bio
+    #implementation error
+    impl_error_mult <- exp(impl_error_mat[yr_char, managed_sp] - 0.5 * sigma_impl^2)
+    F_ABC[managed_sp] <- F_ABC[managed_sp] * impl_error_mult
+
+    C_ABC <- F_ABC * catch_bio[names(F_ABC)]
+    # Species outside the HCR (atka mackerel): fixed mean F 2016-2020 on true biomass
+    # and all groups not managed by the HCR (non-FMP, ecosystem, etc.)
+    mean_sp <- intersect(union(meanF_sp, setdiff(names(C_ABC), managed_sp)),
+                         names(F_target))
+    C_ABC[mean_sp] <- F_target[mean_sp] * end_biomass(goaclim.sim)[mean_sp]
     abc_mat[yr_char, ] <- C_ABC[groundfish]
-    
     
     # ---------------------------------------------------------------------- #
     # D. Total-catch cap / apportionment (placeholder for WGOA implementation) ####

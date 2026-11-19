@@ -45,7 +45,7 @@ managed_sp_list <- c(
   "slope_rockfish",
   "demersal_shelf_rockfish",
   "pelagic_shelf_rockfish",
-  #"atka_mackerel",
+  "atka_mackerel",
   "big_skate",
   "longnose_skate",
   "other_skates",
@@ -260,9 +260,11 @@ ssb_stocks <- setdiff(ssb_stocks, "sablefish_adult") #taking sablefish out of th
 message("SSB stocks (stanza Oldest intersect managed_sp_list): ",
         paste(ssb_stocks, collapse = ", "))
 
+frate_cols <- colnames(scene_hind$fishing$ForcedFRate)
+
 # F = catch / biomass, averaged over 2016-2020
-catch_ref5 <- run_hind$annual_Catch[ref5_hind_rows, managed_sp_list]
-bio_ref5   <- run_hind$annual_Biomass[ref5_hind_rows, managed_sp_list]
+catch_ref5 <- run_hind$annual_Catch[ref5_hind_rows, frate_cols]
+bio_ref5   <- run_hind$annual_Biomass[ref5_hind_rows, frate_cols]
 F_ref5     <- catch_ref5 / bio_ref5
 F_meanlast <- colMeans(F_ref5, na.rm = TRUE)   # kept as F_meanlast for downstream compatibility
 F_meanlast[is.nan(F_meanlast) | is.infinite(F_meanlast)] <- 0
@@ -316,7 +318,7 @@ managed_cols <- intersect(frate_cols, managed_sp_list)
 
 scene_persist$fishing$ForcedFRate[proj_rows, equil_cols] <-
   matrix(
-    F_equil[equil_cols],
+    F_meanlast[equil_cols],
     nrow = length(proj_rows),
     ncol = length(equil_cols),
     byrow = TRUE
@@ -466,14 +468,14 @@ scene_persist_fopt <- F_clim_sim_scene(
   verbose = FALSE
 )
 
-# Projection period baseline: F_equil for all groups, F_meanlast for managed
+# Projection period baseline: F_meanlast (mean 2016-2020) for all groups
 frate_cols   <- colnames(scene_persist_fopt$fishing$ForcedFRate)
 equil_cols   <- intersect(frate_cols, names(F_equil))
 managed_cols <- intersect(frate_cols, managed_sp_list)
 
 scene_persist_fopt$fishing$ForcedFRate[proj_rows, equil_cols] <-
   matrix(
-    F_equil[equil_cols],
+    F_meanlast[equil_cols],
     nrow = length(proj_rows),
     ncol = length(equil_cols),
     byrow = TRUE
@@ -606,17 +608,43 @@ scene_persist_f40 <- F_clim_sim_scene(
 
 
 
-# Set baseline projection rates: background F for non-managed, status quo F for managed
+# Set baseline projection rates: mean F 2016-2020 for all groups
 frate_cols   <- colnames(scene_persist_f40$fishing$ForcedFRate)
 equil_cols   <- intersect(frate_cols, names(F_equil))
 managed_cols <- intersect(frate_cols, managed_sp_list)
 
 scene_persist_f40$fishing$ForcedFRate[proj_rows, equil_cols] <-
-  matrix(F_equil[equil_cols], nrow = length(proj_rows), ncol = length(equil_cols), byrow = TRUE)
+  matrix(F_meanlast[equil_cols], nrow = length(proj_rows), ncol = length(equil_cols), byrow = TRUE)
 
 scene_persist_f40$fishing$ForcedFRate[proj_rows, managed_cols] <-
   matrix(F_meanlast[managed_cols], nrow = length(proj_rows), ncol = length(managed_cols), byrow = TRUE)
 
+
+# Base F40 values from the most recent assessments mapped to WGOA groups
+# (glossary values); used to set the F search range for the optimizers and grid
+base_F40_table <- c(
+  "walleye_pollock_adult"     = 0.280,
+  "pacific_cod_adult"         = 0.460,  
+  "sablefish_adult"           = 0.086, # this is from Meaghan's document 
+  "pacific_ocean_perch_adult" = 0.064,
+  "slope_rockfish"            = 0.061,  # Based on Northern Rockfish
+  "pelagic_shelf_rockfish"    = 0.092,  # Based on Dusky Rockfish
+  "demersal_shelf_rockfish"   = 0.038,  # Based on Rougheye & Blackspotted
+  "arrowtooth_flounder_adult" = 0.136,
+  "flathead_sole_adult"       = 0.290,
+  "deep_water_flatfish"       = 0.117,  # Based on Dover Sole
+  "rex_sole_adult"            = 0.198,
+  "shallow_water_flatfish"    = 0.201  # Based on Northern Rock Sole
+)
+
+# Upper bound of the F search: the wider of the old rule (5x mean F + 0.1),
+# 2x the glossary F40 (same as the grid search), and a floor of 0.5.
+# The old rule alone capped sablefish at 0.25 (mean F is only 0.03).
+f_upper <- function(sp) {
+  old  <- F_meanlast[sp] * 5 + 0.1
+  base <- if (sp %in% names(base_F40_table)) 2 * base_F40_table[sp] else 0
+  unname(max(old, base, 0.5))
+}
 
 ## 7.1 optimize F40 (target Fishing Mortality) Run the individual optimization loop ####
 F40_persist <- setNames(numeric(length(managed_sp_list)), managed_sp_list)
@@ -636,10 +664,7 @@ for (sp in managed_sp_list) {
   }
   
   # Establish a reasonable upper search bound for F (5x status quo F, with a floor of 2.0)
-  upper_bound <- F_meanlast[sp] * 5 + 0.1
-  if (upper_bound < 0.2) {
-    upper_bound <- 2.0  # Safe window if status quo F is near zero ##FLAG
-  }
+  upper_bound <- f_upper(sp)
   
   # Run 1D optimization
   opt_res <- optimize( # 1D optimization with optimize() instead of optim() 
@@ -678,10 +703,7 @@ for (sp in managed_sp_list) {
     Btarg_all[["persist"]][sp, "B35"]
   }
   
-  upper_bound <- F_meanlast[sp] * 5 + 0.1
-  if (upper_bound < 0.2) {
-    upper_bound <- 2.0  # Safe window if status quo F is near zero
-  }
+  upper_bound <- f_upper(sp)
   
   opt_res_35 <- optimize(
     f              = sumsq_btarg_single,
@@ -715,10 +737,7 @@ for (sp in managed_sp_list) {
     Btarg_all[["persist"]][sp, "B50"]
   }
   
-  upper_bound <- F_meanlast[sp] * 5 + 0.1
-  if (upper_bound < 0.2) {
-    upper_bound <- 2.0  # Safe window if status quo F is near zero
-  }
+  upper_bound <- f_upper(sp)
   
   opt_res_50 <- optimize(
     f              = sumsq_btarg_single,
@@ -785,21 +804,7 @@ message("\n============================================================")
 message("Ftarget Grid Search (3rd Method) | SSP: persist")
 message("============================================================")
 
-# Base F40 values from the most recent assessments mapped to WGOA groups
-base_F40_table <- c(
-  "walleye_pollock_adult"     = 0.280,
-  "pacific_cod_adult"         = 0.460,  
-  "sablefish_adult"           = 0.086, # this is from Meaghan's document 
-  "pacific_ocean_perch_adult" = 0.064,
-  "slope_rockfish"            = 0.061,  # Based on Northern Rockfish
-  "pelagic_shelf_rockfish"    = 0.092,  # Based on Dusky Rockfish
-  "demersal_shelf_rockfish"   = 0.038,  # Based on Rougheye & Blackspotted
-  "arrowtooth_flounder_adult" = 0.136,
-  "flathead_sole_adult"       = 0.290,
-  "deep_water_flatfish"       = 0.117,  # Based on Dover Sole
-  "rex_sole_adult"            = 0.198,
-  "shallow_water_flatfish"    = 0.201  # Based on Northern Rock Sole
-)
+# base_F40_table is defined above (section 7), shared with the optimizers.
 
 # Function to generate custom F search range 
 generate_F_search <- function(base_F) {
@@ -998,3 +1003,8 @@ plot_path <- file.path(bftarget_dir, "GridSearch_Profiles_persist_v2.png")
 ggsave(plot_path, plot = p_grid, width = 14, height = 10, bg = "transparent", dpi = 300)
 message("Saved plot: ", plot_path)
 
+
+# ---------------------------------------------------------------------------- #
+# 12. Save session objects needed by 08_run_hcrs_code.R ####
+# ---------------------------------------------------------------------------- #
+save.image(file.path(bftarget_dir, "06_run_btarget_ftarget.RData"))
