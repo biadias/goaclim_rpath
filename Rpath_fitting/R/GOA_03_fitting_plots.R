@@ -49,6 +49,19 @@ plot.species <- c(rpath.living(bal),rpath.detrital(bal))
 #                   "pacific_cod_adult" ,            "pacific_cod_juvenile" ,
 #                   "walleye_pollock_adult" ,        "walleye_pollock_juvenile" )
 
+
+
+my_runs <- list(results_59M03par_codrec_noM0poll$Bioen_pcod$final_run, 
+                results_59M03par_codrec_noM0poll_v1$Bioen_pcod$final_run,
+                results_61M02par_codrec$Bioen_pcod$final_run,
+                results_61M02par_codrec_v1$Bioen_pcod$final_run)
+run_names <- list("Bioen_59M03par_codrec_noM0poll_shark_bioen", 
+                  "Bioen_59M03par_codrec__noM0pollnoshark_bioen",
+                  "Bioen_61M02par_codrec_shark_bioen",
+                  "Bioen_61M02par_codrec_noshark_bioen")
+
+
+
 # Call the function
 rsim.runplot.multi(scene_bioen, my_runs, plot.species, run_names=run_names, inset=c(-0.1,0))
 rsim.runplot(scene_bioen, results_59M03par_codrec_noM0poll_pol1$Bioen_pcod$final_run, plot.species, "59M03par_codrec_noM0poll")

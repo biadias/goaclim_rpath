@@ -151,7 +151,7 @@ for (scen_name in names(scenarios_to_run)) {
     NA,
     NA,
     NA,
-    scene = current_scene,
+    Rsim.scenario = current_scene,
     run_method = "AB",
     run_years = hind_years,
     verbose = TRUE
@@ -162,7 +162,7 @@ for (scen_name in names(scenarios_to_run)) {
     NA,
     NA,
     NA,
-    scene = current_scene,
+    Rsim.scenario = current_scene,
     run_method = "AB",
     run_years = hind_years,
     verbose = FALSE
@@ -183,7 +183,7 @@ for (scen_name in names(scenarios_to_run)) {
   )
 }
 
-saveRDS(results_nofit, file = "Rpath_fitting/GOA/GOA_fit_results_nofit_v4.rds")
+#saveRDS(results_nofit, file = "Rpath_fitting/GOA/GOA_fit_results_nofit_v4.rds")
 
 # ---------------------------------------------------------------------------- #
 # Run 1: 63 Parameters Fitting (Vulnerabilities) ####
@@ -215,10 +215,10 @@ for (scen_name in names(scenarios_to_run)) {
 #saveRDS(fit_results_63par, file = "GOA/GOA_fit_results_63par.rds")
 
 #saveRDS(fit_results_63par, file = "Rpath_fitting/GOA/GOA_fit_results_63par_v3.rds")
-saveRDS(fit_results_63par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_63par_codrec_v4.rds")
+#saveRDS(fit_results_63par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_63par_codrec_v4.rds")
 
 #results_63par <- readRDS("Rpath_fitting/GOA/GOA_fit_results_63par.rds")
-fit_results_63par_codrec_v1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_63par_codrec_v3.rds")
+#fit_results_63par_codrec_v1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_63par_codrec_v3.rds")
 #fit_results_63par_codrec_v4 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_63par_codrec_v4.rds")
 # ---------------------------------------------------------------------------- #
 # Run 2: 61 Parameters Fitting (Vulnerabilities + M02) ####
@@ -246,7 +246,7 @@ for (scen_name in names(scenarios_to_run)) {
 }
 
 # Save results
-saveRDS(results_61M02par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_61M02par_codrec_v4.rds")
+#saveRDS(results_61M02par_codrec, file = "Rpath_fitting/GOA/GOA_fit_results_61M02par_codrec_v4.rds")
 #results_61M02par <- readRDS("Rpath_fitting/GOA/GOA_fit_results_61M02par_v3.rds")
 results_61M02par_codrec_v1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_61M02par_codrec_v3.rds")
 
@@ -283,7 +283,7 @@ results_59M03par_codrec_v1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03pa
 
 # ---------------------------------------------------------------------------- #
 # Run 4: 59 Parameters Fitting (Vulnerabilities + M04) ####
-# Best model ####
+# Old Best model ####
 # ---------------------------------------------------------------------------- #
 
 mzero_groups_4     <- c(
@@ -388,8 +388,8 @@ for (scen_name in names(scenarios_to_run)) {
   results_59M03par_codrec_noM0poll[[scen_name]] <- fit_result
 }
 # Save results
-saveRDS(results_59M03par_codrec_noM0poll, file = "Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_noM0poll_v4.rds")
-results_59M03par_codrec_noM0poll_v1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_noM0poll_v3.rds")
+saveRDS(results_59M03par_codrec_noM0poll, file = "Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_noM0poll_v5.rds")
+#results_59M03par_codrec_noM0poll_v1 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_noM0poll_v3.rds")
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------------------------------------------------- #
@@ -498,23 +498,23 @@ stats_nofit <- do.call(rbind, lapply(results_nofit, function(r) extract_stats_no
 aicc_table <- rbind(
   stats_nofit,
   # No cod recruitment
-  stats_63par,
-  stats_61M02par,
-  stats_59M03par,
-  stats_59M04par,
+  #stats_63par,
+  #stats_61M02par,
+  #stats_59M03par,
+  #stats_59M04par,
   #stats_57M05par,
   # Cod recruitment, 1 pollock TS (current v4)
   stats_63par_codrec,
   stats_61M02par_codrec,
-  stats_59M03par_codrec,
-  stats_59M04par_codrec,
+  #stats_59M03par_codrec,
+  #stats_59M04par_codrec,
   stats_59_m03_nopollM0_codrec,
   #stats_57M05par_codrec,
   # Cod recruitment, 2 pollock TS (v1 / v3 RDS)
-  stats_63par_codrec_v1,
+  #stats_63par_codrec_v1,
   stats_61M02par_codrec_v1,
-  stats_59M03par_codrec_v1,
-  stats_59M04par_codrec_v1,
+  #stats_59M03par_codrec_v1,
+  #stats_59M04par_codrec_v1,
   stats_59_m03_nopollM0_codrec_v1
 )
 
