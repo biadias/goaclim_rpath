@@ -22,12 +22,12 @@ library(janitor)
 library(here)
 
 # Support function files that may be moved to Rpath when finalized
-fup <- function() {
-  #source("R/xml_convert.r") # comment out this line
-  source("Rpath_fitting/R/merge_ecofitting.R")
-  source("Rpath_fitting/R/ecofitting_plots.R")
-}
-fup()
+#fup <- function() {
+#  #source("R/xml_convert.r") # comment out this line
+#  source("Rpath_fitting/R/merge_ecofitting.R")
+#  source("Rpath_fitting/R/ecofitting_plots.R")
+#}
+#fup()
 
 # ---------------------------------------------------------------------------- #
 # 1.Load and test WGOA model ####
@@ -118,7 +118,7 @@ all_years  <- c(hind_years,fore_years) #1:1308 here and 133:1440 tstep
 # Setup base scenario
 scene0 <- rsim.scenario(bal, unbal, years = all_years)
 # Read in biomass to fit from data frame
-scene1 <- read.fitting.biomass.cv(scene0, bio_dat)
+scene1 <- read.fitting.biomass(scene0, bio_dat)
 # Read in catch to fit from data frame. This does not apply catch to catch forcing.
 scene2 <- read.fitting.catch(scene1, catch_dat)
 
@@ -163,7 +163,7 @@ removed_series <- c(
   "lingcod:race_wgoa",
   "pacific_hake:race_wgoa",
   "pacific_herring_adult:craig_index",
-  "salmon_shark:race_wgoa",
+  #"salmon_shark:race_wgoa",
   "walleye_pollock_adult:race_wgoa",#removing this time series_replacing by shelikoff index
   "sablefish_adult:race_wgoa",
   "miscellaneous_deep_sea_fish:race_wgoa", 
@@ -184,10 +184,10 @@ scene5 <- rsim.fit.remove.bio.timeseries(scene4, removed_series)
 # ---------------------------------------------------------------------------- #
 plot.species <- c(rpath.living(bal),rpath.detrital(bal))  
 # Run and calculate without changing any fitting values  
-run.base <- rsim.fit.run(NA, NA, NA, scene=scene5, run_method="AB", 
+run.base <- rsim.fit.run(NA, NA, NA, Rsim.scenario =scene5, run_method="AB", 
                          run_years=all_years, verbose=T)
 # test to show output negative log likelihood
-run.base.nll <- rsim.fit.run(NA, NA, NA, scene=scene5, run_method="AB", 
+run.base.nll <- rsim.fit.run(NA, NA, NA, Rsim.scenario=scene5, run_method="AB", 
                              run_years=all_years, verbose=F); run.base.nll # default verbosity
 
 

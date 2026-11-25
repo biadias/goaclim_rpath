@@ -23,18 +23,19 @@ list_ssps <- list( "F0 persist Pcod" = fore_pers_f0, "F0 126 Pcod" = forecast_12
 # PLOT — save 3-page PDF, one page per recruitment/buffer scenario
 # --------------------------------------------------------------------------- #
 
-species_list <- c(#"arrowtooth_flounder_adult", 
-  "pacific_cod_adult", #"walleye_pollock_adult",
-                  #"arrowtooth_flounder_juvenile", 
-  "pacific_cod_juvenile")#, "walleye_pollock_juvenile")
+species_list <- c("arrowtooth_flounder_adult", 
+  "pacific_cod_adult", "walleye_pollock_adult",
+                  "arrowtooth_flounder_juvenile", 
+  "pacific_cod_juvenile", "walleye_pollock_juvenile",
+  "pacific_halibut_adult",
+  "pacific_halibut_juvenile",
+  "salmon_shark")
 
 cols <- c("persist" = "black", "126" = "#009E73", "245" = "#56B4E9", "585" = "#E69F00")
 ltys <- c("F0" = 2, "Fmean" = 1)
 
 scenario_lists <- list(
-  "Base"           = list_ssps,
-  "Pcod rec"       = list_ssps_pcod,
-  "Buf + Pcod rec" = list_ssps_pp
+  "Buf + Pcod rec" = list_ssps_pp # change this if I want to show the other possibilities.
 )
 
 get_ssp <- function(nm) {
@@ -56,8 +57,8 @@ global_max <- setNames(
   species_list
 )
 
-out_path <- "C:/Users/biadias/Documents/goaclim_rpath/figures/biomass_trajectories_pcod.pdf"
-pdf(out_path, width = 14, height = 6)
+out_path <- "C:/Users/biadias/Documents/goaclim_rpath/figures/biomass_trajectories_pcod_v3.pdf"
+pdf(out_path, width = 14, height = 8)
 
 for (list_label in names(scenario_lists)) {
   lst <- scenario_lists[[list_label]]
@@ -65,7 +66,7 @@ for (list_label in names(scenario_lists)) {
   # Extract years from row names
   years <- as.numeric(rownames(lst[[1]]$annual_Biomass))
   
-  par(mfrow = c(2, 3),
+  par(mfrow = c(3, 3),
       mar   = c(4, 4, 3, 1),
       oma   = c(0, 0, 2, 0))
   
@@ -73,7 +74,7 @@ for (list_label in names(scenario_lists)) {
     
     plot(years, rep(NA_real_, length(years)),
          type = "n",
-         #ylim = c(0, global_max[sp] * 1.1),
+         ylim = c(0, global_max[sp] * 1.1),
          xlab = "Year",
          ylab = "Biomass",
          main = sp)

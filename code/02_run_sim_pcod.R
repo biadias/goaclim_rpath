@@ -189,7 +189,7 @@ scene_585_f0 <- F_clim_sim_scene(scene = scene_bioen_best,
                                    hind_data_start_yr = 1991,
                                    climate_data_start_yr = 1980,
                                    verbose = TRUE)
-
+#Full utilization paper recomendations ####
 ## Pcod rec  Fmean 2016-2020####
 scene_persist_pcod_fmean <- F_clim_sim_scene(scene = scene_bioen_best,
                                        ssp = "persist",
@@ -462,12 +462,15 @@ forecast_585_fmean      <- rsim.run(scenes$`585_npcod_nbuf_mean`,     method = "
 source("code/Function_plot_scenario_comparison.R")
 
 plot_ground <- c(
-  #"arrowtooth_flounder_adult",
+  "arrowtooth_flounder_adult",
   "pacific_cod_adult",
-  #"walleye_pollock_adult",
-  #"arrowtooth_flounder_juvenile",
-  "pacific_cod_juvenile")
-  #"walleye_pollock_juvenile")
+  "walleye_pollock_adult",
+  "arrowtooth_flounder_juvenile",
+  "pacific_cod_juvenile",
+  "walleye_pollock_juvenile",
+  "pacific_halibut_adult",
+  "pacific_halibut_juvenile",
+  "salmon_shark")
 
 ## a) Plot Persistence Scenarios ####
 list_persist <- list(
@@ -557,14 +560,14 @@ plot_scenario_comparison(sim_list = list_ssps_f0, species_to_plot = plot_ground,
 
 # 7. Plot SSPs F0 Fmean PP Scenarios
 list_ssps <- list(
-  "F0 persist Pcod" = fore_pers_f0,
-  "F0 126 Pcod"    = forecast_126_f0,
-  "F0 245 Pcod"    = forecast_245_f0,
-  "F0 585 Pcod"    = forecast_585_f0,
-  "Fmean persist Pcod"= fore_pers_fmean,
-  "Fmean 126 Pcod"    = forecast_126_fmean,
-  "Fmean 245 Pcod"    = forecast_245_fmean,
-  "Fmean 585 Pcod"    = forecast_585_fmean
+  "F0 persist Pcod" = fore_pers_buf_pcod_f0,
+  "F0 126 Pcod"    = forecast_126_buf_pcod_f0,
+  "F0 245 Pcod"    = forecast_245_buf_pcod_f0,
+  "F0 585 Pcod"    = forecast_585_buf_pcod_f0,
+  "Fmean persist Pcod"= fore_pers_buf_pcod_fmean,
+  "Fmean 126 Pcod"    = forecast_126_buf_pcod_fmean,
+  "Fmean 245 Pcod"    = forecast_245_buf_pcod_fmean,
+  "Fmean 585 Pcod"    = forecast_585_buf_pcod_fmean
 )
 
 plot_scenario_comparison(sim_list = list_ssps, species_to_plot = plot_ground, 

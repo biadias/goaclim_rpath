@@ -50,7 +50,7 @@ if (file.exists(sens_file)) {
     scen_sensitivities[[scen_name]] <- vv_loop_res[[1]][order(vv_loop_res[[1]]$dnll), ]
   }
 }
-#saveRDS(scen_sensitivities, "results/diagnostics/vv_scen_sensitivities_Bioen_pcod_59M04.rds") 
+saveRDS(scen_sensitivities, "results/diagnostics/vv_scen_sensitivities_Bioen_pcod_59M04.rds") 
 
 
 # ---------------------------------------------------------------------------- #
@@ -117,7 +117,7 @@ get_top_params <- function(vv_table, bal, mzero_list = NULL, total_df = 63) {
 # ---------------------------------------------------------------------------- #
 # 1. Load the best model scenario ####
 # ---------------------------------------------------------------------------- #
-result_59_M03 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_noM0poll_v4.rds")
+result_59_M03 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M03par_codrec_noM0poll_v5.rds") # this has the salmon_shark race biomas ts added to it. 
                          #GOA_fit_results_59M04par_codrec_v4.rds")
 #result_59_M04 <- readRDS("Rpath_fitting/GOA/GOA_fit_results_59M04par.rds")
 
